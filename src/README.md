@@ -77,7 +77,7 @@ https://laravel.com/docs/12.x/vite#main-content
 ```
 
 ## How to install
-This starter kit / base project installed by laravel installer. You can visit installer in here ...
+This starter kit / base project installed by laravel installer. You can visit installer in here (https://github.com/adamarnap/Installer-Laravel-Base-Project.git)
 
 ## Manual installation (Optional). You can use this when you rebuild/remake mannualy this base application (not use installer) :
 ### Install packages

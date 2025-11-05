@@ -6,6 +6,7 @@ echo "============================================================"
 echo "🎉 Welcome to the Laravel Starter Kit Installer for Linux 🎉"
 echo "============================================================"
 # ============= END : Welcome Message
+# ============= END : Welcome Message
 
 # ============== START : Function to check if a directory is not empty
 check_directory_not_empty() {
@@ -61,21 +62,6 @@ echo ""
 echo "============= [STEP] 3 : Moved to project folder: $nama_aplikasi ============="
 echo ""
 # ============== END : Pindah ke dalam folder
-
-# ============== START : Copy Base Project Files
-echo ""
-echo ""
-echo "============= [STEP] 4 : Copying Base Project Files ============="
-echo ""
-# Copy additional files
-cp -r ../src/app .
-cp -r ../src/resources .
-cp -r ../src/routes .
-cp -r ../src/storage .
-cp -r ../src/public/assets public/assets
-cp -r ../src/vite.config.js .
-cp -r ../src/README.md .
-# ============== END : Copy Base Project Files
 
 # membuat link storage
 php artisan storage:link
@@ -150,25 +136,44 @@ composer require --dev barryvdh/laravel-ide-helper
 php artisan vendor:publish --provider="Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider" --tag="config"
 php artisan ide-helper:generate
 php artisan ide-helper:meta
+
+# Laravel Yajra DataTables
+echo ""
+echo "------------------------- [STEP] 6.6 Installing Laravel Yajra DataTables -------------------------"
+echo ""
+composer require yajra/laravel-datatables:"^12.0"
+php artisan vendor:publish --provider="Yajra\DataTables\DataTablesServiceProvider"
+php artisan vendor:publish --tag=datatables
 # ============== END : Install Composer Packages
 
 # ============== START : Install NPM Packages
+# Clean existing node modules and lock file
+rm -rf node_modules package-lock.json
+
+# Remove existing Tailwind and PostCSS config files if they exist
+rm -f postcss.config.js tailwind.config.js
+
 # Melakukan instalasi paket npm
 echo ""
 echo "============= [STEP] 7 : Installing NPM Packages ============="
 echo ""
+
 # Install tailwindcss
 echo ""
 echo "------------------------- [STEP] 7.1 Installing TailwindCSS -------------------------"
 echo ""
-npm install -D tailwindcss postcss autoprefixer --save-dev
+npm install -D tailwindcss@4.0.0
+npm install -D @tailwindcss/vite@^4.0.0
+
 # Init tailwindcss
-npx tailwindcss init -p
+# npx tailwindcss init -p # Not use in tailwindcss v4
+
 # Install axios
 echo ""
 echo "------------------------- [STEP] 7.2 Installing Axios -------------------------"
 echo ""
 npm install axios --save-dev
+
 # Install concurrently
 echo ""
 echo "------------------------- [STEP] 7.3 Installing Concurrently -------------------------"
@@ -191,11 +196,12 @@ echo ""
 echo ""
 echo "----------------- [STEP] 8.1 Add additional providers to bootstrap/providers.php -----------------"
 echo ""
-sed -i '/App\\Providers\\AppServiceProvider::class,/a\
-    App\\Providers\\HelperServiceProvider::class,\ 
-    App\\Providers\\ViewComposerServiceProvider::class,\
-    Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider::class,
-' bootstrap/providers.php
+printf "%s\n" \
+"    App\\Providers\\HelperServiceProvider::class," \
+"    App\\Providers\\ViewComposerServiceProvider::class," \
+"    Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider::class," \
+| sed -i '/App\\Providers\\AppServiceProvider::class,/r /dev/stdin' bootstrap/providers.php
+
 
 # Locale support
 echo ""
@@ -218,6 +224,21 @@ echo ""
 sed -i '5i\use Illuminate\Pagination\Paginator;' app/Providers/AppServiceProvider.php
 sed -i '24i\Paginator::useTailwind();' app/Providers/AppServiceProvider.php
 # ============== END : Modify Files using sed
+
+# ============== START : Copy Base Project Files
+echo ""
+echo ""
+echo "============= [STEP] 4 : Copying Base Project Files ============="
+echo ""
+# Copy additional files
+cp -r ../src/app .
+cp -r ../src/resources .
+cp -r ../src/routes .
+# cp -r ../src/storage .
+cp -r ../src/public/assets public/assets
+cp -r ../src/vite.config.js .
+cp -r ../src/README.md .
+# ============== END : Copy Base Project Files
 
 # =========== START : Migrations and Seeders
 echo ""
