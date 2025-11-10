@@ -8,7 +8,7 @@
 
 @push('styles')
     {{-- DataTables CSS --}}
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/datatables-2.3.4/datatables.tailwindcss.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('asstes/admin/css/datatables-2.3.4/datatables.tailwindcss.css') }}">
 @endpush
 
 
@@ -129,8 +129,8 @@
 
 @push('scripts')
     {{-- DataTables JS --}}
-    <script src="{{ URL::asset('assets/js/datatables-2.3.4/dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/js/datatables-2.3.4/dataTables.tailwindcss.js') }}"></script>
+    <script src="{{ URL::asset('asstes/admin/js/datatables-2.3.4/dataTables.js') }}"></script>
+    <script src="{{ URL::asset('asstes/admin/js/datatables-2.3.4/dataTables.tailwindcss.js') }}"></script>
 
     {{-- Start: Implement datatable --}}
     <script>

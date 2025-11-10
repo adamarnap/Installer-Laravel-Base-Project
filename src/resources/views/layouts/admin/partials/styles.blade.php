@@ -1,12 +1,12 @@
-<link rel="stylesheet" href="{{ URL::asset('assets/css/remixicon.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('assets/css/apexcharts.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('assets/css/simplebar.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('assets/css/prism.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('assets/css/jsvectormap.min.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('assets/css/swiper-bundle.min.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('assets/css/quill.snow.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('assets/css/sweetalert2.min.css') }}">
-{{-- <link rel="stylesheet" href="{{ URL::asset('assets/css/style.css') }}"> --}}
+<link rel="stylesheet" href="{{ URL::asset('asstes/admin/css/remixicon.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('asstes/admin/css/apexcharts.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('asstes/admin/css/simplebar.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('asstes/admin/css/prism.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('asstes/admin/css/jsvectormap.min.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('asstes/admin/css/swiper-bundle.min.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('asstes/admin/css/quill.snow.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('asstes/admin/css/sweetalert2.min.css') }}">
+{{-- <link rel="stylesheet" href="{{ URL::asset('asstes/admin/css/style.css') }}"> --}}
 
 {{-- Favicon --}}
 <link rel="icon" type="image/png" href="{{ URL::asset($prefs_composer['favicon']) }}">

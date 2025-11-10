@@ -8,7 +8,7 @@
 
 @push('styles')
     {{-- DataTables CSS --}}
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/datatables-2.3.4/datatables.tailwindcss.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('asstes/admin/css/datatables-2.3.4/datatables.tailwindcss.css') }}">
     {{-- Select2 CSS --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
@@ -257,8 +257,8 @@
 @push('scripts')
     {{-- Start: Data Table --}}
     {{-- DataTables JS --}}
-    <script src="{{ URL::asset('assets/js/datatables-2.3.4/dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/js/datatables-2.3.4/dataTables.tailwindcss.js') }}"></script>
+    <script src="{{ URL::asset('asstes/admin/js/datatables-2.3.4/dataTables.js') }}"></script>
+    <script src="{{ URL::asset('asstes/admin/js/datatables-2.3.4/dataTables.tailwindcss.js') }}"></script>
     <script>
         $('#data-table').DataTable({
             responsive: true,

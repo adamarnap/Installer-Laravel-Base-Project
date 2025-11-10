@@ -7,79 +7,47 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## 1. Requirements
-- Tested in Laravel 12.x (PHP 8.2)
+## Table Of Contents
+
+[[_TOC_]]
+
+## Requirements
+- Laravel 12.x (PHP 8.2)
 - NodeJS > 14
 - Composer
 
-## 2. Materials used in this base
-
-### 2.1. Template HTML : 
-
-In this base project I use an HTML template, namely:  
+## Template HTML is Used
+- For Admin (Trezo) : 
 ```
-SOURCE
-- Template Name : Trezo 
-- URL : https://trezo-twcss.envytheme.com/lms-index.html
+https://trezo-twcss.envytheme.com/lms-index.html
 
 ```
+- For Landing (Martex)
+```
+https://martex-tailwindcss.ibthemespro.com/index.html
+```
+IF you will edit Tailwind css for Landing Page you can edit file input css then you can : 
+- Run npm run build-styling-landing. 
+- then, you can copy file style.css in folder dist
+- paste in public/assets/landing/css here
 
-### 2.2. Data Tables : 
-
-In this base project I use datatables to display tables.
+### Data Table is Used
+- Data Tables Tailwind V 2.3.4
 ```
-SOURCE
-- Data tables Tailwind V 2.3.4
-- URL : https://datatables.net/examples/styling/tailwind.html
-```
-
-### 2.4. Package Composer
-- #### Breadcrumbs
-Used for create breadcrumbs in UI.
-``` 
-SOURCE :
-https://github.com/diglactic/laravel-breadcrumbs
-```
-- #### Laravel Spatie Permission
-Used for create user role permission in App
-```
-SOURCE : 
-https://spatie.be/docs/laravel-permission/v6/introduction
-```
-- #### Yajra Datatables
-Used for create datatables in serverside
-```
-SOURCE :
-https://yajrabox.com/docs/laravel-datatables/12.0
-```
-- #### Laravel Breeze
-Used for manage Authentication
-```
-SOURCE : 
-https://laravel.com/docs/11.x/starter-kits#laravel-breeze
-```
-
-### 2.5. Package JSON (NPM Package)
-- #### Tailwind CSS
-```
-SOURCE :
-https://tailwindcss.com/
-```
-- ####  Vite
-```
-SOURCE :
-https://vite.dev/
-```
-- ####  Laravel Vite Plugin
-```
-SOURCE :
-https://laravel.com/docs/12.x/vite#main-content
+https://datatables.net/examples/styling/tailwind.html
 ```
 
 ## How to install
-This starter kit / base project installed by laravel installer. You can visit installer in here (https://github.com/adamarnap/Installer-Laravel-Base-Project.git)
 
-## Manual installation (Optional). You can use this when you rebuild/remake mannualy this base application (not use installer) :
+### Clone Repository
+open your terminal, go to the directory that you will install this project, then run the following command:
+
+```bash
+git clone ...
+
+cd base-laravel 
+```
+
 ### Install packages
 Install vendor using composer
 
@@ -145,8 +113,8 @@ AllowOverride All
 ## Email Test
 
 MailHog is an email testing tool for developers.
-- Inbox : ...
-- SMTP : ...
+- Inbox : 202.91.14.2:8025(http://202.91.14.2:8025)
+- SMTP : 202.91.14.2:8125
 
 ## Integrate a Template
 - Unzip in resource/template/name_template

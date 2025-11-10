@@ -15,7 +15,7 @@
                 @php
                     $profile_photo = Auth::user()?->userProfile?->profile_photo
                     ? URL::asset('storage/' . Auth::user()->userProfile->profile_photo)
-                    : URL::asset('assets/images/users/default.jpg');
+                    : URL::asset('asstes/admin/images/users/default.jpg');
                 @endphp
                 <img src="{{ $profile_photo }}" alt="user-image" class="rounded-full w-[75px] mb-2">
                 <p class="mb-[20px] md:mb-[25px] text-center">

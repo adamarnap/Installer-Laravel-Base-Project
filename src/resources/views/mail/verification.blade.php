@@ -1,7 +1,7 @@
 <x-mail-layout>
 
     <div class="header text-center">
-        <img class="img-fluid" src="{{ asset( 'storage/lte/assets/img/AdminLTEFullLogo.png') }}" alt="Logo">
+        <img class="img-fluid" src="{{ asset( 'storage/lte/asstes/admin/img/AdminLTEFullLogo.png') }}" alt="Logo">
     </div>
     <div class="content">
         <h2 class="mb-4 text-center">Verifikasi pendaftaran akun anda</h2>

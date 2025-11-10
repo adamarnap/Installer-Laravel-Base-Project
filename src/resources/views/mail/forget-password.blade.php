@@ -1,7 +1,7 @@
 <x-mail-layout>
 
     <div class="header text-center">
-        <img class="img-fluid" src="{{ asset('assets/images/authentication/img-auth-reset-password.png') }}" alt="Logo">
+        <img class="img-fluid" src="{{ asset('asstes/admin/images/authentication/img-auth-reset-password.png') }}" alt="Logo">
     </div>
     <div class="content">
         <h2 class="mb-4">Reset Password Anda</h2>

@@ -29,7 +29,8 @@ use App\Http\Controllers\Admin\Settings\PreferencesController;
 | Landing Routes
 |--------------------------------------------------------------------------
 */
-Route::resource('/', BerandaController::class)->names(['beranda']);
+Route::resource('/beranda', BerandaController::class)->names(['beranda']);
+Route::redirect('/', '/beranda');
 
 /* 
 |--------------------------------------------------------------------------
@@ -39,7 +40,7 @@ Route::resource('/', BerandaController::class)->names(['beranda']);
 Route::middleware('auth', 'verified')->group(function () {
     /* ---- Dashboard */
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::redirect('/', '/dashboard');
+    
 
     /* ---- My Profile */
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

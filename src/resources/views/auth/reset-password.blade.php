@@ -16,11 +16,11 @@
         <div class="mx-auto px-[12.5px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1255px]">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-[25px] items-center">
                 <div class="xl:ltr:-mr-[25px] xl:rtl:-ml-[25px] 2xl:ltr:-mr-[45px] 2xl:rtl:-ml-[45px] rounded-[25px] order-2 lg:order-1">
-                    <img src="{{ URL::asset('assets/images/reset-password.jpg') }}" alt="reset-password-image" class="rounded-[25px]">
+                    <img src="{{ URL::asset('asstes/admin/images/reset-password.jpg') }}" alt="reset-password-image" class="rounded-[25px]">
                 </div>
                 <div class="xl:ltr:pl-[90px] xl:rtl:pr-[90px] 2xl:ltr:pl-[120px] 2xl:rtl:pr-[120px] order-1 lg:order-2">
-                    <img src="{{ URL::asset('assets/images/logo-big.svg') }}" alt="logo" class="inline-block dark:hidden">
-                    <img src="{{ URL::asset('assets/images/white-logo-big.svg') }}" alt="logo" class="hidden dark:inline-block">
+                    <img src="{{ URL::asset('asstes/admin/images/logo-big.svg') }}" alt="logo" class="inline-block dark:hidden">
+                    <img src="{{ URL::asset('asstes/admin/images/white-logo-big.svg') }}" alt="logo" class="hidden dark:inline-block">
                     <div class="my-[17px] md:my-[25px]">
                         <h1 class="font-semibold text-[22px] md:text-xl lg:text-2xl mb-[5px] md:mb-[10px]">
                             Reset Password ?

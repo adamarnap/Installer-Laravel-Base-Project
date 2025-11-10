@@ -32,10 +32,12 @@ class ViewComposerServiceProvider extends ServiceProvider
         
         // Admin
         View::composer(['layouts.admin.master'], PreferenceComposer::class);
-        View::composer(['layouts.admin.master-1'], PreferenceComposer::class);
         View::composer(['layouts.admin.auth'], PreferenceComposer::class);
         View::composer(['layouts.admin.partials.sidebar'], PreferenceComposer::class);
         View::composer(['layouts.admin.partials.menu-list'], NavigationComposer::class);
+        
+        // Landing
+        View::composer(['layouts.landing.master'], PreferenceComposer::class);
         
         // Auth
         View::composer(['auth.login'], PreferenceComposer::class);

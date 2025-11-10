@@ -18,12 +18,12 @@
                     <!-- Session Status -->
 
                     <div class="xl:ltr:-mr-[25px] xl:rtl:-ml-[25px] 2xl:ltr:-mr-[45px] 2xl:rtl:-ml-[45px] rounded-[25px] order-2 lg:order-1">
-                        <img src="{{ URL::asset('/assets/images/sign-in.jpg') }}" alt="sign-in-image" class="rounded-[25px]">
+                        <img src="{{ URL::asset('/asstes/admin/images/sign-in.jpg') }}" alt="sign-in-image" class="rounded-[25px]">
                     </div>
                     <div class="xl:ltr:pl-[90px] xl:rtl:pr-[90px] 2xl:ltr:pl-[120px] 2xl:rtl:pr-[120px] order-1 lg:order-2">
 
-                        <img src="{{ URL::asset('/assets/images/logo-big.svg') }}" alt="logo" class="inline-block dark:hidden">
-                        <img src="{{ URL::asset('/assets/images/white-logo-big.svg') }}" alt="logo" class="hidden dark:inline-block">
+                        <img src="{{ URL::asset('/asstes/admin/images/logo-big.svg') }}" alt="logo" class="inline-block dark:hidden">
+                        <img src="{{ URL::asset('/asstes/admin/images/white-logo-big.svg') }}" alt="logo" class="hidden dark:inline-block">
                         <div class="my-[17px] md:my-[25px]">
                             <h1 class="!font-semibold !text-[22px] md:!text-xl lg:!text-2xl !mb-[5px] md:!mb-[7px]">
                                 Selamat datang di {{ $prefs_composer['title'] }}!
@@ -35,17 +35,17 @@
                         <div class="flex items-center justify-between mb-[20px] md:mb-[23px] gap-[12px]">
                             <div class="grow">
                                 <button type="button" class="block text-center w-full rounded-md transition-all py-[8px] md:py-[10.5px] px-[15px] md:px-[25px] text-black dark:text-white border border-[#D6DAE1] bg-white dark:bg-[#0a0e19] dark:border-[#172036] shadow-sm hover:border-primary-500">
-                                    <img src="{{ URL::asset('/assets/images/icons/google.svg') }}" class="inline-block" alt="google">
+                                    <img src="{{ URL::asset('/asstes/admin/images/icons/google.svg') }}" class="inline-block" alt="google">
                                 </button>
                             </div>
                             <div class="grow">
                                 <button type="button" class="block text-center w-full rounded-md transition-all py-[8px] md:py-[10.5px] px-[15px] md:px-[25px] text-black dark:text-white border border-[#D6DAE1] bg-white dark:bg-[#0a0e19] dark:border-[#172036] shadow-sm hover:border-primary-500">
-                                    <img src="{{ URL::asset('/assets/images/icons/facebook2.svg') }}" class="inline-block" alt="google">
+                                    <img src="{{ URL::asset('/asstes/admin/images/icons/facebook2.svg') }}" class="inline-block" alt="google">
                                 </button>
                             </div>
                             <div class="grow">
                                 <button type="button" class="block text-center w-full rounded-md transition-all py-[8px] md:py-[10.5px] px-[15px] md:px-[25px] text-black dark:text-white border border-[#D6DAE1] bg-white dark:bg-[#0a0e19] dark:border-[#172036] shadow-sm hover:border-primary-500">
-                                    <img src="{{ URL::asset('/assets/images/icons/apple.svg') }}" class="inline-block" alt="google">
+                                    <img src="{{ URL::asset('/asstes/admin/images/icons/apple.svg') }}" class="inline-block" alt="google">
                                 </button>
                             </div>
                         </div>

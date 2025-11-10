@@ -11,8 +11,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/img/favicon.png" rel="icon">
-    <link href="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="https://bootstrapmade.com/demo/templates/NiceAdmin/asstes/admin/img/favicon.png" rel="icon">
+    <link href="https://bootstrapmade.com/demo/templates/NiceAdmin/asstes/admin/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -21,16 +21,16 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="https://bootstrapmade.com/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://bootstrapmade.com/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://bootstrapmade.com/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="https://bootstrapmade.com/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="https://bootstrapmade.com/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="https://bootstrapmade.com/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="https://bootstrapmade.com/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link href="https://bootstrapmade.com/asstes/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://bootstrapmade.com/asstes/admin/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://bootstrapmade.com/asstes/admin/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://bootstrapmade.com/asstes/admin/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="https://bootstrapmade.com/asstes/admin/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="https://bootstrapmade.com/asstes/admin/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="https://bootstrapmade.com/asstes/admin/vendor/simple-datatables/style.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/css/style.css" rel="stylesheet">
+    <link href="https://bootstrapmade.com/demo/templates/NiceAdmin/asstes/admin/css/style.css" rel="stylesheet">
 
     <!-- =======================================================
   * Template Name: NiceAdmin
@@ -49,7 +49,7 @@
                 <h1>@yield('code')</h1>
                 <h2>@yield('title').</h2>
                 <a class="btn" href="/">Back to home</a>
-                <img src="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/img/not-found.svg" class="img-fluid py-5" alt="Page Not Found">
+                <img src="https://bootstrapmade.com/demo/templates/NiceAdmin/asstes/admin/img/not-found.svg" class="img-fluid py-5" alt="Page Not Found">
                 <div class="credits">
                     <!-- All the links in the footer should remain intact. -->
                     <!-- You can delete the links only if you purchased the pro version. -->
@@ -66,17 +66,17 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="https://bootstrapmade.com/assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="https://bootstrapmade.com/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://bootstrapmade.com/assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="https://bootstrapmade.com/assets/vendor/echarts/echarts.min.js"></script>
-    <script src="https://bootstrapmade.com/assets/vendor/quill/quill.min.js"></script>
-    <script src="https://bootstrapmade.com/assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="https://bootstrapmade.com/assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="https://bootstrapmade.com/assets/vendor/php-email-form/validate.js"></script>
+    <script src="https://bootstrapmade.com/asstes/admin/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="https://bootstrapmade.com/asstes/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://bootstrapmade.com/asstes/admin/vendor/chart.js/chart.umd.js"></script>
+    <script src="https://bootstrapmade.com/asstes/admin/vendor/echarts/echarts.min.js"></script>
+    <script src="https://bootstrapmade.com/asstes/admin/vendor/quill/quill.min.js"></script>
+    <script src="https://bootstrapmade.com/asstes/admin/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="https://bootstrapmade.com/asstes/admin/vendor/tinymce/tinymce.min.js"></script>
+    <script src="https://bootstrapmade.com/asstes/admin/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/js/main.js"></script>
+    <script src="https://bootstrapmade.com/demo/templates/NiceAdmin/asstes/admin/js/main.js"></script>
 
     <script async src='https://www.googletagmanager.com/gtag/js?id=G-P7JSYB1CSP'></script>
     <script>if (window.self == window.top) { window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-P7JSYB1CSP'); } </script>

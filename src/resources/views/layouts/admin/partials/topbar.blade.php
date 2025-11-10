@@ -27,7 +27,7 @@
                     <ul class="grid grid-cols-3 text-center gap-[5px]">
                         <li>
                             <a href="https://www.figma.com/" class="block text-xs mb-[15px] text-black transition-all hover:text-primary-500 dark:text-white" target="_blank">
-                                <img src="{{ URL::asset('assets/images/icons/figma.svg') }}" class="inline-block" alt="figma">
+                                <img src="{{ URL::asset('asstes/admin/images/icons/figma.svg') }}" class="inline-block" alt="figma">
                                 <span class="block mt-[7px]">
                                     Figma
                                 </span>
@@ -35,7 +35,7 @@
                         </li>
                         <li>
                             <a href="https://dribbble.com/" class="block text-xs mb-[15px] text-black transition-all hover:text-primary-500 dark:text-white" target="_blank">
-                                <img src="{{ URL::asset('assets/images/icons/dribbble.svg') }}" class="inline-block" alt="dribbble">
+                                <img src="{{ URL::asset('asstes/admin/images/icons/dribbble.svg') }}" class="inline-block" alt="dribbble">
                                 <span class="block mt-[7px]">
                                     Dribbble
                                 </span>
@@ -43,7 +43,7 @@
                         </li>
                         <li>
                             <a href="https://open.spotify.com/" class="block text-xs mb-[15px] text-black transition-all hover:text-primary-500 dark:text-white" target="_blank">
-                                <img src="{{ URL::asset('assets/images/icons/spotify.svg') }}" class="inline-block" alt="spotify">
+                                <img src="{{ URL::asset('asstes/admin/images/icons/spotify.svg') }}" class="inline-block" alt="spotify">
                                 <span class="block mt-[7px]">
                                     Spotify
                                 </span>
@@ -51,7 +51,7 @@
                         </li>
                         <li>
                             <a href="https://gitlab.com/" class="block text-xs mb-[15px] text-black transition-all hover:text-primary-500 dark:text-white" target="_blank">
-                                <img src="{{ URL::asset('assets/images/icons/gitlab.svg') }}" class="inline-block" alt="gitlab">
+                                <img src="{{ URL::asset('asstes/admin/images/icons/gitlab.svg') }}" class="inline-block" alt="gitlab">
                                 <span class="block mt-[7px]">
                                     Gitlab
                                 </span>
@@ -59,7 +59,7 @@
                         </li>
                         <li>
                             <a href="https://drive.google.com/" class="block text-xs mb-[15px] text-black transition-all hover:text-primary-500 dark:text-white" target="_blank">
-                                <img src="{{ URL::asset('assets/images/icons/google-drive.svg') }}" class="inline-block" alt="google-drive">
+                                <img src="{{ URL::asset('asstes/admin/images/icons/google-drive.svg') }}" class="inline-block" alt="google-drive">
                                 <span class="block mt-[7px]">
                                     GDrive
                                 </span>
@@ -67,7 +67,7 @@
                         </li>
                         <li>
                             <a href="https://trello.com/" class="block text-xs mb-[15px] text-black transition-all hover:text-primary-500 dark:text-white" target="_blank">
-                                <img src="{{ URL::asset('assets/images/icons/trello.svg') }}" class="inline-block" alt="trello">
+                                <img src="{{ URL::asset('asstes/admin/images/icons/trello.svg') }}" class="inline-block" alt="trello">
                                 <span class="block mt-[7px]">
                                     Trello
                                 </span>
@@ -75,7 +75,7 @@
                         </li>
                         <li>
                             <a href="https://slack.com/" class="block text-xs mb-[15px] text-black transition-all hover:text-primary-500 dark:text-white" target="_blank">
-                                <img src="{{ URL::asset('assets/images/icons/slack.svg') }}" class="inline-block" alt="slack">
+                                <img src="{{ URL::asset('asstes/admin/images/icons/slack.svg') }}" class="inline-block" alt="slack">
                                 <span class="block mt-[7px]">
                                     Slack
                                 </span>
@@ -83,7 +83,7 @@
                         </li>
                         <li>
                             <a href="https://www.pinterest.com/" class="block text-xs mb-[15px] text-black transition-all hover:text-primary-500 dark:text-white" target="_blank">
-                                <img src="{{ URL::asset('assets/images/icons/pinterest.svg') }}" class="inline-block" alt="pinterest">
+                                <img src="{{ URL::asset('asstes/admin/images/icons/pinterest.svg') }}" class="inline-block" alt="pinterest">
                                 <span class="block mt-[7px]">
                                     Pinterest
                                 </span>
@@ -91,7 +91,7 @@
                         </li>
                         <li>
                             <a href="https://www.facebook.com/" class="block text-xs mb-[15px] text-black transition-all hover:text-primary-500 dark:text-white" target="_blank">
-                                <img src="{{ URL::asset('assets/images/icons/facebook.svg') }}" class="inline-block" alt="facebook">
+                                <img src="{{ URL::asset('asstes/admin/images/icons/facebook.svg') }}" class="inline-block" alt="facebook">
                                 <span class="block mt-[7px]">
                                     Facebook
                                 </span>
@@ -99,7 +99,7 @@
                         </li>
                         <li>
                             <a href="https://www.linkedin.com/" class="block text-xs mb-[15px] text-black transition-all hover:text-primary-500 dark:text-white" target="_blank">
-                                <img src="{{ URL::asset('assets/images/icons/linkedin.svg') }}" class="inline-block" alt="linkedIn">
+                                <img src="{{ URL::asset('asstes/admin/images/icons/linkedin.svg') }}" class="inline-block" alt="linkedIn">
                                 <span class="block mt-[7px]">
                                     LinkedIn
                                 </span>
@@ -229,7 +229,7 @@
                 @php
                     $profile_photo = Auth::user()?->userProfile?->profile_photo
                     ? URL::asset('storage/' . Auth::user()->userProfile->profile_photo)
-                    : URL::asset('assets/images/users/default.jpg');
+                    : URL::asset('asstes/admin/images/users/default.jpg');
                 @endphp
                 {{-- End Get Profile Photo --}}
 
