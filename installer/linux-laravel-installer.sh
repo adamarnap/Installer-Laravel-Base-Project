@@ -3,7 +3,7 @@
 
 # ============= START : Welcome Message
 echo "============================================================"
-echo "🎉 Welcome to the Laravel Starter Kit Installer for Linux 🎉"
+echo "🎉 Welcome to the Laravel Starter Kit Installer for macOS 🎉"
 echo "============================================================"
 # ============= END : Welcome Message
 # ============= END : Welcome Message
@@ -80,12 +80,12 @@ read -p "DB DATABASE: " db_database
 read -p "DB USERNAME: " db_user
 read -p "DB PASSWORD: " db_pass
 
-sed -i "s/DB_CONNECTION=sqlite/DB_CONNECTION=mysql/g" .env
-sed -i "s/# DB_HOST=127.0.0.1/DB_HOST=$db_host/g" .env
-sed -i "s/# DB_PORT=3306/DB_PORT=$db_port/g" .env
-sed -i "s/# DB_DATABASE=laravel/DB_DATABASE=$db_database/g" .env
-sed -i "s/# DB_USERNAME=root/DB_USERNAME=$db_user/g" .env
-sed -i "s/# DB_PASSWORD=/DB_PASSWORD=$db_pass/g" .env
+sed -i '' "s/DB_CONNECTION=sqlite/DB_CONNECTION=mysql/g" .env
+sed -i '' "s/# DB_HOST=127.0.0.1/DB_HOST=$db_host/g" .env
+sed -i '' "s/# DB_PORT=3306/DB_PORT=$db_port/g" .env
+sed -i '' "s/# DB_DATABASE=laravel/DB_DATABASE=$db_database/g" .env
+sed -i '' "s/# DB_USERNAME=root/DB_USERNAME=$db_user/g" .env
+sed -i '' "s/# DB_PASSWORD=/DB_PASSWORD=$db_pass/g" .env
 # ============== END : Setup .env file
 
 # ============== START : Install Composer Packages
@@ -164,6 +164,7 @@ echo "------------------------- [STEP] 7.1 Installing TailwindCSS --------------
 echo ""
 npm install -D tailwindcss@4.0.0
 npm install -D @tailwindcss/vite@^4.0.0
+npm install -D @tailwindcss/cli@^4.0.6,
 
 # Init tailwindcss
 # npx tailwindcss init -p # Not use in tailwindcss v4
@@ -200,14 +201,13 @@ printf "%s\n" \
 "    App\\Providers\\HelperServiceProvider::class," \
 "    App\\Providers\\ViewComposerServiceProvider::class," \
 "    Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider::class," \
-| sed -i '/App\\Providers\\AppServiceProvider::class,/r /dev/stdin' bootstrap/providers.php
-
+| sed -i '' '/App\\Providers\\AppServiceProvider::class,/r /dev/stdin' bootstrap/providers.php
 
 # Locale support
 echo ""
 echo "----------------- [STEP] 8.2 Change locale support | For Language and Localization -----------------"
 echo ""
-sed -i '/withMiddleware(function (Middleware \$middleware)/a\
+sed -i '' '/withMiddleware(function (Middleware \$middleware)/a\
         // Web middleware\
         $middleware->web(append:[\
             \\App\\Http\\Middleware\\LocaleManager::class\
@@ -221,8 +221,17 @@ cp -r ../src/lang .
 echo ""
 echo "----------------- [STEP] 8.3 Change pagination to tailwind support -----------------"
 echo ""
-sed -i '5i\use Illuminate\Pagination\Paginator;' app/Providers/AppServiceProvider.php
-sed -i '24i\Paginator::useTailwind();' app/Providers/AppServiceProvider.php
+sed -i '' '5i\use Illuminate\Pagination\Paginator;' app/Providers/AppServiceProvider.php
+sed -i '' '24i\Paginator::useTailwind();' app/Providers/AppServiceProvider.php
+
+# Add NPM scripts to package.json
+echo ""
+echo "----------------- [STEP] 8.4 Add NPM scripts for Build style.css Landing Template HTML to package.json -----------------"
+echo ""
+sed -i '' '/"scripts": {/a\
+\    "build-styling-landing": "npx @tailwindcss/cli -i ./resources/css/landing/input.css -o ./dist/landing/style.css --watch",
+' package.json
+
 # ============== END : Modify Files using sed
 
 # ============== START : Copy Base Project Files

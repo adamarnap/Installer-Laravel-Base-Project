@@ -164,6 +164,7 @@ echo "------------------------- [STEP] 7.1 Installing TailwindCSS --------------
 echo ""
 npm install -D tailwindcss@4.0.0
 npm install -D @tailwindcss/vite@^4.0.0
+npm install -D @tailwindcss/cli@^4.0.6,
 
 # Init tailwindcss
 # npx tailwindcss init -p # Not use in tailwindcss v4
@@ -202,7 +203,6 @@ printf "%s\n" \
 "    Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider::class," \
 | sed -i '' '/App\\Providers\\AppServiceProvider::class,/r /dev/stdin' bootstrap/providers.php
 
-
 # Locale support
 echo ""
 echo "----------------- [STEP] 8.2 Change locale support | For Language and Localization -----------------"
@@ -223,6 +223,15 @@ echo "----------------- [STEP] 8.3 Change pagination to tailwind support -------
 echo ""
 sed -i '' '5i\use Illuminate\Pagination\Paginator;' app/Providers/AppServiceProvider.php
 sed -i '' '24i\Paginator::useTailwind();' app/Providers/AppServiceProvider.php
+
+# Add NPM scripts to package.json
+echo ""
+echo "----------------- [STEP] 8.4 Add NPM scripts for Build style.css Landing Template HTML to package.json -----------------"
+echo ""
+sed -i '' '/"scripts": {/a\
+\    "build-styling-landing": "npx @tailwindcss/cli -i ./resources/css/landing/input.css -o ./dist/landing/style.css --watch",
+' package.json
+
 # ============== END : Modify Files using sed
 
 # ============== START : Copy Base Project Files
