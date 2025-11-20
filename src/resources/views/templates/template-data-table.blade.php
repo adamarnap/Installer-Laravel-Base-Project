@@ -1,6 +1,6 @@
 @push('styles')
     {{-- DataTables CSS --}}
-    <link rel="stylesheet" href="{{ URL::asset('asstes/admin/css/datatables-2.3.4/datatables.tailwindcss.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/admin/css/datatables-2.3.4/datatables.tailwindcss.css') }}">
 @endpush
 
 @section('content')
@@ -61,10 +61,10 @@
 
 @push('scripts')
     {{-- DataTables JS --}}
-    <script src="{{ URL::asset('asstes/admin/js/datatables-2.3.4/dataTables.js') }}"></script>
-    <script src="{{ URL::asset('asstes/admin/js/datatables-2.3.4/dataTables.tailwindcss.js') }}"></script>
-    <script src="{{ URL::asset('asstes/admin/js/datatables/data-tables.min.js') }}"></script>
-    <script src="{{ URL::asset('asstes/admin/js/datatables/data-tables.tailwindcss.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/admin/js/datatables-2.3.4/dataTables.js') }}"></script>
+    <script src="{{ URL::asset('assets/admin/js/datatables-2.3.4/dataTables.tailwindcss.js') }}"></script>
+    <script src="{{ URL::asset('assets/admin/js/datatables/data-tables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/admin/js/datatables/data-tables.tailwindcss.min.js') }}"></script>
     {{-- Start Implement datatable --}}
     <script>
         // -- Start Load Datatable
@@ -80,7 +80,7 @@
                 processing: true,
                 serverSide: true,
                 // language: {
-                //     url: "{{ asset('asstes/admin/js/datatables/lang/id.json') }}",
+                //     url: "{{ asset('assets/admin/js/datatables/lang/id.json') }}",
                 // },
                 ajax: {
                     url: "{{ route('settings.users.index') }}",

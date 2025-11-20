@@ -217,7 +217,7 @@ sed -i '' '/withMiddleware(function (Middleware \$middleware)/a\
         ]);' bootstrap/app.php
 cp -r ../src/lang .
 
-# Pagination tailwind support
+# Pagination tailwind support   
 echo ""
 echo "----------------- [STEP] 8.3 Change pagination to tailwind support -----------------"
 echo ""
