@@ -63,8 +63,6 @@
     {{-- DataTables JS --}}
     <script src="{{ URL::asset('assets/admin/js/datatables-2.3.4/dataTables.js') }}"></script>
     <script src="{{ URL::asset('assets/admin/js/datatables-2.3.4/dataTables.tailwindcss.js') }}"></script>
-    <script src="{{ URL::asset('assets/admin/js/datatables/data-tables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/admin/js/datatables/data-tables.tailwindcss.min.js') }}"></script>
     {{-- Start Implement datatable --}}
     <script>
         // -- Start Load Datatable
