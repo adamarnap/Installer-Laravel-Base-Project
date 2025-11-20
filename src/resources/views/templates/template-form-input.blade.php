@@ -32,6 +32,13 @@
                 @endif
             @endforeach
         </select>
+
+        <select name="roles[]" class="select2 h-[45px] rounded-md border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[13px] block w-full outline-0 cursor-pointer transition-all focus:border-primary-500">
+            <option selected>- Select Role -</option>
+            @foreach (\App\Enums\JenisKelompokBinaanEnum::cases() as $enum)
+                <option value="{{ $enum->value }}">{{ $enum->label() }}</option>
+            @endforeach
+        </select>
     </div>
     {{-- END: Role --}}
 </div>
