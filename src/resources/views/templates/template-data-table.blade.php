@@ -77,9 +77,9 @@
             var tbl = $('#data-table').DataTable({
                 processing: true,
                 serverSide: true,
-                // language: {
-                //     url: "{{ asset('assets/admin/js/datatables/lang/id.json') }}",
-                // },
+                language: {
+                    url: "{{ asset('assets/admin/js/datatables-2.3.4/lang/id.json') }}",
+                },
                 ajax: {
                     url: "{{ route('settings.users.index') }}",
                     type: 'GET',
