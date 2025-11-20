@@ -31,14 +31,14 @@
             <table id="data-table" class="display stripe group" style="width:100%">
                 <thead>
                     <tr>
-                        <th class="text-center">No.</th>
-                        <th class="ltr:!text-left rtl:!text-right">Nama</th>
-                        <th class="text-center">Username</th>
-                        <th class="text-center">Email</th>
-                        <th class="text-center">Peran</th>
-                        <th class="text-center">Status</th>
-                        <th class="text-center">Dibuat Pada</th>
-                        <th class="text-center">Aksi</th>
+                        <th class="px-2 py-1 !text-center">No.</th>
+                        <th class="px-2 py-1 !text-center">Nama</th>
+                        <th class="px-2 py-1 !text-center">Username</th>
+                        <th class="px-2 py-1 !text-center">Email</th>
+                        <th class="px-2 py-1 !text-center">Peran</th>
+                        <th class="px-2 py-1 !text-center">Status</th>
+                        <th class="px-2 py-1 !text-center">Dibuat Pada</th>
+                        <th class="px-2 py-1 !text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
