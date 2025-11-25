@@ -8,6 +8,52 @@ use Illuminate\Support\Facades\DB;
 
 class NavigationSeeder extends Seeder
 {
+    /* 
+    ! ========================================================================================================
+    * EXAMPLE DATA FOR NAVIGATION MENUS
+    ! ========================================================================================================
+    */
+
+    // // Parent Menu
+    // [
+    //     'id' => 501,
+    //     'name' => 'Pengaturan',
+    //     'page' => 'admin',
+    //     'url' => '#',
+    //     'slug' => 'settings',
+    //     'icon' => 'settings',
+    //     'order' => 501,
+    //     'parent_id' => null,
+    //     'active' => true,
+    //     'display' => true,
+    // ],
+    // // Child Menus
+    // [
+    //     'id' => 502,
+    //     'name' => 'Pengaturan Lanjutan',
+    //     'page' => 'admin',
+    //     'url' => '#',
+    //     'slug' => 'settings-advanced',
+    //     'icon' => 'settings-advanced',
+    //     'order' => 1,
+    //     'parent_id' => 501,
+    //     'active' => true,
+    //     'display' => true,
+    // ],
+    // // Sub Child Menus
+    // [
+    //     'id' => 503,
+    //     'name' => 'Pengaturan Lanjutan - Profil Website',
+    //     'page' => 'admin',
+    //     'url' => 'settings.advanced.profile.index',
+    //     'slug' => 'settings-advanced-profile',
+    //     'icon' => 'settings-advanced-profile',
+    //     'order' => 1,
+    //     'parent_id' => 502,
+    //     'active' => true,
+    //     'display' => true,
+    // ],
+
     /**
      * Run the database seeds.
      */

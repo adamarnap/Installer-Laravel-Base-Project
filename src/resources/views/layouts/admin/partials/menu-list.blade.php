@@ -1,6 +1,9 @@
 {{-- Start list menus --}}
 <div class="accordion">
 
+    {{-- START: Title Section Menus --}}
+    <span class="block relative font-medium uppercase text-gray-400 mb-[10px] text-xs">SECTION MENU</span>
+    {{-- END: Title Section Menus --}}
     @foreach ($navs as $nav)
         {{-- Route prefix to determine menu activity  --}}
         @php
@@ -80,9 +83,21 @@
             */
             $urlCurrent = url('/') . '/' . Request::segments()[0];
             
+            $isHaveSegment4 = false;
             // Tambahkan URL segment ke 2 jika ada
             if (isset(Request::segments()[1])) {
                 $urlCurrent .= '/' . Request::segments()[1];
+                $isHaveSegment4 = false;
+            }
+            // Tambahkan URL segment ke 3 jika ada
+            if (isset(Request::segments()[2])) {
+                $urlCurrent .= '/' . Request::segments()[2];
+                $isHaveSegment4 = false;
+            }
+            // Tambahkan URL segment ke 4 jika ada
+            if (isset(Request::segments()[3])) {
+                $urlCurrent .= '/' . Request::segments()[3];
+                $isHaveSegment4 = true;
             }
         @endphp
 
@@ -100,15 +115,64 @@
             {{-- END: Parent Menu --}}
 
             {{-- START: Menu Childs --}}
-            <div class="accordion-collapse" style="display: {{ Request::is(ltrim(parse_url($nav['url'], PHP_URL_PATH), '/')) || collect($nav['child'])->pluck('url')->contains($urlCurrent)? 'block': 'none' }};">
+            @php
+                // Cek apakah ada sub_child yang aktif
+                $hasActiveSubChild = false;
+                foreach ($nav['child'] as $child) {
+                    if (isset($child['sub_child']) && count($child['sub_child']) > 0) {
+                        if (collect($child['sub_child'])->pluck('url')->contains($urlCurrent)) {
+                            $hasActiveSubChild = true;
+                            break;
+                        }
+                    }
+                }
+            @endphp
+            <div class="accordion-collapse" style="display: {{ Request::is(ltrim(parse_url($nav['url'], PHP_URL_PATH), '/')) || collect($nav['child'])->pluck('url')->contains($urlCurrent) || $hasActiveSubChild ? 'block': 'none' }};">
                 <div class="pt-[4px]">
                     <ul class="sidebar-sub-menu" id="{{ $nav['name'] }}-item-list">
                         {{-- START: Foreach List Childs Menu --}}
                         @foreach ($nav['child'] as $child)
                             <li class="sidemenu-item mb-[4px] last:mb-0">
-                                <a href="{{ $child['url'] }}" class="{{ $urlCurrent == $child['url'] ? 'active' : '' }} sidemenu-link rounded-md flex items-center relative transition-all font-medium text-gray-500 dark:text-gray-400 py-[9px] ltr:pl-[38px] ltr:pr-[30px] rtl:pr-[38px] rtl:pl-[30px] hover:text-primary-500 hover:bg-primary-50 w-full text-left dark:hover:bg-[#15203c]">
-                                    {{ $child['name'] }}
-                                </a>
+                                {{-- Check if the child has subChild --}}
+                                @if ($child['sub_child'] && count($child['sub_child']) > 0)
+                                    {{-- START: Sub-Child Menu --}}
+                                    @php
+                                        // Cek apakah sub_child aktif
+                                        $isSubChildActive = collect($child['sub_child'])->pluck('url')->contains($urlCurrent);
+                                    @endphp
+                                    <button type="button" class="{{ Request::is(ltrim(parse_url($child['url'], PHP_URL_PATH), '/')) || $isSubChildActive ? 'open active': '' }} sidemenu-link toggle rounded-md flex items-center relative transition-all font-medium text-gray-500 py-[9px] ltr:pl-[38px] ltr:pr-[30px] rtl:pr-[38px] rtl:pl-[30px] hover:text-primary-500 hover:bg-primary-50 w-full text-left dark:hover:bg-[#15203c]">
+                                        {{ $child['name'] }}
+                                    </button>
+                                    
+                                    {{-- START: Foreach Sub-Child Menu --}}
+                                    <div class="accordion-collapse" style="display: {{ Request::is(ltrim(parse_url($child['url'], PHP_URL_PATH), '/')) || $isSubChildActive ? 'block': 'none' }};">
+                                        <div class="pt-[6px] ltr:pl-[20px] rtl:pr-[20px]">
+                                            <ul class="sidebar-sub-menu">
+                                                {{-- @dd($urlCurrent) --}}
+                                                @foreach ($child['sub_child'] as $subChild)
+                                                    <li class="sidemenu-item mb-[4px] last:mb-0">
+                                                        <a href="{{ $subChild['url'] }}" class="{{ $urlCurrent == $subChild['url'] ? 'active' : '' }} sidemenu-link rounded-md flex items-center relative transition-all font-medium text-gray-500 dark:text-gray-400 py-[9px] ltr:pl-[38px] ltr:pr-[30px] rtl:pr-[38px] rtl:pl-[30px] hover:text-primary-500 hover:bg-primary-50 w-full text-left dark:hover:bg-[#15203c]">
+                                                            @if (strlen($subChild['name']) > 25)
+                                                                {{ substr($subChild['name'], 0, 25) . '...' }}
+                                                            @else
+                                                                {{ $subChild['name'] }}
+                                                            @endif
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    {{-- END: Foreach Sub-Child Menu --}}
+
+                                    {{-- END: Sub-Child Menu --}}
+                                @else
+                                    {{-- START: Child Menu not Have SubChild --}}
+                                    <a href="{{ $child['url'] }}" class="{{ $urlCurrent == $child['url'] ? 'active' : '' }} sidemenu-link rounded-md flex items-center relative transition-all font-medium text-gray-500 dark:text-gray-400 py-[9px] ltr:pl-[38px] ltr:pr-[30px] rtl:pr-[38px] rtl:pl-[30px] hover:text-primary-500 hover:bg-primary-50 w-full text-left dark:hover:bg-[#15203c]">
+                                        {{ $child['name'] }}
+                                    </a>
+                                    {{-- END: Child Menu not Have SubChild --}}
+                                @endif
                             </li>
                         @endforeach
                         {{-- END: Foreach List Childs Menu --}}

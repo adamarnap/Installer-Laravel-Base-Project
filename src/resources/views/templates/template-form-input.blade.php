@@ -1,3 +1,11 @@
+<div class="trezo-card-header mb-[20px] md:mb-[25px] flex items-center justify-between">
+    <div class="trezo-card-title">
+        <h5 class="!mb-0">
+            Example
+        </h5>
+    </div>
+</div>
+
 <div class="grid grid-cols-1 sm:grid-cols-3 gap-[20px] md:gap-[25px]">
     {{-- START: Name --}}
     <div>
@@ -18,6 +26,16 @@
         <input type="email" name="email" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" placeholder="name@example.com">
     </div>
     {{-- END: Email --}}
+
+    {{-- START: Textarea --}}
+    <div>
+        <label class="mb-[12px] font-medium block">
+            Textarea
+            <strong class="text-red-500">*</strong>
+        </label>
+        <textarea name="textarea" class="h-[140px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] p-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" placeholder="It makes me feel..."></textarea>
+    </div>
+    {{-- END: Textarea --}}
     
     {{-- START: Role --}}
     <div>
