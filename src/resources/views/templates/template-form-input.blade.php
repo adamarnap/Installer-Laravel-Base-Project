@@ -59,4 +59,19 @@
         </select>
     </div>
     {{-- END: Role --}}
+
+    {{-- START: Form Group --}}
+    <div>
+        <label class="mb-[12px] font-medium block">
+            Nominal Setoran
+            <strong class="text-red-500">*</strong>
+        </label>
+        <div class="mt-2">
+            <div class="h-[45px] rounded-md border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[13px] flex items-center transition-all focus-within:border-primary-500">
+                <div class="shrink-0 text-base text-gray-500 dark:text-gray-400 select-none mr-3">$</div>
+                <input id="price" type="text" name="price" placeholder="0.00" class="block min-w-0 grow bg-transparent py-1.5 text-black dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 outline-0" />
+            </div>
+        </div>
+    </div>
+    {{-- END: Form Group --}}
 </div>
