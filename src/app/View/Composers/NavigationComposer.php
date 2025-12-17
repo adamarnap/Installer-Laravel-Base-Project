@@ -17,6 +17,10 @@ class NavigationComposer
             $query->where('active', 1)
                 ->where('display', true)
                 ->orderBy('order', 'asc');
+        }, 'child.subChild' => function ($query) {
+            $query->where('active', 1)
+                ->where('display', true)
+                ->orderBy('order', 'asc');
         }])
             ->whereNull('parent_id')
             ->where('page', 'admin')
@@ -28,7 +32,13 @@ class NavigationComposer
                 $nav->url = $nav->url != '#' ? route($nav->url) : '#';  // $nav->url yang akan dihasilkan adalah dalam bentuk route (contoh : route('dashboard'), hasilnya http://127.0.0.1:8000/dashboard)
 
                 $nav->child->each(function ($child) {
+                    // Set URL from route name to URL for child
                     $child->url = $child->url != '#' ? route($child->url) : '#';
+
+                    // Set URL from route name to URL for subChild
+                    $child->subChild->each(function ($subChild) {
+                        $subChild->url = $subChild->url != '#' ? route($subChild->url) : '#';
+                    });
                 });
 
                 return $nav;
@@ -58,6 +68,10 @@ class NavigationComposer
                 // If there are child items, recursively filter them
                 if (!empty($nav['child'])) {
                     $nav['child'] = $this->filterPermission($nav['child']);
+                }
+                // If there are subChild items, recursively filter them
+                if (!empty($nav['sub_child'])) {
+                    $nav['sub_child'] = $this->filterPermission($nav['sub_child']);
                 }
                 $filteredNavs[] = $nav; // Add to the result array
             }

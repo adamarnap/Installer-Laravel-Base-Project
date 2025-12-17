@@ -25,6 +25,11 @@ class Navigation extends Model
         return $this->hasMany(Navigation::class, 'parent_id', 'id');
     }
 
+    public function subChild()
+    {
+        return $this->hasMany(Navigation::class, 'parent_id', 'id')->with('child');
+    }
+
     public function parent()
     {
         return $this->belongsTo(Navigation::class, 'parent_id', 'id');
