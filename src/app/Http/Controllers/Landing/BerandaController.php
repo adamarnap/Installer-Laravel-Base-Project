@@ -16,7 +16,7 @@ class BerandaController extends Controller
      */
     public function index(Request $request)
     {
-        return view('landing.index');
+        return view('landing.beranda.index');
     }
 
 }

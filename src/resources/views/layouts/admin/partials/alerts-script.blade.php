@@ -1,4 +1,4 @@
-<script src="{{ URL::asset('asstes/admin/js/sweetalert2.min.js') }}"></script>
+<script src="{{ URL::asset('assets/admin/js/sweetalert2.min.js') }}"></script>
 
 {{-- Alert Action Notification --}}
 <script>

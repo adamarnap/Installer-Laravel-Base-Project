@@ -46,8 +46,9 @@ printf "${DIM}%s${RESET}\n\n" "=================================================
 echo "🌐 Select your operating system:"
 echo "1) Linux"
 echo "2) macOS"
-echo "3) Exit"
-read -p "Enter your choice [1-3]: " choice
+echo "3) Windows"
+echo "4) Exit"
+read -p "Enter your choice [1-4]: " choice
 
 case "$choice" in
     1)
@@ -59,6 +60,19 @@ case "$choice" in
     bash installer/macos-laravel-installer.sh
     ;;
     3)
+    echo "✅ Windows selected. Running Windows installer..."
+    echo ""
+    echo "📋 Instructions for Windows:"
+    echo "1. Open PowerShell as Administrator"
+    echo "2. Navigate to this directory"
+    echo "3. Run: powershell -ExecutionPolicy Bypass -File installer/windows-laravel-installer.ps1"
+    echo ""
+    echo "💡 Tip: You may need to enable script execution with:"
+    echo "   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
+    echo ""
+    echo "⚠️  This script is running on macOS/Linux. Please follow the instructions above on your Windows machine."
+    ;;
+    4)
     echo "👋 Exiting installer. Goodbye!"
     exit 0
     ;;

@@ -22,7 +22,7 @@
                         class="md:w-6/12 lg:max-xl:w-6/12 xl:w-6/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full order-last order-md-2 md:max-lg:order-2 lg:max-xl:order-2 xl:order-2">
                         <div
                             class="hero-2-img wow fadeInRight !text-center pr-[25px] lg:max-xl:pr-[15px] md:max-lg:pr-[5px] xsm:max-sm:!mt-[40px]">
-                            <img class="img-fluid" src="images/hero-2-img.png" alt="hero-image">
+                            <img class="img-fluid" src="{{ URL::asset('assets/landing/images/hero-2-img.png') }}" alt="hero-image">
                         </div>
                     </div>
                     <!-- HERO TEXT -->
@@ -109,66 +109,66 @@
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo px-[30px] py-0 lg:max-xl:px-[12px] lg:max-xl:py-0 md:max-lg:px-[12px] md:max-lg:py-0 sm:max-md:px-[20px] sm:max-md:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="images/brand-1.png"
+                                <a href="#"><img class="img-fluid light-theme-img" src="{{ URL::asset('assets/landing/images/brand-1.png') }}"
                                         alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
-                                        src="images/brand-1-white.png" alt="brand-logo"></a>
+                                        src="{{ URL::asset('assets/landing/images/brand-1-white.png') }}" alt="brand-logo"></a>
                             </div>
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo px-[30px] py-0 lg:max-xl:px-[12px] lg:max-xl:py-0 md:max-lg:px-[12px] md:max-lg:py-0 sm:max-md:px-[20px] sm:max-md:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="images/brand-2.png"
+                                <a href="#"><img class="img-fluid light-theme-img" src="{{ URL::asset('assets/landing/images/brand-2.png') }}"
                                         alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
-                                        src="images/brand-3-white.png" alt="brand-logo"></a>
+                                        src="{{ URL::asset('assets/landing/images/brand-3-white.png') }}" alt="brand-logo"></a>
                             </div>
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo px-[30px] py-0 lg:max-xl:px-[12px] lg:max-xl:py-0 md:max-lg:px-[12px] md:max-lg:py-0 sm:max-md:px-[20px] sm:max-md:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="images/brand-4.png"
+                                <a href="#"><img class="img-fluid light-theme-img" src="{{ URL::asset('assets/landing/images/brand-4.png') }}"
                                         alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
-                                        src="images/brand-4-white.png" alt="brand-logo"></a>
+                                        src="{{ URL::asset('assets/landing/images/brand-4-white.png') }}" alt="brand-logo"></a>
                             </div>
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo px-[30px] py-0 lg:max-xl:px-[12px] lg:max-xl:py-0 md:max-lg:px-[12px] md:max-lg:py-0 sm:max-md:px-[20px] sm:max-md:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="images/brand-5.png"
+                                <a href="#"><img class="img-fluid light-theme-img" src="{{ URL::asset('assets/landing/images/brand-5.png') }}"
                                         alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
-                                        src="images/brand-5-white.png" alt="brand-logo"></a>
+                                        src="{{ URL::asset('assets/landing/images/brand-5-white.png') }}" alt="brand-logo"></a>
                             </div>
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo px-[30px] py-0 lg:max-xl:px-[12px] lg:max-xl:py-0 md:max-lg:px-[12px] md:max-lg:py-0 sm:max-md:px-[20px] sm:max-md:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="images/brand-6.png"
+                                <a href="#"><img class="img-fluid light-theme-img" src="{{ URL::asset('assets/landing/images/brand-6.png') }}"
                                         alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
-                                        src="images/brand-6-white.png" alt="brand-logo"></a>
+                                        src="{{ URL::asset('assets/landing/images/brand-6-white.png') }}" alt="brand-logo"></a>
                             </div>
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo px-[30px] py-0 lg:max-xl:px-[12px] lg:max-xl:py-0 md:max-lg:px-[12px] md:max-lg:py-0 sm:max-md:px-[20px] sm:max-md:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="images/brand-7.png"
+                                <a href="#"><img class="img-fluid light-theme-img" src="{{ URL::asset('assets/landing/images/brand-7.png') }}"
                                         alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
-                                        src="images/brand-7-white.png" alt="brand-logo"></a>
+                                        src="{{ URL::asset('assets/landing/images/brand-7-white.png') }}" alt="brand-logo"></a>
                             </div>
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo px-[30px] py-0 lg:max-xl:px-[12px] lg:max-xl:py-0 md:max-lg:px-[12px] md:max-lg:py-0 sm:max-md:px-[20px] sm:max-md:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="images/brand-8.png"
+                                <a href="#"><img class="img-fluid light-theme-img" src="{{ URL::asset('assets/landing/images/brand-8.png') }}"
                                         alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
-                                        src="images/brand-8-white.png" alt="brand-logo"></a>
+                                        src="{{ URL::asset('assets/landing/images/brand-8-white.png') }}" alt="brand-logo"></a>
                             </div>
                             <!-- BRAND LOGO IMAGE -->
                             <div
                                 class="brand-logo px-[30px] py-0 lg:max-xl:px-[12px] lg:max-xl:py-0 md:max-lg:px-[12px] md:max-lg:py-0 sm:max-md:px-[20px] sm:max-md:py-0 xsm:max-sm:px-[25px] xsm:max-sm:py-0 overflow-hidden relative transition-all duration-[400ms] ease-[ease-in-out] top-0 hover:-top-1.5">
-                                <a href="#"><img class="img-fluid light-theme-img" src="images/brand-9.png"
+                                <a href="#"><img class="img-fluid light-theme-img" src="{{ URL::asset('assets/landing/images/brand-9.png') }}"
                                         alt="brand-logo"></a>
                                 <a href="#"><img class="img-fluid dark-theme-img hidden absolute"
-                                        src="images/brand-9-white.png" alt="brand-logo"></a>
+                                        src="{{ URL::asset('assets/landing/images/brand-9-white.png') }}" alt="brand-logo"></a>
                             </div>
                         </div>
                     </div>
@@ -212,9 +212,9 @@
                                 <div
                                     class="fbox-img gr--whitesmoke h--175 xl:!m-[0_8px_60px] xl:!pt-[42px] lg:max-xl:!mt-0 lg:max-xl:!mb-[50px] lg:max-xl:mx-0 lg:max-xl:pt-[35px] md:max-lg:!mt-0 md:max-lg:!mb-[45px] md:max-lg:mx-0 md:max-lg:pt-[30px] sm:max-md:!mt-0 sm:max-md:!mb-[50px] sm:max-md:mx-[10%] sm:max-md:pt-[46px] xsm:max-sm:!mt-0 xsm:max-sm:!mb-[50px] xsm:max-sm:mx-3 xsm:max-sm:pt-[40px] rounded-[12px_12px_0_0]">
                                     <img class="img-fluid light-theme-img mb-[-25px] xl:!max-h-[175px] md:max-lg:!max-h-32 sm:max-md:!max-h-[220px] xsm:max-sm:!max-h-[185px] lg:max-xl:!max-h-40 w-auto max-w-[inherit] inline-block"
-                                        src="images/f_01.png" alt="feature-image">
+                                        src="{{ URL::asset('assets/landing/images/f_01.png') }}" alt="feature-image">
                                     <img class="img-fluid dark-theme-img mb-[-25px] xl:!max-h-[175px] md:max-lg:!max-h-32 sm:max-md:!max-h-[220px] xsm:max-sm:!max-h-[185px] lg:max-xl:!max-h-40 w-auto max-w-[inherit] hidden"
-                                        src="images/f_01_dark.png" alt="feature-image">
+                                        src="{{ URL::asset('assets/landing/images/f_01_dark.png') }}" alt="feature-image">
                                 </div>
                                 <!-- Text -->
                                 <div class="fbox-txt">
@@ -235,9 +235,9 @@
                                 <div
                                     class="fbox-img gr--whitesmoke h--175 xl:!m-[0_8px_60px] xl:!pt-[42px] lg:max-xl:!mt-0 lg:max-xl:!mb-[50px] lg:max-xl:mx-0 lg:max-xl:pt-[35px] md:max-lg:!mt-0 md:max-lg:!mb-[45px] md:max-lg:mx-0 md:max-lg:pt-[30px] sm:max-md:!mt-0 sm:max-md:!mb-[50px] sm:max-md:mx-[10%] sm:max-md:pt-[46px] xsm:max-sm:!mt-0 xsm:max-sm:!mb-[50px] xsm:max-sm:mx-3 xsm:max-sm:pt-[40px] rounded-[12px_12px_0_0]">
                                     <img class="img-fluid light-theme-img mb-[-25px] xl:!max-h-[175px] md:max-lg:!max-h-32 sm:max-md:!max-h-[220px] xsm:max-sm:!max-h-[185px] lg:max-xl:!max-h-40 w-auto max-w-[inherit] inline-block"
-                                        src="images/f_05.png" alt="feature-image">
+                                        src="{{ URL::asset('assets/landing/images/f_05.png') }}" alt="feature-image">
                                     <img class="img-fluid dark-theme-img mb-[-25px] xl:!max-h-[175px] md:max-lg:!max-h-32 sm:max-md:!max-h-[220px] xsm:max-sm:!max-h-[185px] lg:max-xl:!max-h-40 w-auto max-w-[inherit] hidden"
-                                        src="images/f_05_dark.png" alt="feature-image">
+                                        src="{{ URL::asset('assets/landing/images/f_05_dark.png') }}" alt="feature-image">
                                 </div>
                                 <!-- Text -->
                                 <div class="fbox-txt">
@@ -258,9 +258,9 @@
                                 <div
                                     class="fbox-img gr--whitesmoke h--175 xl:!m-[0_8px_60px] xl:!pt-[42px] lg:max-xl:!mt-0 lg:max-xl:!mb-[50px] lg:max-xl:mx-0 lg:max-xl:pt-[35px] md:max-lg:!mt-0 md:max-lg:!mb-[45px] md:max-lg:mx-0 md:max-lg:pt-[30px] sm:max-md:!mt-0 sm:max-md:!mb-[50px] sm:max-md:mx-[10%] sm:max-md:pt-[46px] xsm:max-sm:!mt-0 xsm:max-sm:!mb-[50px] xsm:max-sm:mx-3 xsm:max-sm:pt-[40px] rounded-[12px_12px_0_0]">
                                     <img class="img-fluid light-theme-img mb-[-25px] xl:!max-h-[175px] md:max-lg:!max-h-32 sm:max-md:!max-h-[220px] xsm:max-sm:!max-h-[185px] lg:max-xl:!max-h-40 w-auto max-w-[inherit] inline-block"
-                                        src="images/f_02.png" alt="feature-image">
+                                        src="{{ URL::asset('assets/landing/images/f_02.png') }}" alt="feature-image">
                                     <img class="img-fluid dark-theme-img mb-[-25px] xl:!max-h-[175px] md:max-lg:!max-h-32 sm:max-md:!max-h-[220px] xsm:max-sm:!max-h-[185px] lg:max-xl:!max-h-40 w-auto max-w-[inherit] hidden"
-                                        src="images/f_02_dark.png" alt="feature-image">
+                                        src="{{ URL::asset('assets/landing/images/f_02_dark.png') }}" alt="feature-image">
                                 </div>
                                 <!-- Text -->
                                 <div class="fbox-txt">
@@ -294,7 +294,7 @@
                         class="xl:w-6/12 lg:max-xl:w-6/12 md:max-lg:w-6/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
                         <div
                             class="img-block !text-center left-column wow fadeInRight mr-[30px] lg:max-xl:mr-[5px] md:max-lg:mr-0 sm:max-md:mx-[3%] xsm:max-sm:m-[0_2%_35px]">
-                            <img class="img-fluid" src="images/img-06.png" alt="content-image">
+                            <img class="img-fluid" src="{{ URL::asset('assets/landing/images/img-06.png') }}" alt="content-image">
                         </div>
                     </div>
                     <!-- TEXT BLOCK -->
@@ -552,7 +552,7 @@
                         class="xl:w-6/12 lg:max-xl:w-6/12 md:max-lg:w-6/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
                         <div
                             class="img-block !text-center left-column wow fadeInRight mr-[30px] lg:max-xl:mr-[5px] md:max-lg:mr-0 sm:max-md:mx-[3%] xsm:max-sm:m-[0_2%_35px]">
-                            <img class="img-fluid" src="images/img-13.png" alt="content-image">
+                            <img class="img-fluid" src="{{ URL::asset('assets/landing/images/img-13.png') }}" alt="content-image">
                         </div>
                     </div>
                     <!-- TEXT BLOCK -->
@@ -707,7 +707,7 @@
                         <div
                             class="img-block !text-center wow fadeInLeft ml-[30px] lg:max-xl:ml-[15px] md:max-lg:ml-[15px]">
                             <img class="img-fluid max-w-none inline-block lg:max-xl:!max-w-[175%] md:max-lg:!max-w-[220%]"
-                                src="images/tablet-02.png" alt="content-image">
+                                src="{{ URL::asset('assets/landing/images/tablet-02.png') }}" alt="content-image">
                         </div>
                     </div>
                 </div>
@@ -726,7 +726,7 @@
                         class="xl:w-6/12 lg:max-xl:w-6/12 md:max-lg:w-6/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
                         <div
                             class="img-block !text-center left-column wow fadeInRight mr-[20px] lg:max-xl:mr-[15px] md:max-lg:mr-0 sm:max-md:mx-[3%] xsm:max-sm:m-[0_2%_35px]">
-                            <img class="img-fluid" src="images/img-05.png" alt="content-image">
+                            <img class="img-fluid" src="{{ URL::asset('assets/landing/images/img-05.png') }}" alt="content-image">
                         </div>
                     </div>
                     <!-- TEXT BLOCK -->
@@ -814,7 +814,7 @@
                         class="md:w-6/12 lg:max-xl:w-6/12 xl:w-6/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full order-first order-md-2 md:max-lg:order-2 lg:max-xl:order-2 xl:order-2">
                         <div
                             class="img-block !text-center right-column wow fadeInLeft ml-[30px] lg:max-xl:ml-[5px] md:max-lg:ml-0 sm:max-md:!mx-[3%] xsm:max-sm:!m-[0_2%_35px]">
-                            <img class="img-fluid" src="images/img-02.png" alt="content-image">
+                            <img class="img-fluid" src="{{ URL::asset('assets/landing/images/img-02.png') }}" alt="content-image">
                         </div>
                     </div>
                 </div>
@@ -861,7 +861,7 @@
                                     </div>
                                 </a>
                                 <!-- Preview Image -->
-                                <img class="img-fluid" src="images/dashboard-01.png" alt="video-preview">
+                                <img class="img-fluid" src="{{ URL::asset('assets/landing/images/dashboard-01.png') }}" alt="video-preview">
                             </div>
                         </div>
                     </div>
@@ -998,8 +998,8 @@
                                 <!-- Image -->
                                 <div
                                     class="fbox-5-img order-first order-md-2 mt--40 mt-[40px] xl:!mb-0 mx-[5%] lg:max-xl:!mt-[35px] lg:max-xl:!mb-0 lg:max-xl:mx-[6%] md:max-lg:!mt-[30px] md:max-lg:!mb-0 md:max-lg:mx-[6%] sm:max-md:!mt-0 sm:max-md:!mb-[30px] sm:max-md:mx-[10%] xsm:max-sm:!mt-0 xsm:max-sm:!mb-[30px] xsm:max-sm:mx-[9%]">
-                                    <img class="img-fluid light-theme-img" src="images/f_06.png" alt="feature-image">
-                                    <img class="img-fluid dark-theme-img hidden absolute" src="images/f_06_dark.png"
+                                    <img class="img-fluid light-theme-img" src="{{ URL::asset('assets/landing/images/f_06.png') }}" alt="feature-image">
+                                    <img class="img-fluid dark-theme-img hidden absolute" src="{{ URL::asset('assets/landing/images/f_06_dark.png') }}"
                                         alt="feature-image">
                                 </div>
                             </div>
@@ -1013,8 +1013,8 @@
                                 <!-- Image -->
                                 <div
                                     class="fbox-5-img !mt-0 xl:!mb-[40px] mx-[5%] lg:max-xl:!mt-0 lg:max-xl:!mb-[30px] lg:max-xl:mx-[6%] md:max-lg:!mt-0 md:max-lg:!mb-[25px] md:max-lg:mx-[6%] sm:max-md:!mt-0 sm:max-md:!mb-[30px] sm:max-md:mx-[10%] xsm:max-sm:!mt-0 xsm:max-sm:!mb-[30px] xsm:max-sm:mx-[9%]">
-                                    <img class="img-fluid light-theme-img" src="images/f_04.png" alt="feature-image">
-                                    <img class="img-fluid dark-theme-img hidden absolute" src="images/f_04_dark.png"
+                                    <img class="img-fluid light-theme-img" src="{{ URL::asset('assets/landing/images/f_04.png') }}" alt="feature-image">
+                                    <img class="img-fluid dark-theme-img hidden absolute" src="{{ URL::asset('assets/landing/images/f_04_dark.png') }}"
                                         alt="feature-image">
                                 </div>
                                 <!-- Text -->
@@ -1134,7 +1134,7 @@
                         class="md:w-6/12 lg:max-xl:w-6/12 xl:w-6/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full order-first order-md-2 md:max-lg:order-2 lg:max-xl:order-2 xl:order-2">
                         <div
                             class="img-block !text-center right-column wow fadeInLeft ml-[30px] lg:max-xl:ml-[5px] md:max-lg:ml-0 sm:max-md:!mx-[3%] xsm:max-sm:!m-[0_2%_35px]">
-                            <img class="img-fluid" src="images/img-03.png" alt="content-image">
+                            <img class="img-fluid" src="{{ URL::asset('assets/landing/images/img-03.png') }}" alt="content-image">
                         </div>
                     </div>
                 </div>
@@ -1152,7 +1152,7 @@
                         class="md:w-6/12 lg:max-xl:w-7/12 xl:w-7/12 w-full flex-[0_0_auto] px-[calc(0.5*_1.5rem)] max-w-full">
                         <div
                             class="img-block !text-center left-column wow fadeInRight mr-[20px] lg:max-xl:mr-[15px] md:max-lg:mr-0 sm:max-md:mx-[3%] xsm:max-sm:m-[0_2%_35px]">
-                            <img class="img-fluid" src="images/img-14.png" alt="content-image">
+                            <img class="img-fluid" src="{{ URL::asset('assets/landing/images/img-14.png') }}" alt="content-image">
                         </div>
                     </div>
                     <!-- TEXT BLOCK -->
@@ -1222,7 +1222,7 @@
                                 <div class="in_tool-logo-wrap">
                                     <div class="in_tool-logo ico-60 relative mr-[20px]">
                                         <img class="img-fluid xl:!w-[60px] xl:!h-[60px] lg:max-xl:!w-[48px] lg:max-xl:!h-[48px] md:max-lg:!w-[52px] md:max-lg:!h-[52px]"
-                                            src="images/png_icons/tool-1.png" alt="brand-logo">
+                                            src="{{ URL::asset('assets/landing/images/png_icons/tool-1.png') }}" alt="brand-logo">
                                     </div>
                                 </div>
                                 <!-- Text -->
@@ -1246,7 +1246,7 @@
                                 <div class="in_tool-logo-wrap">
                                     <div class="in_tool-logo ico-60 relative mr-[20px]">
                                         <img class="img-fluid xl:!w-[60px] xl:!h-[60px] lg:max-xl:!w-[48px] lg:max-xl:!h-[48px] md:max-lg:!w-[52px] md:max-lg:!h-[52px]"
-                                            src="images/png_icons/tool-2.png" alt="brand-logo">
+                                            src="{{ URL::asset('assets/landing/images/png_icons/tool-2.png') }}" alt="brand-logo">
                                     </div>
                                 </div>
                                 <!-- Text -->
@@ -1270,7 +1270,7 @@
                                 <div class="in_tool-logo-wrap">
                                     <div class="in_tool-logo ico-60 relative mr-[20px]">
                                         <img class="img-fluid xl:!w-[60px] xl:!h-[60px] lg:max-xl:!w-[48px] lg:max-xl:!h-[48px] md:max-lg:!w-[52px] md:max-lg:!h-[52px]"
-                                            src="images/png_icons/tool-3.png" alt="brand-logo">
+                                            src="{{ URL::asset('assets/landing/images/png_icons/tool-3.png') }}" alt="brand-logo">
                                     </div>
                                 </div>
                                 <!-- Text -->
@@ -1294,7 +1294,7 @@
                                 <div class="in_tool-logo-wrap">
                                     <div class="in_tool-logo ico-60 relative mr-[20px]">
                                         <img class="img-fluid xl:!w-[60px] xl:!h-[60px] lg:max-xl:!w-[48px] lg:max-xl:!h-[48px] md:max-lg:!w-[52px] md:max-lg:!h-[52px]"
-                                            src="images/png_icons/tool-4.png" alt="brand-logo">
+                                            src="{{ URL::asset('assets/landing/images/png_icons/tool-4.png') }}" alt="brand-logo">
                                     </div>
                                 </div>
                                 <!-- Text -->
@@ -1318,7 +1318,7 @@
                                 <div class="in_tool-logo-wrap">
                                     <div class="in_tool-logo ico-60 relative mr-[20px]">
                                         <img class="img-fluid xl:!w-[60px] xl:!h-[60px] lg:max-xl:!w-[48px] lg:max-xl:!h-[48px] md:max-lg:!w-[52px] md:max-lg:!h-[52px]"
-                                            src="images/png_icons/tool-5.png" alt="brand-logo">
+                                            src="{{ URL::asset('assets/landing/images/png_icons/tool-5.png') }}" alt="brand-logo">
                                     </div>
                                 </div>
                                 <!-- Text -->
@@ -1342,7 +1342,7 @@
                                 <div class="in_tool-logo-wrap">
                                     <div class="in_tool-logo ico-60 relative mr-[20px]">
                                         <img class="img-fluid xl:!w-[60px] xl:!h-[60px] lg:max-xl:!w-[48px] lg:max-xl:!h-[48px] md:max-lg:!w-[52px] md:max-lg:!h-[52px]"
-                                            src="images/png_icons/tool-6.png" alt="brand-logo">
+                                            src="{{ URL::asset('assets/landing/images/png_icons/tool-6.png') }}" alt="brand-logo">
                                     </div>
                                 </div>
                                 <!-- Text -->
@@ -1366,7 +1366,7 @@
                                 <div class="in_tool-logo-wrap">
                                     <div class="in_tool-logo ico-60 relative mr-[20px]">
                                         <img class="img-fluid xl:!w-[60px] xl:!h-[60px] lg:max-xl:!w-[48px] lg:max-xl:!h-[48px] md:max-lg:!w-[52px] md:max-lg:!h-[52px]"
-                                            src="images/png_icons/tool-7.png" alt="brand-logo">
+                                            src="{{ URL::asset('assets/landing/images/png_icons/tool-7.png') }}" alt="brand-logo">
                                     </div>
                                 </div>
                                 <!-- Text -->
@@ -1390,7 +1390,7 @@
                                 <div class="in_tool-logo-wrap">
                                     <div class="in_tool-logo ico-60 relative mr-[20px]">
                                         <img class="img-fluid xl:!w-[60px] xl:!h-[60px] lg:max-xl:!w-[48px] lg:max-xl:!h-[48px] md:max-lg:!w-[52px] md:max-lg:!h-[52px]"
-                                            src="images/png_icons/tool-8.png" alt="brand-logo">
+                                            src="{{ URL::asset('assets/landing/images/png_icons/tool-8.png') }}" alt="brand-logo">
                                     </div>
                                 </div>
                                 <!-- Text -->
@@ -1414,7 +1414,7 @@
                                 <div class="in_tool-logo-wrap">
                                     <div class="in_tool-logo ico-60 relative mr-[20px]">
                                         <img class="img-fluid xl:!w-[60px] xl:!h-[60px] lg:max-xl:!w-[48px] lg:max-xl:!h-[48px] md:max-lg:!w-[52px] md:max-lg:!h-[52px]"
-                                            src="images/png_icons/tool-9.png" alt="brand-logo">
+                                            src="{{ URL::asset('assets/landing/images/png_icons/tool-9.png') }}" alt="brand-logo">
                                     </div>
                                 </div>
                                 <!-- Text -->
@@ -1490,7 +1490,7 @@
                                         <!-- Avatar -->
                                         <div class="review-avatar float-left !m-[0_auto]">
                                             <img class=" !w-[54px] !h-[54px] rounded-[100%] lg:max-xl:!w-[44px] lg:max-xl:!h-[44px] md:max-lg:!w-[40px] md:max-lg:!h-[40px] sm:max-md:!w-[52px] sm:max-md:!h-[52px] xsm:max-sm:!w-[52px] xsm:max-sm:!h-[52px]"
-                                                src="images/review-author-1.jpg" alt="review-avatar">
+                                                src="{{ URL::asset('assets/landing/images/review-author-1.jpg') }}" alt="review-avatar">
                                         </div>
                                         <!-- Data -->
                                         <div
@@ -1526,7 +1526,7 @@
                                         <!-- Avatar -->
                                         <div class="review-avatar float-left !m-[0_auto]">
                                             <img class=" !w-[54px] !h-[54px] rounded-[100%] lg:max-xl:!w-[44px] lg:max-xl:!h-[44px] md:max-lg:!w-[40px] md:max-lg:!h-[40px] sm:max-md:!w-[52px] sm:max-md:!h-[52px] xsm:max-sm:!w-[52px] xsm:max-sm:!h-[52px]"
-                                                src="images/review-author-2.jpg" alt="review-avatar">
+                                                src="{{ URL::asset('assets/landing/images/review-author-2.jpg') }}" alt="review-avatar">
                                         </div>
                                         <!-- Data -->
                                         <div
@@ -1561,7 +1561,7 @@
                                         <!-- Avatar -->
                                         <div class="review-avatar float-left !m-[0_auto]">
                                             <img class=" !w-[54px] !h-[54px] rounded-[100%] lg:max-xl:!w-[44px] lg:max-xl:!h-[44px] md:max-lg:!w-[40px] md:max-lg:!h-[40px] sm:max-md:!w-[52px] sm:max-md:!h-[52px] xsm:max-sm:!w-[52px] xsm:max-sm:!h-[52px]"
-                                                src="images/review-author-3.jpg" alt="review-avatar">
+                                                src="{{ URL::asset('assets/landing/images/review-author-3.jpg') }}" alt="review-avatar">
                                         </div>
                                         <!-- Data -->
                                         <div
@@ -1596,7 +1596,7 @@
                                         <!-- Avatar -->
                                         <div class="review-avatar float-left !m-[0_auto]">
                                             <img class=" !w-[54px] !h-[54px] rounded-[100%] lg:max-xl:!w-[44px] lg:max-xl:!h-[44px] md:max-lg:!w-[40px] md:max-lg:!h-[40px] sm:max-md:!w-[52px] sm:max-md:!h-[52px] xsm:max-sm:!w-[52px] xsm:max-sm:!h-[52px]"
-                                                src="images/review-author-4.jpg" alt="review-avatar">
+                                                src="{{ URL::asset('assets/landing/images/review-author-4.jpg') }}" alt="review-avatar">
                                         </div>
                                         <!-- Data -->
                                         <div
@@ -1633,7 +1633,7 @@
                                         <!-- Avatar -->
                                         <div class="review-avatar float-left !m-[0_auto]">
                                             <img class=" !w-[54px] !h-[54px] rounded-[100%] lg:max-xl:!w-[44px] lg:max-xl:!h-[44px] md:max-lg:!w-[40px] md:max-lg:!h-[40px] sm:max-md:!w-[52px] sm:max-md:!h-[52px] xsm:max-sm:!w-[52px] xsm:max-sm:!h-[52px]"
-                                                src="images/review-author-5.jpg" alt="review-avatar">
+                                                src="{{ URL::asset('assets/landing/images/review-author-5.jpg') }}" alt="review-avatar">
                                         </div>
                                         <!-- Data -->
                                         <div
@@ -1668,7 +1668,7 @@
                                         <!-- Avatar -->
                                         <div class="review-avatar float-left !m-[0_auto]">
                                             <img class=" !w-[54px] !h-[54px] rounded-[100%] lg:max-xl:!w-[44px] lg:max-xl:!h-[44px] md:max-lg:!w-[40px] md:max-lg:!h-[40px] sm:max-md:!w-[52px] sm:max-md:!h-[52px] xsm:max-sm:!w-[52px] xsm:max-sm:!h-[52px]"
-                                                src="images/review-author-6.jpg" alt="review-avatar">
+                                                src="{{ URL::asset('assets/landing/images/review-author-6.jpg') }}" alt="review-avatar">
                                         </div>
                                         <!-- Data -->
                                         <div
@@ -1704,7 +1704,7 @@
                                         <!-- Avatar -->
                                         <div class="review-avatar float-left !m-[0_auto]">
                                             <img class=" !w-[54px] !h-[54px] rounded-[100%] lg:max-xl:!w-[44px] lg:max-xl:!h-[44px] md:max-lg:!w-[40px] md:max-lg:!h-[40px] sm:max-md:!w-[52px] sm:max-md:!h-[52px] xsm:max-sm:!w-[52px] xsm:max-sm:!h-[52px]"
-                                                src="images/review-author-7.jpg" alt="review-avatar">
+                                                src="{{ URL::asset('assets/landing/images/review-author-7.jpg') }}" alt="review-avatar">
                                         </div>
                                         <!-- Data -->
                                         <div
@@ -1739,7 +1739,7 @@
                                         <!-- Avatar -->
                                         <div class="review-avatar float-left !m-[0_auto]">
                                             <img class=" !w-[54px] !h-[54px] rounded-[100%] lg:max-xl:!w-[44px] lg:max-xl:!h-[44px] md:max-lg:!w-[40px] md:max-lg:!h-[40px] sm:max-md:!w-[52px] sm:max-md:!h-[52px] xsm:max-sm:!w-[52px] xsm:max-sm:!h-[52px]"
-                                                src="images/review-author-8.jpg" alt="review-avatar">
+                                                src="{{ URL::asset('assets/landing/images/review-author-8.jpg') }}" alt="review-avatar">
                                         </div>
                                         <!-- Data -->
                                         <div
@@ -1974,7 +1974,7 @@
                     <div class="modal-body !text-center !p-0 relative flex-[1_1_auto]">
                         <!-- IMAGE -->
                         <div class="modal-body-img">
-                            <img class="img-fluid" src="images/modal-newsletter-violet.jpg" alt="content-image">
+                            <img class="img-fluid" src="{{ URL::asset('assets/landing/images/modal-newsletter-violet.jpg') }}" alt="content-image">
                         </div>
                         <!-- NEWSLETTER FORM -->
                         <div

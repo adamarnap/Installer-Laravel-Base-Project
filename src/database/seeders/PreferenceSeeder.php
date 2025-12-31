@@ -42,13 +42,13 @@ class PreferenceSeeder extends Seeder
                 'group' => 'site',
                 'name' => 'logo',
                 'is_asset' => true,
-                'value' => 'asstes/all-pages/images/logo/logo-icon.svg',
+                'value' => 'assets/all-pages/images/logo/logo-icon.svg',
             ],
             [
                 'group' => 'site',
                 'name' => 'favicon',
                 'is_asset' => true,
-                'value' => 'asstes/all-pages/images/logo/favicon.ico',
+                'value' => 'assets/all-pages/images/logo/favicon.ico',
             ]
         ];
         

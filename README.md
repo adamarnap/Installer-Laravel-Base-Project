@@ -8,13 +8,40 @@
 
 ## How to install
 
+### For Linux & macOS
+
 1. Open terminal
 2. Run 
 
 ```shell
 $ sh installer-laravel.sh
 ```
-then
+
+### For Windows
+
+#### Option 1: Using Batch File (Easiest)
+1. Navigate to the `installer` folder
+2. Right-click on `windows-laravel-installer.bat`
+3. Select **"Run as administrator"**
+4. Follow the on-screen instructions
+
+#### Option 2: Using PowerShell
+1. Open **PowerShell as Administrator**
+2. Navigate to the installer directory:
+```powershell
+cd path\to\kominfo-base-laravel-installer\installer
+```
+3. Run the installer:
+```powershell
+.\windows-laravel-installer.ps1
+```
+
+For detailed Windows installation instructions, see [Windows Installer README](installer/WINDOWS-INSTALLER-README.md)
+
+### Installation Process
+
+After running the installer:
+
 ```shell
 $ choose your device OS is used
 $ Insert project Laravel name: <input project name>
