@@ -10,21 +10,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- SITE TITLE -->
     <title>@yield('title') | {{ $prefs_composer['title'] }}</title>
-    <!-- FAVICON AND TOUCH ICONS -->
+    {{-- <!-- FAVICON AND TOUCH ICONS -->
     <link rel="shortcut icon" href="{{ URL::asset('assets/landing/images/favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ URL::asset('assets/landing/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ URL::asset('assets/landing/images/favicon.ico') }}" type="image/x-icon"> --}}
     <link rel="apple-touch-icon" sizes="152x152"
-        href="{{ URL::asset('assets/landing/images/apple-touch-icon-152x152.png') }}">
+        href="{{ URL::asset('assets/landing/images/kdmp-logo-white.png') }}">
     <link rel="apple-touch-icon" sizes="120x120"
-        href="{{ URL::asset('assets/landing/images/apple-touch-icon-120x120.png') }}">
+        href="{{ URL::asset('assets/landing/images/kdmp-logo-white.png') }}">
     <link rel="apple-touch-icon" sizes="76x76"
-        href="{{ URL::asset('assets/landing/images/apple-touch-icon-76x76.png') }}">
-    <link rel="apple-touch-icon" href="{{ URL::asset('assets/landing/images/apple-touch-icon.png') }}">
-    <link rel="icon" href="{{ URL::asset('assets/landing/images/apple-touch-icon.png') }}">
-    
+        href="{{ URL::asset('assets/landing/images/kdmp-logo-white.png') }}">
+    <link rel="apple-touch-icon" href="{{ URL::asset('assets/landing/images/kdmp-logo-white.png') }}">
+    <link rel="icon" href="{{ URL::asset('assets/landing/images/kdmp-logo-white.png') }}">
+
     {{-- START: Include Styles --}}
     @include('layouts.landing.partials.styles')
     {{-- END: Include Styles --}}
+    {{-- css Include Toggledarkmode --}}
+    <link rel="stylesheet" href="{{ URL::asset('assets/landing/css/toggledarkmode.css') }}">
+    {{-- END: Include Toggledarkmode --}}
+
+    {{-- Additional Styles Stack --}}
+    @stack('styles')
+
+    @push('scripts')
+     {{-- // js Include Toggledarkmode --}}
+     <script src="{{ URL::asset('assets/landing/js/toogledarkmode.js') }}"></script>
+
+    @endpush
 </head>
 
 <body>
@@ -37,7 +49,7 @@
         </div>
     </div>
     <!-- STYLE SWITCHER ============================================= -->
-    <div id="stlChanger"
+    {{-- <div id="stlChanger"
         class="fixed z-[9999] !text-[15px] overflow-hidden right-[-230px] cursor-pointer transition-all duration-[400ms] ease-[ease-in-out] rounded-none top-[100px] xsm:max-sm:hidden">
         <div class="blockChanger bgChanger min-w-[280px] min-h-[280px] !w-[230px]">
             <a href="#"
@@ -49,49 +61,57 @@
                     <div class="stBgs">
                         <p
                             class="switch !text-[18px] font-semibold tracking-[0] !mb-[20px] font-Jakarta w-full !text-white rounded px-[1.4rem] py-[0.4rem] border-2 border-solid border-white !leading-[1.6666]">
+                            Style Switcher
                         </p>
                         <p class="color--white !text-[1.125rem] font-semibold tracking-[0] !mb-[20px] font-Jakarta">
                             Color
                             Scheme</p>
                         <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
-                            href="javascript:chooseStyle('pink-theme', 60)"><img src="{{ URL::asset('assets/landing/images/color-scheme/pink.jpg') }}"
+                            href="javascript:chooseStyle('pink-theme', 60)"><img
+                                src="{{ URL::asset('assets/landing/images/color-scheme/pink.jpg') }}"
                                 class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
                         <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
                             href="javascript:chooseStyle('purple-theme', 60)"><img
-                                src="{{ URL::asset('assets/landing/images/color-scheme/purple.jpg') }}" class=" !w-[50px] !h-[50px] rounded-[8px]"
-                                alt=""></a>
-                        <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
-                            href="javascript:chooseStyle('violet-theme', 60)"><img
-                                src="{{ URL::asset('assets/landing/images/color-scheme/violet.jpg') }}" class=" !w-[50px] !h-[50px] rounded-[8px]"
-                                alt=""></a>
-                        <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
-                            href="javascript:chooseStyle('skyblue-theme', 60)"><img
-                                src="{{ URL::asset('assets/landing/images/color-scheme/skyblue.jpg') }}" class=" !w-[50px] !h-[50px] rounded-[8px]"
-                                alt=""></a>
-                        <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
-                            href="javascript:chooseStyle('magenta-theme', 60)"><img
-                                src="{{ URL::asset('assets/landing/images/color-scheme/magenta.jpg') }}" class=" !w-[50px] !h-[50px] rounded-[8px]"
-                                alt=""></a>
-                        <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
-                            href="javascript:chooseStyle('crocus-theme', 60)"><img
-                                src="{{ URL::asset('assets/landing/images/color-scheme/crocus.jpg') }}" class=" !w-[50px] !h-[50px] rounded-[8px]"
-                                alt=""></a>
-                        <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
-                            href="javascript:chooseStyle('red-theme', 60)"><img src="{{ URL::asset('assets/landing/images/color-scheme/red.jpg') }}"
+                                src="{{ URL::asset('assets/landing/images/color-scheme/purple.jpg') }}"
                                 class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
                         <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
-                            href="javascript:chooseStyle('green-theme', 60)"><img src="{{ URL::asset('assets/landing/images/color-scheme/green.jpg') }}"
+                            href="javascript:chooseStyle('violet-theme', 60)"><img
+                                src="{{ URL::asset('assets/landing/images/color-scheme/violet.jpg') }}"
+                                class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
+                        <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
+                            href="javascript:chooseStyle('skyblue-theme', 60)"><img
+                                src="{{ URL::asset('assets/landing/images/color-scheme/skyblue.jpg') }}"
+                                class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
+                        <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
+                            href="javascript:chooseStyle('magenta-theme', 60)"><img
+                                src="{{ URL::asset('assets/landing/images/color-scheme/magenta.jpg') }}"
+                                class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
+                        <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
+                            href="javascript:chooseStyle('crocus-theme', 60)"><img
+                                src="{{ URL::asset('assets/landing/images/color-scheme/crocus.jpg') }}"
+                                class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
+                        <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
+                            href="javascript:chooseStyle('red-theme', 60)"><img
+                                src="{{ URL::asset('assets/landing/images/color-scheme/red.jpg') }}"
+                                class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
+                        <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
+                            href="javascript:chooseStyle('green-theme', 60)"><img
+                                src="{{ URL::asset('assets/landing/images/color-scheme/green.jpg') }}"
+                                class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
+                        <a class=" no-underline !w-[50px] !h-[50px] float-left cursor-pointer opacity-100 !mt-0 !mb-[8px] mx-[5px] !p-0 rounded-[8px]"
+                            href="javascript:chooseStyle('blue-theme', 60)"><img
+                                src="{{ URL::asset('assets/landing/images/color-scheme/blue.jpg') }}"
                                 class=" !w-[50px] !h-[50px] rounded-[8px]" alt=""></a>
                     </div>
                 </div>
                 <div class="stBlock !text-center" style="margin: 0px 27px 25px 31px;">
                     <a class="btn rounded-[4px] btn--theme hover--theme w-full leading-none mt-[15px] !px-[1.2rem] !py-[0.65rem]"
-                        href="javascript:chooseStyle('none', 60)">Reset
+                        href="javascript:chooseStyle('red-theme', 60)">Reset
                         Color</a>
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- END SWITCHER -->
     <!-- PAGE CONTENT ============================================= -->
     <div id="page" class="page font--jakarta">
