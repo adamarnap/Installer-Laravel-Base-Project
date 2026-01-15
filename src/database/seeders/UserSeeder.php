@@ -1,11 +1,8 @@
 <?php
 
-/**
- * @author Yayong Ditya <https://gitlab.com/yayong.dk>
- */
-
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Enums\RoleEnum;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -23,24 +20,51 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // Reset cached roles and permissions
+        /** 
+         * ================================================================
+         * CLEAR CACHE PERMISSIONS
+         * ================================================================
+         */
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
-        // create permissions for navigation
+        
+        /** 
+         * ================================================================
+         * GENERATE PERMISSIONS FROM NAVIGATION SLUG
+         * ================================================================
+         */
         $navSlug = ModelsNavigation::pluck('slug')->toArray();
         $this->generatePermissions($navSlug);
-        $permissions = Permission::all();
 
-        // create roles and assign existing permissions
+        /** 
+         * ================================================================
+         * GET PERMISSION FOR EACH ROLE
+         * ================================================================
+         */
+        $allPermissions = Permission::all();
+
+        /** 
+         * ================================================================
+         * CREATE ROLES
+         * ================================================================
+         */
         $developerRole = Role::create(['name' => RoleEnum::DEVELOPER->value]);
         $superadmin = Role::create(['name' => RoleEnum::SUPERADMIN->value]);
         $admin = Role::create(['name' => RoleEnum::ADMIN->value]);
         $user = Role::create(['name' => RoleEnum::USER->value]);
 
-        // Sync permission to each role
-        $developerRole->syncPermissions($permissions);
+        /** 
+         * ================================================================
+         * ASSIGN PERMISSIONS TO ROLES
+         * ================================================================
+         */
+        $developerRole->syncPermissions($allPermissions);
 
-        // create developer users
-        $developerAccount = \App\Models\User::factory()->create([
+        /** 
+         * ================================================================
+         * CREATE USERS AND ASSIGN ROLES
+         * ================================================================
+         */
+        $developerAccount = User::factory()->create([
             'name' => 'Laravel Base Developer',
             'email' => 'developerlaravelbase@gmail.com',
             'password' => Hash::make('123456789'),
@@ -48,9 +72,11 @@ class UserSeeder extends Seeder
         $developerAccount->assignRole($developerRole);
     }
     
-    /**
-     * Fungsi untuk menghasilkan permission berdasarkan slug navigasi
-    */
+    /** 
+     * ================================================================
+     * FUNCTION FOR GENERATE PERMISSIONS FROM NAVIGATION SLUG
+     * ================================================================
+     */
     public function generatePermissions($permissions)
     {
         $permissionsList = [];
@@ -62,4 +88,11 @@ class UserSeeder extends Seeder
         }
         return Permission::insert($permissionsList);
     }
+
+    /** 
+     * =======================================================================
+     * FUNCTIONS FOR GET LIST PERMISSIONS FOR ROLE EXCEPT 'developer'
+     * You can add functions here to get specific permissions for other roles
+     * ========================================================================
+     */
 }
