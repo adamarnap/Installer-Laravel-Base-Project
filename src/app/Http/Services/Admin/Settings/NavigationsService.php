@@ -9,7 +9,7 @@ class NavigationsService
     /* Get data all navigations */
     public function getAllNavigations()
     {
-        return Navigation::with('child')
+        return Navigation::with(['child.subChild'])
                     ->where('parent_id', null)    
                     ->get();
     }

@@ -110,7 +110,7 @@
                         {{-- START: Is Display --}}
                         <div>
                             <label class="mb-[12px] font-medium block">
-                                Is Active
+                                Is Display
                                 <strong class="text-red-500">*</strong>
                             </label>
                             <select name="display" id="display" class="select2 h-[45px] rounded-md border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[13px] block w-full outline-0 cursor-pointer transition-all focus:border-primary-500" required>
@@ -129,7 +129,7 @@
                         Close   
                     </button>
                     <button type="submit" class="inline-block py-[10px] px-[30px] bg-primary-500 text-white transition-all hover:bg-primary-400 rounded-md border border-primary-500 hover:border-primary-400 ltr:mr-[11px] rtl:ml-[11px] mb-[15px]">
-                        Save Changes
+                        Simpan Perubahan
                     </button>
                 </div>
                 {{-- END: Modal Footer --}}
@@ -143,7 +143,7 @@
 
 @push('scripts')
 <script>
-    // Add New Popup Toggle
+    // Tambah Popup Toggle
     const addNewPopupID = document.getElementById("modal-add");
     if (addNewPopupID) {
         var buttons = document.querySelectorAll("#modal-add-toggle");
