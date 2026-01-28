@@ -110,7 +110,7 @@
                                 {{-- START: Menu Level 2 & 3 --}}
                                 @if ($nav->child->count() > 0)
                                     @foreach ($nav->child as $child)
-                                        <tr class="bg-gray-50 dark:bg-gray-800/30">
+                                        <tr class="">
                                             <td class="px-5 py-1 text-start border-l-4 border-blue-500">
                                                 <small>
                                                     <div class="flex items-center gap-2 mr-4 pl-4">
@@ -125,7 +125,7 @@
                                                     </div>
                                                 </small>
                                             </td>
-                                            <td class="px-1 py-1 text-start bg-gray-50 dark:bg-gray-800/30">
+                                            <td class="px-1 py-1 text-start">
                                                 <small>
                                                     <div class="flex items-center gap-2 mr-4 pl-4">
                                                         <div class="title leading-none text-left">
@@ -134,7 +134,7 @@
                                                     </div>
                                                 </small>
                                             </td>
-                                            <td class="px-1 py-1 text-start bg-gray-50 dark:bg-gray-800/30">
+                                            <td class="px-1 py-1 text-start">
                                                 <small>
                                                     <div class="flex items-center gap-2 mr-4 pl-4">
                                                         <div class="title leading-none text-left">
@@ -143,7 +143,7 @@
                                                     </div>
                                                 </small>
                                             </td>
-                                            <td class="px-5 py-1 text-center bg-gray-50 dark:bg-gray-800/30">
+                                            <td class="px-5 py-1 text-center">
                                                 <small>
                                                     <div class="flex items-center gap-2 mr-4 pl-4">
                                                         <div class="title leading-none text-left">
@@ -152,7 +152,7 @@
                                                     </div>    
                                                 </small>
                                             </td>
-                                            <td class="px-4 py-1 text-center bg-gray-50 dark:bg-gray-800/30 {{ $child->active == 1 ? 'text-success' : 'text-danger' }}">
+                                            <td class="px-4 py-1 text-center {{ $child->active == 1 ? 'text-success' : 'text-danger' }}">
                                                 <small>
                                                     <div class="flex items-center gap-2 mr-4 pl-4">
                                                         <div class="title leading-none text-left">
@@ -161,7 +161,7 @@
                                                     </div>
                                                 </small>
                                             </td>
-                                            <td class="px-4 py-1 text-center bg-gray-50 dark:bg-gray-800/30 {{ $child->display == 1 ? 'text-success' : 'text-danger' }}">
+                                            <td class="px-4 py-1 text-center {{ $child->display == 1 ? 'text-success' : 'text-danger' }}">
                                                 <small>
                                                     <div class="flex items-center gap-2 mr-4 pl-4">
                                                         <div class="title leading-none text-left">
@@ -170,7 +170,7 @@
                                                     </div>
                                                 </small>
                                             </td>
-                                            <td class="px-5 py-1 text-center bg-gray-50 dark:bg-gray-800/30">
+                                            <td class="px-5 py-1 text-center">
                                                 <div class="flex items-center gap-[9px]">
                                                     @can('settings-navs.update')
                                                         <button type="button" class="btn-modal-edit-nav text-warning-500 dark:text-warning-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit"
@@ -201,7 +201,7 @@
                                         {{-- START: Menu Level 3 --}}
                                         @if ($child->subChild->count() > 0)
                                             @foreach ($child->subChild as $subChild)
-                                                <tr class="bg-gray-100 dark:bg-gray-800/50">
+                                                <tr class="">
                                                     <td class="px-5 py-1 text-start border-l-4 border-green-500">
                                                         <small>
                                                             <div class="flex items-center gap-2 mr-4 pl-8">
@@ -216,7 +216,7 @@
                                                             </div>
                                                         </small>
                                                     </td>
-                                                    <td class="px-1 py-1 text-start bg-gray-100 dark:bg-gray-800/50">
+                                                    <td class="px-5 py-1 text-center">
                                                         <small>
                                                             <div class="flex items-center gap-2 mr-4 pl-8">
                                                                 <div class="title leading-none text-left">
@@ -225,7 +225,7 @@
                                                             </div>
                                                         </small>
                                                     </td>
-                                                    <td class="px-1 py-1 text-start bg-gray-100 dark:bg-gray-800/50">
+                                                    <td class="px-1 py-1 text-start">
                                                         <small>
                                                             <div class="flex items-center gap-2 mr-4 pl-8">
                                                                 <div class="title leading-none text-left">
@@ -234,7 +234,7 @@
                                                             </div>
                                                         </small>
                                                     </td>
-                                                    <td class="px-5 py-1 text-center bg-gray-100 dark:bg-gray-800/50">
+                                                    <td class="px-5 py-1 text-center">
                                                         <small>
                                                             <div class="flex items-center gap-2 mr-4 pl-8">
                                                                 <div class="title leading-none text-left">
@@ -243,7 +243,7 @@
                                                             </div>    
                                                         </small>
                                                     </td>
-                                                    <td class="px-4 py-1 text-center bg-gray-100 dark:bg-gray-800/50 {{ $subChild->active == 1 ? 'text-success' : 'text-danger' }}">
+                                                    <td class="px-4 py-1 text-center {{ $subChild->active == 1 ? 'text-success' : 'text-danger' }}">
                                                         <small>
                                                             <div class="flex items-center gap-2 mr-4 pl-8">
                                                                 <div class="title leading-none text-left">
@@ -252,7 +252,7 @@
                                                             </div>
                                                         </small>
                                                     </td>
-                                                    <td class="px-4 py-1 text-center bg-gray-100 dark:bg-gray-800/50 {{ $subChild->display == 1 ? 'text-success' : 'text-danger' }}">
+                                                    <td class="px-4 py-1 text-center {{ $subChild->display == 1 ? 'text-success' : 'text-danger' }}">
                                                         <small>
                                                             <div class="flex items-center gap-2 mr-4 pl-8">
                                                                 <div class="title leading-none text-left">
@@ -261,7 +261,7 @@
                                                             </div>
                                                         </small>
                                                     </td>
-                                                    <td class="px-5 py-1 text-center bg-gray-100 dark:bg-gray-800/50">
+                                                    <td class="px-5 py-1 text-center">
                                                         <div class="flex items-center gap-[9px]">
                                                             @can('settings-navs.update')
                                                                 <button type="button" class="btn-modal-edit-nav text-warning-500 dark:text-warning-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit"
