@@ -319,7 +319,7 @@ awk '
     print "        });"
     print ""
     print "        // Generic Exception - catch all (should be last)"
-    print "        $exceptions->render(function (\\\\Throwable $e, Request $request) {"
+    print "        $exceptions->render(function (\\Throwable $e, Request $request) {"
     print "            if ($request->is('\''api/*'\'')) {"
     print "                return ApiResponse::error('\''Server Error'\'', 500, ["
     print "                    '\''type'\'' => '\''server_error'\'',"
@@ -328,9 +328,10 @@ awk '
     print "            }"
     print "        });"
     print "    })"
+    print "    ->create();"
     # Skip until we find the closing
     while (getline > 0) {
-        if (/^[[:space:]]*\}[[:space:]]*\)[[:space:]]*$/) {
+        if (/->create\(\);/) {
             break
         }
     }
