@@ -3,24 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="author" content="elite-themes24">
-    <meta name="description" content="Martex - Tailwind CSS Software, SaaS & Startup Template">
-    <meta name="keywords"
-        content="Responsive, HTML5, elite-themes24, Landing, Software, Mobile App, SaaS, Startup, Creative, Digital Product">
+    <meta name="author" content="{{ $prefs_composer['author'] }}">
+    <meta name="description" content="{{ $prefs_composer['meta-description'] }}">
+    <meta name="keywords" content="{{ $prefs_composer['meta-keywords'] }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- SITE TITLE -->
     <title>@yield('title') | {{ $prefs_composer['title'] }}</title>
-    {{-- <!-- FAVICON AND TOUCH ICONS -->
-    <link rel="shortcut icon" href="{{ URL::asset('assets/landing/images/favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ URL::asset('assets/landing/images/favicon.ico') }}" type="image/x-icon"> --}}
-    <link rel="apple-touch-icon" sizes="152x152"
-        href="{{ URL::asset('assets/landing/images/kdmp-logo-white.png') }}">
-    <link rel="apple-touch-icon" sizes="120x120"
-        href="{{ URL::asset('assets/landing/images/kdmp-logo-white.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76"
-        href="{{ URL::asset('assets/landing/images/kdmp-logo-white.png') }}">
-    <link rel="apple-touch-icon" href="{{ URL::asset('assets/landing/images/kdmp-logo-white.png') }}">
-    <link rel="icon" href="{{ URL::asset('assets/landing/images/kdmp-logo-white.png') }}">
+
+    {{-- START : FAVICON --}}
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ URL::asset($prefs_composer['favicon']) }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ URL::asset($prefs_composer['favicon']) }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ URL::asset($prefs_composer['favicon']) }}">
+    <link rel="apple-touch-icon" href="{{ URL::asset($prefs_composer['favicon']) }}">
+    <link rel="icon" href="{{ URL::asset($prefs_composer['favicon']) }}">
+    {{-- END : FAVICON --}}
 
     {{-- START: Include Styles --}}
     @include('layouts.landing.partials.styles')
@@ -33,9 +29,8 @@
     @stack('styles')
 
     @push('scripts')
-     {{-- // js Include Toggledarkmode --}}
-     <script src="{{ URL::asset('assets/landing/js/toogledarkmode.js') }}"></script>
-
+        {{-- // js Include Toggledarkmode --}}
+        <script src="{{ URL::asset('assets/landing/js/toogledarkmode.js') }}"></script>
     @endpush
 </head>
 

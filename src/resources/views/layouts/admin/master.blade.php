@@ -3,7 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="description" content="{{ $prefs_composer['meta-description'] }}">
+        <meta name="keywords" content="{{ $prefs_composer['meta-keywords'] }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         {{-- Styles --}}
         @include('layouts.admin.partials.styles')
         

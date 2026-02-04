@@ -16,6 +16,12 @@ class PreferenceSeeder extends Seeder
         $data = [
             [
                 'group' => 'site',
+                'name' => 'author',
+                'is_asset' => false,
+                'value' => 'Pemerintah Kabupaten Bantul',
+            ],
+            [
+                'group' => 'site',
                 'name' => 'app_name',
                 'is_asset' => false,
                 'value' => 'Adam Laravel',
@@ -49,6 +55,18 @@ class PreferenceSeeder extends Seeder
                 'name' => 'favicon',
                 'is_asset' => true,
                 'value' => 'assets/all-pages/images/logo/favicon.ico',
+            ],
+            [
+                'group' => 'site',
+                'name' => 'meta-description',
+                'is_asset' => false,
+                'value' => 'Laravel Adam is a Laravel base project that helps you to build web application faster with lot of built-in features.',
+            ],
+            [
+                'group' => 'site',
+                'name' => 'meta-keywords',
+                'is_asset' => false,
+                'value' => 'laravel,laravel adam,laravel base project,laravel starter kit,laravel boilerplate,laravel admin panel',
             ]
         ];
         
