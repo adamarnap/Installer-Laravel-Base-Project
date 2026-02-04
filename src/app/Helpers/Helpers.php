@@ -217,3 +217,62 @@ if (!function_exists('getDefaultTheme')) {
         return env('DEFAULT_THEME', 'light'); // 'light' adalah default jika tidak ada di .env
     }
 }
+
+if (!function_exists('getBulan')) {
+    /**
+     * Get month name in Indonesian
+     *
+     * @param int $month Month number (1-12)
+     * @param bool $short Return short format (3 characters) or full name
+     * @return string
+     */
+    function getBulan(int $month, bool $short = false): string
+    {
+        $months = [
+            1 => ['short' => 'Jan', 'full' => 'Januari'],
+            2 => ['short' => 'Feb', 'full' => 'Februari'],
+            3 => ['short' => 'Mar', 'full' => 'Maret'],
+            4 => ['short' => 'Apr', 'full' => 'April'],
+            5 => ['short' => 'Mei', 'full' => 'Mei'],
+            6 => ['short' => 'Jun', 'full' => 'Juni'],
+            7 => ['short' => 'Jul', 'full' => 'Juli'],
+            8 => ['short' => 'Agu', 'full' => 'Agustus'],
+            9 => ['short' => 'Sep', 'full' => 'September'],
+            10 => ['short' => 'okt', 'full' => 'Oktober'],
+            11 => ['short' => 'Nov', 'full' => 'November'],
+            12 => ['short' => 'Des', 'full' => 'Desember'],
+        ];
+
+        if ($month < 1 || $month > 12) {
+            return '';
+        }
+
+        return $short ? $months[$month]['short'] : $months[$month]['full'];
+    }
+}
+
+if (!function_exists('collectPaginate')) {
+    /**
+     * Transform the items in a LengthAwarePaginator into API resource instances.
+     *
+     * This function maps each item in the paginator's underlying collection using the
+     * provided resource class' static make method, replacing the collection with the
+     * resulting resource objects. The paginator instance is mutated and returned to
+     * allow for method chaining or direct return from controller methods.
+     *
+     * Example:
+     *     $paginated = collectPaginate($usersPaginator, \App\Http\Resources\UserResource::class);
+     *
+     * @param \Illuminate\Pagination\LengthAwarePaginator $data The paginator whose collection will be transformed.
+     * @param class-string $resource_class Fully-qualified resource class name that provides a static make($item) method.
+     * @return \Illuminate\Pagination\LengthAwarePaginator The same paginator instance with its collection transformed into resources.
+     */
+    function collectPaginate(\Illuminate\Pagination\LengthAwarePaginator $data, string $resource_class)
+    {
+        $data->getCollection()->transform(function ($item) use ($resource_class) {
+            return $resource_class::make($item);
+        });
+
+        return $data;
+    }
+}

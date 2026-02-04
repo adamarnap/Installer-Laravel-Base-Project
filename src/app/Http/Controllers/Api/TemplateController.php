@@ -24,7 +24,8 @@ class AuthController extends Controller
         ]);
 
         $user = $this->authService->login($validated);
-        $result = LoginResource::make($user);
+        $result = LoginResource::make($user); // For one object resource
+        $result = collectPaginate($result, BlogResource::class); // For pagination data
         return ApiResponse::success(data: $result, message: 'Login successful');
     }
 }
