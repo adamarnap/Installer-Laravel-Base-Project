@@ -75,6 +75,24 @@ Write-Host "============= [STEP] 3 : Moved to project folder: $nama_aplikasi ===
 Write-Host ""
 # ============== END : Move to project folder
 
+# ============== START : Copy Base Project Files
+Write-Host ""
+Write-Host ""
+Write-Host "============= [STEP] 4 : Copying Base Project Files =============" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Copying base project files from src..." -ForegroundColor Yellow
+
+# Copy additional files from src to new Laravel project
+Copy-Item -Path "..\src\app\*" -Destination "app" -Recurse -Force
+Copy-Item -Path "..\src\resources\*" -Destination "resources" -Recurse -Force
+Copy-Item -Path "..\src\routes\*" -Destination "routes" -Recurse -Force
+Copy-Item -Path "..\src\public\assets" -Destination "public\assets" -Recurse -Force
+Copy-Item -Path "..\src\vite.config.js" -Destination "." -Force
+Copy-Item -Path "..\src\README.md" -Destination "." -Force
+
+Write-Host "✅ Base project files copied successfully" -ForegroundColor Green
+# ============== END : Copy Base Project Files
+
 # Create storage link
 Write-Host ""
 Write-Host "============= [STEP] 4 : Creating storage link =============" -ForegroundColor Cyan
@@ -162,6 +180,14 @@ Write-Host ""
 composer require yajra/laravel-datatables:"^12.0"
 php artisan vendor:publish --provider="Yajra\DataTables\DataTablesServiceProvider"
 php artisan vendor:publish --tag=datatables
+
+# Laravolt Indonesia Address
+Write-Host ""
+Write-Host "------------------------- [STEP] 6.7 Installing Laravolt Indonesia Address -------------------------" -ForegroundColor Yellow
+Write-Host ""
+composer require laravolt/indonesia
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider" --tag=config
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider" --tag=migrations
 # ============== END : Install Composer Packages
 
 # ============== START : Install NPM Packages
@@ -228,12 +254,120 @@ $providerToAdd = @"
     App\Providers\ViewComposerServiceProvider::class,
     Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 "@
-$providersContent = $providersContent -replace "(App\\Providers\\AppServiceProvider::class,)", "`$1`n$providerToAdd"
+$providersContent = $providersContent -replace "(App\\Providers\\AppServiceProvider::class,)", "`$1`n    App\Providers\HelperServiceProvider::class,`n    App\Providers\ViewComposerServiceProvider::class,`n    Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,"
 Set-Content "bootstrap\providers.php" -Value $providersContent
+
+# Add necessary imports to bootstrap/app.php
+Write-Host ""
+Write-Host "----------------- [STEP] 8.2.1 Add necessary imports to bootstrap/app.php -----------------" -ForegroundColor Yellow
+Write-Host ""
+$appContent = Get-Content "bootstrap\app.php" -Raw
+$importsToAdd = @"
+use Illuminate\Http\Request;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\QueryException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Exceptions\ServiceException;
+use App\Exceptions\ResourceNotFound;
+use App\Helpers\ApiResponse;
+"@
+# Add imports after existing use statements
+$appContent = $appContent -replace "(use Illuminate\\Foundation\\Configuration\\Middleware;)", "`$1`n`n$importsToAdd"
+Set-Content "bootstrap\app.php" -Value $appContent
+
+# Add API route to withRouting
+Write-Host ""
+Write-Host "----------------- [STEP] 8.2.2 Add API route to withRouting -----------------" -ForegroundColor Yellow
+Write-Host ""
+$appContent = Get-Content "bootstrap\app.php" -Raw
+$appContent = $appContent -replace "(web: __DIR__\.'/../routes/web\.php',)", "`$1`n        api: __DIR__.'/../routes/api.php',"
+Set-Content "bootstrap\app.php" -Value $appContent
+
+# Replace withExceptions with custom exception handling
+Write-Host ""
+Write-Host "----------------- [STEP] 8.2.3 Replace withExceptions with custom exception handling -----------------" -ForegroundColor Yellow
+Write-Host ""
+$appContent = Get-Content "bootstrap\app.php" -Raw
+$newExceptions = @'
+    ->withExceptions(function (Exceptions `$exceptions): void {
+        // ServiceException - specific custom exception (should be first)
+        `$exceptions->render(function (ServiceException `$e, Request `$request) {
+            if (`$request->is('api/*')) {
+                return ApiResponse::error(`$e->getMessage(), `$e->getCode(), [
+                    'file' => "{`$e->getFile()}:{`$e->getLine()}",
+                    'context' => `$e->getContext()
+                ]);
+            }
+        });
+
+        // AuthenticationException - unauthenticated user
+        `$exceptions->render(function (AuthenticationException `$e, Request `$request) {
+            if (`$request->is('api/*')) {
+                return ApiResponse::unauthorized('Unauthorized', [
+                    'type' => 'authentication_failed',
+                    'message' => 'You must be authenticated to access this resource.',
+                ]);
+            }
+        });
+
+        // ResourceNotFound exception
+        `$exceptions->render(function (ResourceNotFound `$e, Request `$request) {
+            if (`$request->is('api/*')) {
+                return ApiResponse::notFound('Resource Not Found', [
+                    'type' => 'resource_not_found',
+                    'message' => `$e->getMessage() ?? 'The requested resource could not be found.',
+                ]);
+            }
+        });
+
+        // NotFoundHttpException - 404 errors
+        `$exceptions->render(function (NotFoundHttpException `$e, Request `$request) {
+            if (`$request->is('api/*')) {
+                return ApiResponse::notFound('Not Found', [
+                    'type' => 'route_not_found',
+                    'message' => 'The requested API endpoint does not exist.',
+                ]);
+            }
+        });
+
+        // ValidationException - validation errors
+        `$exceptions->render(function (ValidationException `$e, Request `$request) {
+            if (`$request->is('api/*')) {
+                return ApiResponse::validation([
+                    'type' => 'request_validation_fail',
+                    'message' => `$e->errors(),
+                ]);
+            }
+        });
+
+        // QueryException - database errors
+        `$exceptions->render(function (QueryException `$e, Request `$request) {
+            if (`$request->is('api/*')) {
+                return ApiResponse::error('Server Error', 500, [
+                    'type' => 'server_error',
+                    'message' => 'A database error occurred.',
+                ]);
+            }
+        });
+
+        // Generic Exception - catch all (should be last)
+        `$exceptions->render(function (\Throwable `$e, Request `$request) {
+            if (`$request->is('api/*')) {
+                return ApiResponse::error('Server Error', 500, [
+                    'type' => 'server_error',
+                    'message' => `$e->getMessage(),
+                ]);
+            }
+        });
+    })
+'@
+$appContent = $appContent -replace "->withExceptions\(function \(Exceptions \`\$exceptions\)\s*\{[^}]*\}\s*\)", $newExceptions
+Set-Content "bootstrap\app.php" -Value $appContent
 
 # Locale support
 Write-Host ""
-Write-Host "----------------- [STEP] 8.2 Change locale support | For Language and Localization -----------------" -ForegroundColor Yellow
+Write-Host "----------------- [STEP] 8.2.4 Change locale support | For Language and Localization -----------------" -ForegroundColor Yellow
 Write-Host ""
 $appContent = Get-Content "bootstrap\app.php" -Raw
 $middlewareToAdd = @"
@@ -250,6 +384,14 @@ Set-Content "bootstrap\app.php" -Value $appContent
 
 # Copy lang folder
 Copy-Item -Path "..\src\lang" -Destination "." -Recurse -Force
+
+# Install laravel sanctum
+Write-Host ""
+Write-Host "----------------- [STEP] 8.2.5 Installing Laravel Sanctum Package -----------------" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "Installing Laravel Sanctum and API support..." -ForegroundColor Yellow
+php artisan install:api
+Write-Host "✅ Laravel Sanctum installed successfully" -ForegroundColor Green
 
 # Pagination tailwind support
 Write-Host ""
@@ -270,21 +412,6 @@ $packageJsonContent = Get-Content "package.json" -Raw
 $packageJsonContent = $packageJsonContent -replace '("scripts": \{)', "`$1`n        `"build-styling-landing`": `"npx @tailwindcss/cli -i ./resources/css/landing/input.css -o ./dist/landing/style.css --watch`","
 Set-Content "package.json" -Value $packageJsonContent
 # ============== END : Modify Files
-
-# ============== START : Copy Base Project Files
-Write-Host ""
-Write-Host ""
-Write-Host "============= [STEP] 9 : Copying Base Project Files =============" -ForegroundColor Cyan
-Write-Host ""
-
-# Copy additional files
-Copy-Item -Path "..\src\app\*" -Destination "app" -Recurse -Force
-Copy-Item -Path "..\src\resources\*" -Destination "resources" -Recurse -Force
-Copy-Item -Path "..\src\routes\*" -Destination "routes" -Recurse -Force
-Copy-Item -Path "..\src\public\assets" -Destination "public\assets" -Recurse -Force
-Copy-Item -Path "..\src\vite.config.js" -Destination "." -Force
-Copy-Item -Path "..\src\README.md" -Destination "." -Force
-# ============== END : Copy Base Project Files
 
 # =========== START : Migrations and Seeders
 Write-Host ""

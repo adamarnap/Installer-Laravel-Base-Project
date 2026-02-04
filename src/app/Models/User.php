@@ -11,10 +11,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable, SoftDeletes, HasRoles;
+    use HasFactory, Notifiable, SoftDeletes, HasRoles, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -79,5 +80,17 @@ class User extends Authenticatable implements MustVerifyEmail
                 'profile_photo' => $path,
             ]);
         }
+    }
+
+    /* 
+     * =========================================================
+     * Relationships
+     * =========================================================
+    */
+
+    // Relationship to UserProfile
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class, 'user_id', 'id');
     }
 }

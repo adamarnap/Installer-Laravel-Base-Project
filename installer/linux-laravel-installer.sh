@@ -80,12 +80,12 @@ read -p "DB DATABASE: " db_database
 read -p "DB USERNAME: " db_user
 read -p "DB PASSWORD: " db_pass
 
-sed -i '' "s/DB_CONNECTION=sqlite/DB_CONNECTION=mysql/g" .env
-sed -i '' "s/# DB_HOST=127.0.0.1/DB_HOST=$db_host/g" .env
-sed -i '' "s/# DB_PORT=3306/DB_PORT=$db_port/g" .env
-sed -i '' "s/# DB_DATABASE=laravel/DB_DATABASE=$db_database/g" .env
-sed -i '' "s/# DB_USERNAME=root/DB_USERNAME=$db_user/g" .env
-sed -i '' "s/# DB_PASSWORD=/DB_PASSWORD=$db_pass/g" .env
+sed -i "s/DB_CONNECTION=sqlite/DB_CONNECTION=mysql/g" .env
+sed -i "s/# DB_HOST=127.0.0.1/DB_HOST=$db_host/g" .env
+sed -i "s/# DB_PORT=3306/DB_PORT=$db_port/g" .env
+sed -i "s/# DB_DATABASE=laravel/DB_DATABASE=$db_database/g" .env
+sed -i "s/# DB_USERNAME=root/DB_USERNAME=$db_user/g" .env
+sed -i "s/# DB_PASSWORD=/DB_PASSWORD=$db_pass/g" .env
 # ============== END : Setup .env file
 
 # ============== START : Install Composer Packages
@@ -144,6 +144,15 @@ echo ""
 composer require yajra/laravel-datatables:"^12.0"
 php artisan vendor:publish --provider="Yajra\DataTables\DataTablesServiceProvider"
 php artisan vendor:publish --tag=datatables
+
+# Laravolt Indonesia Address
+echo ""
+echo "------------------------- [STEP] 6.7 Installing Laravolt Indonesia Address -------------------------"
+echo ""
+composer require laravolt/indonesia
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider" --tag=config
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider" --tag=migrations
+
 # ============== END : Install Composer Packages
 
 # ============== START : Install NPM Packages
@@ -197,40 +206,321 @@ echo ""
 echo ""
 echo "----------------- [STEP] 8.1 Add additional providers to bootstrap/providers.php -----------------"
 echo ""
-printf "%s\n" \
-"    App\\Providers\\HelperServiceProvider::class," \
-"    App\\Providers\\ViewComposerServiceProvider::class," \
-"    Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider::class," \
-| sed -i '' '/App\\Providers\\AppServiceProvider::class,/r /dev/stdin' bootstrap/providers.php
+# Use Python for reliable provider addition
+python3 << 'ENDPYTHON'
+import re
+
+with open('bootstrap/providers.php', 'r') as f:
+    content = f.read()
+
+# Find AppServiceProvider line and add after it
+pattern = r"(App\\Providers\\AppServiceProvider::class,)"
+replacement = r"\1\n    App\\Providers\\HelperServiceProvider::class,\n    App\\Providers\\ViewComposerServiceProvider::class,\n    Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider::class,"
+content = re.sub(pattern, replacement, content)
+
+with open('bootstrap/providers.php', 'w') as f:
+    f.write(content)
+ENDPYTHON
+
+# Add necessary imports to bootstrap/app.php
+echo ""
+echo "----------------- [STEP] 8.2.1 Add necessary imports to bootstrap/app.php -----------------"
+echo ""
+# Use Python for more reliable import insertion
+python3 << 'ENDPYTHON'
+import re
+
+with open('bootstrap/app.php', 'r') as f:
+    content = f.read()
+
+# New imports to add
+new_imports = [
+    "use Illuminate\\Http\\Request;",
+    "use Illuminate\\Auth\\AuthenticationException;",
+    "use Illuminate\\Validation\\ValidationException;",
+    "use Illuminate\\Database\\QueryException;",
+    "use Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException;",
+    "use App\\Exceptions\\ServiceException;",
+    "use App\\Exceptions\\ResourceNotFound;",
+    "use App\\Helpers\\ApiResponse;",
+]
+
+# Find the last use statement and add after it
+lines = content.split('\n')
+result = []
+last_use_index = -1
+
+for i, line in enumerate(lines):
+    result.append(line)
+    if line.strip().startswith('use ') and ';' in line:
+        last_use_index = len(result) - 1
+
+if last_use_index >= 0:
+    # Insert new imports after last use statement
+    for import_stmt in new_imports:
+        if import_stmt not in content:
+            result.insert(last_use_index + 1, import_stmt)
+            last_use_index += 1
+
+with open('bootstrap/app.php', 'w') as f:
+    f.write('\n'.join(result))
+ENDPYTHON
+
+# Add API route to withRouting
+echo ""
+echo "----------------- [STEP] 8.2.2 Add API route to withRouting -----------------"
+echo ""
+# Use Python for reliable API route addition
+python3 << 'ENDPYTHON'
+import re
+
+with open('bootstrap/app.php', 'r') as f:
+    content = f.read()
+
+# Add API route after web route - using more flexible pattern
+if "api: __DIR__" not in content:
+    pattern = r"(web:\s*__DIR__\s*\.\s*'[^']+',)"
+    replacement = r"\1\n        api: __DIR__.'/../routes/api.php',"
+    content = re.sub(pattern, replacement, content)
+
+with open('bootstrap/app.php', 'w') as f:
+    f.write(content)
+ENDPYTHON
+
+# Replace withExceptions with custom exception handling
+echo ""
+echo "----------------- [STEP] 8.2.3 Replace withExceptions with custom exception handling -----------------"
+echo ""
+# Create a temporary file with the new exception handling code
+cat > /tmp/exceptions_handler.txt << 'EOFEXC'
+    ->withExceptions(function (Exceptions $exceptions): void {
+        // ServiceException - specific custom exception (should be first)
+        $exceptions->render(function (ServiceException $e, Request $request) {
+            if ($request->is('api/*')) {
+                return ApiResponse::error($e->getMessage(), $e->getCode(), [
+                    'file' => "{$e->getFile()}:{$e->getLine()}",
+                    'context' => $e->getContext()
+                ]);
+            }
+        });
+
+        // AuthenticationException - unauthenticated user
+        $exceptions->render(function (AuthenticationException $e, Request $request) {
+            if ($request->is('api/*')) {
+                return ApiResponse::unauthorized('Unauthorized', [
+                    'type' => 'authentication_failed',
+                    'message' => 'You must be authenticated to access this resource.',
+                ]);
+            }
+        });
+
+        // ResourceNotFound exception
+        $exceptions->render(function (ResourceNotFound $e, Request $request) {
+            if ($request->is('api/*')) {
+                return ApiResponse::notFound('Resource Not Found', [
+                    'type' => 'resource_not_found',
+                    'message' => $e->getMessage() ?? 'The requested resource could not be found.',
+                ]);
+            }
+        });
+
+        // NotFoundHttpException - 404 errors
+        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
+            if ($request->is('api/*')) {
+                return ApiResponse::notFound('Not Found', [
+                    'type' => 'route_not_found',
+                    'message' => 'The requested API endpoint does not exist.',
+                ]);
+            }
+        });
+
+        // ValidationException - validation errors
+        $exceptions->render(function (ValidationException $e, Request $request) {
+            if ($request->is('api/*')) {
+                return ApiResponse::validation([
+                    'type' => 'request_validation_fail',
+                    'message' => $e->errors(),
+                ]);
+            }
+        });
+
+        // QueryException - database errors
+        $exceptions->render(function (QueryException $e, Request $request) {
+            if ($request->is('api/*')) {
+                return ApiResponse::error('Server Error', 500, [
+                    'type' => 'server_error',
+                    'message' => 'A database error occurred.',
+                ]);
+            }
+        });
+
+        // Generic Exception - catch all (should be last)
+        $exceptions->render(function (\Throwable $e, Request $request) {
+            if ($request->is('api/*')) {
+                return ApiResponse::error('Server Error', 500, [
+                    'type' => 'server_error',
+                    'message' => $e->getMessage(),
+                ]);
+            }
+        });
+    })
+EOFEXC
+
+# Replace the withExceptions section using Python for reliable multi-line replacement
+python3 << 'ENDPYTHON'
+import re
+
+with open('bootstrap/app.php', 'r') as f:
+    content = f.read()
+
+# Read the new exception handler
+with open('/tmp/exceptions_handler.txt', 'r') as f:
+    new_handler = f.read().strip()
+
+# Find and replace the withExceptions section - split and rebuild to avoid escape issues
+start_pattern = r'->withExceptions\s*\(\s*function\s*\(\s*Exceptions\s+\$exceptions\s*\)\s*(?::\s*void\s*)?\{'
+end_pattern = r'\}\s*\)'
+
+# Find the start of withExceptions
+start_match = re.search(start_pattern, content)
+if start_match:
+    before_exceptions = content[:start_match.start()]
+    
+    # Find the end (matching closing brace and paren) after start
+    temp_content = content[start_match.start():]
+    brace_count = 0
+    found_opening = False
+    end_pos = -1
+    
+    for i, char in enumerate(temp_content):
+        if char == '{':
+            brace_count += 1
+            found_opening = True
+        elif char == '}' and found_opening:
+            brace_count -= 1
+            if brace_count == 0:
+                # Found matching brace, now look for closing paren
+                for j in range(i+1, min(i+10, len(temp_content))):
+                    if temp_content[j] == ')':
+                        end_pos = start_match.start() + j + 1
+                        break
+                break
+    
+    if end_pos > 0:
+        after_exceptions = content[end_pos:]
+        content = before_exceptions + new_handler + after_exceptions
+
+with open('bootstrap/app.php', 'w') as f:
+    f.write(content)
+ENDPYTHON
+
+rm -f /tmp/exceptions_handler.txt
 
 # Locale support
 echo ""
-echo "----------------- [STEP] 8.2 Change locale support | For Language and Localization -----------------"
+echo "----------------- [STEP] 8.2.4 Change locale support | For Language and Localization -----------------"
 echo ""
-sed -i '' '/withMiddleware(function (Middleware \$middleware)/a\
-        // Web middleware\
-        $middleware->web(append:[\
-            \\App\\Http\\Middleware\\LocaleManager::class\
-        ]);\
-        // Alias middleware | can use for route or group\
-        $middleware->alias([\
-        ]);' bootstrap/app.php
+# Use Python for more reliable multi-line insertion
+python3 << 'ENDPYTHON'
+import re
+
+with open('bootstrap/app.php', 'r') as f:
+    content = f.read()
+
+# Create the new middleware code
+new_middleware = '''->withMiddleware(function (Middleware $middleware) {
+        // Web middleware
+        $middleware->web(append:[
+            \\App\\Http\\Middleware\\LocaleManager::class
+        ]);
+        // Alias middleware | can use for route or group
+        $middleware->alias([
+        ]);
+    })'''
+
+# Find and replace the withMiddleware section
+start_pattern = r'->withMiddleware\s*\(\s*function\s*\(\s*Middleware\s+\$middleware\s*\)\s*\{'
+
+start_match = re.search(start_pattern, content)
+if start_match:
+    before_middleware = content[:start_match.start()]
+    
+    # Find the end (matching closing brace and paren) after start
+    temp_content = content[start_match.start():]
+    brace_count = 0
+    found_opening = False
+    end_pos = -1
+    
+    for i, char in enumerate(temp_content):
+        if char == '{':
+            brace_count += 1
+            found_opening = True
+        elif char == '}' and found_opening:
+            brace_count -= 1
+            if brace_count == 0:
+                # Found matching brace, now look for closing paren
+                for j in range(i+1, min(i+10, len(temp_content))):
+                    if temp_content[j] == ')':
+                        end_pos = start_match.start() + j + 1
+                        break
+                break
+    
+    if end_pos > 0:
+        after_middleware = content[end_pos:]
+        content = before_middleware + new_middleware + after_middleware
+
+with open('bootstrap/app.php', 'w') as f:
+    f.write(content)
+ENDPYTHON
+
 cp -r ../src/lang .
+
+# Install laravel sanctum
+echo ""
+echo "----------------- [STEP] 8.2.5 Installing Laravel Sanctum Package -----------------"
+echo ""
+echo "----------------- [STEP] 8.2.5.1 Copying Base Routes"
+cp -r ../src/routes .
+echo "----------------- [STEP] 8.2.5.2 Installing Laravel Sanctum Process"
+php artisan install:api
+
 
 # Pagination tailwind support   
 echo ""
 echo "----------------- [STEP] 8.3 Change pagination to tailwind support -----------------"
 echo ""
-sed -i '' '5i\use Illuminate\Pagination\Paginator;' app/Providers/AppServiceProvider.php
-sed -i '' '24i\Paginator::useTailwind();' app/Providers/AppServiceProvider.php
+# Use Python for reliable file modification
+python3 << 'ENDPYTHON'
+import re
+
+with open('app/Providers/AppServiceProvider.php', 'r') as f:
+    content = f.read()
+
+# Add use statement if not exists
+if 'use Illuminate\\Pagination\\Paginator;' not in content:
+    content = re.sub(
+        r'(namespace App\\Providers;)',
+        r'\1\n\nuse Illuminate\\Pagination\\Paginator;',
+        content
+    )
+
+# Add Paginator::useTailwind(); in boot method
+if 'Paginator::useTailwind()' not in content:
+    content = re.sub(
+        r'(public function boot\(\):\s*void\s*\{)',
+        r'\1\n        Paginator::useTailwind();',
+        content
+    )
+
+with open('app/Providers/AppServiceProvider.php', 'w') as f:
+    f.write(content)
+ENDPYTHON
 
 # Add NPM scripts to package.json
 echo ""
 echo "----------------- [STEP] 8.4 Add NPM scripts for Build style.css Landing Template HTML to package.json -----------------"
 echo ""
-sed -i '' '/"scripts": {/a\
-\    "build-styling-landing": "npx @tailwindcss/cli -i ./resources/css/landing/input.css -o ./dist/landing/style.css --watch",
-' package.json
+sed -i '/"scripts": {/a\    "build-styling-landing": "npx @tailwindcss/cli -i ./resources/css/landing/input.css -o ./dist/landing/style.css --watch",' package.json
 
 # ============== END : Modify Files using sed
 
@@ -242,7 +532,6 @@ echo ""
 # Copy additional files
 cp -r ../src/app .
 cp -r ../src/resources .
-cp -r ../src/routes .
 # cp -r ../src/storage .
 cp -r ../src/public/assets public/assets
 cp -r ../src/vite.config.js .

@@ -63,6 +63,22 @@ echo "============= [STEP] 3 : Moved to project folder: $nama_aplikasi =========
 echo ""
 # ============== END : Pindah ke dalam folder
 
+# ============== START : Copy Base Project Files
+echo ""
+echo ""
+echo "============= [STEP] 4 : Copying Base Project Files ============="
+echo ""
+# Copy additional files from src to new Laravel project
+cp -r ../src/app .
+cp -r ../src/resources .
+cp -r ../src/routes .
+# cp -r ../src/storage .
+cp -r ../src/public/assets public/assets
+cp -r ../src/vite.config.js .
+cp -r ../src/README.md .
+echo "Base project files copied successfully"
+# ============== END : Copy Base Project Files
+
 # membuat link storage
 php artisan storage:link
 
@@ -144,6 +160,14 @@ echo ""
 composer require yajra/laravel-datatables:"^12.0"
 php artisan vendor:publish --provider="Yajra\DataTables\DataTablesServiceProvider"
 php artisan vendor:publish --tag=datatables
+
+# Laravolt Indonesia Address
+echo ""
+echo "------------------------- [STEP] 6.7 Installing Laravolt Indonesia Address -------------------------"
+echo ""
+composer require laravolt/indonesia
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider" --tag=config
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider" --tag=migrations
 # ============== END : Install Composer Packages
 
 # ============== START : Install NPM Packages
@@ -203,7 +227,122 @@ printf "%s\n" \
 "    Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider::class," \
 | sed -i '' '/App\\Providers\\AppServiceProvider::class,/r /dev/stdin' bootstrap/providers.php
 
+# Add necessary imports to bootstrap/app.php
+echo ""
+echo "----------------- [STEP] 8.2.1 Add necessary imports to bootstrap/app.php -----------------"
+echo ""
+sed -i '' '3i\
+use Illuminate\\Http\\Request;\
+use Illuminate\\Auth\\AuthenticationException;\
+use Illuminate\\Validation\\ValidationException;\
+use Illuminate\\Database\\QueryException;\
+use Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException;\
+use App\\Exceptions\\ServiceException;\
+use App\\Exceptions\\ResourceNotFound;\
+use App\\Helpers\\ApiResponse;
+' bootstrap/app.php
+
+# Add API route to withRouting
+echo ""
+echo "----------------- [STEP] 8.2.2 Add API route to withRouting -----------------"
+echo ""
+sed -i '' "/web: __DIR__/a\\
+        api: __DIR__.'/../routes/api.php'," bootstrap/app.php
+
+# Replace withExceptions with custom exception handling
+echo ""
+echo "----------------- [STEP] 8.2.3 Replace withExceptions with custom exception handling -----------------"
+echo ""
+# Create backup and use temporary file approach
+cp bootstrap/app.php bootstrap/app.php.bak
+awk '
+/->withExceptions\(function \(Exceptions \$exceptions\) \{/ {
+    print "    ->withExceptions(function (Exceptions $exceptions): void {"
+    print "        // ServiceException - specific custom exception (should be first)"
+    print "        $exceptions->render(function (ServiceException $e, Request $request) {"
+    print "            if ($request->is('\''api/*'\'')) {"
+    print "                return ApiResponse::error($e->getMessage(), $e->getCode(), ["
+    print "                    '\''file'\'' => \"{$e->getFile()}:{$e->getLine()}\","
+    print "                    '\''context'\'' => $e->getContext()"
+    print "                ]);"
+    print "            }"
+    print "        });"
+    print ""
+    print "        // AuthenticationException - unauthenticated user"
+    print "        $exceptions->render(function (AuthenticationException $e, Request $request) {"
+    print "            if ($request->is('\''api/*'\'')) {"
+    print "                return ApiResponse::unauthorized('\''Unauthorized'\'', ["
+    print "                    '\''type'\'' => '\''authentication_failed'\'',"
+    print "                    '\''message'\'' => '\''You must be authenticated to access this resource.'\'',"
+    print "                ]);"
+    print "            }"
+    print "        });"
+    print ""
+    print "        // ResourceNotFound exception"
+    print "        $exceptions->render(function (ResourceNotFound $e, Request $request) {"
+    print "            if ($request->is('\''api/*'\'')) {"
+    print "                return ApiResponse::notFound('\''Resource Not Found'\'', ["
+    print "                    '\''type'\'' => '\''resource_not_found'\'',"
+    print "                    '\''message'\'' => $e->getMessage() ?? '\''The requested resource could not be found.'\'',"
+    print "                ]);"
+    print "            }"
+    print "        });"
+    print ""
+    print "        // NotFoundHttpException - 404 errors"
+    print "        $exceptions->render(function (NotFoundHttpException $e, Request $request) {"
+    print "            if ($request->is('\''api/*'\'')) {"
+    print "                return ApiResponse::notFound('\''Not Found'\'', ["
+    print "                    '\''type'\'' => '\''route_not_found'\'',"
+    print "                    '\''message'\'' => '\''The requested API endpoint does not exist.'\'',"
+    print "                ]);"
+    print "            }"
+    print "        });"
+    print ""
+    print "        // ValidationException - validation errors"
+    print "        $exceptions->render(function (ValidationException $e, Request $request) {"
+    print "            if ($request->is('\''api/*'\'')) {"
+    print "                return ApiResponse::validation(["
+    print "                    '\''type'\'' => '\''request_validation_fail'\'',"
+    print "                    '\''message'\'' => $e->errors(),"
+    print "                ]);"
+    print "            }"
+    print "        });"
+    print ""
+    print "        // QueryException - database errors"
+    print "        $exceptions->render(function (QueryException $e, Request $request) {"
+    print "            if ($request->is('\''api/*'\'')) {"
+    print "                return ApiResponse::error('\''Server Error'\'', 500, ["
+    print "                    '\''type'\'' => '\''server_error'\'',"
+    print "                    '\''message'\'' => '\''A database error occurred.'\'',"
+    print "                ]);"
+    print "            }"
+    print "        });"
+    print ""
+    print "        // Generic Exception - catch all (should be last)"
+    print "        $exceptions->render(function (\\\\Throwable $e, Request $request) {"
+    print "            if ($request->is('\''api/*'\'')) {"
+    print "                return ApiResponse::error('\''Server Error'\'', 500, ["
+    print "                    '\''type'\'' => '\''server_error'\'',"
+    print "                    '\''message'\'' => $e->getMessage(),"
+    print "                ]);"
+    print "            }"
+    print "        });"
+    print "    })"
+    # Skip until we find the closing
+    while (getline > 0) {
+        if (/^[[:space:]]*\}[[:space:]]*\)[[:space:]]*$/) {
+            break
+        }
+    }
+    next
+}
+{ print }
+' bootstrap/app.php.bak > bootstrap/app.php
+rm bootstrap/app.php.bak
+
 # Locale support
+echo ""
+echo "----------------- [STEP] 8.2.4 Change locale support | For Language and Localization -----------------"
 echo ""
 echo "----------------- [STEP] 8.2 Change locale support | For Language and Localization -----------------"
 echo ""
@@ -216,6 +355,13 @@ sed -i '' '/withMiddleware(function (Middleware \$middleware)/a\
         $middleware->alias([\
         ]);' bootstrap/app.php
 cp -r ../src/lang .
+
+# Install laravel sanctum
+echo ""
+echo "----------------- [STEP] 8.2.5 Installing Laravel Sanctum Package -----------------"
+echo ""
+echo "Installing Laravel Sanctum and API support..."
+php artisan install:api
 
 # Pagination tailwind support
 echo ""
@@ -233,21 +379,6 @@ sed -i '' '/"scripts": {/a\
 ' package.json
 
 # ============== END : Modify Files using sed
-
-# ============== START : Copy Base Project Files
-echo ""
-echo ""
-echo "============= [STEP] 4 : Copying Base Project Files ============="
-echo ""
-# Copy additional files
-cp -r ../src/app .
-cp -r ../src/resources .
-cp -r ../src/routes .
-# cp -r ../src/storage .
-cp -r ../src/public/assets public/assets
-cp -r ../src/vite.config.js .
-cp -r ../src/README.md .
-# ============== END : Copy Base Project Files
 
 # =========== START : Migrations and Seeders
 echo ""
