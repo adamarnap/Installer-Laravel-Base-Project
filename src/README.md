@@ -123,71 +123,26 @@ MailHog is an email testing tool for developers.
 - Make main-dev.js and add base js to resources/js/main-dev.js (for dev, see example)
 - Edit vite.config.js
 
-## Make API Documentation
-### Swagger UI
-- Manual write yaml/json
-> - Edit resource/js/swagger.js
-> - change url of json/yaml
-- Using Postman Collection JSON
-> - export collection to json
-> - convert postman json to openapi json/yaml using [apimatic.io](http://apimatic.io) (Login / Signup Free)
-> - Transform API
-> - Convert and download
-> - do as manual write
+## API Documentation
+### Using Postman Collection JSON
 
-## VS Code Extension
-- code --list-extensions | xargs -L 1 echo code --install-extension (UNIX)
-- code --list-extensions | % { "code --install-extension $_" } (Windows)
+1. **Open the Postman application** on your computer.  
+2. **Connect Postman to your local project folder**:  
+   - Click the **Folder icon** at the bottom left of the Postman app.  
+   - Select the `docs` folder inside this project as the location for the Postman documentation.  
+   ![Connect Postman to Local](docs/images/api-docs/api-docs-1.jpg)
 
-> - code --install-extension ahinkle.laravel-model-snippets
-> - code --install-extension amiralizadeh9480.laravel-extra-intellisense
-> - code --install-extension austenc.laravel-blade-spacer
-> - code --install-extension bmewburn.vscode-intelephense-client
-> - code --install-extension calebporzio.better-phpunit
-> - code --install-extension codingyu.laravel-goto-view
-> - code --install-extension formulahendry.auto-close-tag
-> - code --install-extension MehediDracula.php-namespace-resolver
-> - code --install-extension ms-vscode.sublime-keybindings
-> - code --install-extension neilbrayfield.php-docblocker
-> - code --install-extension onecentlin.laravel-blade
-> - code --install-extension onecentlin.laravel5-snippets
-> - code --install-extension SonarSource.sonarlint-vscode
-> - code --install-extension Codeium.codeium
+3. **Verify the connection**:  
+   - Make sure Postman is connected to **Local** storage, not to the **Cloud**.  
+   ![Verify Local Connection](docs/images/api-docs/api-docs-2.jpg)
 
-## Usefull Links
+4. **Sync documentation changes with Git**:  
+   - When you make changes to the API documentation or `collection.json`, commit and **push** them to the repository.  
+   - To get the latest updates from the team, perform a **pull** from the repository.  
 
-- [Laravel 10 Documentations](https://laravel.com/docs/10.x/)
-- [Spatie Laravel Permission](https://spatie.be/docs/laravel-permission/v5/introduction/)
-- [AdminLTE](https://adminlte.io/)
-- [Check Coding Standard](https://github.com/squizlabs/PHP_CodeSniffer)
-- [PHP code style fixer - Laravel Pint](https://laravel.com/docs/9.x/pint)
-- [Package yang berisi data Provinsi, Kabupaten/Kota, dan Kecamatan/Desa di seluruh Indonesia](https://github.com/laravolt/indonesia)
+### Summary
+- Documentation is stored in the `docs` folder.  
+- Postman must be connected to **Local** to ensure changes are tracked in Git.  
+- Use **push** to share updates and **pull** to receive the latest changes.  
 
-## FAQ
-#### Apakah itu laravel pint?
-Alat untuk merapihkan penulisan PHP, cara penggunaan ./vendor/bin/pint
-#### Bagaimana cara mengubah template?
-Template berada di folder storage/app.public/. Daftarkan url js dan css ke table preference. ubah THEME="default" di environment (.env)
-#### Arsitektur apa yang digunakan?
-Minimal dengan arsitektur MVC, bisa juga menambahkan service pattern, dan memungkinkan juga memakai repository jika diperlukan.
-#### Apakah wajib mengunakan service dan repository ini?
-Penggunaan service dan repository adalah optional.
-#### Kapan penggunaan service pattern itu?
-Penggunaan service pattern ketika banyak logic yang bisa dipanggil ulang.
-#### Apa isi dari service pattern itu?
-Isi service pattern adalah logic.
-#### Kapan penggunaan repository pattern itu?
-Penggunaan repository pattern ketika mengakses data selain database atau ketika query manual.
-#### Apa isi dari repository pattern itu?
-Isi repository pattern adalah query bisa juga logic untuk ambil data selain database semisal dari API.
-#### Apakah boleh memanggil model di service?
-Boleh
-#### Apakah boleh memanggil model di repository?
-Boleh
-#### Bisakah service menggunakan service lainnya?
-Bisa
-
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---

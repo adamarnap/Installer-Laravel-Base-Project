@@ -1,0 +1,1662 @@
+{
+  "info": {
+    "_postman_id": "1c1789d2-d1b7-4317-803f-b0febdb8c220",
+    "name": "Docs Laravel Base",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Mobile",
+      "item": [
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "Login",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "f4fc5ef8-7c43-4117-a579-34e9c011eb65",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "const response = pm.response.json();",
+                      "",
+                      "if (response.data) {",
+                      "    pm.environment.set(\"authToken\", response.data.token);",
+                      "}"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "d6567f07-bc71-405b-9044-68270b3f5c9f",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"developerkdmp@gmail.com\",\n  \"password\": \"123456789\",\n  \"device_name\" : \"api-token\" // Optional, For identifier. By default in BE filled 'api-token'\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrlMobile}}/auth/login",
+                  "host": [
+                    "{{baseUrlMobile}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "e597d440-c69a-488b-8087-3fae4bf62d10",
+                  "name": "Failed",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"developerkdmp@gmail.com\",\n  \"password\": \"123456789f\"\n}\n",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/login",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "login"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "",
+                  "header": [],
+                  "cookie": [
+                    {
+                      "expires": "Invalid Date",
+                      "domain": "",
+                      "path": ""
+                    }
+                  ],
+                  "body": "{\n    \"status\": false,\n    \"message\": \"Validation failed\",\n    \"errors\": {\n        \"type\": \"request_validation_fail\",\n        \"message\": {\n            \"email\": [\n                \"The provided credentials are incorrect.\"\n            ]\n        }\n    }\n}"
+                },
+                {
+                  "id": "61b6acd5-8ccc-406d-a8d4-28fed9c19ccb",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"developerkdmp@gmail.com\",\n  \"password\": \"123456789\",\n  \"device_name\" : \"api-token\" // Optional, For identifier. By default in BE filled 'api-token'\n}\n",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/login",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "login"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Host",
+                      "value": "127.0.0.1:8000"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "close"
+                    },
+                    {
+                      "key": "X-Powered-By",
+                      "value": "PHP/8.3.6"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 03 Feb 2026 03:59:55 GMT"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "GET, POST, PUT, DELETE, OPTIONS"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Authorization, X-Requested-With, X-CSRF-TOKEN"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Developer KDMP\",\n        \"email\": \"developerkdmp@gmail.com\",\n        \"token\": \"13|tQClCFlZU1AfKZMDj1rH9NnW1dHckosA7PSZgDig51932130\",\n        \"token_expires_at\": \"2026-03-05 14:08:41\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Logout",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "0ddebe8c-1857-41b8-a854-762cc301efa1",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "// Clear semua auth tokens dari environment",
+                      "pm.environment.unset(\"authToken\");",
+                      "",
+                      "console.log(\"✅ All auth tokens cleared from environment\");",
+                      "",
+                      "// Optional: Tambah test untuk memastikan token terhapus",
+                      "pm.test(\"Auth token cleared\", function () {",
+                      "    const authToken = pm.environment.get(\"authToken\");",
+                      "    pm.expect(authToken).to.be.undefined;",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "b39dbd14-22bd-4ead-8433-3a26228ffb91",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrlMobile}}/auth/logout",
+                  "host": [
+                    "{{baseUrlMobile}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "logout"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "b59d65a0-ac90-4715-8e81-10ce5339d627",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": ""
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/logout",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "logout"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Host",
+                      "value": "127.0.0.1:8000"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "close"
+                    },
+                    {
+                      "key": "X-Powered-By",
+                      "value": "PHP/8.3.6"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 03 Feb 2026 04:23:36 GMT"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "GET, POST, PUT, DELETE, OPTIONS"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Authorization, X-Requested-With, X-CSRF-TOKEN"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": false,\n    \"message\": \"Unauthorized\",\n    \"errors\": {\n        \"type\": \"authentication_failed\",\n        \"message\": \"You must be authenticated to access this resource.\"\n    }\n}"
+                },
+                {
+                  "id": "bb53c39d-c779-4361-8ea1-d66b788194da",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": ""
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/logout",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "logout"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Host",
+                      "value": "127.0.0.1:8000"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "close"
+                    },
+                    {
+                      "key": "X-Powered-By",
+                      "value": "PHP/8.3.6"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 03 Feb 2026 04:24:15 GMT"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "GET, POST, PUT, DELETE, OPTIONS"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Authorization, X-Requested-With, X-CSRF-TOKEN"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Logged out successfully\",\n    \"data\": []\n}"
+                }
+              ]
+            },
+            {
+              "name": "Logout From All Device",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "0ddebe8c-1857-41b8-a854-762cc301efa1",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "// Clear semua auth tokens dari environment",
+                      "pm.environment.unset(\"authToken\");",
+                      "",
+                      "console.log(\"✅ All auth tokens cleared from environment\");",
+                      "",
+                      "// Optional: Tambah test untuk memastikan token terhapus",
+                      "pm.test(\"Auth token cleared\", function () {",
+                      "    const authToken = pm.environment.get(\"authToken\");",
+                      "    pm.expect(authToken).to.be.undefined;",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "70c7962f-9752-406f-8fba-1ee0d2ee4ce7",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrlMobile}}/auth/logout-all",
+                  "host": [
+                    "{{baseUrlMobile}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "logout-all"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "c14f45b5-d392-4f7a-85f8-885bc1b26ccb",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": ""
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/logout",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "logout"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Host",
+                      "value": "127.0.0.1:8000"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "close"
+                    },
+                    {
+                      "key": "X-Powered-By",
+                      "value": "PHP/8.3.6"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 03 Feb 2026 04:23:36 GMT"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "GET, POST, PUT, DELETE, OPTIONS"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Authorization, X-Requested-With, X-CSRF-TOKEN"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": false,\n    \"message\": \"Unauthorized\",\n    \"errors\": {\n        \"type\": \"authentication_failed\",\n        \"message\": \"You must be authenticated to access this resource.\"\n    }\n}"
+                },
+                {
+                  "id": "cc909195-a24c-494d-ba54-371ebfb9b1fc",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": ""
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/logout",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "logout"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Host",
+                      "value": "127.0.0.1:8000"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "close"
+                    },
+                    {
+                      "key": "X-Powered-By",
+                      "value": "PHP/8.3.6"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 03 Feb 2026 04:24:15 GMT"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "GET, POST, PUT, DELETE, OPTIONS"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Authorization, X-Requested-With, X-CSRF-TOKEN"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Logged out from all devices successfully\",\n    \"data\": []\n}"
+                }
+              ]
+            },
+            {
+              "name": "Change Password",
+              "id": "7abf4ae8-00e4-479a-a026-f791e26521c7",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"current_password\": \"123456789\",\n    \"new_password\": \"123456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrlMobile}}/api/auth/change-password",
+                  "host": [
+                    "{{baseUrlMobile}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "change-password"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "0c4e629d-776d-4cd2-9419-3543784ea22e",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"current_password\": \"1234\",\n    \"new_password\": \"1234\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/change-password",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "change-password"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Host",
+                      "value": "127.0.0.1:8000"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "close"
+                    },
+                    {
+                      "key": "X-Powered-By",
+                      "value": "PHP/8.3.6"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 03 Feb 2026 04:35:23 GMT"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "GET, POST, PUT, DELETE, OPTIONS"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Authorization, X-Requested-With, X-CSRF-TOKEN"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": false,\n    \"message\": \"Unauthorized\",\n    \"errors\": {\n        \"type\": \"authentication_failed\",\n        \"message\": \"You must be authenticated to access this resource.\"\n    }\n}"
+                },
+                {
+                  "id": "17ba2c82-145e-462a-a055-274a2a7a563a",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"current_password\": \"1234\",\n    \"new_password\": \"1234\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/change-password",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "change-password"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Content",
+                  "code": 422,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Host",
+                      "value": "127.0.0.1:8000"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "close"
+                    },
+                    {
+                      "key": "X-Powered-By",
+                      "value": "PHP/8.3.6"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 03 Feb 2026 04:35:55 GMT"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "GET, POST, PUT, DELETE, OPTIONS"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Authorization, X-Requested-With, X-CSRF-TOKEN"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": false,\n    \"message\": \"Validation failed\",\n    \"errors\": {\n        \"type\": \"request_validation_fail\",\n        \"message\": {\n            \"new_password\": [\n                \"The new password field must be at least 8 characters.\",\n                \"The new password field confirmation does not match.\"\n            ]\n        }\n    }\n}"
+                },
+                {
+                  "id": "b48c3f3a-bc24-4ab2-bb99-e9d3ef163654",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"current_password\": \"123456789\",\n    \"new_password\": \"123456789\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/change-password",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "change-password"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Host",
+                      "value": "127.0.0.1:8000"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "close"
+                    },
+                    {
+                      "key": "X-Powered-By",
+                      "value": "PHP/8.3.6"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 03 Feb 2026 04:36:55 GMT"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "GET, POST, PUT, DELETE, OPTIONS"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Authorization, X-Requested-With, X-CSRF-TOKEN"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Password changed successfully\",\n    \"data\": []\n}"
+                }
+              ]
+            }
+          ],
+          "id": "e4e6b79a-18d0-4026-b040-2bc76b1dcbcf"
+        },
+        {
+          "name": "Profile",
+          "item": [
+            {
+              "name": "get-profile",
+              "id": "88d99c03-840f-4c90-9ea9-5e950da42d64",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrlMobile}}/profile",
+                  "host": [
+                    "{{baseUrlMobile}}"
+                  ],
+                  "path": [
+                    "profile"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "a38aa0b2-4488-437f-8d05-f4d3a49ef9be",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrlMobile}}/profile",
+                      "host": [
+                        "{{baseUrlMobile}}"
+                      ],
+                      "path": [
+                        "profile"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Host",
+                      "value": "127.0.0.1:8000"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "close"
+                    },
+                    {
+                      "key": "X-Powered-By",
+                      "value": "PHP/8.3.6"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 03 Feb 2026 07:23:11 GMT"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "GET, POST, PUT, DELETE, OPTIONS"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Authorization, X-Requested-With, X-CSRF-TOKEN"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"User profile retrieved successfully\",\n    \"data\": {\n        \"id\": 5,\n        \"name\": \"Pepi Bidang 3\",\n        \"email\": \"anggotakdmp01@gmail.com\",\n        \"nomor_identitas\": \"7892880726911488\",\n        \"has_npwp\": true,\n        \"ponsel\": \"089223654423\",\n        \"jenis_kelamin\": \"Laki-laki\",\n        \"tempat_lahir\": \"Sukabumi\",\n        \"tanggal_lahir\": \"1990-11-18\",\n        \"alamat\": \"Ds. Sentot Alibasa No. 476, Tanjungbalai 18340, Kalbar\",\n        \"pekerjaan\": \"Buruh\",\n        \"instansi\": \"Fa Hidayanto Widiastuti\",\n        \"pendidikan\": \"SLTA Sederajat\",\n        \"avatar_url\": null,\n        \"anggota\": {\n            \"nomor_registrasi\": \"KOP26001\",\n            \"tanggal_daftar\": \"2024-12-11\",\n            \"status\": \"Tidak Tetap\",\n            \"tanggal_keluar\": null,\n            \"cara_bayar\": \"tunai\"\n        },\n        \"joined_at\": \"2026-02-02 13:46:59\"\n    }\n}"
+                },
+                {
+                  "id": "d5f1b811-2a20-4ca0-bb2a-e439b46ba75a",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "name",
+                          "value": "{{$randomNamePrefix}}",
+                          "type": "text"
+                        },
+                        {
+                          "key": "nomor_identitas",
+                          "value": "0034890789089876",
+                          "description": "Must 16 digit number",
+                          "type": "text"
+                        },
+                        {
+                          "key": "has_npwp",
+                          "value": "true",
+                          "description": "Boolean (true/false)",
+                          "type": "text"
+                        },
+                        {
+                          "key": "ponsel",
+                          "value": "081234121234",
+                          "description": "Between 9 - 13 digits",
+                          "type": "text"
+                        },
+                        {
+                          "key": "jenis_kelamin",
+                          "value": "L",
+                          "description": "Enum (L/P)",
+                          "type": "text"
+                        },
+                        {
+                          "key": "tempat_lahir",
+                          "value": "Sleman",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "tanggal_lahir",
+                          "value": "2001-01-28",
+                          "description": "Date format ISO 8601 (YYYY-MM-DD)",
+                          "type": "text"
+                        },
+                        {
+                          "key": "alamat",
+                          "value": "Banguntapan, Bantul, Yogyakarta",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "pekerjaan",
+                          "value": "PNS",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "instansi",
+                          "value": "Diskominfo Bantul",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "pendidikan",
+                          "value": "S3",
+                          "description": "Enum (TK, SD, SMP, SMA, D3, S1, S2, S3)",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrlMobile}}/profile",
+                      "host": [
+                        "{{baseUrlMobile}}"
+                      ],
+                      "path": [
+                        "profile"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Host",
+                      "value": "127.0.0.1:8000"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "close"
+                    },
+                    {
+                      "key": "X-Powered-By",
+                      "value": "PHP/8.3.6"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 03 Feb 2026 07:46:51 GMT"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "GET, POST, PUT, DELETE, OPTIONS"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Authorization, X-Requested-With, X-CSRF-TOKEN"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": false,\n    \"message\": \"Unauthorized\",\n    \"errors\": {\n        \"type\": \"authentication_failed\",\n        \"message\": \"You must be authenticated to access this resource.\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "update-avatar",
+              "id": "8bae7772-1a1b-4688-9aa4-7a688e7c5d17",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "avatar",
+                      "description": "required|image|mimes:jpeg,png,jpg,gif|max:2048",
+                      "type": "file",
+                      "src": "/home/softdev/Pictures/Screenshots/Screenshot from 2026-02-04 07-47-03.png"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrlMobile}}/profile/avatar",
+                  "host": [
+                    "{{baseUrlMobile}}"
+                  ],
+                  "path": [
+                    "profile",
+                    "avatar"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "e1751cc5-2481-4ef7-8732-fb2933b29854",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "name",
+                          "value": "{{$randomNamePrefix}}",
+                          "type": "text"
+                        },
+                        {
+                          "key": "nomor_identitas",
+                          "value": "0034890789089876",
+                          "description": "Must 16 digit number",
+                          "type": "text"
+                        },
+                        {
+                          "key": "has_npwp",
+                          "value": "true",
+                          "description": "Boolean (true/false)",
+                          "type": "text"
+                        },
+                        {
+                          "key": "ponsel",
+                          "value": "081234121234",
+                          "description": "Between 9 - 13 digits",
+                          "type": "text"
+                        },
+                        {
+                          "key": "jenis_kelamin",
+                          "value": "L",
+                          "description": "Enum (L/P)",
+                          "type": "text"
+                        },
+                        {
+                          "key": "tempat_lahir",
+                          "value": "Sleman",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "tanggal_lahir",
+                          "value": "2001-01-28",
+                          "description": "Date format ISO 8601 (YYYY-MM-DD)",
+                          "type": "text"
+                        },
+                        {
+                          "key": "alamat",
+                          "value": "Banguntapan, Bantul, Yogyakarta",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "pekerjaan",
+                          "value": "PNS",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "instansi",
+                          "value": "Diskominfo Bantul",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "pendidikan",
+                          "value": "S3",
+                          "description": "Enum (TK, SD, SMP, SMA, D3, S1, S2, S3)",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrlMobile}}/profile/avatar",
+                      "host": [
+                        "{{baseUrlMobile}}"
+                      ],
+                      "path": [
+                        "profile",
+                        "avatar"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Host",
+                      "value": "127.0.0.1:8000"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "close"
+                    },
+                    {
+                      "key": "X-Powered-By",
+                      "value": "PHP/8.3.6"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 03 Feb 2026 07:46:51 GMT"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "GET, POST, PUT, DELETE, OPTIONS"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Authorization, X-Requested-With, X-CSRF-TOKEN"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"User profile updated successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Kyler93\",\n        \"email\": \"developerkdmp@gmail.com\",\n        \"nomor_identitas\": \"0034890789089876\",\n        \"has_npwp\": true,\n        \"ponsel\": \"081234121234\",\n        \"jenis_kelamin\": \"Laki-laki\",\n        \"tempat_lahir\": \"Sleman\",\n        \"tanggal_lahir\": \"2001-01-28\",\n        \"alamat\": \"Banguntapan, Bantul, Yogyakarta\",\n        \"pekerjaan\": \"PNS\",\n        \"instansi\": \"Diskominfo Bantul\",\n        \"pendidikan\": \"Strata 3\",\n        \"avatar_url\": \"http://127.0.0.1:8000/storage/profile-photos/50myqKNs46UKlJd6d2fkWaNTQsaHpyfaguC4z0IR.png\",\n        \"anggota\": null,\n        \"joined_at\": \"2026-02-02 13:46:58\"\n    }\n}"
+                },
+                {
+                  "id": "01c7420a-4227-48bf-9b7a-befa70009c5f",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "avatar",
+                          "description": "required|image|mimes:jpeg,png,jpg,gif|max:2048",
+                          "type": "file",
+                          "src": "/home/softdev/Pictures/Screenshots/Screenshot from 2026-02-04 07-47-03.png"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrlMobile}}/profile/avatar",
+                      "host": [
+                        "{{baseUrlMobile}}"
+                      ],
+                      "path": [
+                        "profile",
+                        "avatar"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Host",
+                      "value": "127.0.0.1:8000"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "close"
+                    },
+                    {
+                      "key": "X-Powered-By",
+                      "value": "PHP/8.3.6"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Wed, 04 Feb 2026 01:48:55 GMT"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "GET, POST, PUT, DELETE, OPTIONS"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Authorization, X-Requested-With, X-CSRF-TOKEN"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"User profile photo updated successfully\",\n    \"data\": {\n        \"avatar_url\": \"http://127.0.0.1:8000/storage/profile-photos/JHPe503PcgDSaJQwUuwJTyIv7I2Bwtf5CGJx7gAf.png\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "update-profile",
+              "id": "dfc3648c-039e-4534-b20d-8aff1d5870eb",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "name",
+                      "value": "{{$randomUserName}}",
+                      "description": "String",
+                      "type": "text"
+                    },
+                    {
+                      "key": "nomor_identitas",
+                      "value": "0034890789089873",
+                      "description": "Must 16 digit number",
+                      "type": "text"
+                    },
+                    {
+                      "key": "has_npwp",
+                      "value": "1",
+                      "description": "Boolean (1/0)",
+                      "type": "text"
+                    },
+                    {
+                      "key": "ponsel",
+                      "value": "081234121233",
+                      "description": "Between 9 - 13 digits",
+                      "type": "text"
+                    },
+                    {
+                      "key": "jenis_kelamin",
+                      "value": "L",
+                      "description": "Enum (L/P)",
+                      "type": "text"
+                    },
+                    {
+                      "key": "tempat_lahir",
+                      "value": "Sleman",
+                      "description": "String",
+                      "type": "text"
+                    },
+                    {
+                      "key": "tanggal_lahir",
+                      "value": "2001-01-28",
+                      "description": "Date format ISO 8601 (YYYY-MM-DD)",
+                      "type": "text"
+                    },
+                    {
+                      "key": "alamat",
+                      "value": "Banguntapan, Bantul, Yogyakarta",
+                      "description": "String",
+                      "type": "text"
+                    },
+                    {
+                      "key": "pekerjaan",
+                      "value": "PNS",
+                      "description": "String",
+                      "type": "text"
+                    },
+                    {
+                      "key": "instansi",
+                      "value": "Diskominfo Bantul",
+                      "description": "String",
+                      "type": "text"
+                    },
+                    {
+                      "key": "pendidikan",
+                      "value": "S3",
+                      "description": "Enum (TK, SD, SMP, SMA, D3, S1, S2, S3)",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrlMobile}}/profile",
+                  "host": [
+                    "{{baseUrlMobile}}"
+                  ],
+                  "path": [
+                    "profile"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "77feb7f8-773e-4f3d-9fc2-ab5894854f12",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "key": "name",
+                          "value": "{{$randomUserName}}",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "nomor_identitas",
+                          "value": "0034890789089873",
+                          "description": "Must 16 digit number",
+                          "type": "text"
+                        },
+                        {
+                          "key": "has_npwp",
+                          "value": "1",
+                          "description": "Boolean (1/0)",
+                          "type": "text"
+                        },
+                        {
+                          "key": "ponsel",
+                          "value": "081234121233",
+                          "description": "Between 9 - 13 digits",
+                          "type": "text"
+                        },
+                        {
+                          "key": "jenis_kelamin",
+                          "value": "L",
+                          "description": "Enum (L/P)",
+                          "type": "text"
+                        },
+                        {
+                          "key": "tempat_lahir",
+                          "value": "Sleman",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "tanggal_lahir",
+                          "value": "2001-01-28",
+                          "description": "Date format ISO 8601 (YYYY-MM-DD)",
+                          "type": "text"
+                        },
+                        {
+                          "key": "alamat",
+                          "value": "Banguntapan, Bantul, Yogyakarta",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "pekerjaan",
+                          "value": "PNS",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "instansi",
+                          "value": "Diskominfo Bantul",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "pendidikan",
+                          "value": "S3",
+                          "description": "Enum (TK, SD, SMP, SMA, D3, S1, S2, S3)",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrlMobile}}/profile",
+                      "host": [
+                        "{{baseUrlMobile}}"
+                      ],
+                      "path": [
+                        "profile"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Host",
+                      "value": "127.0.0.1:8000"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "close"
+                    },
+                    {
+                      "key": "X-Powered-By",
+                      "value": "PHP/8.3.6"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Wed, 04 Feb 2026 01:03:45 GMT"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "GET, POST, PUT, DELETE, OPTIONS"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Authorization, X-Requested-With, X-CSRF-TOKEN"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"User profile updated successfully\",\n    \"data\": {\n        \"id\": 5,\n        \"name\": \"Zelda_Cartwright3\",\n        \"email\": \"anggotakdmp01@gmail.com\",\n        \"nomor_identitas\": \"0034890789089873\",\n        \"has_npwp\": true,\n        \"ponsel\": \"081234121233\",\n        \"jenis_kelamin\": \"Laki-laki\",\n        \"tempat_lahir\": \"Sleman\",\n        \"tanggal_lahir\": \"2001-01-28\",\n        \"alamat\": \"Banguntapan, Bantul, Yogyakarta\",\n        \"pekerjaan\": \"PNS\",\n        \"instansi\": \"Diskominfo Bantul\",\n        \"pendidikan\": \"Strata 3\",\n        \"avatar_url\": null,\n        \"anggota\": {\n            \"nomor_registrasi\": \"KOP26001\",\n            \"tanggal_daftar\": \"2024-12-11\",\n            \"status\": \"Tidak Tetap\",\n            \"tanggal_keluar\": null,\n            \"cara_bayar\": \"tunai\"\n        },\n        \"joined_at\": \"2026-02-02 13:46:59\"\n    }\n}"
+                },
+                {
+                  "id": "eaa67adf-839a-4f11-a2d8-d029282c6d0a",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "name",
+                          "value": "{{$randomNamePrefix}}",
+                          "type": "text"
+                        },
+                        {
+                          "key": "nomor_identitas",
+                          "value": "0034890789089876",
+                          "description": "Must 16 digit number",
+                          "type": "text"
+                        },
+                        {
+                          "key": "has_npwp",
+                          "value": "true",
+                          "description": "Boolean (true/false)",
+                          "type": "text"
+                        },
+                        {
+                          "key": "ponsel",
+                          "value": "081234121234",
+                          "description": "Between 9 - 13 digits",
+                          "type": "text"
+                        },
+                        {
+                          "key": "jenis_kelamin",
+                          "value": "L",
+                          "description": "Enum (L/P)",
+                          "type": "text"
+                        },
+                        {
+                          "key": "tempat_lahir",
+                          "value": "Sleman",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "tanggal_lahir",
+                          "value": "2001-01-28",
+                          "description": "Date format ISO 8601 (YYYY-MM-DD)",
+                          "type": "text"
+                        },
+                        {
+                          "key": "alamat",
+                          "value": "Banguntapan, Bantul, Yogyakarta",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "pekerjaan",
+                          "value": "PNS",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "instansi",
+                          "value": "Diskominfo Bantul",
+                          "description": "String",
+                          "type": "text"
+                        },
+                        {
+                          "key": "pendidikan",
+                          "value": "S3",
+                          "description": "Enum (TK, SD, SMP, SMA, D3, S1, S2, S3)",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrlMobile}}/profile",
+                      "host": [
+                        "{{baseUrlMobile}}"
+                      ],
+                      "path": [
+                        "profile"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Host",
+                      "value": "127.0.0.1:8000"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "close"
+                    },
+                    {
+                      "key": "X-Powered-By",
+                      "value": "PHP/8.3.6"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 03 Feb 2026 07:46:51 GMT"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "GET, POST, PUT, DELETE, OPTIONS"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Authorization, X-Requested-With, X-CSRF-TOKEN"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"User profile updated successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Kyler93\",\n        \"email\": \"developerkdmp@gmail.com\",\n        \"nomor_identitas\": \"0034890789089876\",\n        \"has_npwp\": true,\n        \"ponsel\": \"081234121234\",\n        \"jenis_kelamin\": \"Laki-laki\",\n        \"tempat_lahir\": \"Sleman\",\n        \"tanggal_lahir\": \"2001-01-28\",\n        \"alamat\": \"Banguntapan, Bantul, Yogyakarta\",\n        \"pekerjaan\": \"PNS\",\n        \"instansi\": \"Diskominfo Bantul\",\n        \"pendidikan\": \"Strata 3\",\n        \"avatar_url\": \"http://127.0.0.1:8000/storage/profile-photos/50myqKNs46UKlJd6d2fkWaNTQsaHpyfaguC4z0IR.png\",\n        \"anggota\": null,\n        \"joined_at\": \"2026-02-02 13:46:58\"\n    }\n}"
+                }
+              ]
+            }
+          ],
+          "id": "0383f806-ada8-44dc-bea8-14054f1aad46",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{authToken}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "1d03a92a-c02f-4775-8a36-10c94382cb53",
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "4d3fe0cd-453d-4cb7-b03d-c8fb8f6b6158",
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "id": "1015c0d9-aee1-4af6-9b73-7a11b63c5373"
+    }
+  ]
+}
