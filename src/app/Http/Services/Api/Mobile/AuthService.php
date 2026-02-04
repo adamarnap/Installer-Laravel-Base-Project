@@ -35,7 +35,7 @@ class AuthService
             $token = $user->createToken(
                         name: $tokenName,
                         abilities: ['*'],
-                        expiresAt: now()->addDays(config('sanctum.expiration', 30))
+                        expiresAt: now()->addMinutes(config('sanctum.expiration', 43800)) // Default 30 days
                     );
 
             // Commit Transaction
