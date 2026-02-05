@@ -139,6 +139,18 @@ Add-Content .env.example "RECAPTCHA_SITE_KEY=6LdxE2EsAAAAAA9IYBunJoj1Klqdqgsx1kq
 Add-Content .env.example "RECAPTCHA_SECRET_KEY=6LdxE2EsAAAAAI_DhxKvivWqNwr3Cj1z7DeU-W2J"
 Add-Content .env.example "RECAPTCHA_ENABLED=true"
 Add-Content .env.example "RECAPTCHA_MIN_SCORE=0.5"
+
+# Add Rate Limiting configuration to .env
+Add-Content .env ""
+Add-Content .env "# RATE LIMITING"
+Add-Content .env "LOGIN_RATE_LIMIT_MAX_ATTEMPTS=60"
+Add-Content .env "LOGIN_RATE_LIMIT_DECAY_MINUTES=5"
+
+# Add Rate Limiting configuration to .env.example
+Add-Content .env.example ""
+Add-Content .env.example "# RATE LIMITING"
+Add-Content .env.example "LOGIN_RATE_LIMIT_MAX_ATTEMPTS=60"
+Add-Content .env.example "LOGIN_RATE_LIMIT_DECAY_MINUTES=5"
 # ============== END : Setup .env file
 
 # ============== START : Install Composer Packages

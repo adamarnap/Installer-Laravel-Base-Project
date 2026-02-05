@@ -102,6 +102,18 @@ echo "RECAPTCHA_SITE_KEY=6LdxE2EsAAAAAA9IYBunJoj1Klqdqgsx1kqXpzj1" >> .env.examp
 echo "RECAPTCHA_SECRET_KEY=6LdxE2EsAAAAAI_DhxKvivWqNwr3Cj1z7DeU-W2J" >> .env.example
 echo "RECAPTCHA_ENABLED=true" >> .env.example
 echo "RECAPTCHA_MIN_SCORE=0.5" >> .env.example
+
+# Add Rate Limiting configuration to .env
+echo "" >> .env
+echo "# RATE LIMITING" >> .env
+echo "LOGIN_RATE_LIMIT_MAX_ATTEMPTS=60" >> .env
+echo "LOGIN_RATE_LIMIT_DECAY_MINUTES=5" >> .env
+
+# Add Rate Limiting configuration to .env.example
+echo "" >> .env.example
+echo "# RATE LIMITING" >> .env.example
+echo "LOGIN_RATE_LIMIT_MAX_ATTEMPTS=60" >> .env.example
+echo "LOGIN_RATE_LIMIT_DECAY_MINUTES=5" >> .env.example
 # ============== END : Setup .env file
 
 # ============== START : Install Composer Packages
