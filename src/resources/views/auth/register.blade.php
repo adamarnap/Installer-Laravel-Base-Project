@@ -19,8 +19,8 @@
                     <img src="{{ URL::asset('assets/admin/images/sign-up.jpg') }}" alt="sign-up-image" class="rounded-[25px]">
                 </div>
                 <div class="xl:ltr:pl-[90px] xl:rtl:pr-[90px] 2xl:ltr:pl-[120px] 2xl:rtl:pr-[120px] order-1 lg:order-2">
-                    <img src="{{ URL::asset('assets/admin/images/logo-big.svg') }}" alt="logo" class="inline-block dark:hidden">
-                    <img src="{{ URL::asset('assets/admin/images/white-logo-big.svg') }}" alt="logo" class="hidden dark:inline-block">
+                    <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo" class="inline-block dark:hidden w-32">
+                    <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo" class="hidden dark:inline-block w-32">
                     <div class="my-[17px] md:my-[25px]">
                         <h1 class="font-semibold text-[22px] md:text-xl lg:text-2xl mb-[5px] md:mb-[7px]">
                             Lakukan pendaftaran di {{ $prefs_composer['title'] }} !
@@ -28,23 +28,6 @@
                         <p class="font-medium lg:text-md text-[#445164] dark:text-gray-400">
                             Daftar dengan akun sosial atau masukkan detail Anda
                         </p>
-                    </div>
-                    <div class="flex items-center justify-between mb-[20px] md:mb-[23px] gap-[12px]">
-                        <div class="grow">
-                            <button type="button" class="block text-center w-full rounded-md transition-all py-[8px] md:py-[10.5px] px-[15px] md:px-[25px] text-black dark:text-white border border-[#D6DAE1] bg-white dark:bg-[#0a0e19] dark:border-[#172036] shadow-sm hover:border-primary-500">
-                                <img src="{{ URL::asset('assets/admin/images/icons/google.svg') }}" class="inline-block" alt="google">
-                            </button>
-                        </div>
-                        <div class="grow">
-                            <button type="button" class="block text-center w-full rounded-md transition-all py-[8px] md:py-[10.5px] px-[15px] md:px-[25px] text-black dark:text-white border border-[#D6DAE1] bg-white dark:bg-[#0a0e19] dark:border-[#172036] shadow-sm hover:border-primary-500">
-                                <img src="{{ URL::asset('assets/admin/images/icons/facebook2.svg') }}" class="inline-block" alt="google">
-                            </button>
-                        </div>
-                        <div class="grow">
-                            <button type="button" class="block text-center w-full rounded-md transition-all py-[8px] md:py-[10.5px] px-[15px] md:px-[25px] text-black dark:text-white border border-[#D6DAE1] bg-white dark:bg-[#0a0e19] dark:border-[#172036] shadow-sm hover:border-primary-500">
-                                <img src="{{ URL::asset('assets/admin/images/icons/apple.svg') }}" class="inline-block" alt="google">
-                            </button>
-                        </div>
                     </div>
                     {{-- START : Alert --}}
                     <div class="">
@@ -81,14 +64,14 @@
                             <label class="mb-[10px] md:mb-[12px] text-black dark:text-white font-medium block">
                                 Nama
                             </label>
-                            <input type="text" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" placeholder="Enter your full name"
+                            <input type="text" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" placeholder="Masukkan nama lengkap anda"
                                 id="name" name="name" value="{{ old('name') }}" autocomplete="name">
                         </div>
                         <div class="mb-[15px] relative">
                             <label class="mb-[10px] md:mb-[12px] text-black dark:text-white font-medium block">
                                 Email
                             </label>
-                            <input type="text" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" placeholder="Enter your email address"
+                            <input type="text" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" placeholder="Masukkan alamat email anda"
                                 id="email" name="email" value="{{ old('email') }}" autocomplete="email">
                         </div>
                         <div class="mb-[15px] relative" id="passwordHideShow">
@@ -96,17 +79,17 @@
                                 Password
                             </label>
                             <input type="password" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" 
-                                id="password" name="password" placeholder="Type password">
+                                id="password" name="password" placeholder="Masukkan kata sandi">
                             <button class="absolute text-lg ltr:right-[20px] rtl:left-[20px] bottom-[12px] transition-all hover:text-primary-500" id="toggleButton" type="button">
                                 <i class="ri-eye-off-line"></i>
                             </button>
                         </div>
                         <div class="mb-[15px] relative" id="passwordHideShow">
                             <label class="mb-[10px] md:mb-[12px] text-black dark:text-white font-medium block">
-                                Password Confirmation
+                                Konfirmasi Kata Sandi
                             </label>
                             <input type="password" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" 
-                                id="password_confirmation" name="password_confirmation" placeholder="Type password confirmation" autocomplete="off">
+                                id="password_confirmation" name="password_confirmation" placeholder="Masukkan konfirmasi kata sandi" autocomplete="off">
                             <button class="absolute text-lg ltr:right-[20px] rtl:left-[20px] bottom-[12px] transition-all hover:text-primary-500" id="toggleButton" type="button">
                                 <i class="ri-eye-off-line"></i>
                             </button>
@@ -116,11 +99,11 @@
                                 <i class="material-symbols-outlined">
                                     person_4
                                 </i>
-                                Sign Up
+                                Daftar
                             </span>
                         </button>
                         <p class="leading-[1.6]">
-                            Already have an account. <a href="{{ route('login') }}" class="text-primary-500 transition-all font-semibold hover:underline">Sign In</a>
+                            Sudah punya akun? <a href="{{ route('login') }}" class="text-primary-500 transition-all font-semibold hover:underline">Masuk</a>
                         </p>
                     </form>
                     {{-- END : Form Register --}}
@@ -131,7 +114,7 @@
     <!-- End Sign Up -->
 @endsection
 
-@push('script')
+@push('scripts')
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (() => {

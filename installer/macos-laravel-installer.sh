@@ -70,6 +70,7 @@ echo "============= [STEP] 4 : Copying Base Project Files ============="
 echo ""
 # Copy additional files from src to new Laravel project
 cp -r ../src/app .
+cp -r ../src/config .
 cp -r ../src/resources .
 cp -r ../src/routes .
 # cp -r ../src/storage .
@@ -102,6 +103,22 @@ sed -i '' "s/# DB_PORT=3306/DB_PORT=$db_port/g" .env
 sed -i '' "s/# DB_DATABASE=laravel/DB_DATABASE=$db_database/g" .env
 sed -i '' "s/# DB_USERNAME=root/DB_USERNAME=$db_user/g" .env
 sed -i '' "s/# DB_PASSWORD=/DB_PASSWORD=$db_pass/g" .env
+
+# Add Google reCAPTCHA configuration to .env
+echo "" >> .env
+echo "# GOOGLE RECAPTCHA" >> .env
+echo "RECAPTCHA_SITE_KEY=6LdxE2EsAAAAAA9IYBunJoj1Klqdqgsx1kqXpzj1" >> .env
+echo "RECAPTCHA_SECRET_KEY=6LdxE2EsAAAAAI_DhxKvivWqNwr3Cj1z7DeU-W2J" >> .env
+echo "RECAPTCHA_ENABLED=true" >> .env
+echo "RECAPTCHA_MIN_SCORE=0.5" >> .env
+
+# Add Google reCAPTCHA configuration to .env.example
+echo "" >> .env.example
+echo "# GOOGLE RECAPTCHA" >> .env.example
+echo "RECAPTCHA_SITE_KEY=6LdxE2EsAAAAAA9IYBunJoj1Klqdqgsx1kqXpzj1" >> .env.example
+echo "RECAPTCHA_SECRET_KEY=6LdxE2EsAAAAAI_DhxKvivWqNwr3Cj1z7DeU-W2J" >> .env.example
+echo "RECAPTCHA_ENABLED=true" >> .env.example
+echo "RECAPTCHA_MIN_SCORE=0.5" >> .env.example
 # ============== END : Setup .env file
 
 # ============== START : Install Composer Packages

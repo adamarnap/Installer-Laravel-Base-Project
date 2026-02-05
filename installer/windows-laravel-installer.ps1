@@ -84,6 +84,7 @@ Write-Host "Copying base project files from src..." -ForegroundColor Yellow
 
 # Copy additional files from src to new Laravel project
 Copy-Item -Path "..\src\app\*" -Destination "app" -Recurse -Force
+Copy-Item -Path "..\src\config\*" -Destination "config" -Recurse -Force
 Copy-Item -Path "..\src\resources\*" -Destination "resources" -Recurse -Force
 Copy-Item -Path "..\src\routes\*" -Destination "routes" -Recurse -Force
 Copy-Item -Path "..\src\public\assets" -Destination "public\assets" -Recurse -Force
@@ -122,6 +123,22 @@ $envContent = $envContent -replace "# DB_DATABASE=laravel", "DB_DATABASE=$db_dat
 $envContent = $envContent -replace "# DB_USERNAME=root", "DB_USERNAME=$db_user"
 $envContent = $envContent -replace "# DB_PASSWORD=", "DB_PASSWORD=$db_pass"
 Set-Content .env -Value $envContent
+
+# Add Google reCAPTCHA configuration to .env
+Add-Content .env ""
+Add-Content .env "# GOOGLE RECAPTCHA"
+Add-Content .env "RECAPTCHA_SITE_KEY=6LdxE2EsAAAAAA9IYBunJoj1Klqdqgsx1kqXpzj1"
+Add-Content .env "RECAPTCHA_SECRET_KEY=6LdxE2EsAAAAAI_DhxKvivWqNwr3Cj1z7DeU-W2J"
+Add-Content .env "RECAPTCHA_ENABLED=true"
+Add-Content .env "RECAPTCHA_MIN_SCORE=0.5"
+
+# Add Google reCAPTCHA configuration to .env.example
+Add-Content .env.example ""
+Add-Content .env.example "# GOOGLE RECAPTCHA"
+Add-Content .env.example "RECAPTCHA_SITE_KEY=6LdxE2EsAAAAAA9IYBunJoj1Klqdqgsx1kqXpzj1"
+Add-Content .env.example "RECAPTCHA_SECRET_KEY=6LdxE2EsAAAAAI_DhxKvivWqNwr3Cj1z7DeU-W2J"
+Add-Content .env.example "RECAPTCHA_ENABLED=true"
+Add-Content .env.example "RECAPTCHA_MIN_SCORE=0.5"
 # ============== END : Setup .env file
 
 # ============== START : Install Composer Packages

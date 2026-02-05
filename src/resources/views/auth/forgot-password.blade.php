@@ -20,11 +20,11 @@
                     <img src="{{ URL::asset('assets/admin/images/forgot-password.jpg') }}" alt="forgot-password-image" class="rounded-[25px]">
                 </div>
                 <div class="xl:ltr:pl-[90px] xl:rtl:pr-[90px] 2xl:ltr:pl-[120px] 2xl:rtl:pr-[120px] order-1 lg:order-2">
-                    <img src="{{ URL::asset('assets/admin/images/logo-big.svg') }}" alt="logo" class="inline-block dark:hidden">
-                    <img src="{{ URL::asset('assets/admin/images/white-logo-big.svg') }}" alt="logo" class="hidden dark:inline-block">
+                    <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo" class="inline-block dark:hidden w-32">
+                    <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo" class="hidden dark:inline-block w-32">
                     <div class="my-[17px] md:my-[25px]">
                         <h1 class="font-semibold text-[22px] md:text-xl lg:text-2xl mb-[5px] md:mb-[12px]">
-                            Forgot your password?
+                            Lupa kata sandi Anda?
                         </h1>
                         <p class="font-medium leading-[1.5] lg:text-md text-[#445164] dark:text-gray-400">
                             Lupa kata sandi Anda? Tidak masalah. Cukup beri tahu kami alamat email Anda dan kami akan mengirimkan
@@ -61,23 +61,23 @@
                         @csrf
                         <div class="mb-[15px] relative">
                             <label class="mb-[10px] md:mb-[12px] text-black dark:text-white font-medium block">
-                                Email Address
+                                Alamat Email
                             </label>
                             <input type="email" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500"
-                                placeholder="Enter your email address" name="email" :value="old('email')" required autofocus autocomplete="email" />
+                                placeholder="Masukkan alamat email anda" name="email" :value="old('email')" required autofocus autocomplete="email" />
                         </div>
                         <button type="submit" class="md:text-md block w-full text-center transition-all rounded-md font-medium mt-[20px] md:mt-[25px] py-[12px] px-[25px] text-white bg-primary-500 hover:bg-primary-400">
                             <span class="flex items-center justify-center gap-[5px]">
                                 <i class="material-symbols-outlined">
                                     article_shortcut
                                 </i>
-                                Request email for reset password
+                                Kirim email untuk reset kata sandi
                             </span>
                         </button>
                     </form>
                     {{-- END : Form --}}
                     <p class="mt-[15px] md:mt-[20px]">
-                        Back to <a href="{{ route('login') }}" class="text-primary-500 transition-all font-semibold hover:underline">Sign In</a>
+                        Kembali ke <a href="{{ route('login') }}" class="text-primary-500 transition-all font-semibold hover:underline">Halaman Masuk</a>
                     </p>
                 </div>
             </div>

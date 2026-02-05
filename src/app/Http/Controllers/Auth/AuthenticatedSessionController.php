@@ -24,6 +24,16 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        // Validate reCAPTCHA v3 when enabled
+        if (config('recaptcha.enabled', false)) {
+            $request->validate([
+                'g-recaptcha-response' => ['required', new RecaptchaRule(config('recaptcha.min_score', 0.5))],
+            ], [
+                'g-recaptcha-response.required' => 'Security verification failed. Please refresh the page.',
+            ]);
+        }
+        
+        // Authenticate user
         $request->authenticate();
 
         $request->session()->regenerate();

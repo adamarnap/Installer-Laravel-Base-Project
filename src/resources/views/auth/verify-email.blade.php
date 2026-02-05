@@ -19,8 +19,8 @@
                     <img src="{{ URL::asset('assets/admin/images/confirm-email.jpg') }}" alt="confirm-email-image" class="rounded-[25px]">
                 </div>
                 <div class="xl:ltr:pl-[90px] xl:rtl:pr-[90px] 2xl:ltr:pl-[120px] 2xl:rtl:pr-[120px] order-1 lg:order-2">
-                    <img src="{{ URL::asset('assets/admin/images/logo-big.svg') }}" alt="logo" class="inline-block dark:hidden">
-                    <img src="{{ URL::asset('assets/admin/images/white-logo-big.svg') }}" alt="logo" class="hidden dark:inline-block">
+                    <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo" class="inline-block dark:hidden w-32">
+                    <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo" class="hidden dark:inline-block w-32">
                     <div class="my-[17px] md:my-[25px]">
                         <h1 class="font-semibold text-[22px] md:text-xl lg:text-2xl mb-[5px] md:mb-[10px]">
                             Selamat datang kembali ke {{ $prefs_composer['title'] }} !
@@ -61,7 +61,7 @@
                                 <i class="material-symbols-outlined">
                                     login
                                 </i>
-                                Back To Home
+                                Kembali ke Beranda
                             </span>
                         </button>
                     </form>

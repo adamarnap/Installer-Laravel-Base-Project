@@ -19,14 +19,14 @@
                     <img src="{{ URL::asset('assets/admin/images/reset-password.jpg') }}" alt="reset-password-image" class="rounded-[25px]">
                 </div>
                 <div class="xl:ltr:pl-[90px] xl:rtl:pr-[90px] 2xl:ltr:pl-[120px] 2xl:rtl:pr-[120px] order-1 lg:order-2">
-                    <img src="{{ URL::asset('assets/admin/images/logo-big.svg') }}" alt="logo" class="inline-block dark:hidden">
-                    <img src="{{ URL::asset('assets/admin/images/white-logo-big.svg') }}" alt="logo" class="hidden dark:inline-block">
+                    <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo" class="inline-block dark:hidden w-32">
+                    <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo" class="hidden dark:inline-block w-32">
                     <div class="my-[17px] md:my-[25px]">
                         <h1 class="font-semibold text-[22px] md:text-xl lg:text-2xl mb-[5px] md:mb-[10px]">
-                            Reset Password?
+                            Atur Ulang Kata Sandi
                         </h1>
                         <p class="font-medium leading-[1.5] lg:text-md text-[#445164] dark:text-gray-400">
-                            Enter your new password and confirm it another time in the field below.
+                            Masukkan kata sandi baru Anda dan konfirmasikan sekali lagi di kolom di bawah ini.
                         </p>
                     </div>
                     {{-- START: Alert Message --}}
@@ -52,20 +52,20 @@
                     {{-- START: Form reset email --}}
                     <div class="mb-[15px] relative" id="passwordHideShow2">
                         <label class="mb-[10px] md:mb-[12px] text-black dark:text-white font-medium block">
-                            New Password
+                            Kata Sandi Baru
                         </label>
                         <input type="password" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" 
-                            name="password" id="new-password" placeholder="Type new password" required>
+                            name="password" id="new-password" placeholder="Masukkan kata sandi baru" required>
                         <button class="absolute text-lg ltr:right-[20px] rtl:left-[20px] bottom-[12px] transition-all hover:text-primary-500" id="toggleButton2" type="button">
                             <i class="ri-eye-off-line"></i>
                         </button>
                     </div>
                     <div class="mb-[15px] relative" id="passwordHideShow3">
                         <label class="mb-[10px] md:mb-[12px] text-black dark:text-white font-medium block">
-                            Confirm New Password
+                            Konfirmasi Kata Sandi Baru
                         </label>
                         <input type="password" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" 
-                           name="" id="new-password-confirmation" placeholder="Retype new password for confirmation" required>
+                           name="" id="new-password-confirmation" placeholder="Ketik ulang kata sandi baru untuk konfirmasi" required>
                         <button class="absolute text-lg ltr:right-[20px] rtl:left-[20px] bottom-[12px] transition-all hover:text-primary-500" id="toggleButton3" type="button">
                             <i class="ri-eye-off-line"></i>
                         </button>
@@ -75,12 +75,12 @@
                             <i class="material-symbols-outlined">
                                 autorenew
                             </i>
-                            Send
+                            Kirim
                         </span>
                     </button>
                     {{-- END: Form reset email --}}
                     <p class="mt-[15px] md:mt-[20px]">
-                        Back to <a href="sign-in.html" class="text-primary-500 transition-all font-semibold hover:underline">Sign In</a>
+                        Kembali ke <a href="sign-in.html" class="text-primary-500 transition-all font-semibold hover:underline">Halaman Masuk</a>
                     </p>
                 </div>
             </div>
