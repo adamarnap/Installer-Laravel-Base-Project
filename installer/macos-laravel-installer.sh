@@ -73,6 +73,7 @@ cp -r ../src/app .
 cp -r ../src/config .
 cp -r ../src/resources .
 cp -r ../src/routes .
+cp -r ../src/docs .
 # cp -r ../src/storage .
 cp -r ../src/public/assets public/assets
 cp -r ../src/vite.config.js .

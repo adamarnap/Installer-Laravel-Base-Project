@@ -90,7 +90,7 @@ Copy-Item -Path "..\src\routes\*" -Destination "routes" -Recurse -Force
 Copy-Item -Path "..\src\public\assets" -Destination "public\assets" -Recurse -Force
 Copy-Item -Path "..\src\vite.config.js" -Destination "." -Force
 Copy-Item -Path "..\src\README.md" -Destination "." -Force
-
+Copy-Item -Path "..\src\docs" -Destination "." -Recurse -Force
 Write-Host "✅ Base project files copied successfully" -ForegroundColor Green
 # ============== END : Copy Base Project Files
 

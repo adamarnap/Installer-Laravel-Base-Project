@@ -63,6 +63,21 @@ echo "============= [STEP] 3 : Moved to project folder: $nama_aplikasi =========
 echo ""
 # ============== END : Pindah ke dalam folder
 
+# ============== START : Copy Base Project Files
+echo ""
+echo ""
+echo "============= [STEP] 4 : Copying Base Project Files ============="
+echo ""
+# Copy additional files
+cp -r ../src/app .
+cp -r ../src/resources .
+cp -r ../src/config .
+# cp -r ../src/storage .
+cp -r ../src/public/assets public/assets
+cp -r ../src/vite.config.js .
+cp -r ../src/README.md .
+# ============== END : Copy Base Project Files
+
 # membuat link storage
 php artisan storage:link
 
@@ -571,21 +586,6 @@ sed -i '/"scripts": {/a\    "build-styling-landing": "npx @tailwindcss/cli -i ./
 
 # ============== END : Modify Files using sed
 
-# ============== START : Copy Base Project Files
-echo ""
-echo ""
-echo "============= [STEP] 4 : Copying Base Project Files ============="
-echo ""
-# Copy additional files
-cp -r ../src/app .
-cp -r ../src/resources .
-cp -r ../src/config .
-# cp -r ../src/storage .
-cp -r ../src/public/assets public/assets
-cp -r ../src/vite.config.js .
-cp -r ../src/README.md .
-# ============== END : Copy Base Project Files
-
 # =========== START : Migrations and Seeders
 echo ""
 echo ""
@@ -609,6 +609,7 @@ cp -r ../src/resources .
 cp -r ../src/routes/web.php routes/web.php
 cp -r ../src/vite.config.js .
 cp -r ../src/README.md .
+cp -r ../src/docs .
 # ========== START : Recopy specific files from src (template)
 
 # Finalize
