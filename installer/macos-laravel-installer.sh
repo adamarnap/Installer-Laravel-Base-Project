@@ -91,13 +91,32 @@ echo ""
 
 php artisan key:generate
 
+# DB connection choice
+echo "Choose DB CONNECTION:"
+echo "1) mysql"
+echo "2) pgsql"
+echo "3) sqlite"
+echo "4) sqlsrv"
+
+db_connection=""
+while [ -z "$db_connection" ]; do
+    read -p "Select DB connection [1-4]: " db_choice
+    case "$db_choice" in
+        1) db_connection="mysql" ;;
+        2) db_connection="pgsql" ;;
+        3) db_connection="sqlite" ;;
+        4) db_connection="sqlsrv" ;;
+        *) echo "[ERROR] Invalid choice. Please select 1, 2, 3, or 4." ;;
+    esac
+done
+
 read -p "DB HOST: " db_host
 read -p "DB PORT: " db_port
 read -p "DB DATABASE: " db_database
 read -p "DB USERNAME: " db_user
 read -p "DB PASSWORD: " db_pass
 
-sed -i '' "s/DB_CONNECTION=sqlite/DB_CONNECTION=mysql/g" .env
+sed -i '' "s/DB_CONNECTION=sqlite/DB_CONNECTION=$db_connection/g" .env
 sed -i '' "s/# DB_HOST=127.0.0.1/DB_HOST=$db_host/g" .env
 sed -i '' "s/# DB_PORT=3306/DB_PORT=$db_port/g" .env
 sed -i '' "s/# DB_DATABASE=laravel/DB_DATABASE=$db_database/g" .env
@@ -217,7 +236,7 @@ echo "------------------------- [STEP] 7.1 Installing TailwindCSS --------------
 echo ""
 npm install -D tailwindcss@4.0.0
 npm install -D @tailwindcss/vite@^4.0.0
-npm install -D @tailwindcss/cli@^4.0.6,
+npm install -D @tailwindcss/cli@^4.0.6
 
 # Init tailwindcss
 # npx tailwindcss init -p # Not use in tailwindcss v4
@@ -422,6 +441,19 @@ cp -r ../src/database .
 echo "Migrate & Seeding DB"
 php artisan migrate:fresh --seed
 # =========== END : Migrations and Seeders
+
+# ========== START : Recopy specific files from src (template)
+echo ""
+echo ""
+echo "============= [STEP] 10 : Recopy specific files from src (resources/*, routes/web.php, vite.config.js and README.md) ============="
+echo ""
+# Recopy resources, route, vite config and readme
+cp -r ../src/resources .
+cp -r ../src/routes/web.php routes/web.php
+cp -r ../src/vite.config.js .
+cp -r ../src/README.md .
+# ========== START : Recopy specific files from src (template)
+
 
 # Finalize
 echo ""

@@ -108,6 +108,25 @@ Write-Host ""
 
 php artisan key:generate
 
+# DB connection choice
+Write-Host "Choose DB CONNECTION:" -ForegroundColor Yellow
+Write-Host "1) mysql"
+Write-Host "2) pgsql"
+Write-Host "3) sqlite"
+Write-Host "4) sqlsrv"
+
+$db_connection = ""
+while ([string]::IsNullOrWhiteSpace($db_connection)) {
+    $db_choice = Read-Host "Select DB connection [1-4]"
+    switch ($db_choice) {
+        "1" { $db_connection = "mysql" }
+        "2" { $db_connection = "pgsql" }
+        "3" { $db_connection = "sqlite" }
+        "4" { $db_connection = "sqlsrv" }
+        default { Write-Host "[ERROR] Invalid choice. Please select 1, 2, 3, or 4." -ForegroundColor Red }
+    }
+}
+
 $db_host = Read-Host "DB HOST"
 $db_port = Read-Host "DB PORT"
 $db_database = Read-Host "DB DATABASE"
@@ -116,7 +135,7 @@ $db_pass = Read-Host "DB PASSWORD"
 
 # Read .env file and replace values
 $envContent = Get-Content .env -Raw
-$envContent = $envContent -replace "DB_CONNECTION=sqlite", "DB_CONNECTION=mysql"
+$envContent = $envContent -replace "DB_CONNECTION=sqlite", "DB_CONNECTION=$db_connection"
 $envContent = $envContent -replace "# DB_HOST=127.0.0.1", "DB_HOST=$db_host"
 $envContent = $envContent -replace "# DB_PORT=3306", "DB_PORT=$db_port"
 $envContent = $envContent -replace "# DB_DATABASE=laravel", "DB_DATABASE=$db_database"
@@ -445,7 +464,7 @@ Set-Content "package.json" -Value $packageJsonContent
 # =========== START : Migrations and Seeders
 Write-Host ""
 Write-Host ""
-Write-Host "============= [STEP] 10 : Running Migrations and Seeders =============" -ForegroundColor Cyan
+Write-Host "============= [STEP] 9 : Running Migrations and Seeders =============" -ForegroundColor Cyan
 Write-Host ""
 
 Write-Host "Copying migrations and seeders..." -ForegroundColor Yellow
@@ -455,6 +474,18 @@ Copy-Item -Path "..\src\database\*" -Destination "database" -Recurse -Force
 Write-Host "Running migrations and seeders..." -ForegroundColor Yellow
 php artisan migrate:fresh --seed
 # =========== END : Migrations and Seeders
+
+# ========== START : Recopy specific files from src (template)
+Write-Host ""
+Write-Host ""
+Write-Host "============= [STEP] 10 : Recopy specific files from src (resources/*, routes/web.php, vite.config.js and README.md) =============" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Recopying resources, routes, vite config and readme..." -ForegroundColor Yellow
+Copy-Item -Path "..\src\resources\*" -Destination "resources" -Recurse -Force
+Copy-Item -Path "..\src\routes\web.php" -Destination "routes\web.php" -Force
+Copy-Item -Path "..\src\vite.config.js" -Destination "." -Force
+Copy-Item -Path "..\src\README.md" -Destination "." -Force
+# ========== END : Recopy specific files from src (template)
 
 # Finalize
 Write-Host ""
