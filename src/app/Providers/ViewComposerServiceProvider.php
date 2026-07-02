@@ -8,6 +8,7 @@ use App\View\Composers\NavigationComposer;
 use App\View\Composers\PreferenceComposer;
 use App\View\Composers\FormComposer;
 use App\View\Composers\ThemeModeComposer;
+use App\View\Composers\ImpersonateComposer;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         
         // Admin
         View::composer(['layouts.admin.master'], PreferenceComposer::class);
+        View::composer(['layouts.admin.master'], ImpersonateComposer::class);
         View::composer(['layouts.admin.auth'], PreferenceComposer::class);
         View::composer(['layouts.admin.partials.sidebar'], PreferenceComposer::class);
         View::composer(['layouts.admin.partials.menu-list'], NavigationComposer::class);

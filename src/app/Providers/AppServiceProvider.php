@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Auth\Notifications\VerifyEmail;
+use App\Models\User;
+use App\Policies\ImpersonatePolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -49,5 +52,8 @@ class AppServiceProvider extends ServiceProvider
                 ->to($notifiable->email)
                 ->subject('[No Reply] Lupa Password');
         });
+
+        // Register Impersonate Policy
+        Gate::policy(User::class, ImpersonatePolicy::class);
     }
 }

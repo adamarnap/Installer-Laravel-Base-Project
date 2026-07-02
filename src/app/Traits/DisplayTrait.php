@@ -1,6 +1,7 @@
 <?php
 namespace App\Traits;
 
+use App\Enums\RoleEnum;
 use App\Models\Navigation;
 use App\Models\Preference;
 
@@ -38,6 +39,6 @@ trait DisplayTrait
     }
 
     protected function setRule($role=null) {
-        auth()->user()->hasRole('developer') || auth()->user()->can($role) || abort(403);
+        auth()->user()->hasRole(RoleEnum::DEVELOPER->value) || auth()->user()->can($role) || abort(403);
     }
 }

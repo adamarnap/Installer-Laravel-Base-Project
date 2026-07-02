@@ -65,6 +65,11 @@ Breadcrumbs::for('users', function (BreadcrumbTrail $trail) {
     $trail->push('Pengguna', route('settings.users.index'));
 });
 
+Breadcrumbs::for('impersonate', function (BreadcrumbTrail $trail) {
+    $trail->parent('settings');
+    $trail->push('Impersonate', route('settings.impersonate.index'));
+});
+
 Breadcrumbs::for('users-create', function (BreadcrumbTrail $trail) {
     $trail->parent('users');
     $trail->push('Tambah Pengguna', route('settings.users.create'));

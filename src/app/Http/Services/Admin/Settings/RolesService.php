@@ -2,15 +2,18 @@
 
 namespace App\Http\Services\Admin\Settings;
 
+use App\Enums\RoleEnum;
 use App\Models\Navigation;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class RolesService
 {
     /* Get All Roles */
     public function getAllRoles()
     {
-        return Role::where('name', '!=', 'developer')->orderBy('name')->get();
+        return Role::where('name', '!=', RoleEnum::DEVELOPER->value)->orderBy('name')->get();
     }
 
     /* Get all permissions */
@@ -64,7 +67,7 @@ class RolesService
             $role = Role::findOrFail($roleId);
 
             // Disabled delete when role == developer
-            if ($role->name === 'developer') {
+            if ($role->name === RoleEnum::DEVELOPER->value) {
                 return redirect()->back()->with('error', 'Peran developer tidak dapat dihapus');
             }
 
@@ -80,15 +83,24 @@ class RolesService
     public function givePermission($roleId, array $request)
     {
         try {
+            // Clear permission cache first to avoid stale lookups
+            app()[PermissionRegistrar::class]->forgetCachedPermissions();
+
             // Create permissions if not exist
             foreach ($request->permissions ?? [] as $key => $permission) {
                 $permission = Permission::firstOrCreate(['name' => $permission]);
             }
 
+            // Clear cache again so syncPermissions sees the newly created permissions
+            app()[PermissionRegistrar::class]->forgetCachedPermissions();
+
             // Assign role permissions
             $role = Role::findOrFail($roleId);
             $role->syncPermissions($request['permissions']);
 
+            // Clear permission cache after sync
+            app()[PermissionRegistrar::class]->forgetCachedPermissions();
+            
             // Return Success
             return redirect()->back()->with('success', 'Hak akses berhasil diberikan');
         } catch (\Exception $e) {

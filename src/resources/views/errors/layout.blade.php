@@ -43,7 +43,7 @@
                             @hasSection('actions')
                                 @yield('actions')
                             @else
-                                <a href="{{ route('beranda') }}" 
+                                <a href="{{ route('beranda.index') }}" 
                                    class="inline-block font-medium rounded-md text-[16px] md:text-[18px] py-[12px] px-[30px] text-white bg-primary-500 hover:bg-primary-400 transition-all duration-300 shadow-lg hover:shadow-xl">
                                     <i class="flaticon-home mr-2"></i> Back to Home
                                 </a>

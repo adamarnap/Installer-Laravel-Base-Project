@@ -64,12 +64,37 @@ class UserSeeder extends Seeder
          * CREATE USERS AND ASSIGN ROLES
          * ================================================================
          */
+        // Developer Account
         $developerAccount = User::factory()->create([
             'name' => 'Laravel Base Developer',
             'email' => 'developerlaravelbase@gmail.com',
             'password' => Hash::make('123456789'),
         ]);
         $developerAccount->assignRole($developerRole);
+
+        // Superadmin Account
+        $superadminAccount = User::factory()->create([
+            'name' => 'Laravel Base Superadmin',
+            'email' => 'superadminlaravelbase@gmail.com',
+            'password' => Hash::make('123456789'),
+        ]);
+        $superadminAccount->assignRole($superadmin);
+        
+        // Admin Account
+        $adminAccount = User::factory()->create([
+            'name' => 'Laravel Base Admin',
+            'email' => 'adminlaravelbase@gmail.com',
+            'password' => Hash::make('123456789'),
+        ]);
+        $adminAccount->assignRole($admin);
+        
+        // User Account
+        $userAccount = User::factory()->create([
+            'name' => 'Laravel Base User',
+            'email' => 'userlaravelbase@gmail.com',
+            'password' => Hash::make('123456789'),
+        ]);
+        $userAccount->assignRole($user);
     }
     
     /** 

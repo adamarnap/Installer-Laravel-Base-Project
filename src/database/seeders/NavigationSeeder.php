@@ -118,43 +118,55 @@ class NavigationSeeder extends Seeder
                 'url' => 'settings.users.index',
                 'slug' => 'settings-users',
                 'icon' => '', // Assuming no icon specified
-                'order' => 501,
+                'order' => 1,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,
             ],
             [
                 'id' => 503,
-                'name' => 'Peran',
+                'name' => 'Impersonate',
                 'page' => 'admin',
-                'url' => 'settings.roles.index',
-                'slug' => 'settings-roles',
+                'url' => 'settings.impersonate.index',
+                'slug' => 'settings-impersonate',
                 'icon' => '', // Assuming no icon specified
-                'order' => 502,
+                'order' => 2,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,
             ],
             [
                 'id' => 504,
-                'name' => 'Menu',
+                'name' => 'Peran',
                 'page' => 'admin',
-                'url' => 'settings.navs.index',
-                'slug' => 'settings-navs',
+                'url' => 'settings.roles.index',
+                'slug' => 'settings-roles',
                 'icon' => '', // Assuming no icon specified
-                'order' => 503,
+                'order' => 3,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,
             ],
             [
                 'id' => 505,
+                'name' => 'Menu',
+                'page' => 'admin',
+                'url' => 'settings.navs.index',
+                'slug' => 'settings-navs',
+                'icon' => '', // Assuming no icon specified
+                'order' => 4,
+                'parent_id' => 501, // Nested under Settings
+                'active' => true,
+                'display' => true,
+            ],
+            [
+                'id' => 506,
                 'name' => 'Preferensi',
                 'page' => 'admin',
                 'url' => 'settings.preferences.index',
                 'slug' => 'settings-preferences',
                 'icon' => '', // Assuming no icon specified
-                'order' => 504,
+                'order' => 5,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,

@@ -63,14 +63,14 @@ class UsersService
 
                 return $wrapperStart . $btnEdit . ' ' . $btnDelete . $wrapperBottom;
             })
-            ->escapeColumns([])
+            ->rawColumns(['aksi', 'status'])
             ->make(true);
     }
 
     /* Get all roles (except developer) */
     public function getAllRoles()
     {
-        return Role::where('name', '!=', 'developer')->get();
+        return Role::where('name', '!=', RoleEnum::DEVELOPER->value)->get();
     }
 
     /* Get user by ID */

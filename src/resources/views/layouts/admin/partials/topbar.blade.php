@@ -109,6 +109,26 @@
                 </div>
             </div>
         </div>
+
+        {{-- Impersonate Warning (di dalam topbar, di antara kiri & kanan) --}}
+        @if($impersonate_data['is_impersonating'])
+        <div class="flex-1 flex items-center justify-center px-4">
+            <div class="flex items-center gap-2 bg-red-500 text-white px-3 py-1.5 rounded-md">
+                <i class="material-symbols-outlined text-[18px]">warning</i>
+                <span class="text-xs font-medium whitespace-nowrap">
+                    Impersonate: <strong>{{ $impersonate_data['impersonated_user']->name }}</strong>
+                </span>
+                <form action="{{ route('settings.impersonate.destroy', $impersonate_data['impersonated_user']->id) }}" method="POST" class="inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-white text-red-600 hover:bg-red-50 rounded text-[11px] font-semibold transition-all ml-1">
+                        <i class="material-symbols-outlined text-[14px]">logout</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        @endif
+
         <ul class="flex items-center justify-center md:justify-normal mt-[13px] md:mt-0">
             <li class="relative mx-[8px] md:mx-[10px] lg:mx-[12px] ltr:first:ml-0 ltr:last:mr-0 rtl:first:mr-0 rtl:last:ml-0">
                 <button type="button" class="light-dark-toggle leading-none inline-block transition-all relative top-[2px] text-[#fe7a36]" id="light-dark-toggle">

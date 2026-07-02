@@ -16,7 +16,7 @@
         <p class="text-gray-600 dark:text-gray-300 mb-[30px] !text-[16px] md:!text-[18px]">
             You have made too many requests in a short period. Please wait a moment and try again.
         </p>
-        <a href="{{ route('beranda') }}" class="inline-block font-medium rounded-md text-[16px] md:text-[18px] py-[12px] px-[25px] text-white bg-primary-500 transition-all hover:bg-primary-400">
+        <a href="{{ route('beranda.index') }}" class="inline-block font-medium rounded-md text-[16px] md:text-[18px] py-[12px] px-[25px] text-white bg-primary-500 transition-all hover:bg-primary-400">
             Back to Home
         </a>
     </div>

@@ -1,16 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\LocaleController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Operator\HomeController;
-use App\Http\Controllers\Landing\BerandaController;
-use App\Http\Controllers\Admin\Settings\RolesController;
-use App\Http\Controllers\Admin\Settings\UsersController;
+use App\Http\Controllers\Admin\Settings\ImpersonateController;
 use App\Http\Controllers\Admin\Settings\NavigationsController;
 use App\Http\Controllers\Admin\Settings\PreferencesController;
+use App\Http\Controllers\Admin\Settings\RolesController;
+use App\Http\Controllers\Admin\Settings\UsersController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Landing\BerandaController;
+use App\Http\Controllers\LocaleController;
+use Illuminate\Support\Facades\Route;
 
 
 /*
@@ -51,6 +50,15 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
         /* Users */
         Route::resource('users', UsersController::class)->names('users');
+        /* Impersonate */
+        Route::get('/impersonate', [ImpersonateController::class, 'index'])
+            ->name('impersonate.index');
+
+        Route::post('/impersonate/{userId}', [ImpersonateController::class, 'store'])
+            ->name('impersonate.store');
+
+        Route::delete('/impersonate/{userId}', [ImpersonateController::class, 'destroy'])
+            ->name('impersonate.destroy');
         /* Roles */
         Route::resource('roles', RolesController::class)->names('roles');
         Route::put('/roles/{role}/permissions', [RolesController::class, 'givePermission'])->name('roles.permissions');
@@ -62,6 +70,7 @@ Route::middleware('auth', 'verified')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
 
 // Change Locale Language
 Route::get('change-locale/{lang}', [LocaleController::class, 'changeLocale'])->name('change-locale');
