@@ -75,3 +75,15 @@ Choose PHPUnit
 $ php artisan serve
 ```
 7. For more information, i hope you can read README.md in yourprojcet/README.md
+
+
+# About Template HTML
+## Landing
+Here in landing pages we use Template HTML From MARTEX (https://martex-tailwindcss.ibthemespro.com/index.html)
+
+![Landing Page Overview](docs/images/base-project-overview/landing-page-overview.png)
+
+## Admin
+Here in admin pages we use Template HTML From TREZO (https://trezo-twcss.envytheme.com/lms-index.html)
+![Auth Page Overview](docs/images/base-project-overview/auth-page-overview.png)
+![Admin Page Overview](docs/images/base-project-overview/admin-page-overview.png)
