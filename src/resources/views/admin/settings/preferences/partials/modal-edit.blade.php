@@ -1,198 +1,117 @@
-@push('styles')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-@endpush
+<button id="modal-edit-toggle" type="button" class="hidden" data-hs-overlay="#modal-edit"></button>
 
-{{-- Trigger Modal Edit --}}
-<button id="modal-edit-toggle" type="button"></button>
+<div id="modal-edit" class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 pointer-events-none fixed inset-0 z-80 hidden size-full overflow-x-hidden overflow-y-auto opacity-0 transition-all" role="dialog" tabindex="-1" aria-labelledby="modal-title">
+    <div class="hs-overlay-animation-target m-3 sm:mx-auto sm:w-full sm:max-w-xl lg:max-w-4xl">
+        <div class="border-default-300 pointer-events-auto flex flex-col rounded-md border card">
+            <div class="border-default-300 flex items-center justify-between border-b p-6">
+                <div>
+                    <h3 id="modal-title" class="text-base font-semibold">Edit Data @yield('title')</h3>
+                    <p class="text-default-400 text-sm">Perbarui nilai preferensi atau unggah asset baru.</p>
+                </div>
 
-{{-- START: Modal --}}
-<div class="modal-edit z-[999] fixed transition-all inset-0 overflow-x-hidden overflow-y-auto" id="modal-edit">
-    <!-- popup-dialog: centered and responsive widths (mobile -> large) -->
-    <div class="popup-dialog flex transition-all items-center justify-center min-h-screen px-4 sm:px-6">
-        <div class="trezo-card w-full max-w-[95%] sm:max-w-[720px] md:max-w-[900px] lg:max-w-[1100px] bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md">
-            
-            {{-- START: Modal Header --}}
-            <div class="trezo-card-header bg-gray-50 dark:bg-[#15203c] mb-[20px] md:mb-[25px] flex items-center justify-between -mx-[20px] md:-mx-[25px] -mt-[20px] md:-mt-[25px] p-[20px] md:p-[25px] rounded-t-md">
-                <div class="trezo-card-title">
-                    <h5 class="mb-0" id="modal-title">
-                        Edit Data @yield('title')
-                    </h5>
-                </div>
-                <div class="trezo-card-subtitle">
-                    <button type="button" class="text-[23px] transition-all leading-none text-black dark:text-white hover:text-primary-500" id="modal-edit-toggle">
-                        <i class="ri-close-fill"></i>
-                    </button>
-                </div>
+                <button type="button" aria-label="Close" data-hs-overlay="#modal-edit">
+                    <span class="sr-only">Close</span>
+                    <i class="iconify tabler--x text-xl"></i>
+                </button>
             </div>
-            {{-- END: Modal Header --}}
 
-            {{-- START: Form Edit --}}
             <form id="form-edit" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <input type="hidden" name="is_asset" id="is_asset">
-                {{-- START: Modal Body --}}
-                <div class="trezo-card-content pb-[20px] md:pb-[25px]">
-                    {{-- START: Asset --}}
-                    <div class="row" id="content-asset">
-                        {{-- START: Preview If is_asset = true --}}
-                        <div class="flex flex-col items-center mb-[25px]" id="content-asset-preview">
-                            <div class="flex flex-col items-center">
-                                <img src="" alt="user-image" class="rounded-full w-[300px] mb-2" id="content-asset-preview--image">
-                                <p class="mb-[20px] md:mb-[25px] text-center" id="content-asset-preview--text"></p>
-                            </div>
-                        </div>
-                        {{-- END: Preview If is_asset = true --}}
-    
-                        {{-- START: Asset Upload (if this is_asset = ture) --}}
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-[20px] md:gap-[25px]" id="content-asset-upload">
-                            <div class="">
-                                <label class="mb-[12px] font-medium block">
-                                    Path
-                                </label>
-                                <input type="text" name="path" id="path" class="rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] p-[10px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" readonly />
-                            </div>
-                            <div class="">
-                                <label class="mb-[12px] font-medium block">
-                                    File Name
-                                </label>
-                                <input type="text" name="file_name" id="file_name" class="rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] p-[10px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" readonly />
-                            </div>
-                            <div id="">
-                                <label class="mb-[12px] font-medium block">
-                                    Upload File
-                                </label>
-                                <input type="file" name="file_asset" id="file_asset" class="rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] p-[10px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" />
-                            </div>
-                        </div>
-                        {{-- END: Asset Upload (if this is_asset = ture) --}}
-                    </div>
-                    {{-- END: Asset --}}
 
-                    {{-- START: Value --}}
-                    <div class="grid grid-cols-1 sm:grid-cols-1 gap-[20px] md:gap-[25px] mt-5" id="content-form-value">
-                        <div>
-                            <label class="mb-[12px] font-medium block">
-                                Value
-                                <strong class="text-red-500">*</strong>
-                            </label>
-                            <textarea type="text" name="value" id="value" class="h-[140px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] p-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" placeholder="Fill preference value ..." required></textarea>
+                <div class="overflow-y-auto card-body space-y-6">
+                    <div class="rounded-lg border border-dashed border-default-300 p-5" id="content-asset">
+                        <div class="flex flex-col gap-5 md:flex-row md:items-center">
+                            <img src="" alt="preference-preview" class="h-28 w-28 rounded-md object-cover" id="content-asset-preview--image">
+                            <div class="flex-1">
+                                <h5 class="mb-2">Asset Preview</h5>
+                                <p class="text-default-400 mb-4 text-sm" id="content-asset-preview--text"></p>
+                                <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+                                    <div>
+                                        <label class="mb-[12px] block font-medium">Path</label>
+                                        <input type="text" name="path" id="path" class="form-input" readonly>
+                                    </div>
+                                    <div>
+                                        <label class="mb-[12px] block font-medium">File Name</label>
+                                        <input type="text" name="file_name" id="file_name" class="form-input" readonly>
+                                    </div>
+                                    <div>
+                                        <label class="mb-[12px] block font-medium">Upload File</label>
+                                        <input type="file" name="file_asset" id="file_asset" class="form-input">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    {{-- END: Value --}}
-                </div>
-                {{-- END: Modal Body --}}
 
-                {{-- START: Modal Footer --}}
-                <div class="trezo-card-footer flex items-center justify-between -mx-[20px] md:-mx-[25px] px-[20px] md:px-[25px] pt-[20px] md:pt-[25px] border-t border-gray-100 dark:border-[#172036]">
-                    <button class="inline-block py-[10px] px-[30px] bg-danger-500 text-white transition-all hover:bg-danger-400 rounded-md border border-danger-500 hover:border-danger-400" type="button" id="modal-edit-toggle">
-                        Close
-                    </button>
-                    <button class="inline-block py-[10px] px-[30px] bg-primary-500 text-white transition-all hover:bg-primary-400 rounded-md border border-primary-500 hover:border-primary-400 ltr:mr-[11px] rtl:ml-[11px] mb-[15px]" 
-                    type="submit">
-                        Save Changes
-                    </button>
+                    <div id="content-form-value">
+                        <label class="mb-[12px] block font-medium">
+                            Value
+                            <strong class="text-red-500">*</strong>
+                        </label>
+                        <textarea name="value" id="value" rows="6" class="form-textarea" placeholder="Fill preference value ..." required></textarea>
+                    </div>
                 </div>
-                {{-- END: Modal Footer --}}
+
+                <div class="border-default-300 flex items-center justify-end border-t p-4">
+                    <button type="button" class="btn bg-light hover:text-primary m-1" data-hs-overlay="#modal-edit">Close</button>
+                    <button type="submit" class="btn bg-primary hover:bg-primary-hover m-1 rounded text-white">Save Changes</button>
+                </div>
             </form>
-            {{-- END: Form Edit --}}
-
         </div>
     </div>
 </div>
-{{-- END: Modal --}}
 
 @push('scripts')
-    <script>
-        // Add New Popup Toggle
-        const editNewPopupID = document.getElementById("modal-edit");
-        if (editNewPopupID) {
-            var buttons = document.querySelectorAll("#modal-edit-toggle");
-            buttons.forEach(function(button) {
-                button.addEventListener("click", function() {
-                    // Toggle class on the div
-                    var divElement = document.getElementById("modal-edit");
-                    divElement.classList.toggle("active");
-                });
-            });
-        }
-    </script>
+<script>
+    $(document).on('click', '.btn-modal-edit-pref', function(e) {
+        e.preventDefault();
 
-    {{-- Start Select 2 --}}
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.select2').select2();
-        });
-    </script>
-    {{-- End Select 2 --}}
+        $('#modal-edit-toggle').trigger('click');
 
-    <!-- Start Edit Preference (Modal) -->
-    <script>
-        $(document).on('click', '.btn-modal-edit-pref', function(e) {
-            e.preventDefault();
+        var urlFormAction = $(this).data('url-action');
+        var urlGetData = $(this).data('url-get');
 
-            // Trigger button to open modal
-            $('#modal-edit-toggle').click();
+        $.ajax({
+            url: urlGetData,
+            type: 'GET',
+            success: function(response) {
+                $('#modal-title').text('Edit Data Preference - ' + response.name);
+                $('#form-edit').attr('action', urlFormAction);
+                $('#form-edit').find('#value').val(response.value);
 
-            // pref Id
-            var prefId = $(this).data('id');
-            var urlFormAction = $(this).data('url-action');
-            var urlGetData = $(this).data('url-get');
-            // Send request to get user data
-            $.ajax({
-                url: urlGetData, // Url for get data edit
-                type: 'GET',
-                success: function(response) {
-                    // Modal title
-                    $('#modal-title').text('Edit Data Preference - ' + response.name);
-                    // Set form action
-                    $('#form-edit').attr('action', urlFormAction);
-                    // Set value to form inputs
-                    $('#form-edit').find('#value').val(response.value);
+                if (response.is_asset) {
+                    $('#content-asset').show();
+                    $('#content-form-value').hide();
+                    $('#form-edit').find('#file_asset').attr('required', true);
+                    $('#is_asset').val('1');
 
-                    // Hidden asset content if not is_asset
-                    if (response.is_asset) {
-                        // Show asset content
-                        $('#content-asset').show();
-                        // Hide value content
-                        $('#content-form-value').hide();
-                        // Set form input file_asset to required true
-                        $('#form-edit').find('#file_asset').attr('required', true);
-                        // Set is_asset
-                        $('#form-edit').find('#is_asset').val('1');
+                    var filepath = response.value;
+                    var filename = filepath.substring(filepath.lastIndexOf('/') + 1);
+                    var directory = filepath.substring(0, filepath.lastIndexOf('/'));
+                    var baseUrl = window.location.origin;
+                    var imgSrc = baseUrl + '/' + filepath;
 
-                        /* Set path */
-                        var filepath = response.value;
-                        var filename = filepath.substring(filepath.lastIndexOf('/') + 1);
-                        var directory = filepath.substring(0, filepath.lastIndexOf('/'));
-                        const baseUrl = window.location.origin;
-                        const imgSrc = baseUrl + '/' + filepath;
-                        // Set path
-                        $('#form-edit').find('#path').val(directory + '/');
-                        // Set file_name
-                        $('#form-edit').find('#file_name').val(filename);
-                        // Set preview image and text
-                        $('#content-asset-preview--image').attr('src', imgSrc);
-                        $('#content-asset-preview--text').text(filename);
-                    } else {
-                        // Hide asset content
-                        $('#content-asset').hide();
-                        // Show value content
-                        $('#content-form-value').show();
-                        // Set is_asset
-                        $('#form-edit').find('#is_asset').val('0');
-                    }
-                },
-                error: function(xhr) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Gagal memuat data.',
-                    });
+                    $('#form-edit').find('#path').val(directory + '/');
+                    $('#form-edit').find('#file_name').val(filename);
+                    $('#content-asset-preview--image').attr('src', imgSrc);
+                    $('#content-asset-preview--text').text(filename);
+                } else {
+                    $('#content-asset').hide();
+                    $('#content-form-value').show();
+                    $('#is_asset').val('0');
+                    $('#form-edit').find('#file_asset').removeAttr('required');
                 }
-            });
-        });        
-        </script>
-        <!-- End Edit User (Modal) -->
+            },
+            error: function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Gagal memuat data.',
+                });
+            }
+        });
+    });
+</script>
 @endpush

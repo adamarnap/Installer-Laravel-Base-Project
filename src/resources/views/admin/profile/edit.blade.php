@@ -7,166 +7,183 @@
 @endsection
 
 @section('content')
-{{-- START : Update Biodata --}}
-<div class="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
-    <div class="trezo-card-content">
-        <div class="flex flex-col items-center mb-[25px]">
-            <div class="flex flex-col items-center">
-                @php
-                    $profile_photo = Auth::user()?->userProfile?->profile_photo
-                    ? URL::asset('storage/' . Auth::user()->userProfile->profile_photo)
-                    : URL::asset('assets/admin/images/users/default.jpg');
-                @endphp
-                <img src="{{ $profile_photo }}" alt="user-image" class="rounded-full w-[75px] mb-2">
-                <p class="mb-[20px] md:mb-[25px] text-center">
-                    {{ ucwords(implode(', ', $user->roles->pluck('name')->toArray())) }}
-                </p>
+    @php
+        $profile_photo = Auth::user()?->userProfile?->profile_photo
+            ? URL::asset('storage/' . Auth::user()->userProfile->profile_photo)
+            : URL::asset('assets/admin/images/users/default.jpg');
+        $roles = ucwords(implode(', ', $user->roles->pluck('name')->toArray()));
+        $profile_bg = URL::asset('assets/admin/images/profile-bg.jpg');
+    @endphp
+
+    <div class="mb-5">
+        <div class="relative h-62.5 overflow-hidden rounded bg-cover bg-center" style="min-height: 300px; background-image: url('{{ $profile_bg }}');">
+            <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-linear-to-t from-[#313A46] via-[#313a46cc] to-[#313a4680] p-7.5 text-center">
+
+                <div>
+                    <h3 class="text-2xl text-white italic">
+                        {{ $user->name }}
+                    </h3>
+                    <p class="mt-2 text-md text-white">
+                        {{ $roles }}
+                    </p>
+                </div>
             </div>
         </div>
-        <form action="{{ route('profile.update') }}" method="POST" id="generalInformationForm" enctype="multipart/form-data">
-            @csrf
-            @method('patch')
-            {{-- START: Name & Email --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-[20px] md:gap-[25px]">
-                <div>
-                    <label class="mb-[10px] text-black dark:text-white font-medium block">
-                        Name
-                    </label>
-                    <input type="text" name="name" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" value="{{ $user->name }}" required>
-                </div>
-                <div>
-                    <label class="mb-[10px] text-black dark:text-white font-medium block">
-                        Email
-                    </label>
-                    <input type="email" name="email" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" value="{{ $user->email }}" readonly>
-                </div>
-            </div>
-            {{-- END: Name & Email --}}
+    </div>
 
-            {{-- START: Profile Photo --}}
-            <label class="mb-[10px] text-black dark:text-white font-medium block mt-[20px] md:mt-[25px]">
-                Foto Profile
-            </label>
-            
-            <div id="fileUploader">
-                <div class="relative flex items-center justify-center overflow-hidden rounded-md py-[88px] px-[20px] border border-gray-200 dark:border-[#172036]">
-                    <div class="flex items-center justify-center">
-                        <div class="w-[35px] h-[35px] border border-gray-100 dark:border-[#15203c] flex items-center justify-center rounded-md text-primary-500 text-lg ltr:mr-[12px] rtl:ml-[12px]">
-                            <i class="ri-upload-2-line"></i>
+    <div class="card -mt-12">
+        <div class="card-body space-y-8">
+            <form action="{{ route('profile.update') }}" method="POST" id="generalInformationForm" enctype="multipart/form-data" class="mb-5">
+                @csrf
+                @method('patch')
+
+                <h5 class="bg-light/15 border-default-300 mb-5 flex items-center justify-center gap-1.5 rounded border border-dashed p-1.25 text-sm uppercase">
+                    <i class="iconify tabler--user-circle text-base"></i>
+                    Personal Info
+                </h5>
+
+                <div class="grid grid-cols-1 gap-x-base gap-y-5 mb-base lg:grid-cols-2">
+                    <div class="lg:col-span-2">
+                        <label for="profile_photo" class="form-label">Profile Photo</label>
+                        <div class="flex flex-col gap-4 rounded border border-dashed border-default-300 p-5 md:flex-row md:items-center">
+                            <img src="{{ $profile_photo }}" alt="Profile Photo" class="h-20 w-20 rounded-full object-cover">
+                            <div class="flex-1">
+                                <input
+                                    type="file"
+                                    name="profile_photo"
+                                    id="profile_photo"
+                                    class="form-input"
+                                    accept="image/*"
+                                />
+                                <p class="mt-2 text-xs italic text-default-400">
+                                    Upload a new image to replace the current profile photo.
+                                </p>
+                            </div>
                         </div>
-                        <p class="leading-[1.5]">
-                            <strong class="text-black dark:text-white">Click to upload</strong><br> you file here
-                        </p>
                     </div>
-                    <input type="file" name="profile_photo" id="fileInput" class="absolute top-0 left-0 right-0 bottom-0 rounded-md z-[1] opacity-0 cursor-pointer" 
-                    accept="image/*">
-                </div>
-                <ul id="fileList"></ul>
-            </div>
-            {{-- END: Profile Photo --}}
 
-            {{-- START: Btn Save Bio Data --}}
-            <div class="mt-[20px] md:mt-[25px]">
-                <button type="submit" class="font-medium inline-block transition-all rounded-md md:text-md py-[10px] md:py-[12px] px-[20px] md:px-[22px] bg-primary-500 text-white hover:bg-primary-400">
-                    <span class="inline-block relative ltr:pl-[29px] rtl:pr-[29px]">
-                        <i class="material-symbols-outlined ltr:left-0 rtl:right-0 absolute top-1/2 -translate-y-1/2">
-                            check
-                        </i>
+                    <div>
+                        <label for="name" class="form-label">Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            class="form-input"
+                            placeholder="Enter name"
+                            value="{{ $user->name }}"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label for="email" class="form-label">Email Address</label>
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            class="form-input"
+                            placeholder="Enter email"
+                            value="{{ $user->email }}"
+                            readonly
+                        />
+                        <span class="text-default-400 text-xs italic">
+                            Email cannot be changed from this page.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mt-7.5 text-end">
+                    <button type="submit" class="btn bg-success text-white hover:bg-success-hover">
                         Update Profile
-                    </span>
-                </button>
-            </div>
-            {{-- END: Btn Save Bio Data --}}
-        </form>
-    </div>
-</div>
-{{-- END : Update Biodata --}}
+                    </button>
+                </div>
+            </form>
 
-{{-- START : Update Password --}}
-<div class="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
-    <div class="trezo-card-content">
-        <form action="{{ route('password.update') }}" id="updatePasswordForm" method="POST">
-            @csrf
-            @method('put')
-            {{-- START: Password --}}
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-[20px] md:gap-[25px]">
-                <div>
-                    <label class="mb-[10px] text-black dark:text-white font-medium block">
-                        Current Password
-                    </label>
-                    <input type="password" name="current_password" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500"
-                    placeholder="Type current password ..." required>
+            <form action="{{ route('password.update') }}" id="updatePasswordForm" method="POST" class="mb-5">
+                @csrf
+                @method('put')
+
+                <h5 class="bg-light/15 border-default-300 mb-5 flex items-center justify-center gap-1.5 rounded border border-dashed p-1.25 text-sm uppercase">
+                    <i class="iconify tabler--lock text-base"></i>
+                    Update Password
+                </h5>
+
+                <div class="grid grid-cols-1 gap-x-base gap-y-5 mb-base lg:grid-cols-3">
+                    <div>
+                        <label for="current_password" class="form-label">Current Password</label>
+                        <input
+                            type="password"
+                            name="current_password"
+                            id="current_password"
+                            class="form-input"
+                            placeholder="Type current password ..."
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label for="password" class="form-label">New Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            class="form-input"
+                            placeholder="Type new password ..."
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label for="password_confirmation" class="form-label">Confirm New Password</label>
+                        <input
+                            type="password"
+                            name="password_confirmation"
+                            id="password_confirmation"
+                            class="form-input"
+                            placeholder="Confirm new password ..."
+                            required
+                        />
+                    </div>
                 </div>
 
-                <div>
-                    <label class="mb-[10px] text-black dark:text-white font-medium block">
-                        New Password
-                    </label>
-                    <input type="password" name="password" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" 
-                    placeholder="Type new password ..." required>
-                </div>
-
-                <div>
-                    <label class="mb-[10px] text-black dark:text-white font-medium block">
-                        Confirm New Password
-                    </label>
-                    <input type="password" name="password_confirmation" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" 
-                    placeholder="Confirm new password ..." required>
-                </div>
-            </div>
-            {{-- END: Password --}}
-
-            {{-- START: Btn Save Bio Data --}}
-            <div class="mt-[20px] md:mt-[25px]">
-                <button type="submit" class="font-medium inline-block transition-all rounded-md md:text-md py-[10px] md:py-[12px] px-[20px] md:px-[22px] bg-red-500 text-white hover:bg-red-400">
-                    <span class="inline-block relative ltr:pl-[29px] rtl:pr-[29px]">
-                        <i class="material-symbols-outlined ltr:left-0 rtl:right-0 absolute top-1/2 -translate-y-1/2">
-                            key
-                        </i>
+                <div class="mt-7.5 text-end">
+                    <button type="submit" class="btn bg-danger text-white hover:bg-danger-hover">
                         Update Password
-                    </span>
-                </button>
-            </div>
-            {{-- END: Btn Save Bio Data --}}
-        </form>
-    </div>
-</div>
-{{-- END : Update Password --}}
-
-{{-- START: Delete Account --}}
-<div class="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
-    <div class="trezo-card-content">
-        <form action="{{ route('profile.destroy') }}" id="deleteAccountForm" method="POST">
-            @csrf
-            @method('delete')
-            {{-- START: Password --}}
-            <div class="grid grid-cols-1 sm:grid-cols-1 gap-[20px] md:gap-[25px]">
-                <div>
-                    <label class="mb-[10px] text-black dark:text-white font-medium block">
-                        Current Password for Confirmation
-                    </label>
-                    <input type="password" name="password" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500"
-                    placeholder="Type current password for confirmation if you need delete account ..." required>
+                    </button>
                 </div>
-            </div>
-            {{-- END: Password --}}
+            </form>
 
-            {{-- START: Btn Save Bio Data --}}
-            <div class="mt-[20px] md:mt-[25px]">
-                <button type="submit" id="delete-account-btn" class="font-medium inline-block transition-all rounded-md md:text-md py-[10px] md:py-[12px] px-[20px] md:px-[22px] bg-red-500 text-white hover:bg-red-400">
-                    <span class="inline-block relative ltr:pl-[29px] rtl:pr-[29px]">
-                        <i class="material-symbols-outlined ltr:left-0 rtl:right-0 absolute top-1/2 -translate-y-1/2">
-                            delete
-                        </i>
+            <form action="{{ route('profile.destroy') }}" id="deleteAccountForm" method="POST">
+                @csrf
+                @method('delete')
+
+                <h5 class="bg-light/15 border-default-300 mb-5 flex items-center justify-center gap-1.5 rounded border border-dashed p-1.25 text-sm uppercase">
+                    <i class="iconify tabler--trash text-base"></i>
+                    Delete Account
+                </h5>
+
+                <div class="grid grid-cols-1 gap-x-base gap-y-5 mb-base">
+                    <div>
+                        <label for="delete_password" class="form-label">Current Password for Confirmation</label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="delete_password"
+                            class="form-input"
+                            placeholder="Type current password for confirmation if you need delete account ..."
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div class="mt-7.5 text-end">
+                    <button type="submit" id="delete-account-btn" class="btn bg-danger text-white hover:bg-danger-hover">
                         Delete Account
-                    </span>
-                </button>
-            </div>
-            {{-- END: Btn Save Bio Data --}}
-        </form>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-{{-- END: Delete Account --}}
 @endsection
 
 @push('scripts')
@@ -247,6 +264,3 @@
         });
     </script>
 @endpush
-
-
-

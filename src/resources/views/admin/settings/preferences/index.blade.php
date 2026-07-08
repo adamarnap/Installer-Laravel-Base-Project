@@ -7,89 +7,90 @@
 @endsection
 
 @push('styles')
-    {{-- DataTables CSS --}}
-    <link rel="stylesheet" href="{{ URL::asset('assets/admin/css/datatables-2.3.4/datatables.tailwindcss.css') }}">
-    {{-- Select2 CSS --}}
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 
 @section('content')
-    <!-- START: Data Table -->
-    <div class="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
-        <div class="trezo-card-header mb-[20px] md:mb-[25px] sm:flex sm:items-center sm:justify-between">
-            <div class="trezo-card-title">
-                <h5 class="mb-0">
-                    Daftar @yield('title')
-                </h5>
+    <div class="grid grid-cols-1 gap-base">
+        <div class="card">
+            <div class="card-header  ">
+                <div>
+                    <h4 class="card-title mb-1.25">Daftar Preferensi</h4>
+                    <p class="text-default-400">Kelola konfigurasi aplikasi dan nilai yang tersimpan di sistem.</p>
+                </div>
+                <span class="badge bg-info/15 text-info">Editable settings</span>
             </div>
-        </div>
-        {{-- START: Data Table --}}
-        <div class="trezo-card-content" id="dataTable">
-            <div class="table-responsive overflow-x-auto p-2">
-                <table id="data-table" class="display" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th class="text-center">Key</th>
-                            <th class="text-center">Group</th>
-                            <th class="text-center">Value</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($preferences as $preference)
-                            <tr>
-                                <td>{{ $preference->name ?? '-' }}</td>
-                                <td>{{ $preference->group ?? '-' }}</td>
-                                <td>{{ $preference->value ?? '-' }}</td>
-                                <td>
-                                    @can('settings-preferences.update')
-                                        {{-- BUTTON MINI FOR IN TABLE --}}
-                                        <div class="flex items-center gap-[9px]">
-                                            {{-- Button Edit --}}
-                                            <button type="button" class="btn-modal-edit-pref text-warning-500 dark:text-warning-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit"
-                                                data-id="{{ $preference->id }}"
-                                                data-url-action="{{ route('settings.preferences.update', $preference->id) }}"
-                                                data-url-get="{{ route('settings.preferences.edit', $preference->id) }}">
-                                                <i class="material-symbols-outlined !text-md">
-                                                    edit
-                                                </i>
-                                            </button>
-                                        </div>
-                                    @endcan
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="4" class="text-center">Not found preferences</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        {{-- END: Data Table --}}
-    </div>
-    <!-- END: Data Table -->
 
-    {{-- START: Import Modal Edit --}}
+            <div class="card-body">
+                <div class="table-wrapper -mb-4 overflow-x-auto">
+                    <table id="data-table" class="display" style="width:100%">
+                        <thead class="text-2xs font-semibold uppercase">
+                            <tr>
+                                <th class="text-center">Key</th>
+                                <th class="text-center">Group</th>
+                                <th class="text-center">Type</th>
+                                <th class="text-center">Value</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($preferences as $preference)
+                                <tr>
+                                    <td class="align-middle">{{ $preference->name ?? '-' }}</td>
+                                    <td class="align-middle">{{ $preference->group ?? '-' }}</td>
+                                    <td class="align-middle text-center">
+                                        <span class="badge {{ $preference->is_asset ? 'bg-success/15 text-success' : 'bg-secondary/15 text-secondary' }}">
+                                            {{ $preference->is_asset ? 'Asset' : 'Value' }}
+                                        </span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <span class="break-all">{{ $preference->value ?? '-' }}</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        @can('settings-preferences.update')
+                                            <div class="flex items-center justify-center gap-[9px]">
+                                                <button type="button" class="btn-modal-edit-pref btn border-danger text-warning hover:bg-danger hover:text-white"
+                                                    id="customTooltip" data-text="Edit"
+                                                    data-id="{{ $preference->id }}"
+                                                    data-url-action="{{ route('settings.preferences.update', $preference->id) }}"
+                                                    data-url-get="{{ route('settings.preferences.edit', $preference->id) }}">
+                                                    <i class="iconify tabler--edit text-xs"></i>
+                                                </button>
+                                            </div>
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center">Not found preferences</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @can('settings-preferences.update')
         @include('admin.settings.preferences.partials.modal-edit')
     @endcan
-    {{-- END: Import Modal Edit --}}
 
-    {{-- START: Form Delete --}}
-    <form action="" id="form-delete" method="POST" id="form-delete">
+    <form action="" id="form-delete" method="POST">
         @csrf
         @method('DELETE')
     </form>
-    {{-- END: Form Delete --}}
 @endsection
 
 @push('scripts')
-    {{-- Start: Data Table --}}
-    <script src="{{ URL::asset('assets/admin/js/datatables-2.3.4/dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/admin/js/datatables-2.3.4/dataTables.tailwindcss.js') }}"></script>
+    <!-- Jquery for Datatables-->
+    <script src="{{ URL::asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
 
+    <!-- Datatables js -->
+    <script src="{{ URL::asset('assets/admin/plugins/datatables-dt/dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/admin/plugins/datatables-dt/dataTables.responsive.min.js') }}"></script>
+
+    <!-- Page js -->
+    <script src="{{ URL::asset('assets/admin/js/pages/datatables-column-search.js') }}"></script>
     
     <script>
         $('#data-table').DataTable({

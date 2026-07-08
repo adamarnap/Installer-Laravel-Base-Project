@@ -53,15 +53,15 @@ $ DB USERNAME: <input db username>
 $ DB PASSWORD: <input db password>
 ```
 
-<img src="./images/choose-breeze-stack.png" alt="images/choose-breeze-stack.png" style="zoom:80%;" />
+<img src="docs/images/installation-guide/choose-breeze-stack.png" alt="images/choose-breeze-stack.png" style="zoom:80%;" />
 
 Choose Blade with Alpine
 
-<img src="./images/choose-breeze-dark-mode.png" alt="images/choose-breeze-dark-mode.png" style="zoom:80%;" />
+<img src="docs/images/installation-guide/choose-breeze-dark-mode.png" alt="images/choose-breeze-dark-mode.png" style="zoom:80%;" />
 
 Choose Yes
 
-<img src="./images/choose-testing-framework.png" alt="images/choose-testing-framework.png" style="zoom:80%;" />
+<img src="docs/images/installation-guide/choose-testing-framework.png" alt="images/choose-testing-framework.png" style="zoom:80%;" />
 
 Choose PHPUnit
 
@@ -75,3 +75,16 @@ Choose PHPUnit
 $ php artisan serve
 ```
 7. For more information, i hope you can read README.md in yourprojcet/README.md
+
+---
+
+# About Template HTML
+## Landing
+Here in landing pages we use Template HTML From MARTEX (https://martex-tailwindcss.ibthemespro.com/index.html)
+
+![Landing Page Overview](docs/images/base-project-overview/landing-page-overview.png)
+
+## Admin
+Here in admin pages we use Template HTML From PACES (https://themes.coderthemes.com/paces/tailwind/index.html)
+![Auth Page Overview](docs/images/base-project-overview/auth-page-overview.png)
+![Admin Page Overview](docs/images/base-project-overview/admin-page-overview.png)

@@ -2,86 +2,29 @@
 
 @section('title', 'Lupa Kata Sandi')
 
-@section('content')
-    
-    <!-- Light/Dark Mode Button -->
-    <button type="button" class="light-dark-toggle leading-none inline-block transition-all text-[#fe7a36] absolute top-[20px] md:top-[25px] ltr:right-[20px] rtl:left-[20px] ltr:md:right-[25px] rtl:md:left-[25px]" id="light-dark-toggle">
-        <i class="material-symbols-outlined !text-[20px] md:!text-[22px]">
-            light_mode
-        </i>
-    </button>
-    <!-- End Light/Dark Mode Button -->
-
-    <!-- Forgot Password -->
-    <div class="bg-white dark:bg-[#0a0e19] py-[60px] md:py-[80px] lg:py-[135px]">
-        <div class="mx-auto px-[12.5px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1255px]">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-[25px] items-center">
-                <div class="xl:ltr:-mr-[25px] xl:rtl:-ml-[25px] 2xl:ltr:-mr-[45px] 2xl:rtl:-ml-[45px] rounded-[25px] order-2 lg:order-1">
-                    <img src="{{ URL::asset('assets/admin/images/forgot-password.jpg') }}" alt="forgot-password-image" class="rounded-[25px]">
-                </div>
-                <div class="xl:ltr:pl-[90px] xl:rtl:pr-[90px] 2xl:ltr:pl-[120px] 2xl:rtl:pr-[120px] order-1 lg:order-2">
-                    <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo" class="inline-block dark:hidden w-32">
-                    <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo" class="hidden dark:inline-block w-32">
-                    <div class="my-[17px] md:my-[25px]">
-                        <h1 class="font-semibold text-[22px] md:text-xl lg:text-2xl mb-[5px] md:mb-[12px]">
-                            Lupa kata sandi Anda?
-                        </h1>
-                        <p class="font-medium leading-[1.5] lg:text-md text-[#445164] dark:text-gray-400">
-                            Lupa kata sandi Anda? Tidak masalah. Cukup beri tahu kami alamat email Anda dan kami akan mengirimkan
-                            email berisi tautan pengaturan ulang kata sandi yang memungkinkan Anda memilih yang baru.
-                        </p>
-                    </div>
-                    {{-- START: Alert Message --}}
-                    <div class="">
-                        @if (session('status'))
-                            <div class="font-medium text-sm text-green-600 border border-transparent rounded-md bg-green-50 px-4 py-3 mt-4">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        <!-- Validation Errors -->
-                        @if ($errors->any())
-                            <div class="py-[1rem] px-[1rem] text-danger-500 bg-danger-50 border border-danger-200 dark:bg-[#15203c] dark:border-[#15203c] rounded-md" role="alert">
-                                <b><i class="bi bi-x-octagon"></i> Error :</b>
-                                <ul>
-                                    @foreach ($errors->get('email') as $message)
-                                        <li>{{ $message }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                    </div>
-                    {{-- END: Alert Message --}}
-
-                    <div class="row">
-                        <p><b>Belum mendapatkan email verifikasi ?</b></p>
-                    </div>
-
-                    {{-- START : Form --}}
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
-                        <div class="mb-[15px] relative">
-                            <label class="mb-[10px] md:mb-[12px] text-black dark:text-white font-medium block">
-                                Alamat Email
-                            </label>
-                            <input type="email" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500"
-                                placeholder="Masukkan alamat email anda" name="email" :value="old('email')" required autofocus autocomplete="email" />
-                        </div>
-                        <button type="submit" class="md:text-md block w-full text-center transition-all rounded-md font-medium mt-[20px] md:mt-[25px] py-[12px] px-[25px] text-white bg-primary-500 hover:bg-primary-400">
-                            <span class="flex items-center justify-center gap-[5px]">
-                                <i class="material-symbols-outlined">
-                                    article_shortcut
-                                </i>
-                                Kirim email untuk reset kata sandi
-                            </span>
-                        </button>
-                    </form>
-                    {{-- END : Form --}}
-                    <p class="mt-[15px] md:mt-[20px]">
-                        Kembali ke <a href="{{ route('login') }}" class="text-primary-500 transition-all font-semibold hover:underline">Halaman Masuk</a>
-                    </p>
-                </div>
+@section('auth-form')
+    <form action="{{ route('password.email') }}" method="POST">
+        @csrf
+        <div class="mb-5">
+            <label for="userEmail" class="form-label">
+                Email
+                <span class="text-danger">*</span>
+            </label>
+            <div class="input-icon-group">
+                <i class="iconify tabler--mail input-icon"></i>
+                <input name="email" type="email" class="form-input" id="userEmail"
+                    placeholder="Masukkan email Anda yang terdaftar" required />
             </div>
         </div>
-    </div>
-    <!-- End Forgot Password -->
+
+        <div>
+            <button type="submit"
+                class="btn bg-primary w-full py-3 font-semibold text-white hover:bg-primary-hover">Kirim email untuk reset kata sandi</button>
+        </div>
+    </form>
+    <p class="text-default-400 mt-7.5 text-center">
+        Kembali ke
+        <a href="{{ route('login') }}"
+            class="text-primary font-semibold underline underline-offset-4"> halaman masuk</a>
+    </p>
 @endsection

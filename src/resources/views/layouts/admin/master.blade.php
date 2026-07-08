@@ -1,56 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8" />
+        <title>@yield('title') | {{ $prefs_composer['title'] }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="{{ $prefs_composer['meta-description'] }}">
         <meta name="keywords" content="{{ $prefs_composer['meta-keywords'] }}">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="author" content="{{ $prefs_composer['author'] }}" />
+
         {{-- Styles --}}
         @include('layouts.admin.partials.styles')
-        
 
-        <title>@yield('title') | {{ $prefs_composer['title'] }}</title>
+        {{-- Head Js --}}
+        <script src="{{ URL::asset('assets/admin/js/config.js') }}"></script>
 
-        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-        @vite('resources/css/app.css')
+    <!-- Jquery for Datatables & Select2 -->
+    <script src="{{ URL::asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
     </head>
 
+
     <body>
-        {{-- Start: Sidebar --}}
-        @include('layouts.admin.partials.sidebar')
-        {{-- End: Sidebar --}}
+        <div class="wrapper">
+            {{-- Start: Topbar --}}
+            @include('layouts.admin.partials.topbar')
+            {{-- End: Topbar --}}
+            
+            {{-- Start: Sidebar --}}
+            @include('layouts.admin.partials.sidebar')
+            {{-- End: Sidebar --}}
 
-        {{-- Start: Topbar --}}
-        @include('layouts.admin.partials.topbar')
-        {{-- End: Topbar --}}
+            {{-- Start: Main Content --}}
+            <div class="page-content">
+                <main>
+                    {{-- Start: Title and Breadcrumb --}}
+                    <div class="page-title-head">
+                        {{-- Start: Title --}}
+                        <h4 class="page-main-title">@yield('title')</h4>
+                        {{-- End: Title --}}
 
-        <div class="main-content transition-all flex flex-col overflow-hidden min-h-screen" id="main-content">
-            <!-- Start: Breadcrumb -->
-            <div class="mb-[25px] md:flex items-center justify-between">
-                <h5 class="mb-0">
-                    @yield('title')
-                </h5>
-                <ol class="breadcrumb mt-[12px] md:mt-0">
-                    @yield('breadcrumb')
-                </ol>
+                        {{-- Start: Breadcrumb --}}
+                        <div class="hidden items-center gap-1.25 text-sm md:flex">
+                            @yield('breadcrumb')
+                        </div>
+                        {{-- End: Breadcrumb --}}
+                    </div>
+                    {{-- End: Title and Breadcrumb --}}
+
+                    {{-- Start: Content --}}
+                    <div class="container-fluid">
+                        @yield('content')
+                    </div>
+                    {{-- End: Content --}}
+                </main>
+
+                {{-- Start: Footer --}}
+                @include('layouts.admin.partials.footer')
+                {{-- End: Footer --}}
             </div>
-            <!-- End : Breadcrumb -->
-            
-            {{-- Start : Main Content --}}
-            
-            @yield('content')
-            {{-- End : Main Content --}}
-
-            {{-- Start: Footer --}}
-            @include('layouts.admin.partials.footer')
-            {{-- End: Footer --}}
+            {{-- End: Main Content --}}
         </div>
-        {{-- Scripts --}}
+
+        {{-- Start: Scripts --}}
         @include('layouts.admin.partials.scripts')
-        {{-- SweetAlert2 --}}
-        @include('layouts.admin.partials.alerts-script')
+        {{-- End: Scripts --}}
     </body>
 
 </html>

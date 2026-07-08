@@ -17,9 +17,9 @@
 - Composer
 
 ## Template HTML is Used
-- For Admin (Trezo) : 
+- For Admin (Paces) : 
 ```
-https://trezo-twcss.envytheme.com/lms-index.html
+https://themes.coderthemes.com/paces/tailwind/index.html
 
 ```
 - For Landing (Martex)

@@ -6,61 +6,50 @@
     {{ Breadcrumbs::render('navigations') }}
 @endsection
 
-@push('styles')
-    {{-- DataTables CSS --}}
-    <link rel="stylesheet" href="{{ URL::asset('assets/admin/css/datatables-2.3.4/datatables.tailwindcss.css') }}">
-    {{-- Select2 CSS --}}
-    <link href="{{ URL::asset('assets/admin/css/select2-4.1.0/select2.min.css') }}" rel="stylesheet" />
-    <link href="{{ URL::asset('assets/admin/css/select2-4.1.0/select2-height-style.css') }}" rel="stylesheet" />
-@endpush
-
 @section('content')
-    <!-- START: Data Table -->
-    <div class="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
-        <div class="trezo-card-header mb-[20px] md:mb-[25px] sm:flex sm:items-center sm:justify-between">
-            <div class="trezo-card-title">
-                <h5 class="mb-0">
-                    Daftar @yield('title')
-                </h5>
-            </div>
-            {{-- START: Tambah Data --}}
-            @can('settings-navs.create')
-                <div class="trezo-card-subtitle sm:flex sm:items-center">
-                    <div class="trezo-card-dropdown relative">
-                        <button class="trezo-card-dropdown-btn py-[5px] md:py-[6.5px] px-[12px] md:px-[19px] bg-primary-500 text-white transition-all hover:bg-primary-400 rounded-md border border-primary-500 hover:border-primary-400"
-                            type="button" id="modal-add-toggle">
-                            <i class="ri-menu-add-line"></i>
-                            Tambah @yield('title')
-                        </button>
-                    </div>
+    <div class="grid grid-cols-1 gap-base">
+        <div class="card">
+            <div class="card-header  ">
+                <div>
+                    <h4 class="card-title mb-1.25">Daftar Menu</h4>
+                    <p class="text-default-400">Kelola struktur menu, permission identifier, status, dan urutan tampilan.</p>
                 </div>
-            @endcan
-            {{-- END: Tambah Data --}}
-        </div>
-        {{-- START: Data Table --}}
-        <div class="trezo-card-content" id="dataTable">
-            <div class="table-responsive overflow-x-auto p-2">
-                <table id="data-table" class="display stripe group" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th class="text-center">Nama</th>
-                            <th class="text-center">Permission Identifier</th>
-                            <th class="text-center">URL</th>
-                            <th class="text-center">Order</th>
-                            <th class="text-center">Active</th>
-                            <th class="text-center">Display</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+
+                @can('settings-navs.create')
+                    <button type="button"
+                        class="btn bg-primary hover:bg-primary-hover rounded text-white"
+                        id="modal-add-toggle"
+                        aria-haspopup="dialog"
+                        aria-expanded="false"
+                        aria-controls="modal-add"
+                        data-hs-overlay="#modal-add">
+                        <i class="iconify tabler--plus text-xs"></i>
+                        Tambah @yield('title')
+                    </button>
+                @endcan
+            </div>
+
+            <div class="card-body">
+                <div class="table-wrapper -mb-4 overflow-x-auto">
+                    <table id="data-table" class="display stripe group" style="width:100%">
+                        <thead class="text-2xs font-semibold uppercase">
+                            <tr>
+                                <th class="text-center">Nama</th>
+                                <th class="text-center">Permission Identifier</th>
+                                <th class="text-center">URL</th>
+                                <th class="text-center">Order</th>
+                                <th class="text-center">Active</th>
+                                <th class="text-center">Display</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         @can('settings-navs.read')
                             @foreach ($navigations as $nav)
                                 <tr>
                                     <td class="text-left align-middle">
                                         <div class="flex items-center gap-2">
-                                            <i class="material-symbols-outlined transition-all text-gray-500 dark:text-gray-400 !text-[22px] leading-none relative -top-px">
-                                                {{ $nav['icon'] }}
-                                            </i>
+                                            <i class="iconify tabler--{{ str_replace('_', '-', $nav['icon']) }} transition-all text-gray-500 dark:text-gray-400 text-xs leading-none relative -top-px"></i>
                                             <span class="title leading-none text-left font-bold">
                                                 {{ $nav['name'] }}
                                             </span>
@@ -73,23 +62,22 @@
                                     </td>
                                     <td class="px-3 py-1 text-start">
                                         <small>
-                                            <span class="px-[8px] py-[3px] inline-block bg-{{ $nav->active == 1 ? 'primary' : 'danger' }}-50 dark:bg-[#15203c] text-{{ $nav->active == 1 ? 'primary' : 'danger' }}-500 rounded-sm font-medium text-xs">{{ $nav->active == 1 ? 'Active' : 'Deactive' }}</span>
+                                            <span class="badge bg-{{ $nav->active == 1 ? 'success' : 'danger' }} text-white font-medium text-xs">{{ $nav->active == 1 ? 'Active' : 'Deactive' }}</span>
                                         </small>
+                                    </td>
                                     <td class="px-3 py-1 text-start">
                                         <small>
-                                            <span class="px-[8px] py-[3px] inline-block bg-{{ $nav->display == 1 ? 'primary' : 'danger' }}-50 dark:bg-[#15203c] text-{{ $nav->display == 1 ? 'primary' : 'danger' }}-500 rounded-sm font-medium text-xs">{{ $nav->display == 1 ? 'Display' : 'Hidden' }}</span>
+                                            <span class="badge bg-{{ $nav->display == 1 ? 'success' : 'danger' }} text-white font-medium text-xs">{{ $nav->display == 1 ? 'Display' : 'Hidden' }}</span>
                                         </small>
                                     </td>
                                     <td class="px-4 py-1 text-center">
                                         <div class="flex items-center gap-[9px]">
                                             @can('settings-navs.update')
-                                                <button type="button" class="btn-modal-edit-nav text-warning-500 dark:text-warning-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit"
+                                                <button type="button" class="btn-modal-edit-nav btn border-warning text-warning hover:bg-warning hover:text-white me-2" id="customTooltip" data-text="Edit"
                                                     data-id="{{ $nav->id }}"
                                                     data-url-action="{{ route('settings.navs.update', $nav->id) }}"
                                                     data-url-get="{{ route('settings.navs.edit', $nav->id) }}">
-                                                    <i class="material-symbols-outlined !text-md">
-                                                        edit
-                                                    </i>
+                                                    <i class="iconify tabler--edit text-xs"></i>
                                                 </button>
                                             @endcan
                                             @can('settings-navs.delete')
@@ -97,10 +85,8 @@
                                                     class="d-inline">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit" onclick="confirmDelete(this);" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
-                                                        <i class="material-symbols-outlined !text-md">
-                                                            delete
-                                                        </i>
+                                                    <button type="submit" onclick="confirmDelete(this);" class="btn border-danger text-danger hover:bg-danger hover:text-white" id="customTooltip" data-text="Delete">
+                                                        <i class="iconify tabler--trash text-xs"></i>
                                                     </button>
                                                 </form>
                                             @endcan
@@ -115,9 +101,7 @@
                                                 <small>
                                                     <div class="flex items-center gap-2 mr-4 pl-4">
                                                         <div class="col-span">
-                                                            <i class="material-symbols-outlined text-blue-500 !text-[18px]">
-                                                                subdirectory_arrow_right
-                                                            </i>
+                                                            <i class="iconify tabler--dots text-blue-500 text-xs"></i>
                                                         </div> 
                                                         <div class="title leading-none text-left font-medium">
                                                             {{ $child->name ?? '-' }}
@@ -156,7 +140,7 @@
                                                 <small>
                                                     <div class="flex items-center gap-2 mr-4 pl-4">
                                                         <div class="title leading-none text-left">
-                                                            <span class="px-[8px] py-[3px] inline-block bg-{{ $child->active == 1 ? 'primary' : 'danger' }}-50 dark:bg-[#15203c] text-{{ $child->active == 1 ? 'primary' : 'danger' }}-500 rounded-sm font-medium text-xs">{{ $child->active == 1 ? 'Active' : 'Deactive' }}</span>
+                                                            <span class="badge bg-{{ $child->active == 1 ? 'success' : 'danger' }} text-white font-medium text-xs">{{ $child->active == 1 ? 'Active' : 'Deactive' }}</span>
                                                         </div>
                                                     </div>
                                                 </small>
@@ -165,7 +149,7 @@
                                                 <small>
                                                     <div class="flex items-center gap-2 mr-4 pl-4">
                                                         <div class="title leading-none text-left">
-                                                            <span class="px-[8px] py-[3px] inline-block bg-{{ $child->display == 1 ? 'primary' : 'danger' }}-50 dark:bg-[#15203c] text-{{ $child->display == 1 ? 'primary' : 'danger' }}-500 rounded-sm font-medium text-xs">{{ $child->display == 1 ? 'Display' : 'Hidden' }}</span>
+                                                            <span class="badge bg-{{ $child->display == 1 ? 'success' : 'danger' }} text-white font-medium text-xs">{{ $child->display == 1 ? 'Display' : 'Hidden' }}</span>
                                                         </div>
                                                     </div>
                                                 </small>
@@ -173,13 +157,11 @@
                                             <td class="px-5 py-1 text-center">
                                                 <div class="flex items-center gap-[9px]">
                                                     @can('settings-navs.update')
-                                                        <button type="button" class="btn-modal-edit-nav text-warning-500 dark:text-warning-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit"
+                                                        <button type="button" class="btn-modal-edit-nav btn border-warning text-warning hover:bg-warning hover:text-white me-2" id="customTooltip" data-text="Edit"
                                                         data-id="{{ $child->id }}"
                                                         data-url-action="{{ route('settings.navs.update', $child->id) }}"
                                                         data-url-get="{{ route('settings.navs.edit', $child->id) }}">
-                                                            <i class="material-symbols-outlined !text-md">
-                                                                edit
-                                                            </i>
+                                                                <i class="iconify tabler--edit text-xs"></i>
                                                         </button>
                                                     @endcan
                                                     @can('settings-navs.delete')
@@ -187,10 +169,8 @@
                                                             class="d-inline">
                                                             @csrf
                                                             @method('delete')
-                                                            <button type="submit" onclick="confirmDelete(this);" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
-                                                                <i class="material-symbols-outlined !text-md">
-                                                                    delete
-                                                                </i>
+                                                            <button type="submit" onclick="confirmDelete(this);" class="btn border-danger text-danger hover:bg-danger hover:text-white" id="customTooltip" data-text="Delete">
+                                                                    <i class="iconify tabler--trash text-xs"></i>
                                                             </button>
                                                         </form>
                                                     @endcan
@@ -206,9 +186,7 @@
                                                         <small>
                                                             <div class="flex items-center gap-2 mr-4 pl-8">
                                                                 <div class="col-span">
-                                                                    <i class="material-symbols-outlined text-green-500 !text-[16px]">
-                                                                        arrow_right
-                                                                    </i>
+                                                                    <i class="iconify tabler--dots text-green-500 text-xs"></i><i class="iconify tabler--dots text-green-500 text-xs"></i>
                                                                 </div> 
                                                                 <div class="title leading-none text-left">
                                                                     {{ $subChild->name ?? '-' }}
@@ -247,7 +225,7 @@
                                                         <small>
                                                             <div class="flex items-center gap-2 mr-4 pl-8">
                                                                 <div class="title leading-none text-left">
-                                                                    <span class="px-[8px] py-[3px] inline-block bg-{{ $subChild->active == 1 ? 'primary' : 'danger' }}-50 dark:bg-[#15203c] text-{{ $subChild->active == 1 ? 'primary' : 'danger' }}-500 rounded-sm font-medium text-xs">{{ $subChild->active == 1 ? 'Active' : 'Deactive' }}</span>
+                                                                    <span class="badge bg-{{ $subChild->active == 1 ? 'success' : 'danger' }} text-white font-medium text-xs">{{ $subChild->active == 1 ? 'Active' : 'Deactive' }}</span>
                                                                 </div>
                                                             </div>
                                                         </small>
@@ -256,7 +234,7 @@
                                                         <small>
                                                             <div class="flex items-center gap-2 mr-4 pl-8">
                                                                 <div class="title leading-none text-left">
-                                                                    <span class="px-[8px] py-[3px] inline-block bg-{{ $subChild->display == 1 ? 'primary' : 'danger' }}-50 dark:bg-[#15203c] text-{{ $subChild->display == 1 ? 'primary' : 'danger' }}-500 rounded-sm font-medium text-xs">{{ $subChild->display == 1 ? 'Display' : 'Hidden' }}</span>
+                                                                    <span class="badge bg-{{ $subChild->display == 1 ? 'success' : 'danger' }} text-white font-medium text-xs">{{ $subChild->display == 1 ? 'Display' : 'Hidden' }}</span>
                                                                 </div>
                                                             </div>
                                                         </small>
@@ -264,13 +242,11 @@
                                                     <td class="px-5 py-1 text-center">
                                                         <div class="flex items-center gap-[9px]">
                                                             @can('settings-navs.update')
-                                                                <button type="button" class="btn-modal-edit-nav text-warning-500 dark:text-warning-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit"
+                                                                <button type="button" class="btn-modal-edit-nav btn border-warning text-warning hover:bg-warning hover:text-white me-2" id="customTooltip" data-text="Edit"
                                                                 data-id="{{ $subChild->id }}"
                                                                 data-url-action="{{ route('settings.navs.update', $subChild->id) }}"
                                                                 data-url-get="{{ route('settings.navs.edit', $subChild->id) }}">
-                                                                    <i class="material-symbols-outlined !text-md">
-                                                                        edit
-                                                                    </i>
+                                                                        <i class="iconify tabler--edit text-xs"></i>
                                                                 </button>
                                                             @endcan
                                                             @can('settings-navs.delete')
@@ -278,10 +254,8 @@
                                                                     class="d-inline">
                                                                     @csrf
                                                                     @method('delete')
-                                                                    <button type="submit" onclick="confirmDelete(this);" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
-                                                                        <i class="material-symbols-outlined !text-md">
-                                                                            delete
-                                                                        </i>
+                                                                    <button type="submit" onclick="confirmDelete(this);" class="btn border-danger text-danger hover:bg-danger hover:text-white" id="customTooltip" data-text="Delete">
+                                                                            <i class="iconify tabler--trash text-xs"></i>
                                                                     </button>
                                                                 </form>
                                                             @endcan
@@ -296,41 +270,44 @@
                                 {{-- END: Menu Level 2 & 3 --}}
                             @endforeach
                         @endcan
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        {{-- END: Data Table --}}
     </div>
-    <!-- END: Data Table -->
 
-    {{-- START: Import Modal Add --}}
     @can('settings-navs.create')
         @include('admin.settings.navigations.partials.modal-add')
     @endcan
-    {{-- END: Import Modal Add --}}
 
-    {{-- START: Import Modal Edit --}}
     @can('settings-navs.update')
         @include('admin.settings.navigations.partials.modal-edit')
     @endcan
-    {{-- END: Import Modal Edit --}}
-    
-    {{-- START: Form Delete --}}
+
     @can('settings-navs.update')
-        <form action="" id="form-delete" method="POST" id="form-delete">
+        <form action="" id="form-delete" method="POST">
             @csrf
             @method('DELETE')
         </form>
     @endcan
-    {{-- END: Form Delete --}}
 @endsection
 
 @push('scripts')
     {{-- Start: Data Table --}}
-    {{-- DataTables JS --}}
-    <script src="{{ URL::asset('assets/admin/js/datatables-2.3.4/dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/admin/js/datatables-2.3.4/dataTables.tailwindcss.js') }}"></script>
+    <!-- Jquery for Datatables-->
+    <script src="{{ URL::asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
+
+    <!-- Datatables js -->
+    <script src="{{ URL::asset('assets/admin/plugins/datatables-dt/dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/admin/plugins/datatables-dt/dataTables.responsive.min.js') }}"></script>
+
+    <!-- Page js -->
+    <script src="{{ URL::asset('assets/admin/js/pages/datatables-column-search.js') }}"></script>
+    
+    <!-- Select2 Plugin Js -->
+    <script src="{{ URL::asset('assets/admin/plugins/select2/select2.min.js') }}"></script>
+
     <script>
         $('#data-table').DataTable({
             responsive: true,
@@ -340,10 +317,6 @@
     </script>
     {{-- End: Data Table --}}
 
-
-    {{-- Start: Select 2 --}}
-    <script src="{{ URL::asset('assets/admin/js/select2-4.1.0/select2.min.js') }}"></script>
-    {{-- Start: Select2 For Modal Add --}}
     <script>
         $(document).ready(function() {
             $('.select2').select2({
@@ -368,5 +341,3 @@
     {{-- End: Select2 for Modal Edit --}}
     {{-- End: Select 2 --}}
 @endpush
-
-

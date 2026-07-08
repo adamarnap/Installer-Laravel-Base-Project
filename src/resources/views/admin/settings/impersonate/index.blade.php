@@ -7,70 +7,58 @@
 @endsection
 
 @push('styles')
-    {{-- DataTables CSS --}}
-    <link rel="stylesheet" href="{{ URL::asset('assets/admin/css/datatables-2.3.4/datatables.tailwindcss.css') }}">
-    {{-- Select2 CSS --}}
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 
 @section('content')
-    <!-- START: Data Table -->
-    <div class="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
-        <div class="trezo-card-header mb-[20px] md:mb-[25px] sm:flex sm:items-center sm:justify-between">
-            <div class="trezo-card-title">
-                <h5 class="mb-0">
-                    Daftar @yield('title')
-                </h5>
-            </div>
-            {{-- START: Add New Data --}}
-            @can('settings-impersonate.create')
-                <div class="trezo-card-subtitle sm:flex sm:items-center">
-                    <div class="trezo-card-dropdown relative">
-                        <button class="trezo-card-dropdown-btn py-[5px] md:py-[6.5px] px-[12px] md:px-[19px] bg-primary-500 text-white transition-all hover:bg-primary-400 rounded-md border border-primary-500 hover:border-primary-400"
-                            type="button" id="modal-add-toggle">
-                            <i class="ri-menu-add-line"></i>
-                            Add New @yield('title')
-                        </button>
-                    </div>
+    <div class="grid grid-cols-1 gap-base">
+        <div class="card">
+            <div class="card-header  ">
+                <div>
+                    <h4 class="card-title mb-1.25">Daftar Pengguna untuk Impersonate</h4>
+                    <p class="text-default-400">Pilih pengguna aktif untuk masuk sementara sebagai akun tersebut.</p>
                 </div>
-            @endcan
-            {{-- END: Add New Data --}}
-        </div>
-        {{-- START: Data Table --}}
-        <div class="trezo-card-content" id="dataTable">
-            <div class="table-responsive overflow-x-auto p-2">
-                <table id="data-table" class="display stripe group" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th class="text-center">No.</th>
-                            <th class="ltr:!text-left rtl:!text-right">Nama</th>
-                            <th class="text-center">Email</th>
-                            <th class="text-center">Peran</th>
-                            <th class="text-center">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- Data will be loaded here by DataTables --}}
-                        <tr class="data-row">
-                            <td colspan="7">
-                                <div class="flex justify-center items-center">
-                                    <span class="text-gray-500 dark:text-zink-300">Data loading ...</span>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <span class="badge bg-primary/15 text-primary">DataTable AJAX</span>
+            </div>
+
+            <div class="card-body">
+                <div class="table-wrapper -mb-4">
+                    <table id="data-table" class="display stripe group" style="width:100%">
+                        <thead class="text-2xs font-semibold uppercase">
+                            <tr>
+                                <th class="text-center">No.</th>
+                                <th class="ltr:!text-left rtl:!text-right">Nama</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Peran</th>
+                                <th class="text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="data-row">
+                                <td colspan="5">
+                                    <div class="flex items-center justify-center py-6">
+                                        <span class="text-gray-500 dark:text-zink-300">Data loading ...</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        {{-- END: Data Table --}}
     </div>
-    <!-- END: Data Table -->
 @endsection
 
 @push('scripts')
     {{-- DataTables JS --}}
-    <script src="{{ URL::asset('assets/admin/js/datatables-2.3.4/dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/admin/js/datatables-2.3.4/dataTables.tailwindcss.js') }}"></script>
+    <!-- Jquery for Datatables-->
+    <script src="{{ URL::asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
+
+    <!-- Datatables js -->
+    <script src="{{ URL::asset('assets/admin/plugins/datatables-dt/dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/admin/plugins/datatables-dt/dataTables.responsive.min.js') }}"></script>
+
+    <!-- Page js -->
+    <script src="{{ URL::asset('assets/admin/js/pages/datatables-column-search.js') }}"></script>
     {{-- Start: Select 2 --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     {{-- Start: Select2 For Modal Add --}}
@@ -139,21 +127,21 @@
                         name: 'email',
                         searchable: true,
                         orderable: true,
-                        className: 'text-center'
+                        className: 'text-start'
                     },
                     {
                         data: 'role',
                         name: 'role',
                         searchable: true,
                         orderable: true,
-                        className: 'text-center'
+                        className: 'text-start'
                     },
                     {
                         data: 'aksi',
                         name: 'aksi',
                         searchable: false,
                         orderable: false,
-                        className: 'text-center'
+                        className: 'text-left'
                     },
                     // etc ...
                 ],
@@ -163,4 +151,3 @@
     </script>
     {{-- End: Implement datatable --}}
 @endpush
-

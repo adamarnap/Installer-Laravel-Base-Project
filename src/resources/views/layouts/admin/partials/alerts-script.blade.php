@@ -1,4 +1,8 @@
-<script src="{{ URL::asset('assets/admin/js/sweetalert2.min.js') }}"></script>
+<!-- Sweet Alerts js -->
+<script src="{{ URL::asset('assets/admin/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+
+<!-- Sweetalerts Plugin js -->
+<script src="{{ URL::asset('assets/admin/js/pages/plugins-sweetalerts.js') }}"></script>
 
 {{-- Alert Action Notification --}}
 <script>
@@ -53,7 +57,7 @@
     });
 </script>
 
-{{-- Alert Action Confirmation --}}
+{{-- Alert Action Confirmation Delete --}}
 <script>
     function confirmDelete(button) {
         event.preventDefault();
@@ -77,9 +81,8 @@
 
 {{-- Start action delete data --}}
 <script>
-    $(document).on('click', '#btn-delete', function(e) {
+    $(document).on('click', '.btn-delete-user', function(e) {
         e.preventDefault();
-        var id = $(this).data('id');
         var urlFormAction = $(this).data('url-action');
         Swal.fire({
             title: 'Yakin ingin menghapus?',

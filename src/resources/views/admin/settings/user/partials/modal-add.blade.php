@@ -1,52 +1,44 @@
-<div class="modal-add z-[999] fixed transition-all inset-0 overflow-x-hidden overflow-y-auto" id="modal-add">
-    <!-- popup-dialog: centered and responsive widths (mobile -> large) -->
-    <div class="popup-dialog flex transition-all items-center justify-center min-h-screen px-4 sm:px-6">
-        <div class="trezo-card w-full max-w-[95%] sm:max-w-[720px] md:max-w-[900px] lg:max-w-[1100px] bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md">
-            <div class="trezo-card-header bg-gray-50 dark:bg-[#15203c] mb-[20px] md:mb-[25px] flex items-center justify-between -mx-[20px] md:-mx-[25px] -mt-[20px] md:-mt-[25px] p-[20px] md:p-[25px] rounded-t-md">
-                <div class="trezo-card-title">
-                    <h5 class="mb-0">
-                        Add Data @yield('title')
-                    </h5>
+<div id="modal-add" class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 pointer-events-none fixed inset-0 z-80 hidden size-full overflow-x-hidden overflow-y-auto opacity-0 transition-all" role="dialog" tabindex="-1" aria-labelledby="modal-add-label">
+    <div class="hs-overlay-animation-target m-3 sm:mx-auto sm:w-full sm:max-w-lg">
+        <div class="border-default-300 pointer-events-auto flex flex-col rounded-md border card">
+            <div class="border-default-300 flex items-center justify-between border-b p-6">
+                <div>
+                    <h3 id="modal-add-label" class="text-base font-semibold">Add Data @yield('title')</h3>
+                    <p class="text-default-400 text-sm">Lengkapi detail pengguna baru di bawah ini.</p>
                 </div>
-                <div class="trezo-card-subtitle">
-                    <button type="button" class="text-[23px] transition-all leading-none text-black dark:text-white hover:text-primary-500" id="modal-add-toggle">
-                        <i class="ri-close-fill"></i>
-                    </button>
-                </div>
+
+                <button type="button" aria-label="Close" data-hs-overlay="#modal-add">
+                    <span class="sr-only">Close</span>
+                    <i class="iconify tabler--x text-xl"></i>
+                </button>
             </div>
-            {{-- START: Form Add --}}
+
             <form action="{{ route('settings.users.store') }}" method="POST">
                 @csrf
-                {{-- START: Modal Body --}}
-                <div class="trezo-card-content pb-[20px] md:pb-[25px]">
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-[20px] md:gap-[25px]">
-                        {{-- START: Name --}}
+                <div class="overflow-y-auto card-body">
+                    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
                         <div>
-                            <label class="mb-[12px] font-medium block">
+                            <label class="mb-[12px] block font-medium">
                                 Name
                                 <strong class="text-red-500">*</strong>
                             </label>
-                            <input type="text" name="name" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" placeholder="Insert user full name here ..." required>
+                            <input type="text" name="name" class="form-input" placeholder="Insert user full name here ..." required>
                         </div>
-                        {{-- END: Name --}}
 
-                        {{-- START: Email --}}
                         <div>
-                            <label class="mb-[12px] font-medium block">
+                            <label class="mb-[12px] block font-medium">
                                 Email
                                 <strong class="text-red-500">*</strong>
                             </label>
-                            <input type="email" name="email" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" placeholder="Insert user email here ..." required>
+                            <input type="email" name="email" class="form-input" placeholder="Insert user email here ..." required>
                         </div>
-                        {{-- END: Email --}}
-                        
-                        {{-- START: Role --}}
-                        <div>
-                            <label class="mb-[12px] font-medium block">
+
+                        <div class="sm:col-span-2">
+                            <label class="mb-[12px] block font-medium">
                                 Role
                                 <strong class="text-red-500">*</strong>
                             </label>
-                            <select name="roles[]" class="select2 h-[45px] rounded-md border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[13px] block w-full outline-0 cursor-pointer transition-all focus:border-primary-500" multiple required>
+                            <select name="roles[]" class="form-select select2" multiple required>
                                 @foreach ($roles as $role)
                                     @if ($role->name !== \App\Enums\RoleEnum::DEVELOPER->value)
                                         <option value="{{ $role->name }}">{{ $role->name }}</option>
@@ -54,57 +46,37 @@
                                 @endforeach
                             </select>
                         </div>
-                        {{-- END: Role --}}
-                    </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-[20px] md:gap-[25px] mt-5">
                         <div>
-                            <label class="mb-[12px] font-medium block">
+                            <label class="mb-[12px] block font-medium">
                                 Password
                                 <strong class="text-red-500">*</strong>
                             </label>
-                            <input type="password" name="password" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" placeholder="Insert user password here ..." required>
+                            <input type="password" name="password" class="form-input mb-3" placeholder="Insert user password here ..." required>
+                            <div class="password-bar mb-3"></div>
+                            <p class="text-default-400 text-2xs">Gunakan 8 atau lebih karakter dengan kombinasi huruf, angka & simbol.</p>
                         </div>
+
                         <div>
-                            <label class="mb-[12px] font-medium block">
+                            <label class="mb-[12px] block font-medium">
                                 Password Confirmation
                                 <strong class="text-red-500">*</strong>
                             </label>
-                            <input type="password" name="password_confirmation" class="h-[45px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] px-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" placeholder="Please retype user password for confirmation here ..." required>
+                            <input type="password" name="password_confirmation" class="form-input" placeholder="Please retype user password for confirmation here ..." required>
                         </div>
                     </div>
                 </div>
-                {{-- END: Modal Body --}}
-                {{-- START: Modal Footer --}}
-                <div class="trezo-card-footer flex items-center justify-between -mx-[20px] md:-mx-[25px] px-[20px] md:px-[25px] pt-[20px] md:pt-[25px] border-t border-gray-100 dark:border-[#172036]">
-                    <button class="inline-block py-[10px] px-[30px] bg-danger-500 text-white transition-all hover:bg-danger-400 rounded-md border border-danger-500 hover:border-danger-400" type="button" id="modal-add-toggle">
-                        Close
-                    </button>
-                    <button type="submit" class="inline-block py-[10px] px-[30px] bg-primary-500 text-white transition-all hover:bg-primary-400 rounded-md border border-primary-500 hover:border-primary-400 ltr:mr-[11px] rtl:ml-[11px] mb-[15px]" >
-                        Save Changes
-                    </button>
+
+                <div class="border-default-300 flex items-center justify-end border-t p-4">
+                    <button type="button" class="btn bg-light hover:text-primary m-1" data-hs-overlay="#modal-add">Close</button>
+                    <button type="submit" class="btn bg-primary hover:bg-primary-hover m-1 rounded text-white">Save Changes</button>
                 </div>
-                {{-- END: Modal Footer --}}
             </form>
-            {{-- END: Form Add --}}
         </div>
     </div>
 </div>
 
-
 @push('scripts')
-<script>
-    // Add New Popup Toggle
-    const addNewPopupID = document.getElementById("modal-add");
-    if (addNewPopupID) {
-        var buttons = document.querySelectorAll("#modal-add-toggle");
-        buttons.forEach(function(button) {
-            button.addEventListener("click", function() {
-                // Toggle class on the div
-                var divElement = document.getElementById("modal-add");
-                divElement.classList.toggle("active");
-            });
-        });
-    }
-</script>
+    <!-- Passwod Meter Plugin Js -->
+    <script src="{{ URL::asset('assets/admin/js/pages/plugins-pass-meter.js') }}"></script>
 @endpush

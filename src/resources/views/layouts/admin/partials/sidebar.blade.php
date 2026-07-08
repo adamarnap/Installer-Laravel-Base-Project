@@ -1,22 +1,89 @@
-<!-- Sidebar -->
-<div class="sidebar-area bg-white dark:bg-[#0c1427] fixed overflow-hidden z-[7] top-0 h-screen transition-all rounded-r-md" id="sidebar-area">
-    <div class="logo bg-white dark:bg-[#0c1427] border-b border-gray-100 dark:border-[#172036] px-[25px] pt-[19px] pb-[15px] absolute z-[2] right-0 top-0 left-0">
-        <a href="index.html" class="transition-none relative flex items-center">
-            <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo-icon">
-            <span class="font-bold text-black dark:text-white relative ltr:ml-[8px] rtl:mr-[8px] top-px text-xl">
-                {{ $prefs_composer['title'] }}
+<aside id="app-menu" class="app-menu">
+    <!-- Sidenav Menu Brand Logo -->
+    <a href="{{ route('dashboard') }}" class="logo-box">
+        <!-- Light Brand Logo -->
+        <span class="logo logo-light">
+            <span class="logo-lg">
+                <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo">
             </span>
-        </a>
-        <button type="button" class="burger-menu inline-block absolute z-[3] top-[24px] ltr:right-[25px] rtl:left-[25px] transition-all hover:text-primary-500" id="hide-sidebar-toggle2">
-            <i class="material-symbols-outlined">
-                close
-            </i>
+            <span class="logo-sm">
+                <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="small logo">
+            </span>
+        </span>
+
+        <!-- Dark Brand Logo -->
+        <span class="logo logo-dark">
+            <span class="logo-lg">
+                <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="dark logo">
+            </span>
+            <span class="logo-sm">
+                <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="small logo">
+            </span>
+        </span>
+    </a>
+
+    <!-- Sidenav Menu Toggle Button -->
+    <div class="h-topbar justify absolute end-5 top-0 flex items-center">
+        <button id="button-hover-toggle">
+            <span class="btn-on-hover-icon"></span>
         </button>
     </div>
-    <div class="pt-[89px] px-[25px] pb-[20px] h-screen" data-simplebar>
-        {{-- Start : List Menu --}}
-        @include('layouts.admin.partials.menu-list')
-        {{-- End : List Menu --}}
+
+    <!-- Sidenav Menu Item Link -->
+    <div class="relative min-h-0 grow">
+        <div class="size-full" data-simplebar="">
+
+            <div id="user-profile-settings" class="sidenav-user p-5 bg-[url(../images/user-bg-pattern.svg)]">
+                <div class="flex items-center justify-between">
+                    <div>
+                        {{-- Start Get Profile Photo --}}
+                        @php
+                            $profile_photo = Auth::user()?->userProfile?->profile_photo
+                            ? URL::asset('storage/' . Auth::user()->userProfile->profile_photo)
+                            : URL::asset('assets/admin/images/users/default.jpg');
+                        @endphp
+                        {{-- End Get Profile Photo --}}
+                        <a href="{{ route('profile.edit') }}" class="link-reset">
+                            <img src="{{ $profile_photo }}" alt="user-image" class="mb-3 size-9 rounded-full">
+                            <span class="sidenav-user-name block font-bold text-nowrap">{{ Auth::user()->name }}</span>
+                            <span class="text-xs font-semibold">{{ Auth::user()->email }}</span>
+                        </a>
+                    </div>
+
+                    <div>
+                        <!-- Profile Dropdown Button -->
+                        <div class="hs-dropdown relative inline-flex [--placement:bottom-right]">
+                            <button class="cursor-pointer" aria-haspopup="menu" aria-expanded="false"
+                                aria-label="Dropdown">
+                                <i class="iconify tabler--settings ms-1 size-6 align-middle"></i>
+                            </button>
+
+                            <div class="hs-dropdown-menu" role="menu" aria-orientation="vertical"
+                                aria-labelledby="hs-dropdown-with-icons">
+                                <!-- Header -->
+                                <div class="py-2 px-3.5">
+                                    <h6 class="text-xs">Hallo, {{ Auth::user()->name }}</h6>
+                                </div>
+
+                                <!-- My Profile -->
+                                <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                                    <i class="iconify tabler--user-circle me-1 align-middle text-lg"></i>
+                                    <span class="align-middle">Profile</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Start: List Menu --}}
+            <div id="sidenav-menu">
+                {{-- Start : Load List Menu --}}
+                @include('layouts.admin.partials.menu-list')
+                {{-- End : Load List Menu --}}
+            </div>
+            {{-- Start: End Menu --}}
+        </div>
     </div>
-</div>
+</aside>
 <!-- End Sidebar -->

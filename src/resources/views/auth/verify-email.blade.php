@@ -2,10 +2,46 @@
 
 @section('title', 'Verifikasi Email')
 
+@section('auth-form')
+
+    {{-- Start: Email verification has sended --}}
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <div class="mt-3 mb-9">
+            <div
+                class="bg-default-50 border-light mx-auto flex size-20 items-center justify-center rounded-full border border-dashed">
+                <img src="{{ URL::asset('assets/admin/images/checkmark.png') }}" alt="checkmark" class="size-16" />
+            </div>
+        </div>
+
+        <h4 class="mb-9 text-center text-lg font-bold">Email verifikasi telah dikirim</h4>
+
+        <div>
+            <button type="submit"
+                class="btn bg-primary w-full py-3 font-semibold text-white hover:bg-primary-hover">Kembali ke Halaman Beranda</button>
+        </div>
+    </form>
+    {{-- End: Email verification has sended --}}
+
+    {{-- Start: Resend Email Verification --}}
+    <p class="text-default-400 mt-7.5">
+    Belum menerima email konfirmasi reset password? Cek folder spam atau 
+    
+        <form method="POST" action="{{ route('verification.send') }}" class="inline-block">
+            @csrf
+            <button type="submit" class="text-primary font-semibold underline underline-offset-3 hover:text-primary/80 transition-colors duration-200 inline-flex items-center gap-1 text-center">
+
+                Kirim ulang email verifikasi
+            </button>
+        </form>
+    </p>
+    {{-- End: Resend Email Verification --}}
+@endsection
+
 @section('content')
     <!-- Light/Dark Mode Button -->
     <button type="button" class="light-dark-toggle leading-none inline-block transition-all text-[#fe7a36] absolute top-[20px] md:top-[25px] ltr:right-[20px] rtl:left-[20px] ltr:md:right-[25px] rtl:md:left-[25px]" id="light-dark-toggle">
-        <i class="material-symbols-outlined !text-[20px] md:!text-[22px]">
+        <i class="iconify tabler--{icon_name} text-xs !text-[20px] md:!text-[22px]">
             light_mode
         </i>
     </button>
@@ -43,7 +79,7 @@
                             @csrf
                             <button type="submit" class="md:text-md block w-full text-center transition-all rounded-md font-medium mt-[20px] md:mt-[25px] lg:mt-[30px] py-[12px] px-[25px] text-white bg-primary-500 hover:bg-primary-400">
                                 <span class="flex items-center justify-center gap-[5px]">
-                                    <i class="material-symbols-outlined">
+                                    <i class="iconify tabler--{icon_name} text-xs">
                                         article_shortcut
                                     </i>
                                     Kirim ulang email verifikasi
@@ -58,7 +94,7 @@
                         @csrf
                         <button type="submit" class="md:text-md block w-full text-center transition-all rounded-md font-medium mt-[20px] md:mt-[25px] lg:mt-[30px] py-[12px] px-[25px] text-white bg-primary-500 hover:bg-primary-400">
                             <span class="flex items-center justify-center gap-[5px]">
-                                <i class="material-symbols-outlined">
+                                <i class="iconify tabler--{icon_name} text-xs">
                                     login
                                 </i>
                                 Kembali ke Beranda

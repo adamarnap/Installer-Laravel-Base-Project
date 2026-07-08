@@ -55,7 +55,7 @@
 
     <!-- Light/Dark Mode Button -->
     <button type="button" class="light-dark-toggle leading-none inline-block transition-all text-[#fe7a36] absolute top-[20px] md:top-[25px] ltr:right-[20px] rtl:left-[20px] ltr:md:right-[25px] rtl:md:left-[25px]" id="light-dark-toggle">
-        <i class="material-symbols-outlined !text-[20px] md:!text-[22px]">
+        <i class="iconify tabler--{icon_name} text-xs !text-[20px] md:!text-[22px]">
             light_mode
         </i>
     </button>
@@ -74,7 +74,7 @@
         // Light/Dark Mode Toggle
         const toggle = document.getElementById('light-dark-toggle');
         const html = document.documentElement;
-        const icon = toggle.querySelector('.material-symbols-outlined');
+        const icon = toggle.querySelector('.iconify tabler--{icon_name} text-xs');
         
         // Check for saved theme preference or default to light mode
         const currentTheme = localStorage.getItem('theme') || 'light';

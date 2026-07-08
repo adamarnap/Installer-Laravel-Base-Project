@@ -13,50 +13,44 @@
 
 
 @section('content')
-    <!-- START: Data Table -->
-    <div class="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
-        <div class="trezo-card-header mb-[20px] md:mb-[25px] sm:flex sm:items-center sm:justify-between">
-            <div class="trezo-card-title">
-                <h5 class="mb-0">
-                    Daftar @yield('title')
-                </h5>
-            </div>
-            {{-- START: Tambah Data --}}
-            @can('settings-users.create')
-                <div class="trezo-card-subtitle sm:flex sm:items-center">
-                    <div class="trezo-card-dropdown relative">
-                        <button data-url="{{ route('settings.roles.index') }}" class="trezo-card-dropdown-btn py-[5px] md:py-[6.5px] px-[12px] md:px-[19px] bg-gray-500 text-white transition-all hover:bg-gray-400 rounded-md border border-gray-500 hover:border-gray-400" 
-                            type="button" onclick="window.location.href=this.getAttribute('data-url')">
-                            <i class="ri-arrow-go-back-line"></i>
-                            Back
-                        </button>
+    <div class="grid grid-cols-1 gap-base">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Daftar @yield('title')</h4>
 
-                        <button class="trezo-card-dropdown-btn py-[5px] md:py-[6.5px] px-[12px] md:px-[19px] bg-danger-500 text-white transition-all hover:bg-danger-400 rounded-md border border-danger-500 hover:border-danger-400" type="submit" onclick="submitForm()">
-                            <i class="ri-save-line"></i>
+                @can('settings-roles.update')
+                    <div class="flex items-center gap-2">
+                        <a href="{{ route('settings.roles.index') }}" class="btn bg-dark text-white hover:bg-warning">
+                            <i class="iconify tabler--arrow-back-up text-xs"></i>
+                            Back
+                        </a>
+
+                        <button type="button" class="btn bg-danger text-white hover:bg-danger-hover" onclick="submitForm()">
+                            <i class="iconify tabler--device-floppy text-xs"></i>
                             Save @yield('title')
                         </button>
                     </div>
-                </div>
-            @endcan
-            {{-- END: Tambah Data --}}
-        </div>
-        {{-- START: Data Table --}}
-        <div class="trezo-card-content" id="dataTable">
-            <div class="table-responsive overflow-x-auto p-2">
-                {{-- Start: Form Update Permissions --}}
+                @endcan
+            </div>
+
+            <div class="card-body">
                 <form action="{{ route('settings.roles.permissions', $role->id) }}" id="permissions-form" method="POST">
                     @csrf
                     @method('PUT')
-                    <table id="data-table" class="display stripe group" style="width:100%">
-                        <thead>
-                            <th class="text-center">Menu</th>
-                            <th class="text-center">All</th>
-                            <th class="text-center">Read</th>
-                            <th class="text-center">Create</th>
-                            <th class="text-center">Update</th>
-                            <th class="text-center">Delete</th>
-                        </thead>
-                        <tbody>
+
+                    <div class="table-wrapper -mb-4">
+                        <table id="data-table" class="table table-striped group">
+                            <thead class="thead-sm uppercase text-2xs">
+                                <tr>
+                                    <th class="text-center">Menu</th>
+                                    <th class="text-center">All</th>
+                                    <th class="text-center">Read</th>
+                                    <th class="text-center">Create</th>
+                                    <th class="text-center">Update</th>
+                                    <th class="text-center">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             @can('settings-roles.read')    
                                 @forelse ($navigations as $nav)
                                     {{-- Start single & parent navs --}}
@@ -64,9 +58,7 @@
                                         {{-- Start Nav Icon & Name --}}
                                         <td class="text-left align-middle">
                                             <div class="flex items-center gap-2">
-                                                <i class="material-symbols-outlined transition-all text-gray-500 dark:text-gray-400 !text-[22px] leading-none relative -top-px">
-                                                    {{ $nav['icon'] }}
-                                                </i>
+                                                <i class="iconify tabler--{{ str_replace('_', '-', $nav['icon']) }} transition-all text-gray-500 dark:text-gray-400 text-xs leading-none relative -top-px"></i>
                                                 <span class="title leading-none text-left">
                                                     {{ $nav['name'] }}
                                                 </span>
@@ -136,9 +128,7 @@
                                                 <td class="text-left align-middle border-l-4 border-blue-500">
                                                     <div class="flex items-center gap-2 mr-4 pl-4">
                                                         <div class="col-span">
-                                                            <i class="material-symbols-outlined text-blue-500 !text-[18px]">
-                                                                subdirectory_arrow_right
-                                                            </i>
+                                                            <i class="iconify tabler--dots text-blue-500 text-xs"></i>
                                                         </div> 
                                                         <div class="title leading-none text-left font-medium">
                                                             {{ $child->name ?? '-' }}
@@ -208,9 +198,7 @@
                                                         <td class="text-left align-middle border-l-4 border-green-500">
                                                             <div class="flex items-center gap-2 mr-4 pl-8">
                                                                 <div class="col-span">
-                                                                    <i class="material-symbols-outlined text-green-500 !text-[16px]">
-                                                                        arrow_right
-                                                                    </i>
+                                                                    <i class="iconify tabler--dots text-blue-500 text-xs"></i><i class="iconify tabler--dots text-blue-500 text-xs"></i>
                                                                 </div> 
                                                                 <div class="title leading-none text-left">
                                                                     {{ $subChild->name ?? '-' }}
@@ -279,19 +267,17 @@
                                     {{-- End child navs --}}
                                 @empty
                                     <tr>
-                                        <td colspan="4" class="text-center">Tidak ada menu ditemukan</td>
+                                        <td colspan="6" class="text-center">Tidak ada menu ditemukan</td>
                                     </tr>
                                 @endforelse
                             @endcan
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </form>
-                {{-- End: Form Update Permissions --}}
             </div>
         </div>
-        {{-- END: Data Table --}}
     </div>
-    <!-- END: Data Table -->
 @endsection
 
 @push('scripts')
@@ -375,9 +361,5 @@
             });
         });
 
-        // Back button
     </script>
 @endpush
-
-
-

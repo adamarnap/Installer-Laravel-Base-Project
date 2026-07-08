@@ -48,8 +48,8 @@ class ImpersonateService
                         ' . csrf_field() . '
                         <button type="submit" 
                                 title="Impersonate pengguna" 
-                                class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 hover:text-red-700 rounded-lg transition-all duration-200 text-sm font-medium border border-red-200 hover:border-red-300 shadow-sm hover:shadow">
-                            <i class="material-symbols-outlined text-base">domino_mask</i>
+                                class="btn border-danger text-danger hover:bg-danger hover:text-white">
+                            <i class="iconify tabler--lock text-xs"></i>
                             <span>Impersonate</span>
                         </button>
                     </form>';

@@ -7,90 +7,85 @@
 @endsection
 
 @push('styles')
-    {{-- DataTables CSS --}}
-    <link rel="stylesheet" href="{{ URL::asset('assets/admin/css/datatables-2.3.4/datatables.tailwindcss.css') }}">
-    {{-- Select2 CSS --}}
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 
 @section('content')
-    <!-- START: Data Table -->
-    <div class="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
-        <div class="trezo-card-header mb-[20px] md:mb-[25px] sm:flex sm:items-center sm:justify-between">
-            <div class="trezo-card-title">
-                <h5 class="mb-0">
-                    Daftar @yield('title')
-                </h5>
-            </div>
-            {{-- START: Add New Data --}}
-            @can('settings-users.create')
-                <div class="trezo-card-subtitle sm:flex sm:items-center">
-                    <div class="trezo-card-dropdown relative">
-                        <button class="trezo-card-dropdown-btn py-[5px] md:py-[6.5px] px-[12px] md:px-[19px] bg-primary-500 text-white transition-all hover:bg-primary-400 rounded-md border border-primary-500 hover:border-primary-400"
-                            type="button" id="modal-add-toggle">
-                            <i class="ri-menu-add-line"></i>
-                            Add New @yield('title')
-                        </button>
-                    </div>
+    <div class="grid grid-cols-1 gap-base">
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <h4 class="card-title mb-1.25">Daftar Pengguna</h4>
+                    <p class="text-default-400">Kelola pengguna, peran, status, dan aksi impersonate dari satu halaman.</p>
                 </div>
-            @endcan
-            {{-- END: Add New Data --}}
-        </div>
-        {{-- START: Data Table --}}
-        <div class="trezo-card-content" id="dataTable">
-            <div class="table-responsive overflow-x-auto p-2">
-                <table id="data-table" class="display stripe group" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th class="text-center">No.</th>
-                            <th class="ltr:!text-left rtl:!text-right">Nama</th>
-                            <th class="text-center">Email</th>
-                            <th class="text-center">Peran</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Dibuat Pada</th>
-                            <th class="text-center">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- Data will be loaded here by DataTables --}}
-                        <tr class="data-row">
-                            <td colspan="7">
-                                <div class="flex justify-center items-center">
-                                    <span class="text-gray-500 dark:text-zink-300">Data loading ...</span>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+
+                @can('settings-users.create')
+                    <button type="button"
+                        class="btn bg-primary hover:bg-primary-hover rounded text-white"
+                        id="modal-add-toggle"
+                        aria-haspopup="dialog"
+                        aria-expanded="false"
+                        aria-controls="modal-add"
+                        data-hs-overlay="#modal-add">
+                        <i class="iconify tabler--plus text-xs"></i>
+                        Add New @yield('title')
+                    </button>
+                @endcan
+            </div>
+
+            <div class="card-body">
+                <div class="table-wrapper -mb-4">
+                    <table id="data-table" class="table table-striped" style="width:100%">
+                        <thead class="text-2xs font-semibold uppercase">
+                            <tr>
+                                <th class="text-center">No.</th>
+                                <th class="ltr:!text-left rtl:!text-right">Nama</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Peran</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Dibuat Pada</th>
+                                <th class="text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="data-row">
+                                <td colspan="7">
+                                    <div class="flex items-center justify-center py-6">
+                                        <span class="text-gray-500 dark:text-zink-300">Data loading ...</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        {{-- END: Data Table --}}
     </div>
-    <!-- END: Data Table -->
 
-    {{-- START: Import Modal Add --}}
     @include('admin.settings.user.partials.modal-add')
-    {{-- END: Import Modal Add --}}
-
-    {{-- START: Import Modal Edit --}}
     @include('admin.settings.user.partials.modal-edit')
-    {{-- END: Import Modal Edit --}}
 
-    {{-- START: Form Delete --}}
-    <form action="" id="form-delete" method="POST" id="form-delete">
-        @csrf
-        @method('DELETE')
-    </form>
-    {{-- END: Form Delete --}}
+    @can('settings-users.delete')
+        <form action="" id="form-delete" method="POST">
+            @csrf
+            @method('DELETE')
+        </form>
+    @endcan
 @endsection
 
 @push('scripts')
-    {{-- DataTables JS --}}
-    <script src="{{ URL::asset('assets/admin/js/datatables-2.3.4/dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/admin/js/datatables-2.3.4/dataTables.tailwindcss.js') }}"></script>
-    {{-- Start: Select 2 --}}
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    {{-- Start: Select2 For Modal Add --}}
+
+    <script src="{{ URL::asset('assets/admin/plugins/datatables-dt/dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/admin/plugins/datatables-dt/dataTables.responsive.min.js') }}"></script>
+
+    {{-- <script src="{{ URL::asset('assets/admin/js/pages/datatables-basic.js') }}"></script> --}}
+
+    <!-- Select2 Plugin Js -->
+    <script src="{{ URL::asset('assets/admin/plugins/select2/select2.min.js') }}"></script>
+
+    <!--Select 2 Demo js-->
+    <script src="{{ URL::asset('assets/admin/js/pages/form-select2.js') }}"></script>
+
+
     <script>
         $(document).ready(function() {
             $('.select2').select2({
@@ -127,21 +122,33 @@
 
         function loadTable(filter) {
             var tbl = $('#data-table').DataTable({
+                language: {
+                    paginate: {
+                        first: '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7l-5 5l5 5" /><path d="M17 7l-5 5l5 5" /></svg>',
+                        previous:
+                            '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>',
+                        next: '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>',
+                        last: '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7l5 5l-5 5" /><path d="M13 7l5 5l-5 5" /></svg>',
+                    },
+                },
                 processing: true,
                 serverSide: true,
-                // language: {
-                //     url: "{{ asset('assets/admin/js/datatables/lang/id.json') }}",
-                // },
+                ordering: true,
                 ajax: {
                     url: "{{ route('settings.users.index') }}",
                     type: 'GET',
+                },
+                drawCallback: function() {
+                    if (window.HSStaticMethods) {
+                        window.HSStaticMethods.autoInit();
+                    }
                 },
                 columns: [
                     {
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
-                        searchable: false,
                         orderable: false,
+                        searchable: false,
                         className: 'text-center'
                     },
                     {
@@ -193,4 +200,3 @@
     </script>
     {{-- End: Implement datatable --}}
 @endpush
-

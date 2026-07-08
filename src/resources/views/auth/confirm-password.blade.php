@@ -5,7 +5,7 @@
 @section('content')
     <!-- Light/Dark Mode Button -->
     <button type="button" class="light-dark-toggle leading-none inline-block transition-all text-[#fe7a36] absolute top-[20px] md:top-[25px] ltr:right-[20px] rtl:left-[20px] ltr:md:right-[25px] rtl:md:left-[25px]" id="light-dark-toggle">
-        <i class="material-symbols-outlined !text-[20px] md:!text-[22px]">
+        <i class="iconify tabler--{icon_name} text-xs !text-[20px] md:!text-[22px]">
             light_mode
         </i>
     </button>
@@ -72,7 +72,7 @@
                     </div>
                     <button type="submit" class="md:text-md block w-full text-center transition-all rounded-md font-medium mt-[20px] md:mt-[25px] py-[12px] px-[25px] text-white bg-primary-500 hover:bg-primary-400">
                         <span class="flex items-center justify-center gap-[5px]">
-                            <i class="material-symbols-outlined">
+                            <i class="iconify tabler--{icon_name} text-xs">
                                 autorenew
                             </i>
                             Kirim

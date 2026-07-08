@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Events\AssignRoleToFirstUser;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Auth\Events\Registered;
+use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
@@ -26,7 +26,7 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
@@ -36,10 +36,6 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        
-        // Passing email to view for verification
-        session()->flash('email-for-verification', $request->email);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -47,12 +43,6 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-        
-
-        // Assign role to first user
-        if (User::count() === 1) {
-            event(new AssignRoleToFirstUser($user));
-        }
 
         Auth::login($user);
 
