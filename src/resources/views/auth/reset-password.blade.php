@@ -52,6 +52,8 @@
 
                     {{-- START: Form reset email --}}
                     <form method="POST" action="{{ route('password.store') }}">
+                        @csrf
+                        <input type="hidden" name="token" value="{{ $request->route('token') }}">
                         <div class="mb-[15px] relative" id="passwordHideShow2">
                             <label class="mb-[10px] md:mb-[12px] text-black dark:text-white font-medium block">
                                 Email
