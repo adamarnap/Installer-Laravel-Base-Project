@@ -1,1 +1,0 @@
-import"../css/app.css";import"preline";import"simplebar";import{createIcons,icons}from"lucide";createIcons({icons:icons});import moment from"moment";window.moment=moment;
