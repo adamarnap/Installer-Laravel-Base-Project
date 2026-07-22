@@ -1,1205 +1,247 @@
-            <main>
-                <!-- Page Title Start -->
-                <div class="page-title-head">
-                    <h4 class="page-main-title">Basic Elements</h4>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-x-5">
 
-                    <div class="hidden items-center gap-1.25 text-sm md:flex">
-
-                        <a href="#" class="text-sm">Paces</a>
-
-                        <i class="iconify tabler--chevron-right text-sm rtl:rotate-180"></i>
-
-                        <a href="#" class="text-sm">Forms</a>
-
-                        <i class="iconify tabler--chevron-right text-sm rtl:rotate-180"></i>
-
-                        <a href="#" class="text-default-400 text-sm " aria-current="page">Basic Elements</a>
-                    </div>
-                </div>
-                <!-- Page Title End -->
-
-                <div class="container-fluid">
-                    <div class="grid grid-cols-1 gap-base">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Input Textfield Type</h4>
-                            </div>
-
-                            <div class="card-body">
-                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-base">
-                                    <div>
-                                        <!-- Simple Input -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="simpleinput" class="form-label py-2 mb-0!">Simple Input</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="text" id="simpleinput" class="form-input" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Floating Input -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Floating Input</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="relative">
-                                                    <input type="text" id="floatingInput" placeholder="" class="peer border-default-300 focus:border-default-500 block w-full rounded bg-transparent p-4 not-placeholder-shown:pt-6 not-placeholder-shown:pb-2 placeholder:text-transparent autofill:pt-6 autofill:pb-2 focus:pt-6 focus:pb-2 focus:ring-0 sm:text-sm" />
-                                                    <label for="floatingInput" class="text-default-500 peer-placeholder-shown:text-default-400 peer-placeholder-shown: absolute start-3 top-2 transition-all peer-placeholder-shown:top-3.5 peer-focus:top-1.5 peer-focus:border-0 peer-focus:text-xs peer-focus:ring-0">Name</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Validation Input -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="validInput" class="form-label py-2 mb-0!">Valid Input</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="relative">
-                                                    <input type="text" id="validInput" name="hs-validation-name-success" class="form-input border-success!" required="" aria-describedby="hs-validation-name-success-helper" />
-                                                    <div class="pointer-events-none absolute inset-y-0 end-0 flex items-center pe-3">
-                                                        <i class="iconify tabler--check text-success text-base"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Placeholder -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-rounded" class="form-label py-2 mb-0!">Rounded Input</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="text" id="example-rounded" class="form-input rounded-full!" placeholder="Rounded Input" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Text Area -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-textarea" class="form-label py-2 mb-0!">Text area</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <textarea id="example-textarea" rows="5" class="form-textarea"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Disabled -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-disable" class="form-label py-2 mb-0!">Disabled</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="text" id="example-disable" value="Disabled value" disabled class="form-input" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Helping Text -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-helping" class="form-label py-2 mb-0!">Helping text</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="text" id="example-helping" placeholder="Helping text" class="form-input" />
-                                                <small class="text-default-400 mt-1 block text-xs">A block of help text that breaks onto a new line and may extend beyond one line.</small>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Default select -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="discount" class="form-label py-2 mb-0!">Select with Icon</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="input-icon-group">
-                                                    <i class="iconify tabler--discount input-icon"></i>
-                                                    <select id="discount" class="form-input">
-                                                        <option selected>Choose Discount</option>
-                                                        <option>No Discount</option>
-                                                        <option>Flat Discount</option>
-                                                        <option>Percentage Discount</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <!-- with Label Input -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Label Input</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div>
-                                                    <label for="labelInputInput1" class="form-label">Label Input</label>
-                                                    <input type="email" class="form-input" id="labelInputInput1" placeholder="name&#64;example.com" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Search Input -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="SearchInput" class="form-label py-2 mb-0!">Search Style</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="input-icon-group">
-                                                    <i class="iconify tabler--search input-icon"></i>
-                                                    <input type="search" id="SearchInput" placeholder="Search for something..." class="form-input" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Invalidation Input -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="inValidationInput" class="form-label py-2 mb-0!">Invalid Input</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="input-icon-group">
-                                                    <input type="text" id="inValidationInput" name="hs-validation-name-success" class="form-input border-danger" required="" aria-describedby="hs-validation-name-success-helper" />
-                                                    <i class="iconify tabler--info-circle text-danger! input-icon text-base"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Placeholder -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-placeholder" class="form-label py-2 mb-0!">Placeholder</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="text" id="example-placeholder" class="form-input" placeholder="placeholder" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Readonly -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-readonly" class="form-label py-2 mb-0!">Readonly</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="text" id="example-readonly" value="Readonly value" readonly class="form-input cursor-not-allowed" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Static Control -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-static" class="form-label py-2 mb-0!">Static control</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="text" id="example-static" value="email&#64;example.com" readonly class="form-input border-transparent! bg-transparent!" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Default select -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Default Select</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <select class="form-select">
-                                                    <option selected>Open this select menu</option>
-                                                    <option>One</option>
-                                                    <option>Two</option>
-                                                    <option>Three</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Multiple Select -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-multiselect" class="form-label py-2 mb-0!">Multiple Select</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <select id="example-multiselect" multiple class="form-input h-auto!">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="xl:col-span-12">
+        <div class="card border border-borderColor bg-white rounded mb-5">
+            <div class="card-header border-b border-borderColor p-4">
+                <h5 class="card-title">Input Types</h5>
+            </div>
+            <div class="card-body p-4">
+            
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-x-5">
+                
+                    <div class="lg:col-span-6">
+                        <div class="mb-3">
+                            <label for="input-label" class="form-label">Text</label>
+                            <input type="text" class="form-control" id="input">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-label" class="form-label">Form Input With Label</label>
+                            <input type="text" class="form-control" id="input-label">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-placeholder" class="form-label">Form Input With Placeholder</label>
+                            <input type="text" class="form-control" id="input-placeholder" placeholder="Placeholder">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-text" class="form-label">Type Text</label>
+                            <input type="text" class="form-control" id="input-text" placeholder="Text">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-number" class="form-label">Type Number</label>
+                            <input type="number" class="form-control" id="input-number" placeholder="Number">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-password" class="form-label">Type Password</label>
+                            <input type="password" class="form-control" id="input-password" placeholder="Password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-email" class="form-label">Type Email</label>
+                            <input type="email" class="form-control" id="input-email" placeholder="email@xyz.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-tel" class="form-label">Type Tel</label>
+                            <input type="tel" class="form-control" id="input-tel" placeholder="+1100-2031-1233">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-date" class="form-label">Type Date</label>
+                            <input type="date" class="form-control" id="input-date">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-week" class="form-label">Type Week</label>
+                            <input type="week" class="form-control" id="input-week">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-month" class="form-label">Type Month</label>
+                            <input type="month" class="form-control" id="input-month">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-time" class="form-label">Type Time</label>
+                            <input type="time" class="form-control" id="input-time">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-datetime-local" class="form-label">Type Datetime Local</label>
+                            <input type="datetime-local" class="form-control" id="input-datetime-local">
+                        </div>
+                        <div class="mb-3">
+                            <label for="text-area" class="form-label">Textarea</label>
+                            <textarea class="form-control" id="text-area" rows="4"></textarea>
                         </div>
 
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Input Types</h4>
-                            </div>
-
-                            <div class="card-body">
-                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-base">
-                                    <div>
-                                        <!-- Email Input -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-email" class="form-label py-2 mb-0!">Email</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="email" id="example-email" placeholder="Email" class="form-input" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Show/Hide Password -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="password" class="form-label py-2 mb-0!">Show/Hide Password</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="relative flex items-center">
-                                                    <input id="password" type="password" class="form-input w-full" placeholder="Enter password" />
-                                                    <button type="button" data-hs-toggle-password='{"target":"#password"}' class="bg-default-100 border-default-300 absolute inset-y-0 end-0 flex items-center rounded rounded-s-none! border px-3 py-1.75">
-                                                        <i class="iconify tabler--eye hs-password-active:hidden block text-sm"></i>
-                                                        <i class="iconify tabler--eye-off hs-password-active:block hidden text-sm"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Time -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-time" class="form-label py-2 mb-0!">Time</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="time" id="example-time" class="form-input" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Number -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-number" class="form-label py-2 mb-0!">Number</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input id="example-number" type="number" name="number" class="form-input" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Range -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-range" class="form-label py-2 mb-0!">Range</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="range" class="form-range" id="example-range" min="0" max="100" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <!-- Password -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-password" class="form-label py-2 mb-0!">Password</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="password" id="example-password" value="password" class="form-input" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Month -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-month" class="form-label py-2 mb-0!">Month</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="month" id="example-month" class="form-input" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Week -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-week" class="form-label py-2 mb-0!">Week</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input id="example-week" type="week" name="week" class="form-input" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Color -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="example-color" class="form-label py-2 mb-0!">Color</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="color" id="example-color" value="#2563eb" class="form-input h-10 p-1!" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Input Group</h4>
-                            </div>
-
-                            <div class="card-body">
-                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-base">
-                                    <div>
-                                        <!-- Basic Input Group -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Username</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="input-group">
-                                                    <span class="input-group-text">&#64;</span>
-                                                    <input type="text" placeholder="Username" class="form-input" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Currency Input Group -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Amount</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="input-group">
-                                                    <span class="input-group-text">$</span>
-                                                    <input type="text" class="form-input" />
-                                                    <span class="input-group-text">.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Textarea with Input Group -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Textarea</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="input-group">
-                                                    <span class="input-group-text">With textarea</span>
-                                                    <textarea rows="2" class="form-textarea"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Flex-nowrap Input Group -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="mt-2 block font-semibold">Wrapping</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="input-group">
-                                                    <span class="input-group-text">&#64;</span>
-                                                    <input type="text" placeholder="Username" class="form-input" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Input group with text input and button -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Input + Button</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="input-group">
-                                                    <input type="text" placeholder="Recipient's username" class="form-input" />
-                                                    <button type="button" class="btn bg-dark text-white hover:bg-dark-hover">Button</button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Multiple Files  -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="formFileMultiple01" class="form-label py-2 mb-0!">Multiple Files</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="file" name="file-input" id="formFileMultiple01" class="form-input" multiple />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <!-- Email-like Input Group -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Recipient</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="input-group">
-                                                    <input type="text" placeholder="Recipient's username" class="form-input" />
-                                                    <span class="input-group-text">&#64;example.com</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Multi-field Input Group -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Email Login</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="input-group">
-                                                    <input type="text" placeholder="Username" class="form-input" />
-                                                    <span class="input-group-text">&#64;</span>
-                                                    <input type="text" placeholder="Server" class="form-input" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Vanity URL Input Group -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Vanity URL</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="input-group">
-                                                    <span class="input-group-text text-nowrap">https://example.com/users/</span>
-                                                    <input type="text" class="form-input" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Input group with dropdown and text input -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="mt-2 block font-semibold">Dropdown + Input</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="input-group">
-                                                    <div class="hs-dropdown relative inline-flex">
-                                                        <button type="button" class="hs-dropdown-toggle btn bg-primary rounded-e-none text-white hover:bg-primary-hover" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">Dropdown <i class="iconify tabler--chevron-down text-base text-white"></i></button>
-
-                                                        <div class="hs-dropdown-menu" role="menu" aria-orientation="vertical">
-                                                            <div class="space-y-0.5">
-                                                                <a class="dropdown-item" href="#!">Action</a>
-
-                                                                <a class="dropdown-item active" href="#!">Another action</a>
-
-                                                                <a class="dropdown-item" href="#!">Something else here</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <input type="text" class="form-input" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- File input -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="inputGroupFile04" class="form-label py-2 mb-0!">File Input</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="file" name="file-input" id="inputGroupFile04" class="form-input" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Input Group Select</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="input-group">
-                                                    <span class="input-group-text">Options</span>
-                                                    <select class="form-input rounded-s-none!">
-                                                        <option selected>Choose...</option>
-                                                        <option>One</option>
-                                                        <option>Two</option>
-                                                        <option>Three</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Floating Labels</h4>
-                            </div>
-
-                            <div class="card-body">
-                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-base">
-                                    <div>
-                                        <!-- Floating Input -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Email address</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <!-- Floating Input -->
-                                                <div class="relative">
-                                                    <input type="email" id="hs-floating-input-email" class="peer border-default-300 focus:border-default-500 block w-full rounded bg-transparent p-4 not-placeholder-shown:pt-6 not-placeholder-shown:pb-2 placeholder:text-transparent autofill:pt-6 autofill:pb-2 focus:pt-6 focus:pb-2 focus:ring-0 sm:text-sm" placeholder="you&#64;email.com" />
-                                                    <label for="hs-floating-input-email" class="peer-focus:text-default-500 peer-not-placeholder-shown:text-default-500 pointer-events-none absolute start-0 top-0 h-full origin-top-left truncate border border-transparent p-4 transition duration-100 ease-in-out peer-not-placeholder-shown:translate-x-0.5 peer-not-placeholder-shown:-translate-y-1.5 peer-not-placeholder-shown:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:scale-90 sm:text-sm">Email</label>
-                                                </div>
-                                                <!-- End Floating Input -->
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Floating Textarea -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Comments</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="relative">
-                                                    <textarea id="floatingTextarea" rows="4" placeholder="" class="peer border-default-300 focus:border-default-500 block w-full rounded bg-transparent p-4 not-placeholder-shown:pt-6 not-placeholder-shown:pb-2 placeholder:text-transparent autofill:pt-6 autofill:pb-2 focus:pt-6 focus:pb-2 focus:ring-0 sm:text-sm"></textarea>
-                                                    <label for="floatingTextarea" class="peer-focus:text-default-500 peer-not-placeholder-shown:text-default-500 pointer-events-none absolute start-0 top-0 h-full origin-top-left truncate border border-transparent p-4 transition duration-100 ease-in-out peer-not-placeholder-shown:translate-x-0.5 peer-not-placeholder-shown:-translate-y-1.5 peer-not-placeholder-shown:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:scale-90 sm:text-sm">Comments</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <!-- Floating Password -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Password</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="relative">
-                                                    <input type="password" id="floatingPassword" placeholder="" class="peer border-default-300 focus:border-default-500 block w-full rounded bg-transparent p-4 not-placeholder-shown:pt-6 not-placeholder-shown:pb-2 placeholder:text-transparent autofill:pt-6 autofill:pb-2 focus:pt-6 focus:pb-2 focus:ring-0 sm:text-sm" />
-                                                    <label for="floatingPassword" class="peer-focus:text-default-500 peer-not-placeholder-shown:text-default-500 pointer-events-none absolute start-0 top-0 h-full origin-top-left truncate border border-transparent p-4 transition duration-100 ease-in-out peer-not-placeholder-shown:translate-x-0.5 peer-not-placeholder-shown:-translate-y-1.5 peer-not-placeholder-shown:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:scale-90 sm:text-sm">Password</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Floating Select -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Select Menu</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="relative">
-                                                    <select id="floatingSelect" placeholder="" class="peer border-default-300 focus:border-default-500 block w-full rounded bg-transparent p-4 not-placeholder-shown:pt-6 not-placeholder-shown:pb-2 placeholder:text-transparent autofill:pt-6 autofill:pb-2 focus:pt-6 focus:pb-2 focus:ring-0 sm:text-sm">
-                                                        <option value="" selected disabled>Open this select menu</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
-                                                    <label for="floatingSelect" class="peer-focus:text-default-500 peer-not-placeholder-shown:text-default-500 pointer-events-none absolute start-0 top-0 h-full origin-top-left truncate border border-transparent p-4 transition duration-100 ease-in-out peer-not-placeholder-shown:translate-x-0.5 peer-not-placeholder-shown:-translate-y-1.5 peer-not-placeholder-shown:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:scale-90 sm:text-sm">Works with selects</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Input Sizes</h4>
-                            </div>
-
-                            <div class="card-body">
-                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-base">
-                                    <div>
-                                        <!-- Small Input -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="input-small" class="form-label py-2 mb-0!">Small</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="text" id="input-small" placeholder=".input-sm" class="form-input form-input-sm" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Large Input -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="input-large" class="form-label py-2 mb-0!">Large</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="text" id="input-large" placeholder=".input-lg" class="form-input form-input-lg" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Large Select -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Large Select</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <select class="form-input form-input-lg">
-                                                    <option selected>Open this select menu</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <!-- Normal Input -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="input-normal" class="form-label py-2 mb-0!">Normal</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <input type="text" id="input-normal" placeholder="Normal" class="form-input" />
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Grid Size Input -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label for="input-gridsize" class="form-label py-2 mb-0!">Grid Sizes</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <div class="grid grid-cols-1 gap-2 lg:grid-cols-3">
-                                                    <div>
-                                                        <input type="text" id="input-gridsize" placeholder="col-span-4" class="form-input" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Small Select -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Small Select</label>
-                                            </div>
-
-                                            <div class="lg:col-span-2">
-                                                <select class="form-input form-input-sm">
-                                                    <option selected>Open this select menu</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Checks, Radios and Switches</h4>
-                            </div>
-
-                            <div class="card-body">
-                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-base">
-                                    <div>
-                                        <!-- Default Checkboxes -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Checkboxes</label>
-                                            </div>
-
-                                            <div class="space-y-3 lg:col-span-2">
-                                                <!-- Default Checkbox -->
-                                                <div class="flex items-center gap-2">
-                                                    <input type="checkbox" id="checkDefault" class="form-checkbox" />
-                                                    <label for="checkDefault">Default Checkbox</label>
-                                                </div>
-
-                                                <!-- Light Checkbox -->
-                                                <div class="flex items-center gap-2">
-                                                    <input type="checkbox" id="checkLight" class="form-checkbox bg-default-200! checked:bg-primary!" />
-                                                    <label for="checkLight">Light Checkbox</label>
-                                                </div>
-
-                                                <!-- Inline Checkboxes -->
-                                                <div class="flex items-center gap-x-4">
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkInline1" class="form-checkbox" checked />
-                                                        <label for="checkInline1">Inline 1</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkInline2" class="form-checkbox" />
-                                                        <label for="checkInline2">Inline 2</label>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Disabled/Indeterminate -->
-                                                <div class="flex items-center gap-2">
-                                                    <input type="checkbox" id="checkIndeterminate" class="form-checkbox" />
-                                                    <label for="checkIndeterminate">Disabled indeterminate checkbox</label>
-                                                </div>
-
-                                                <div class="flex items-center gap-2">
-                                                    <input type="checkbox" id="checkCheckedDisabled" class="form-checkbox" checked disabled />
-                                                    <label for="checkCheckedDisabled">Disabled checked checkbox</label>
-                                                </div>
-
-                                                <!-- Sizes -->
-                                                <h5 class="mt-5 mb-2 font-semibold">Sizes</h5>
-
-                                                <div class="flex items-center gap-2">
-                                                    <input type="checkbox" id="checkSize1" class="form-checkbox size-5!" checked />
-                                                    <label for="checkSize1">I'm 16px Checkbox</label>
-                                                </div>
-
-                                                <div class="flex items-center gap-2">
-                                                    <input type="checkbox" id="checkSize2" class="form-checkbox checked:bg-secondary! size-6.25!" checked />
-                                                    <label for="checkSize2">I'm 20px Checkbox</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Switches -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Switches</label>
-                                            </div>
-
-                                            <div class="space-y-3 lg:col-span-2">
-                                                <!-- Enabled Switch -->
-                                                <div class="flex items-center gap-2">
-                                                    <input type="checkbox" id="switch1" class="form-switch" checked />
-                                                    <label for="switch1">Enabled Switch</label>
-                                                </div>
-
-                                                <!-- Disabled Switch -->
-                                                <div class="flex items-center gap-2">
-                                                    <input type="checkbox" id="switch2" class="form-switch" disabled />
-                                                    <label for="switch2" class="text-default-400">Disabled Switch</label>
-                                                </div>
-
-                                                <!-- Sizes -->
-                                                <h5 class="mt-5 mb-2 font-semibold">Sizes</h5>
-
-                                                <!-- 16px Switch -->
-                                                <div class="flex items-center gap-2">
-                                                    <input type="checkbox" id="checkboxSize16" class="form-switch" checked />
-                                                    <label for="checkboxSize16">I'm 16px Switch</label>
-                                                </div>
-
-                                                <!-- 20px Switch -->
-                                                <div class="flex items-center gap-2">
-                                                    <input type="checkbox" id="checkboxSize20" class="form-switch form-switch-lg checked:bg-secondary!" checked />
-                                                    <label for="checkboxSize20">I'm 20px Switch</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Colored Checkboxes -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Colored Checkboxes</label>
-                                            </div>
-
-                                            <div class="col-span-1 flex flex-wrap gap-9 lg:col-span-2">
-                                                <div class="space-y-3">
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkPrimary" class="form-checkbox checked:bg-primary!" checked />
-                                                        <label for="checkPrimary">Primary</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkSecondary" class="form-checkbox checked:bg-secondary!" checked />
-                                                        <label for="checkSecondary">Secondary</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkSuccess" class="form-checkbox checked:bg-success!" checked />
-                                                        <label for="checkSuccess">Success</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkInfo" class="form-checkbox checked:bg-info!" checked />
-                                                        <label for="checkInfo">Info</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="space-y-3">
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkWarning" class="form-checkbox checked:bg-warning!" checked />
-                                                        <label for="checkWarning">Warning</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkDanger" class="form-checkbox checked:bg-danger!" checked />
-                                                        <label for="checkDanger">Danger</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkDark" class="form-checkbox checked:bg-dark!" checked />
-                                                        <label for="checkDark">Dark</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Colored Checkboxes -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Colored Switches</label>
-                                            </div>
-
-                                            <div class="col-span-1 flex flex-wrap gap-9 lg:col-span-2">
-                                                <div class="space-y-3">
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkPrimary" class="form-switch checked:bg-primary!" checked />
-                                                        <label for="checkPrimary">Primary</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkSecondary" class="form-switch checked:bg-secondary!" checked />
-                                                        <label for="checkSecondary">Secondary</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkSuccess" class="form-switch checked:bg-success!" checked />
-                                                        <label for="checkSuccess">Success</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkInfo" class="form-switch checked:bg-info!" checked />
-                                                        <label for="checkInfo">Info</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="space-y-3">
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkWarning" class="form-switch checked:bg-warning!" checked />
-                                                        <label for="checkWarning">Warning</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkDanger" class="form-switch checked:bg-danger!" checked />
-                                                        <label for="checkDanger">Danger</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkDark" class="form-switch checked:bg-dark!" checked />
-                                                        <label for="checkDark">Dark</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <!-- Default Radios -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Radios</label>
-                                            </div>
-
-                                            <div class="space-y-3 lg:col-span-2">
-                                                <div class="flex items-center gap-2">
-                                                    <input type="radio" name="gridRadio" id="radio1" class="form-radio rounded-full!" checked />
-                                                    <label for="radio1">Option 1</label>
-                                                </div>
-
-                                                <div class="flex items-center gap-2">
-                                                    <input type="radio" name="gridRadio" id="radio2" class="form-radio rounded-full!" />
-                                                    <label for="radio2">Option 2</label>
-                                                </div>
-
-                                                <!-- Inline Radios -->
-                                                <div class="flex space-x-4">
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" class="form-radio rounded-full!" checked />
-                                                        <label for="inlineRadio1">Inline 1</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" class="form-radio rounded-full!" />
-                                                        <label for="inlineRadio2">Inline 2</label>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Disabled Checked -->
-                                                <div class="flex items-center gap-2">
-                                                    <input type="radio" name="disabledRadioOptions" id="inlineRadio3" value="option3" class="form-radio rounded-full!" checked disabled />
-                                                    <label for="inlineRadio3" class="text-default-400">Disabled Checked Radio</label>
-                                                </div>
-
-                                                <!-- Sizes -->
-                                                <h5 class="mt-5 mb-2 font-semibold">Sizes</h5>
-
-                                                <!-- 16px Radios -->
-                                                <div class="flex items-center space-x-4">
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="radio" name="paymentMethod" id="radioCash" value="cash" class="form-radio rounded-full! size-5!" checked />
-                                                        <label for="radioCash">Cash</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="radio" name="paymentMethod" id="radioCard" value="card" class="form-radio rounded-full! size-5!" />
-                                                        <label for="radioCard">Card</label>
-                                                    </div>
-                                                </div>
-
-                                                <!-- 20px Radios -->
-                                                <div class="mt-2 flex items-center space-x-4">
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="radio" name="deliveryOption" id="radioPickup" value="pickup" class="form-radio rounded-full! size-6!" checked />
-                                                        <label for="radioPickup">Pickup</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="radio" name="deliveryOption" id="radioHome" value="home" class="form-radio rounded-full! size-6!" />
-                                                        <label for="radioHome">Home Delivery</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Reverse -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Reverse</label>
-                                            </div>
-
-                                            <div class="col-span-1 w-full space-y-3 lg:col-span-2 lg:w-1/2">
-                                                <!-- Reverse Checkbox -->
-                                                <div class="flex flex-row-reverse items-center gap-2">
-                                                    <input type="checkbox" id="reverseCheck1" class="form-checkbox" checked />
-                                                    <label for="reverseCheck1">Reverse checkbox</label>
-                                                </div>
-
-                                                <!-- Reverse Radio -->
-                                                <div class="flex flex-row-reverse items-center gap-2">
-                                                    <input type="radio" id="reverseCheck2" name="reverseRadio" class="form-radio rounded-full!" disabled />
-                                                    <label for="reverseCheck2">Disabled reverse radio</label>
-                                                </div>
-
-                                                <!-- Reverse Switch -->
-                                                <div class="flex flex-row-reverse items-center gap-2">
-                                                    <input type="checkbox" id="switchCheckReverse" class="form-switch" checked />
-                                                    <label for="switchCheckReverse">Reverse switch checkbox input</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Colored Radios -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Colored Radios</label>
-                                            </div>
-
-                                            <div class="col-span-1 flex flex-wrap gap-9 lg:col-span-2">
-                                                <div class="space-y-3">
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkPrimary" class="form-radio rounded-full! checked:bg-primary!" checked />
-                                                        <label for="checkPrimary">Primary</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkSecondary" class="form-radio rounded-full! checked:bg-secondary!" checked />
-                                                        <label for="checkSecondary">Secondary</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkSuccess" class="form-radio rounded-full! checked:bg-success!" checked />
-                                                        <label for="checkSuccess">Success</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkInfo" class="form-radio rounded-full! checked:bg-info!" checked />
-                                                        <label for="checkInfo">Info</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="space-y-3">
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkWarning" class="form-radio rounded-full! checked:bg-warning!" checked />
-                                                        <label for="checkWarning">Warning</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkDanger" class="form-radio rounded-full! checked:bg-danger!" checked />
-                                                        <label for="checkDanger">Danger</label>
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <input type="checkbox" id="checkDark" class="form-radio rounded-full! checked:bg-dark!" checked />
-                                                        <label for="checkDark">Dark</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Toggle Checkboxes -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Checkbox Toggle</label>
-                                            </div>
-
-                                            <div class="space-y-3 lg:col-span-2">
-                                                <!-- Single Toggle -->
-                                                <div>
-                                                    <input type="checkbox" id="toggleSingle" class="peer hidden" />
-                                                    <label for="toggleSingle" class="btn border-primary text-primary peer-checked:bg-primary peer-checked:text-white">Single Toggle</label>
-                                                </div>
-
-                                                <!-- Group Toggle -->
-                                                <div class="flex">
-                                                    <div>
-                                                        <input type="checkbox" id="toggle1" class="peer hidden" />
-                                                        <label for="toggle1" class="btn rounded-e-none border-primary text-primary peer-checked:bg-primary peer-checked:text-white">One</label>
-                                                    </div>
-                                                    <div>
-                                                        <input type="checkbox" id="toggle2" class="peer hidden" />
-                                                        <label for="toggle2" class="btn rounded-none border-x-0 border-primary text-primary peer-checked:bg-primary peer-checked:text-white">Two</label>
-                                                    </div>
-                                                    <div>
-                                                        <input type="checkbox" id="toggle3" class="peer hidden" />
-                                                        <label for="toggle3" class="btn rounded-s-none border-primary text-primary peer-checked:bg-primary peer-checked:text-white">Three</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-default-300 my-5 border-t border-dashed"></div>
-
-                                        <!-- Toggle Radios -->
-                                        <div class="grid grid-cols-1 gap-1.5 lg:grid-cols-3 lg:gap-9">
-                                            <div>
-                                                <label class="form-label py-2 mb-0!">Radio Toggle</label>
-                                            </div>
-
-                                            <div class="col-span-1 flex lg:col-span-2">
-                                                <div>
-                                                    <input type="radio" name="radiotoggle" id="radioLeft" class="peer hidden" checked />
-                                                    <label for="radioLeft" class="btn rounded-e-none border-secondary text-secondary peer-checked:bg-secondary peer-checked:text-white">Left</label>
-                                                </div>
-
-                                                <div>
-                                                    <input type="radio" name="radiotoggle" id="radioMiddle" class="peer hidden" />
-                                                    <label for="radioMiddle" class="btn rounded-none border-x-0 border-secondary text-secondary peer-checked:bg-secondary peer-checked:text-white">Middle</label>
-                                                </div>
-
-                                                <div>
-                                                    <input type="radio" name="radiotoggle" id="radioRight" class="peer hidden" />
-                                                    <label for="radioRight" class="btn rounded-s-none border-secondary text-secondary peer-checked:bg-secondary peer-checked:text-white">Right</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="mb-0">
+                            <label for="example-range" class="form-label">Range</label>
+                            <input class="form-range" id="example-range" type="range" name="range" min="0" max="100">
                         </div>
                     </div>
+                    
+                    <div class="lg:col-span-6">
+                        <div class="mb-3">
+                            <label for="input-search" class="form-label">Type Search</label>
+                            <input type="search" class="form-control" id="input-search" placeholder="Search">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-submit" class="form-label">Type Submit</label>
+                            <input type="submit" class="form-control" id="input-submit" value="Submit">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-reset" class="form-label">Type Reset</label>
+                            <input type="reset" class="form-control" id="input-reset">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-button" class="form-label">Type Button</label>
+                            <input type="button" class="form-control btn bg-primary border border-primary text-white text-center hover:bg-primary-hover hover:text-white" id="input-button" value="Button">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Type Color</label>
+                            <input class="form-control form-input-color" type="color" value="#136bd0">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-file" class="form-label">Type File</label>
+                            <input class="form-control file-input" type="file" id="input-file">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Type Url</label>
+                            <input class="form-control" type="url" name="website" placeholder="http://example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-disabled" class="form-label">Type Disabled</label>
+                            <input type="text" id="input-disabled" class="form-control" placeholder="Disabled input" disabled="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-readonlytext" class="form-label">Input Readonly Text</label>
+                            <input type="text" readonly="" class="form-control-plaintext" id="input-readonlytext" value="email@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="disabled-readonlytext" class="form-label">Disabled Readonly Input
+                            </label>
+                            <input class="form-control" type="text" value="Disabled readonly input" id="disabled-readonlytext" aria-label="Disabled input example" disabled="" readonly="">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Type Readonly Input</label>
+                            <input class="form-control" type="text" value="Readonly input here..." aria-label="readonly input example" readonly="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-DataList" class="form-label">Datalist example</label>
+                            <input class="form-control" list="datalistOptions" id="input-DataList" placeholder="Type to search...">
+                            <datalist id="datalistOptions">
+                                <option value="San Francisco">
+                                </option>
+                                <option value="New York">
+                                </option>
+                                <option value="Seattle">
+                                </option>
+                                <option value="Los Angeles">
+                                </option>
+                                <option value="Chicago">
+                                </option>
+                            </datalist>
+                        </div>
+                        <div class="mb-3">
+                            <label for="example-select" class="form-label">Input Select</label>
+                            <select class="select" id="example-select">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="example-multiselect" class="form-label">Multiple Select</label>
+                            <select id="example-multiselect" multiple class="form-control">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="mb-0">
+                            <label for="example-helping" class="form-label">Helping text</label>
+                            <input type="text" id="example-helping" class="form-control mb-1" placeholder="Helping text">
+                            <span class="help-block"><small>A block of help text that breaks onto a new line and may extend beyond one line.</small></span>
+                        </div>
+                    </div>
+                    
                 </div>
-            </main>
+            </div> <!-- end card-body -->
+        </div> <!-- end card -->
+    </div> <!-- end col -->
+
+    <div class="xl:col-span-6 flex">
+        <div class="card border flex-1 border-borderColor bg-white rounded mb-5 card-h-100">
+            <div class="card-header border-b border-borderColor p-4">
+                <h5 class="card-title">Input Shapes</h5>
+            </div>
+            <div class="card-body p-4">
+                <div class="grid grid-cols-12 gap-y-4">
+                    <div class="col-span-12">
+                        <label for="input-noradius" class="form-label">Input With No Radius</label>
+                        <input type="text" class="form-control rounded-0" id="input-noradius" placeholder="No Radius">
+                    </div>
+                    <div class="col-span-12">
+                        <label for="input-rounded" class="form-label">Input With Radius</label>
+                        <input type="text" class="form-control" id="input-rounded" placeholder="Default Radius">
+                    </div>
+                    <div class="col-span-12">
+                        <label for="input-rounded-pill" class="form-label">Rounded Input</label>
+                        <input type="text" class="form-control rounded-pill" id="input-rounded-pill" placeholder="Rounded">
+                    </div>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card -->
+    </div> <!-- end col -->
+
+    <div class="xl:col-span-6 flex">
+        <div class="card border flex-1 border-borderColor bg-white rounded mb-5">
+            <div class="card-header border-b border-borderColor p-4">
+                <h5 class="card-title">Disabled forms</h5>
+            </div>
+            <div class="card-body p-4">
+                <form>
+                    <div class="mb-3">
+                        <label for="disabledTextInput" class="form-label">Disabled Input</label>
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+                    </div>
+                    <div class="mb-3">
+                        <label for="disabledSelect" class="form-label">Disabled Select Menu</label>
+                        <select id="disabledSelect" class="form-select">
+                            <option>Disabled select</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input border-border-color rounded" type="checkbox" id="disabledFieldsetCheck" disabled="">
+                            <label class="form-check-label" for="disabledFieldsetCheck">
+                                Can't check this
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input border-border-color" type="radio" id="disabledFieldsetRadio" disabled="">
+                            <label class="form-check-label" for="disabledFieldsetRadio">
+                                Can't check this
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn bg-primary border border-primary text-white text-center hover:bg-primary-hover hover:text-white">Submit</button>
+                </form>
+            </div> <!-- end card-body -->
+        </div> <!-- end card -->
+    </div> <!-- end col -->
+
+    <div class="xl:col-span-6 flex">
+        <div class="card card-h-100 flex-1 border border-borderColor bg-white rounded mb-5">
+            <div class="card-header border-b border-borderColor p-4">
+                <h5 class="card-title">Input Sizing</h5>
+            </div>
+            <div class="card-body p-4">
+                <input class="form-control form-control-sm mb-3" type="text" placeholder=".form-control-sm" aria-label=".form-control-sm example">
+                <input class="form-control mb-3" type="text" placeholder="Default input" aria-label="default input example">
+                <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" aria-label=".form-control-lg example">
+            </div> <!-- end card-body -->
+        </div> <!-- end card -->
+    </div> <!-- end col -->
+
+
+</div>

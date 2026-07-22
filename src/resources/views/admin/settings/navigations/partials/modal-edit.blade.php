@@ -1,140 +1,104 @@
-<button id="modal-edit-toggle" type="button" class="hidden" data-hs-overlay="#modal-edit"></button>
+<button type="button" id="modalEditToggle" class="hidden" data-modal-toggle="modalEdit" data-modal-target="modalEdit"></button>
 
-<div id="modal-edit" class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 pointer-events-none fixed inset-0 z-80 hidden size-full overflow-x-hidden overflow-y-auto opacity-0 transition-all" role="dialog" tabindex="-1" aria-labelledby="modal-title">
-    <div class="hs-overlay-animation-target m-3 sm:mx-auto sm:w-full sm:max-w-xl lg:max-w-4xl">
-        <div class="border-default-300 pointer-events-auto flex flex-col rounded-md border card">
-            <div class="border-default-300 flex items-center justify-between border-b p-6">
-                <div>
-                    <h3 id="modal-title" class="text-base font-semibold">Edit Data @yield('title')</h3>
-                    <p class="text-default-400 text-sm">Perbarui menu dan atribut akses dari modal ini.</p>
+<div class="ui-modals">
+    <div class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-[1055] justify-center items-center flex-wrap w-full md:inset-0 h-[calc(100%-1rem)] max-h-full transition-all duration-300 ease-in-out p-4"
+        id="modalEdit" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
+        <div class="modal-dialog w-full max-w-[800px] max-h-full modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalEditLabel">Edit Data @yield('title')</h4>
+                    <button type="button"
+                        class="end-2.5 text-white bg-gray-500 hover:bg-danger hover:text-white rounded-full text-xs leading-normal size-5 ms-auto inline-flex justify-center items-center"
+                        data-modal-hide="modalEdit">
+                        <i class="ti ti-x"></i><span class="sr-only">Tutup modal</span>
+                    </button>
                 </div>
-
-                <button type="button" aria-label="Close" data-hs-overlay="#modal-edit">
-                    <span class="sr-only">Close</span>
-                    <i class="iconify tabler--x text-xl"></i>
-                </button>
-            </div>
-
-            <form id="form-edit" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="overflow-y-auto card-body">
-                    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                        <div>
-                            <label class="mb-[12px] block font-medium">
-                                Menu Name
-                                <strong class="text-red-500">*</strong>
-                            </label>
-                            <input type="text" name="name" id="name" class="form-input" placeholder="Fill menu name ..." required>
-                        </div>
-
-                        <div>
-                            <label class="mb-[12px] block font-medium">
-                                Permission Identifier
-                                <strong class="text-red-500">*</strong>
-                            </label>
-                            <input type="text" name="slug" id="slug" class="form-input" placeholder="Fill permission identifier ..." required>
-                        </div>
-
-                        <div>
-                            <label class="mb-[12px] block font-medium">Parent Menu</label>
-                            <select name="parent_id" id="parent_id" class="form-select select2">
-                                <option value="">- Select Parent Menu -</option>
-                                @foreach ($parentNavigations as $nav)
-                                    <option value="{{ $nav->id }}">{{ $nav->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="mb-[12px] block font-medium">
-                                URL
-                                <strong class="text-red-500">*</strong>
-                            </label>
-                            <input type="text" name="url" id="url" class="form-input" placeholder="Route name menu ..." required>
-                        </div>
-
-                        <div>
-                            <label class="mb-[12px] block font-medium">Icon</label>
-                            <input type="text" name="icon" id="icon" class="form-input" placeholder="Fill icon name, here use Material Icons ...">
-                        </div>
-
-                        <div>
-                            <label class="mb-[12px] block font-medium">
-                                Order
-                                <strong class="text-red-500">*</strong>
-                            </label>
-                            <input type="number" name="order" id="order" class="form-input" placeholder="Number of order menu ..." required>
-                        </div>
-
-                        <div>
-                            <label class="mb-[12px] block font-medium">
-                                Is Active
-                                <strong class="text-red-500">*</strong>
-                            </label>
-                            <select name="active" id="active" class="form-select select2" required>
-                                <option value="">- Select Status Active -</option>
-                                <option value="1">Active</option>
-                                <option value="0">Deactive</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="mb-[12px] block font-medium">
-                                Is Display
-                                <strong class="text-red-500">*</strong>
-                            </label>
-                            <select name="display" id="display" class="form-select select2" required>
-                                <option value="">- Select Status Display -</option>
-                                <option value="1">Display</option>
-                                <option value="0">Hidden</option>
-                            </select>
+                <form action="" method="POST" id="form-edit-navigation">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                            <div class="md:col-span-6 mb-3">
+                                <label for="nav-name-edit" class="form-label">Nama Menu <strong class="text-red-500">*</strong></label>
+                                <input type="text" name="name" id="nav-name-edit" class="form-control" placeholder="Masukkan nama menu" required>
+                            </div>
+                            <div class="md:col-span-6 mb-3">
+                                <label for="nav-slug-edit" class="form-label">Permission Identifier <strong class="text-red-500">*</strong></label>
+                                <input type="text" name="slug" id="nav-slug-edit" class="form-control" placeholder="Masukkan permission identifier" required>
+                            </div>
+                            <div class="md:col-span-6 mb-3">
+                                <label for="nav-parent-edit" class="form-label">Parent Menu</label>
+                                <select name="parent_id" id="nav-parent-edit" class="select2 form-control">
+                                    <option value="">- Pilih Parent Menu -</option>
+                                    @foreach ($parentNavigations as $nav)
+                                        <option value="{{ $nav->id }}">{{ $nav->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="md:col-span-6 mb-3">
+                                <label for="nav-url-edit" class="form-label">URL <strong class="text-red-500">*</strong></label>
+                                <input type="text" name="url" id="nav-url-edit" class="form-control" placeholder="Masukkan route menu" required>
+                            </div>
+                            <div class="md:col-span-6 mb-3">
+                                <label for="nav-icon-edit" class="form-label">Icon</label>
+                                <input type="text" name="icon" id="nav-icon-edit" class="form-control" placeholder="Masukkan nama icon">
+                            </div>
+                            <div class="md:col-span-6 mb-3">
+                                <label for="nav-order-edit" class="form-label">Urutan <strong class="text-red-500">*</strong></label>
+                                <input type="number" name="order" id="nav-order-edit" class="form-control" placeholder="Masukkan urutan menu" required>
+                            </div>
+                            <div class="md:col-span-6 mb-3">
+                                <label for="nav-active-edit" class="form-label">Status <strong class="text-red-500">*</strong></label>
+                                <select name="active" id="nav-active-edit" class="form-control" required>
+                                    <option value="1">Aktif</option>
+                                    <option value="0">Tidak Aktif</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-6 mb-3">
+                                <label for="nav-display-edit" class="form-label">Tampilan <strong class="text-red-500">*</strong></label>
+                                <select name="display" id="nav-display-edit" class="form-control" required>
+                                    <option value="1">Tampil</option>
+                                    <option value="0">Tersembunyi</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="border-default-300 flex items-center justify-end border-t p-4">
-                    <button type="button" class="btn bg-light hover:text-primary m-1" data-hs-overlay="#modal-edit">Close</button>
-                    <button type="submit" class="btn bg-primary hover:bg-primary-hover m-1 rounded text-white">Simpan Perubahan</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light me-2" data-modal-hide="modalEdit">Batal</button>
+                        <button type="submit" class="btn bg-primary text-white">Simpan</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
 @push('scripts')
-<script>
-    $(document).on('click', '.btn-modal-edit-nav', function(e) {
-        e.preventDefault();
+    <script>
+        $(document).on('click', '.btnModalEdit', function (event) {
+            event.preventDefault();
+            const button = $(this);
 
-        $('#modal-edit-toggle').trigger('click');
-
-        var urlFormAction = $(this).data('url-action');
-        var urlGetData = $(this).data('url-get');
-
-        $.ajax({
-            url: urlGetData,
-            type: 'GET',
-            success: function(response) {
-                $('#modal-title').text('Edit Data Menu - ' + response.name);
-                $('#form-edit').attr('action', urlFormAction);
-                $('#form-edit').find('#name').val(response.name);
-                $('#form-edit').find('#slug').val(response.slug);
-                $('#form-edit').find('#parent_id').val(response.parent_id).trigger('change');
-                $('#form-edit').find('#url').val(response.url);
-                $('#form-edit').find('#icon').val(response.icon);
-                $('#form-edit').find('#order').val(response.order);
-                $('#form-edit').find('#active').val(response.active).trigger('change');
-                $('#form-edit').find('#display').val(response.display).trigger('change');
-            },
-            error: function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Gagal memuat data.',
-                });
-            }
+            $.ajax({
+                url: button.data('url-get'),
+                type: 'GET',
+                success: function (response) {
+                    $('#modalEditLabel').text('Edit Data Menu - ' + response.name);
+                    $('#form-edit-navigation').attr('action', button.data('url-action'));
+                    $('#nav-name-edit').val(response.name);
+                    $('#nav-slug-edit').val(response.slug);
+                    $('#nav-parent-edit').val(response.parent_id).trigger('change');
+                    $('#nav-url-edit').val(response.url);
+                    $('#nav-icon-edit').val(response.icon);
+                    $('#nav-order-edit').val(response.order);
+                    $('#nav-active-edit').val(response.active);
+                    $('#nav-display-edit').val(response.display);
+                    $('#modalEditToggle').trigger('click');
+                },
+                error: function () {
+                    Swal.fire({ icon: 'error', title: 'Error', text: 'Gagal memuat data.' });
+                }
+            });
         });
-    });
-</script>
+    </script>
 @endpush

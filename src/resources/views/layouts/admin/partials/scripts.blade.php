@@ -1,43 +1,23 @@
-{{-- Start: Theme Customizer --}}
-@include('layouts.admin.partials.theme-customization')
-{{-- End: Theme Customizer --}}
+<!-- jQuery -->
+<script src="{{ URL::asset('assets/admin/js/jquery-3.7.1.min.js') }}"></script>
 
-{{-- Start: Load Main Scripts --}}
-{{-- Start: Get asset for language locale in app.js class I18nManager --}}
-<script>
-    window.Laravel = {
-        translationsPath: "{{ asset('assets/admin/data/translations/') . '/' }}",
-        assetUrl: "{{ asset('') }}",
-        csrfToken: "{{ csrf_token() }}",
-        appLocale: "{{ app()->getLocale() }}"
-    };
-    </script>
-{{-- End: Get asset for language locale in app.js class I18nManager --}}
+<!-- Feather Icon JS -->
+<script src="{{ URL::asset('assets/admin/js/feather.min.js') }}"></script>
 
-<script src="{{ URL::asset('assets/admin/js/vendors.min.js') }}"></script>
-<script src="{{ URL::asset('assets/admin/js/app.js') }}"></script>
-{{-- End: Load Main Scripts --}}
+<!-- Slimscroll JS -->
+<script src="{{ URL::asset('assets/admin/js/jquery.slimscroll.min.js') }}"></script>
 
-{{-- Start: Custom JS --}}
-<!-- Apex Chart js -->
-{{-- <script src="{{ URL::asset('assets/admin/plugins/apexcharts/apexcharts.min.js') }}"></script> --}}
+<!-- Flowbite JS -->
+<script src="{{ URL::asset('assets/admin/js/flowbite.min.js') }}"></script>
 
-<!-- Vector Map Js -->
-{{-- <script src="{{ URL::asset('assets/admin/plugins/jsvectormap/jsvectormap.min.js') }}"></script> --}}
-{{-- <script src="{{ URL::asset('assets/admin/js/maps/world-merc.js') }}"></script> --}}
-{{-- <script src="{{ URL::asset('assets/admin/js/maps/world.js') }}"></script> --}}
+<!-- Daterangepikcer JS -->
+<script src="{{ URL::asset('assets/admin/js/moment.min.js') }}"></script>
+<script src="{{ URL::asset('assets/admin/plugins/daterangepicker/daterangepicker.js') }}"></script>
 
-<!-- Custom table -->
-{{-- <script src="{{ URL::asset('assets/admin/js/pages/custom-table.js') }}"></script> --}}
-{{-- End: Custom JS --}}
+<!-- Select2 JS -->
+<script src="{{ URL::asset('assets/admin/plugins/select2/js/select2.min.js') }}"></script>
 
-<!-- Dashboard js -->
-{{-- <script src="{{ URL::asset('assets/admin/js/pages/dashboard-ecommerce.js') }}"></script> --}}
+<!-- Custom JS -->
+<script src="{{ URL::asset('assets/admin/js/script.js') }}"></script>
 
-{{-- Start: SweetAlert2 --}}
-@include('layouts.admin.partials.alerts-script')
-{{-- End: SweetAlert2 --}}
-        
-{{-- Start: Stack Scripts --}}
 @stack('scripts')
-{{-- End: Stack Scripts --}}

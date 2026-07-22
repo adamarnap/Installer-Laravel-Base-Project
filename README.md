@@ -85,6 +85,6 @@ Here in landing pages we use Template HTML From MARTEX (https://martex-tailwindc
 ![Landing Page Overview](docs/images/base-project-overview/landing-page-overview.png)
 
 ## Admin
-Here in admin pages we use Template HTML From PACES (https://themes.coderthemes.com/paces/tailwind/index.html)
+Here in admin pages we use Template HTML From Dream Pos (https://dreamspos.dreamstechnologies.com/retail-pos/tailwind/src/index.html)
 ![Auth Page Overview](docs/images/base-project-overview/auth-page-overview.png)
 ![Admin Page Overview](docs/images/base-project-overview/admin-page-overview.png)

@@ -1,22 +1,22 @@
 @unless ($breadcrumbs->isEmpty())
-    <nav class="container mx-auto">
-        <ol class="p-4 rounded flex flex-wrap text-sm text-dark">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb flex items-center mb-0">
             @foreach ($breadcrumbs as $breadcrumb)
 
                 @if ($breadcrumb->url && !$loop->last)
-                    <li>
-                        <a href="{{ $breadcrumb->url }}" class="text-primary hover:text-primary hover:underline focus:text-primary focus:underline">
+                    <li class="breadcrumb-item text-blue">
+                        <a href="{{ $breadcrumb->url }}" class="">
                             {{ $breadcrumb->title }}
                         </a>
                     </li>
                 @else
-                    <li>
+                    <li class="breadcrumb-item text-gray-900 active">
                         {{ $breadcrumb->title }}
                     </li>
                 @endif
 
                 @unless($loop->last)
-                    <li class="text-dark px-2">
+                    <li class="text-gray px-2">
                         /
                     </li>
                 @endif

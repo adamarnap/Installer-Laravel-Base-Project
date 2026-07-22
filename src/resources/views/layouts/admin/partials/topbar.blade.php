@@ -1,749 +1,416 @@
-{{-- Start: Topbar --}}
-<header class="app-header">
-    <div class="container-fluid flex items-center justify-between">
-        <div class="flex items-center gap-2.5">
-            <div class="logo-topbar">
-                <!-- Sidenav Menu Brand Logo -->
-                <a href="index.html" class="logo-box">
-                    <!-- Light Brand Logo -->
-                    <div class="logo-light">
-                        <img src="{{ URL::asset($prefs_composer['logo']) }}" class="logo-lg h-6" alt="Light logo">
-                        <img src="{{ URL::asset($prefs_composer['logo']) }}" class="logo-sm h-6" alt="Small logo">
-                    </div>
-
-                    <!-- Dark Brand Logo -->
-                    <div class="logo-dark">
-                        <img src="{{ URL::asset($prefs_composer['logo']) }}" class="logo-lg h-6" alt="Dark logo">
-                        <img src="{{ URL::asset($prefs_composer['logo']) }}" class="logo-sm h-6" alt="Small logo">
-                    </div>
-                </a>
-            </div>
-
-            <!-- Sidenav Menu Toggle Button -->
-            <button id="button-toggle-menu" class="sidenav-toggle-button btn btn-icon">
-                <i class="iconify tabler--menu-4 text-xl"></i>
-            </button>
-
-            <!-- Topnav Menu Toggle Button for Horizontal -->
-            <div class="topnav-toggle-button">
-                <button type="button" class="hs-collapse-toggle btn topnav-toggle-button" data-hs-collapse="#topnav-menu" id="topnav-menu-collapse" aria-expanded="false" aria-controls="topnav-menu" aria-label="Toggle navigation">
-                    <i class="iconify tabler--menu-4 text-xl"></i>
-                </button>
-            </div>
-            {{-- Start: Search Box --}}
-            <div id="search-box-rounded" class="hidden xl:flex">
-                <div class="input-icon-group">
-                    <i class="iconify tabler--search input-icon text-lg text-(--topbar-item-color)/50! placeholder:opacity-50"></i>
-                    <input type="search" id="topbar-search" class="form-input w-57.5 rounded-full! border-(--topbar-search-border)! bg-(--topbar-search-bg)! text-(--topbar-item-color)! placeholder:opacity-50" placeholder="Quick Search...">
-                </div>
-            </div>
-            {{-- End: Search Box --}}
-
-            {{-- Start: Mega Menu Columns --}}
-            <div id="megamenu-columns" class="md:inline-flex hidden">
-                <div class="topbar-item hs-dropdown relative inline-flex">
-                    <button class="topbar-link hs-dropdown-toggle btn px-2.5! font-medium" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">Mega Menu <i class="iconify tabler--chevron-down"></i></button>
-
-                    <div class="hs-dropdown-menu p-0 md:min-w-3xl" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-menu">
-                        <div style="max-height: 380px" data-simplebar="">
-                            <div class="grid md:grid-cols-3">
-                                <div class="p-3">
-                                    <h5 class="py-2 px-3.5 font-semibold mb-2 text-xs">Dashboard &amp; Analytics</h5>
-                                    <ul class="list-unstyled megamenu-list">
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--chevron-right align-middle text-default-400"></i>
-                                                Sales Dashboard
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--chevron-right align-middle text-default-400"></i>
-                                                Marketing Dashboard
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--chevron-right align-middle text-default-400"></i>
-                                                Finance Overview
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--chevron-right align-middle text-default-400"></i>
-                                                User Analytics
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--chevron-right align-middle text-default-400"></i>
-                                                Traffic Insights
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="p-3">
-                                    <h5 class="py-2 px-3.5 font-semibold mb-2 text-xs">Project Management</h5>
-                                    <ul class="list-unstyled megamenu-list">
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--minus align-middle text-default-400"></i>
-                                                Kanban Workflow
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--minus align-middle text-default-400"></i>
-                                                Project Timeline
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--minus align-middle text-default-400"></i>
-                                                Task Management
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--minus align-middle text-default-400"></i>
-                                                Team Members
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--minus align-middle text-default-400"></i>
-                                                Assignments
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="p-3 bg-light/50">
-                                    <h5 class="py-2 px-3.5 font-semibold mb-2 text-xs">User Management</h5>
-                                    <ul class="list-unstyled megamenu-list">
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--chevron-right align-middle text-default-400"></i>
-                                                User Profiles
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--chevron-right align-middle text-default-400"></i>
-                                                Access Control
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--chevron-right align-middle text-default-400"></i>
-                                                Security Settings
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--chevron-right align-middle text-default-400"></i>
-                                                User Groups
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item">
-                                                <i class="iconify tabler--chevron-right align-middle text-default-400"></i>
-                                                Authentication
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- end row-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- End: Mega Menu Columns --}}
-
-            {{-- Start: Mega Menu Apps --}}
-            <div id="megamenu-apps" class="md:inline-flex hidden">
-                <div class="topbar-item hs-dropdown relative inline-flex">
-                    <button class="topbar-link hs-dropdown-toggle btn px-2.5! font-medium" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">Apps <i class="iconify tabler--chevron-down"></i></button>
-
-                    <div class="hs-dropdown-menu p-0 md:min-w-3xl" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-menu">
-                        <div style="max-height: 380px" data-simplebar="">
-                            <div class="grid md:grid-cols-3">
-                                <div class="p-3 space-y-2">
-                                    <a href="#!" class="dropdown-item">
-                                        <span class="flex items-center gap-3">
-                                            <span class="size-9 flex items-center justify-center text-primary border border-light bg-light/50 rounded">
-                                                <i class="iconify tabler--basket size-5.5"></i>
-                                            </span>
-                                            <span>
-                                                <h5 class="text-xs">eCommerce</h5>
-                                                <span class="text-default-400 text-xs">Products, orders &amp; etc.</span>
-                                            </span>
-                                        </span>
-                                    </a>
-
-                                    <a href="#!" class="dropdown-item">
-                                        <span class="flex items-center gap-3">
-                                            <span class="size-9 flex items-center justify-center text-success border border-light bg-light/50 rounded">
-                                                <i class="iconify tabler--message size-5.5"></i>
-                                            </span>
-                                            <span>
-                                                <h5 class="text-xs">Chat</h5>
-                                                <span class="text-default-400 text-xs">Team conversations</span>
-                                            </span>
-                                        </span>
-                                    </a>
-
-                                    <a href="#!" class="dropdown-item">
-                                        <span class="flex items-center gap-3">
-                                            <span class="size-9 flex items-center justify-center text-danger border border-light bg-light/50 rounded">
-                                                <i class="iconify tabler--list-check size-5.5"></i>
-                                            </span>
-                                            <span>
-                                                <h5 class="text-xs">Task</h5>
-                                                <span class="text-default-400 text-xs">Plan and track work</span>
-                                            </span>
-                                        </span>
-                                    </a>
-
-                                    <a href="#!" class="dropdown-item">
-                                        <span class="flex items-center gap-3">
-                                            <span class="size-9 flex items-center justify-center text-info border border-light bg-light/50 rounded">
-                                                <i class="iconify tabler--mailbox size-5.5"></i>
-                                            </span>
-                                            <span>
-                                                <h5 class="text-xs">Email</h5>
-                                                <span class="text-default-400 text-xs">Messages and inbox</span>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </div>
-
-                                <div class="p-3 space-y-2">
-                                    <a href="#!" class="dropdown-item">
-                                        <span class="flex items-center gap-3">
-                                            <span class="size-9 flex items-center justify-center text-secondary border border-light bg-light/50 rounded">
-                                                <i class="iconify tabler--building size-5.5"></i>
-                                            </span>
-                                            <span>
-                                                <h5 class="text-xs">Companies</h5>
-                                                <span class="text-default-400 text-xs">Business profiles</span>
-                                            </span>
-                                        </span>
-                                    </a>
-
-                                    <a href="#!" class="dropdown-item">
-                                        <span class="flex items-center gap-3">
-                                            <span class="size-9 flex items-center justify-center text-dark border border-light bg-light/50 rounded">
-                                                <i class="iconify tabler--id size-5.5"></i>
-                                            </span>
-                                            <span>
-                                                <h5 class="text-xs">Contacts Diary</h5>
-                                                <span class="text-default-400 text-xs">People and connections</span>
-                                            </span>
-                                        </span>
-                                    </a>
-
-                                    <a href="#!" class="dropdown-item">
-                                        <span class="flex items-center gap-3">
-                                            <span class="size-9 flex items-center justify-center text-warning border border-light bg-light/50 rounded">
-                                                <i class="iconify tabler--calendar size-5.5"></i>
-                                            </span>
-                                            <span>
-                                                <h5 class="text-xs">Calendar</h5>
-                                                <span class="text-default-400 text-xs">Events and reminders</span>
-                                            </span>
-                                        </span>
-                                    </a>
-
-                                    <a href="#!" class="dropdown-item">
-                                        <span class="flex items-center gap-3">
-                                            <span class="size-9 flex items-center justify-center text-success border border-light bg-light/50 rounded">
-                                                <i class="iconify tabler--lifebuoy size-5.5"></i>
-                                            </span>
-                                            <span>
-                                                <h5 class="text-xs">Support</h5>
-                                                <span class="text-default-400 text-xs">Help and assistance</span>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </div>
-
-                                <div class="row-span-2 bg-light/50">
-                                    <div class="h-full relative rounded-e overflow-hidden bg-[url(../images/stock/small-8.jpg)] bg-cover">
-                                        <div class="p-6 absolute inset-0 bg-gradient bg-secondary/90 flex items-center justify-center">
-                                            <div class="text-center text-white">
-                                                <i class="iconify tabler--atom text-4xl"></i>
-                                                <p class="text-white/75 mb-5 uppercase">Limited Offer</p>
-                                                <h3 class="font-semibold text-white mb-3 text-xl">Unlock Exclusive Savings</h3>
-                                                <h4 class="font-medium text-base mb-1">
-                                                    <del class="text-opacity-75 text-white">$49.00</del>
-                                                    /
-                                                    <span class="font-bold text-white">$25 USD</span>
-                                                </h4>
-                                                <button type="button" class="mt-5 btn btn-sm bg-danger text-white hover:bg-danger-hover">
-                                                    <i class="iconify tabler--shopping-cart me-1.5"></i>
-                                                    Buy Now
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end .bg-light-->
-                                </div>
-
-                                <div class="col-span-2">
-                                    <div class="grid grid-cols-2 border-t border-light border-dashed text-center">
-                                        <div class="p-6">
-                                            <p class="font-medium text-default-400 mb-1 text-2xs uppercase">-: &nbsp; Support &nbsp;:-</p>
-                                            <h5 class="text-md">help@mydomain.com</h5>
-                                        </div>
-
-                                        <div class="p-6">
-                                            <p class="font-medium text-default-400 mb-1 text-2xs uppercase">-: &nbsp; Help: &nbsp;:-</p>
-                                            <h5 class="text-md">+(12) 3456 7890</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end row-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- End: Mega Menu Apps --}}
+{{-- Start Get Profile Photo --}}
+@php
+    $profile_photo = Auth::user()?->userProfile?->profile_photo
+    ? URL::asset('storage/' . Auth::user()->userProfile->profile_photo)
+    : URL::asset('assets/admin/images/users/default.jpg');
+@endphp
+{{-- End Get Profile Photo --}}
+<!-- Header -->
+<div class="header">
+    <div class="main-header h-[inherit]">
+        <!-- Logo -->
+        <div class="header-left active">
+            <a href="{{ route('dashboard') }}" class="logo logo-normal">
+                <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo">
+            </a>
+            <a href="{{ route('dashboard') }}" class="logo logo-white">
+                <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo">
+            </a>
+            <a href="{{ route('dashboard') }}" class="logo-small">
+                <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo">
+            </a>
         </div>
+        <!-- /Logo -->
+        <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+            <span class="bar-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </a>
 
-        {{-- Start: Impersonate Warning (di dalam topbar, di antara kiri & kanan) --}}
-        @if($impersonate_data['is_impersonating'])
-        <div class="flex-1 flex items-center justify-center px-4">
-            <div class="flex items-center gap-2 bg-red-500 text-white px-3 py-1.5 rounded-md">
-                <i class="iconify tabler--{icon_name} text-xs text-[18px]">warning</i>
-                <span class="text-xs font-medium whitespace-nowrap">
-                    Impersonate: <strong>{{ $impersonate_data['impersonated_user']->name }}</strong>
-                </span>
-                <form action="{{ route('settings.impersonate.destroy', $impersonate_data['impersonated_user']->id) }}" method="POST" class="inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-white text-red-600 hover:bg-red-50 rounded text-[11px] font-semibold transition-all ml-1">
-                        <i class="iconify tabler--{icon_name} text-xs text-[14px]">logout</i>
-                    </button>
-                </form>
-            </div>
-        </div>
-        @endif
-        {{-- End: Impersonate Warning (di dalam topbar, di antara kiri & kanan) --}}
+        <!-- Header Menu -->
+        <ul class="nav user-menu items-center justify-center relative h-full transition-all duration-[0.5s] ease-[ease] m-0 pr-6">
 
-        <div class="flex items-center gap-2.5">
-            {{-- Start: Theme Dark/Light Toggle --}}
-            <div id="theme-dropdown" class="sm:inline-flex hidden">
-                <div class="topbar-item hs-dropdown relative inline-flex [--auto-close:inside] [--placement:bottom-right]">
-                    <button class="topbar-link hs-dropdown-toggle rounded-full" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                        <i class="iconify tabler--sun topbar-link-icon hidden" id="theme-icon-light"></i>
-                        <i class="iconify tabler--moon topbar-link-icon hidden" id="theme-icon-dark"></i>
-                        <i class="iconify tabler--sun-moon topbar-link-icon hidden" id="theme-icon-system"></i>
-                    </button>
-
-                    <div class="hs-dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-menu">
-                        <div class="theme-mode">
-                            <input class="peer invisible absolute size-0" type="radio" name="data-theme" id="topbar-dropdown-light" value="light" checked="">
-                            <label class="dropdown-item peer-checked:bg-default-100" for="topbar-dropdown-light">
-                                <i class="iconify tabler--sun me-1 align-middle text-base"></i>
-                                Light
-                            </label>
-                        </div>
-
-                        <div class="theme-mode">
-                            <input class="peer invisible absolute size-0" type="radio" name="data-theme" id="topbar-dropdown-dark" value="dark">
-                            <label class="dropdown-item peer-checked:bg-default-100" for="topbar-dropdown-dark">
-                                <i class="iconify tabler--moon me-1 align-middle text-base"></i>
-                                Dark
-                            </label>
-                        </div>
-
-                        <div class="theme-mode">
-                            <input class="peer invisible absolute size-0" type="radio" name="data-theme" id="topbar-dropdown-system" value="system">
-                            <label class="dropdown-item peer-checked:bg-default-100" for="topbar-dropdown-system">
-                                <i class="iconify tabler--sun-moon me-1 align-middle text-base"></i>
-                                System
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- Start: Theme Dark/Light Toggle --}}
-
-            {{-- Start: Apps Dropdown --}}
-            <div id="apps-dropdown-grid" class="xl:inline-flex hidden">
-                <div class="topbar-item hs-dropdown relative inline-flex [--auto-close:inside] [--placement:bottom-right]">
-                    <button class="topbar-link hs-dropdown-toggle relative flex items-center" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                        <i class="iconify tabler--apps topbar-link-icon"></i>
-                    </button>
-
-                    <div class="hs-dropdown-menu w-80 p-3" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-menu">
-                        <div class="grid grid-cols-3 items-center gap-1.5">
-                            <a href="javascript:void(0);" class="dropdown-item flex-col gap-0 border border-dashed border-default-300 rounded text-center py-3">
-                                <span class="size-8 rounded-full bg-light flex items-center justify-center mx-auto mb-1.25">
-                                    <img src="{{ URL::asset('assets/admin/images/logos/google.svg') }}" alt="Google Logo" class="h-4.5">
-                                </span>
-                                <span class="align-middle font-medium">Google</span>
-                            </a>
-
-                            <a href="javascript:void(0);" class="dropdown-item flex-col gap-0 border border-dashed border-default-300 rounded text-center py-3">
-                                <span class="size-8 rounded-full bg-light flex items-center justify-center mx-auto mb-1.25">
-                                    <img src="{{ URL::asset('assets/admin/images/logos/figma.svg') }}" alt="Figma Logo" class="h-4.5">
-                                </span>
-                                <span class="align-middle font-medium">Figma</span>
-                            </a>
-
-                            <a href="javascript:void(0);" class="dropdown-item flex-col gap-0 border border-dashed border-default-300 rounded text-center py-3">
-                                <span class="size-8 rounded-full bg-light flex items-center justify-center mx-auto mb-1.25">
-                                    <img src="{{ URL::asset('assets/admin/images/logos/slack.svg') }}" alt="Slack Logo" class="h-4.5">
-                                </span>
-                                <span class="align-middle font-medium">Slack</span>
-                            </a>
-
-                            <a href="javascript:void(0);" class="dropdown-item flex-col gap-0 border border-dashed border-default-300 rounded text-center py-3">
-                                <span class="size-8 rounded-full bg-light flex items-center justify-center mx-auto mb-1.25">
-                                    <img src="{{ URL::asset('assets/admin/images/logos/dropbox.svg') }}" alt="Dropbox Logo" class="h-4.5">
-                                </span>
-                                <span class="align-middle font-medium">Dropbox</span>
-                            </a>
-
-                            <div class="text-center">
-                                <a href="javascript:void(0);" class="btn btn-sm btn-icon rounded-full bg-danger text-white hover:bg-danger-hover">
-                                    <i class="iconify tabler--circle-dashed-plus text-lg"></i>
-                                </a>
+            <!-- Search -->
+            <li class="nav-item nav-searchinputs">
+                <div class="top-nav-search">
+                    <a href="javascript:void(0);" class="responsive-search hidden text-white text-xl h-[60px] leading-[60px] px-[15px]">
+                        <i class="fa fa-search"></i>
+                    </a>
+                    <form action="#" class="dropdown relative">
+                        <div class="searchinputs input-group dropdown-toggle" id="dropdownMenuClickable" data-dropdown-toggle="search-dropdown">
+                            <input type="text" placeholder="Search" class="focus:border-border-color focus:ring-0">
+                            <div class="search-addon">
+                                <span class="flex items-center justify-center cursor-pointer text-[#A6AAAF] rounded-[5px] absolute -translate-y-2/4 z-[9] start-2 top-1/2"><i class="ti ti-search"></i></span>
                             </div>
-
-                            <a href="javascript:void(0);" class="dropdown-item flex-col gap-0 border border-dashed border-default-300 rounded text-center py-3">
-                                <span class="size-8 rounded-full flex items-center justify-center bg-primary/15 text-primary mx-auto mb-1.25">
-                                    <i class="iconify tabler--calendar text-lg"></i>
-                                </span>
-                                <span class="align-middle font-medium">Calendar</span>
-                            </a>
-
-                            <a href="javascript:void(0);" class="dropdown-item flex-col gap-0 border border-dashed border-default-300 rounded text-center py-3">
-                                <span class="size-8 rounded-full flex items-center justify-center bg-primary/15 text-primary mx-auto mb-1.25">
-                                    <i class="iconify tabler--message-circle text-lg"></i>
-                                </span>
-                                <span class="align-middle font-medium">Chat</span>
-                            </a>
-
-                            <a href="javascript:void(0);" class="dropdown-item flex-col gap-0 border border-dashed border-default-300 rounded text-center py-3">
-                                <span class="size-8 rounded-full flex items-center justify-center bg-primary/15 text-primary mx-auto mb-1.25">
-                                    <i class="iconify tabler--folder text-lg"></i>
-                                </span>
-                                <span class="align-middle font-medium">Files</span>
-                            </a>
-
-                            <a href="javascript:void(0);" class="dropdown-item flex-col gap-0 border border-dashed border-default-300 rounded text-center py-3">
-                                <span class="size-8 rounded-full flex items-center justify-center bg-primary/15 text-primary mx-auto mb-1.25">
-                                    <i class="iconify tabler--users text-lg"></i>
-                                </span>
-                                <span class="align-middle font-medium">Team</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- Start: End Dropdown --}}
-
-            {{-- Start: Notification Dropdown --}}
-            <div id="notification-dropdown-people" class="topbar-item hs-dropdown relative inline-flex [--auto-close:inside] [--placement:bottom-right]">
-                <button class="topbar-link hs-dropdown-toggle relative flex items-center" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                    <i class="iconify tabler--bell topbar-link-icon"></i>
-                    <span class="badge bg-danger absolute -end-px -top-[13px] size-4 rounded-full leading-0 text-white">5</span>
-                </button>
-
-                <div class="hs-dropdown-menu min-w-80 p-0 space-y-0" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-menu">
-                    <div class="border-default-300 border-b px-3 py-2">
-                        <div class="flex items-center justify-between">
-                            <h6 class="text-base font-semibold">Notifications</h6>
-                            <a href="#!" class="badge badge-label bg-success/15 text-success">07 Notification</a>
-                        </div>
-                    </div>
-
-                    <div style="max-height: 300px" data-simplebar="">
-                        <!-- item 1 -->
-                        <div class="dropdown-item gap-6 px-4.5 py-3 text-wrap" id="message-1">
-                            <span class="shrink-0 relative">
-                                <img src="{{ URL::asset('assets/admin/images/users/user-4.jpg') }}" class="size-9 rounded-full" alt="User Avatar">
-                                <span class="absolute -top-3 -end-2 border-2 border-card bg-success text-white flex size-5.5 items-center justify-center rounded-full">
-                                    <i class="iconify tabler--bell text-2xs align-middle"></i>
-                                    <span class="sr-only">unread notification</span>
-                                </span>
-                            </span>
-
-                            <span class="grow text-default-400">
-                                <span class="font-medium text-body-color">Emily Johnson</span>
-                                commented on a task in
-                                <span class="font-medium text-body-color">Design Sprint</span>
-                                <br>
-                                <span class="text-xs">12 minutes ago</span>
+                            <span class="input-group-text">
+                                <kbd class="flex items-center bg-secondary-transparent text-[10px] font-medium text-text-title py-0.5 p-1 rounded-[5px]"><img src="{{ URL::asset('assets/admin/img/icons/command.svg') }}" alt="img" class="me-1">K</kbd>
                             </span>
                         </div>
-
-                        <!-- Notification 2 -->
-                        <div class="dropdown-item gap-6 px-4.5 py-3 text-wrap" id="message-2">
-                            <span class="shrink-0 relative">
-                                <img src="{{ URL::asset('assets/admin/images/users/user-5.jpg') }}" class="size-9 rounded-full" alt="User Avatar">
-                                <span class="absolute -top-3 -end-2 border-2 border-card bg-info text-white flex size-5.5 items-center justify-center rounded-full">
-                                    <i class="iconify tabler--cloud-upload text-2xs align-middle"></i>
-                                    <span class="sr-only">upload notification</span>
-                                </span>
-                            </span>
-                            <span class="grow text-default-400">
-                                <span class="font-medium text-body-color">Michael Lee</span>
-                                uploaded files to
-                                <span class="font-medium text-body-color">Marketing Assets</span>
-                                <br>
-                                <span class="text-xs">25 minutes ago</span>
-                            </span>
+                        <div id="search-dropdown" class="dropdown-menu hidden search-dropdown w-[300px] h-[315px] shadow overflow-y-auto mt-0 p-5 rounded-[10px]">
+                            <div class="text-sm text-text-default mt-0 mb-[15px] mx-0 pt-0 pb-[15px] px-0 border-b-border-color border-b">
+                                <h6 class="flex items-center text-sm font-bold mb-[15px]"><span><i data-feather="search" class="feather-16 w-3.5 text-secondary me-1.5"></i></span>Recent Searches
+                                </h6>
+                                <ul class="search-tags flex items-center gap-[10px]">
+                                    <li><a href="javascript:void(0);" class="block text-text-default bg-secondary-transparent px-2.5 py-[5px] rounded-[50px] hover:bg-primary hover:text-white">Products</a></li>
+                                    <li><a href="javascript:void(0);" class="block text-text-default bg-secondary-transparent px-2.5 py-[5px] rounded-[50px] hover:bg-primary hover:text-white">Sales</a></li>
+                                    <li><a href="javascript:void(0);" class="block text-text-default bg-secondary-transparent px-2.5 py-[5px] rounded-[50px] hover:bg-primary hover:text-white">Applications</a></li>
+                                </ul>
+                            </div>
+                            <div class="text-sm text-text-default mt-0 mb-[15px] mx-0 pt-0 pb-[15px] px-0 border-b-border-color border-b">
+                                <h6 class="flex items-center text-sm font-bold mb-[15px]"><span><i data-feather="help-circle" class="feather-16 w-3.5 text-secondary me-1.5"></i></span>Help</h6>
+                                <p class="mb-[10px]">How to Change Product Volume from 0 to 200 on Inventory management</p>
+                                <p>Change Product Name</p>
+                            </div>
+                            <div class="text-sm text-text-default mt-0 mx-0 pt-0 px-0">
+                                <h6 class="flex items-center text-sm font-bold mb-[15px]"><span><i data-feather="user" class="feather-16 w-3.5 text-secondary me-1.5"></i></span>Customers</h6>
+                                <ul class="customers">
+                                    <li class="mb-[15px]"><a href="javascript:void(0);" class="text-text-default text-[15px] flex items-center justify-between hover:text-primary">Aron Varu<img src="{{ $profile_photo }}" alt="Img" class="w-[30px] h-[30px] border rounded-[100%] border-border-color"></a></li>
+                                    <li class="mb-[15px]"><a href="javascript:void(0);" class="text-text-default text-[15px] flex items-center justify-between hover:text-primary">Jonita<img src="{{ URL::asset('assets/admin/img/profiles/avatar-01.jpg') }}" alt="Img" class="w-[30px] h-[30px] border rounded-[100%] border-border-color"></a></li> 
+                                    <li><a href="javascript:void(0);" class="text-text-default text-[15px] flex items-center justify-between hover:text-primary">Aaron<img src="{{ URL::asset('assets/admin/img/profiles/avatar-10.jpg') }}" alt="Img" class="w-[30px] h-[30px] border rounded-[100%] border-border-color"></a></li>
+                                </ul>
+                            </div>
                         </div>
-
-                        <!-- Notification 3 - Server CPU Alert -->
-                        <div class="dropdown-item gap-6 px-4.5 py-3 text-wrap" id="message-6">
-                            <span class="shrink-0 relative">
-                                <span class="size-9 rounded-full bg-light flex items-center justify-center">
-                                    <i class="iconify tabler--database text-lg"></i>
-                                </span>
-                                <span class="absolute -top-3 -end-2 border-2 border-card bg-danger text-white flex size-5.5 items-center justify-center rounded-full">
-                                    <i class="iconify tabler--alert-circle text-2xs align-middle"></i>
-                                    <span class="sr-only">server alert</span>
-                                </span>
-                            </span>
-                            <span class="grow text-default-400">
-                                <span class="font-medium text-body-color">Server #3</span>
-                                CPU usage exceeded 90%
-                                <br>
-                                <span class="text-xs">Just now</span>
-                            </span>
-                        </div>
-
-                        <!-- Notification 4 -->
-                        <div class="dropdown-item gap-6 px-4.5 py-3 text-wrap" id="message-3">
-                            <span class="shrink-0 relative">
-                                <img src="{{ URL::asset('assets/admin/images/users/user-6.jpg') }}" class="size-9 rounded-full" alt="User Avatar">
-                                <span class="absolute -top-3 -end-2 border-2 border-card bg-warning text-white flex size-5.5 items-center justify-center rounded-full">
-                                    <i class="iconify tabler--alert-triangle text-2xs align-middle"></i>
-                                    <span class="sr-only">alert</span>
-                                </span>
-                            </span>
-                            <span class="grow text-default-400">
-                                <span class="font-medium text-body-color">Sophia Ray</span>
-                                flagged an issue in
-                                <span class="font-medium text-body-color">Bug Tracker</span>
-                                <br>
-                                <span class="text-xs">40 minutes ago</span>
-                            </span>
-                        </div>
-
-                        <!-- Notification 5 -->
-                        <div class="dropdown-item gap-6 px-4.5 py-3 text-wrap" id="message-4">
-                            <span class="shrink-0 relative">
-                                <img src="{{ URL::asset('assets/admin/images/users/user-7.jpg') }}" class="size-9 rounded-full" alt="User Avatar">
-                                <span class="absolute -top-3 -end-2 border-2 border-card bg-primary text-white flex size-5.5 items-center justify-center rounded-full">
-                                    <i class="iconify tabler--calendar-event text-2xs align-middle"></i>
-                                    <span class="sr-only">event notification</span>
-                                </span>
-                            </span>
-                            <span class="grow text-default-400">
-                                <span class="font-medium text-body-color">David Kim</span>
-                                scheduled a meeting for
-                                <span class="font-medium text-body-color">UX Review</span>
-                                <br>
-                                <span class="text-xs">1 hour ago</span>
-                            </span>
-                        </div>
-
-                        <!-- Notification 6 -->
-                        <div class="dropdown-item gap-6 px-4.5 py-3 text-wrap" id="message-5">
-                            <span class="shrink-0 relative">
-                                <img src="{{ URL::asset('assets/admin/images/users/user-8.jpg') }}" class="size-9 rounded-full" alt="User Avatar">
-                                <span class="absolute -top-3 -end-2 border-2 border-card bg-secondary text-white flex size-5.5 items-center justify-center rounded-full">
-                                    <i class="iconify tabler--edit text-2xs align-middle"></i>
-                                    <span class="sr-only">edit</span>
-                                </span>
-                            </span>
-                            <span class="grow text-default-400">
-                                <span class="font-medium text-body-color">Isabella White</span>
-                                updated the document in
-                                <span class="font-medium text-body-color">Product Specs</span>
-                                <br>
-                                <span class="text-xs">2 hours ago</span>
-                            </span>
-                        </div>
-
-                        <!-- Notification 7 - Deployment Success -->
-                        <div class="dropdown-item gap-6 px-4.5 py-3 text-wrap" id="message-7">
-                            <span class="shrink-0 relative">
-                                <span class="size-9 rounded-full bg-light flex items-center justify-center">
-                                    <i class="iconify tabler--rocket text-lg"></i>
-                                </span>
-                                <span class="absolute -top-3 -end-2 border-2 border-card bg-success text-white flex size-5.5 items-center justify-center rounded-full">
-                                    <i class="iconify tabler--check text-2xs align-middle"></i>
-                                    <span class="sr-only">deployment</span>
-                                </span>
-                            </span>
-                            <span class="grow text-default-400">
-                                <span class="font-medium text-body-color">Production Server</span>
-                                deployment completed successfully
-                                <br>
-                                <span class="text-xs">30 minutes ago</span>
-                            </span>
-                        </div>
-                    </div>
-                    <!-- end dropdown-->
-
-                    <!-- All-->
-                    <a href="javascript:void(0);" class="dropdown-item text-reset border-light justify-center border-t py-3 font-bold underline underline-offset-2">Read All Messages</a>
-                </div>
-            </div>
-            {{-- End: Notification Dropdown --}}
-
-            {{-- Start: Fullscreen Toggle --}}
-            <div id="fullscreen-toggler" class="md:inline-flex hidden">
-                <div class="topbar-item">
-                    <button class="topbar-link btn group size-8 rounded-full" data-toggle="fullscreen" aria-label="Full Screen">
-                        <i class="iconify tabler--maximize topbar-link-icon group-[.fullscreen-active]:hidden"></i>
-                        <i class="iconify tabler--minimize hidden topbar-link-icon group-[.fullscreen-active]:inline-block"></i>
-                    </button>
-                </div>
-            </div>
-            {{-- End: Fullscreen Toggle --}}
-
-            {{-- Start: Monochrome Mode Toggle --}}
-            <div class="xl:inline-flex hidden">
-                <div id="monochrome-toggler" class="topbar-item">
-                    <button class="topbar-link btn btn-sm size-8 rounded-full" id="monochrome-mode" type="button" aria-label="Monochrome Mode">
-                        <i class="iconify tabler--palette topbar-link-icon"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="sm:inline-flex hidden">
-                <div class="topbar-item btn-theme-setting">
-                    <button class="topbar-link btn btn-icon size-8 rounded-full" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="theme-customization" data-hs-overlay="#theme-customization">
-                        <i class="iconify tabler--settings topbar-link-icon"></i>
-                    </button>
-                </div>
-            </div>
-            {{-- End: Monochrome Mode Toggle --}}
-
-            {{-- Start: Language Selector --}}
-            <div id="language-selector-rounded" class="topbar-item hs-dropdown relative inline-flex [--placement:bottom-right]">
-                {{-- Get Current Language --}}
-                @php
-                    $currentLanguage = strtoupper(Lang::locale());
-                    $selectedLanguageImage = 'us.svg'; // Default to English flag
-
-                    if($currentLanguage === 'EN') {
-                        $selectedLanguageImage = 'us.svg';
-                    } elseif($currentLanguage === 'DE') {
-                        $selectedLanguageImage = 'de.svg';
-                    } elseif($currentLanguage === 'IT') {
-                        $selectedLanguageImage = 'it.svg';
-                    } elseif($currentLanguage === 'ES') {
-                        $selectedLanguageImage = 'es.svg';
-                    } elseif($currentLanguage === 'ID') {
-                        $selectedLanguageImage = 'id.svg';
-                    } elseif($currentLanguage === 'RU') {
-                        $selectedLanguageImage = 'ru.svg';
-                    } elseif($currentLanguage === 'HI') {
-                        $selectedLanguageImage = 'in.svg';
-                    } elseif($currentLanguage === 'AR') {
-                        $selectedLanguageImage = 'sa.svg';
-                    }
-                @endphp
-                <button class="topbar-link hs-dropdown-toggle font-bold relative flex items-center" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                    <img src="{{ URL::asset('assets/admin/images/flags/' . $selectedLanguageImage) }}" alt="" class="me-3 size-4.5 rounded-full" id="selected-language-image">
-                    <span id="selected-language-code">{{ $currentLanguage }}</span>
-                </button>
-
-                <div class="hs-dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-menu">
-                    <a href="{{ route('change-locale', 'en') }}" class="dropdown-item" data-translator-lang="en" title="English">
-                        <img src="{{ URL::asset('assets/admin/images/flags/us.svg') }}" alt="English" class="me-1 size-4 rounded-full" height="18" data-translator-image="">
-                        <span class="align-middle">English</span>
-                    </a>
-                    <a href="{{ route('change-locale', 'id') }}" class="dropdown-item" data-translator-lang="id" title="Indonesian">
-                        <img src="{{ URL::asset('assets/admin/images/flags/id.svg') }}" alt="Indonesian" class="me-1 size-4 rounded-full" height="18" data-translator-image="">
-                        <span class="align-middle">Indonesia</span>
-                    </a>
-                </div>
-            </div>
-            {{-- End: Language Selector --}}
-
-            {{-- Start: User Dropdown --}}
-            <div id="user-dropdown-detailed" class="topbar-item hs-dropdown before:bg-default-700/35 relative inline-flex before:h-4.5 before:w-px before:content-['']">
-                <button class="hs-dropdown-toggle topbar-link ms-2.5 cursor-pointer items-center px-3! flex" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                    {{-- Start Get Profile Photo --}}
-                    @php
-                        $profile_photo = Auth::user()?->userProfile?->profile_photo
-                        ? URL::asset('storage/' . Auth::user()->userProfile->profile_photo)
-                        : URL::asset('assets/admin/images/users/default.jpg');
-                    @endphp
-                    {{-- End Get Profile Photo --}}
-                    
-                    <img src="{{ $profile_photo }}" alt="user-image" class="size-8 rounded-full lg:me-3">
-                    <div class="hidden lg:flex items-center gap-1.5">
-                        <span class="flex flex-col items-start">
-                            <h5 class="pro-username">{{ Auth::user()->name }}</h5>
-                            <span class="text-xs/none mb-0.5">{{ ucwords(Auth::user()->roles->pluck('name')->toArray()[0]) }}</span>
-                        </span>
-                        <i class="iconify tabler--chevron-down align-middle"></i>
-                    </div>
-                </button>
-
-                <div class="hs-dropdown-menu min-w-48" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-with-icons">
-                    <!-- Header -->
-                    <div class="py-2 px-3.5">
-                        <h6 class="text-xs">Hallo, {{ Auth::user()->name }}</h6>
-                    </div>
-
-                    <!-- My Profile -->
-                    <a href="{{ route('profile.edit') }}" class="dropdown-item">
-                        <i class="iconify tabler--user-circle text-base align-middle"></i>
-                        <span class="align-middle">Profil Saya</span>
-                    </a>
-
-                    <!-- Logout -->
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                        <button type="submit" class="dropdown-item font-semibold">
-                            <i class="iconify tabler--logout text-base align-middle text-danger"></i>
-                            <span class="align-middle text-danger">Log Out</span>
-                        </button>
                     </form>
                 </div>
-            </div>
-            {{-- End: User Dropdown --}}    
-        </div>
-    </div>
-</header>
-{{-- End: Topbar --}}
+            </li>
+            <!-- /Search -->
 
+            {{-- Start : Alert Impersonate --}}
+            @if($impersonate_data['is_impersonating'])
+                <li class="nav-item flex-1 flex items-center justify-center px-4">
+                    <div class="inline-flex items-center gap-2 bg-danger border border-warning text-warning px-3 py-1.5 rounded-md">
+                        <i class="ti ti-alert-triangle text-[18px] leading-none"></i>
+                        <span class="text-xs font-medium whitespace-nowrap">
+                            Mode impersonate aktif:
+                            <strong>{{ $impersonate_data['impersonated_user']->name }}</strong>
+                            <span class="hidden xl:inline">({{ $impersonate_data['impersonated_user']->email }})</span>
+                        </span>
+                        <form action="{{ route('settings.impersonate.destroy', $impersonate_data['impersonated_user']->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                title="Keluar dari mode impersonate"
+                                class="inline-flex items-center justify-center w-6 h-6 bg-warning text-white hover:bg-warning-hover rounded transition-all cursor-pointer">
+                                <i class="ti ti-logout text-[14px] leading-none"></i>
+                            </button>
+                        </form>
+                    </div>
+                </li>
+            @endif
+            {{-- End : Alert Impersonate --}}
+
+            <!-- Select Store -->
+            <li class="nav-item dropdown relative select-store-dropdown">
+                <a href="javascript:void(0);" class="px-[8px] py-[6px] border border-[#E6EAED] rounded-[8px] nav-link select-store"
+                    data-dropdown-toggle="store-dropdown">
+                    <span class="user-info flex items-center justify-center relative ">
+                        <span class="w-4 h-4 me-2">
+                            <img src="{{ URL::asset('assets/admin/img/store/store-01.png') }}" alt="Store Logo" class="rounded">
+                        </span>
+                        <span class="user-detail">
+                            <span class="text-sm font-normal text-gray-900">Freshmart</span>
+                        </span>
+                    </span>
+                </a>
+                <div id="store-dropdown" class="dropdown-menu p-2 hidden">
+                    <a href="javascript:void(0);" class="flex items-center text-text-default text-[0.8125rem] px-[0.9375rem] py-2 whitespace-nowrap hover:bg-primary/5 hover:text-primary focus:bg-primary/5 focus:text-primary active:bg-primary/5 active:text-primary">
+                        <img src="{{ URL::asset('assets/admin/img/store/store-01.png') }}" alt="Store Logo" class="w-5 h-5 rounded me-2">Freshmart
+                    </a>
+                    <a href="javascript:void(0);" class="flex items-center text-text-default text-[0.8125rem] px-[0.9375rem] py-2 whitespace-nowrap hover:bg-primary/5 hover:text-primary focus:bg-primary/5 focus:text-primary active:bg-primary/5 active:text-primary">
+                        <img src="{{ URL::asset('assets/admin/img/store/store-02.png') }}" alt="Store Logo" class="w-5 h-5 rounded me-2">Grocery Apex
+                    </a>
+                    <a href="javascript:void(0);" class="flex items-center text-text-default text-[0.8125rem] px-[0.9375rem] py-2 whitespace-nowrap hover:bg-primary/5 hover:text-primary focus:bg-primary/5 focus:text-primary active:bg-primary/5 active:text-primary">
+                        <img src="{{ URL::asset('assets/admin/img/store/store-03.png') }}" alt="Store Logo" class="w-5 h-5 rounded me-2">Grocery Bevy
+                    </a>
+                    <a href="javascript:void(0);" class="flex items-center text-text-default text-[0.8125rem] px-[0.9375rem] py-2 whitespace-nowrap hover:bg-primary/5 hover:text-primary focus:bg-primary/5 focus:text-primary active:bg-primary/5 active:text-primary">
+                        <img src="{{ URL::asset('assets/admin/img/store/store-04.png') }}" alt="Store Logo" class="w-5 h-5 rounded me-2">Grocery Eden
+                    </a>
+                </div>
+            </li>
+            <!-- /Select Store -->
+
+            <li class="nav-item dropdown relative link-nav">
+                <a href="javascript:void(0);" class="btn bg-primary border border-primary text-white text-center hover:bg-primary-hover hover:text-white btn-md inline-flex items-center" data-dropdown-toggle="new-dropdown">
+                    <i class="ti ti-circle-plus me-1"></i>Add New
+                </a>
+                <div id="new-dropdown" class="hidden dropdown-menu p-5 w-[600px]">
+                    <div class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-6 gap-[8px]">
+                        <div>
+                            <a href="category-list.html" class="group block text-center border border-border-color rounded-[8px] p-[10px] hover:bg-primary-100 hover:border-primary-100 transition-all">
+                                <span class="w-[36px] h-[36px] rounded-[8px] mx-auto mb-2 inline-flex items-center justify-center text-secondary bg-secondary-transparent group-hover:bg-primary group-hover:text-white transition-all">
+                                    <i class="ti ti-brand-codepen"></i>
+                                </span>
+                                <p class="text-[13px] text-text-default group-hover:text-primary">Category</p>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="add-product.html" class="group block text-center border border-border-color rounded-[8px] p-[10px] hover:bg-primary-100 hover:border-primary-100 transition-all">
+                                <span class="w-[36px] h-[36px] rounded-[8px] mx-auto mb-2 inline-flex items-center justify-center text-secondary bg-secondary-transparent group-hover:bg-primary group-hover:text-white transition-all">
+                                    <i class="ti ti-square-plus"></i>
+                                </span>
+                                <p class="text-[13px] text-text-default group-hover:text-primary">Product</p>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="category-list.html" class="group block text-center border border-border-color rounded-[8px] p-[10px] hover:bg-primary-100 hover:border-primary-100 transition-all">
+                                <span class="w-[36px] h-[36px] rounded-[8px] mx-auto mb-2 inline-flex items-center justify-center text-secondary bg-secondary-transparent group-hover:bg-primary group-hover:text-white transition-all">
+                                    <i class="ti ti-shopping-bag"></i>
+                                </span>
+                                <p class="text-[13px] text-text-default group-hover:text-primary">Purchase</p>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="online-orders.html" class="group block text-center border border-border-color rounded-[8px] p-[10px] hover:bg-primary-100 hover:border-primary-100 transition-all">
+                                <span class="w-[36px] h-[36px] rounded-[8px] mx-auto mb-2 inline-flex items-center justify-center text-secondary bg-secondary-transparent group-hover:bg-primary group-hover:text-white transition-all">
+                                    <i class="ti ti-shopping-cart"></i>
+                                </span>
+                                <p class="text-[13px] text-text-default group-hover:text-primary">Sale</p>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="expense-list.html" class="group block text-center border border-border-color rounded-[8px] p-[10px] hover:bg-primary-100 hover:border-primary-100 transition-all">
+                                <span class="w-[36px] h-[36px] rounded-[8px] mx-auto mb-2 inline-flex items-center justify-center text-secondary bg-secondary-transparent group-hover:bg-primary group-hover:text-white transition-all">
+                                    <i class="ti ti-file-text"></i>
+                                </span>
+                                <p class="text-[13px] text-text-default group-hover:text-primary">Expense</p>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="quotation-list.html" class="group block text-center border border-border-color rounded-[8px] p-[10px] hover:bg-primary-100 hover:border-primary-100 transition-all">
+                                <span class="w-[36px] h-[36px] rounded-[8px] mx-auto mb-2 inline-flex items-center justify-center text-secondary bg-secondary-transparent group-hover:bg-primary group-hover:text-white transition-all">
+                                    <i class="ti ti-device-floppy"></i>
+                                </span>
+                                <p class="text-[13px] text-text-default group-hover:text-primary">Quotation</p>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="sales-returns.html" class="group block text-center border border-border-color rounded-[8px] p-[10px] hover:bg-primary-100 hover:border-primary-100 transition-all">
+                                <span class="w-[36px] h-[36px] rounded-[8px] mx-auto mb-2 inline-flex items-center justify-center text-secondary bg-secondary-transparent group-hover:bg-primary group-hover:text-white transition-all">
+                                    <i class="ti ti-copy"></i>
+                                </span>
+                                <p class="text-[13px] text-text-default group-hover:text-primary">Return</p>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="users.html" class="group block text-center border border-border-color rounded-[8px] p-[10px] hover:bg-primary-100 hover:border-primary-100 transition-all">
+                                <span class="w-[36px] h-[36px] rounded-[8px] mx-auto mb-2 inline-flex items-center justify-center text-secondary bg-secondary-transparent group-hover:bg-primary group-hover:text-white transition-all">
+                                    <i class="ti ti-user"></i>
+                                </span>
+                                <p class="text-[13px] text-text-default group-hover:text-primary">User</p>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="customers.html" class="group block text-center border border-border-color rounded-[8px] p-[10px] hover:bg-primary-100 hover:border-primary-100 transition-all">
+                                <span class="w-[36px] h-[36px] rounded-[8px] mx-auto mb-2 inline-flex items-center justify-center text-secondary bg-secondary-transparent group-hover:bg-primary group-hover:text-white transition-all">
+                                    <i class="ti ti-users"></i>
+                                </span>
+                                <p class="text-[13px] text-text-default group-hover:text-primary">Customer</p>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="sales-report.html" class="group block text-center border border-border-color rounded-[8px] p-[10px] hover:bg-primary-100 hover:border-primary-100 transition-all">
+                                <span class="w-[36px] h-[36px] rounded-[8px] mx-auto mb-2 inline-flex items-center justify-center text-secondary bg-secondary-transparent group-hover:bg-primary group-hover:text-white transition-all">
+                                    <i class="ti ti-shield"></i>
+                                </span>
+                                <p class="text-[13px] text-text-default group-hover:text-primary">Biller</p>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="suppliers.html" class="group block text-center border border-border-color rounded-[8px] p-[10px] hover:bg-primary-100 hover:border-primary-100 transition-all">
+                                <span class="w-[36px] h-[36px] rounded-[8px] mx-auto mb-2 inline-flex items-center justify-center text-secondary bg-secondary-transparent group-hover:bg-primary group-hover:text-white transition-all">
+                                    <i class="ti ti-user-check"></i>
+                                </span>
+                                <p class="text-[13px] text-text-default group-hover:text-primary">Supplier</p>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="stock-transfer.html" class="group block text-center border border-border-color rounded-[8px] p-[10px] hover:bg-primary-100 hover:border-primary-100 transition-all">
+                                <span class="w-[36px] h-[36px] rounded-[8px] mx-auto mb-2 inline-flex items-center justify-center text-secondary bg-secondary-transparent group-hover:bg-primary group-hover:text-white transition-all">
+                                    <i class="ti ti-truck"></i>
+                                </span>
+                                <p class="text-[13px] text-text-default group-hover:text-primary">Transfer</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            <li class="nav-item pos-nav">
+                <a href="pos.html" class="btn bg-dark border border-dark text-white text-center hover:bg-black hover:text-white btn-md inline-flex items-center">
+                    <i class="ti ti-device-laptop me-1"></i>POS
+                </a>
+            </li>
+
+            <!-- Flag -->
+            <li class="nav-item dropdown relative flag-nav nav-item-box">
+                <a class="nav-link dropdown-toggle"  data-dropdown-toggle="flag-dropdown" href="javascript:void(0);"
+                    role="button">
+                    <img src="{{ URL::asset('assets/admin/img/flags/us-flag.svg') }}" alt="Language" class="img-fluid">
+                </a>
+                <div id="flag-dropdown" class="dropdown-menu hidden dropdown-menu hidden-right">
+                    <a href="javascript:void(0);" class="text-gray-500 rounded-[5px] font-medium px-4 py-2 hover:text-primary hover:bg-primary/5 focus:bg-primary/5 focus:text-primary active:bg-primary/5 active:text-primary">
+                        <img src="{{ URL::asset('assets/admin/img/flags/english.svg') }}" alt="Img" height="16">English
+                    </a>
+                    <a href="javascript:void(0);" class="text-gray-500 rounded-[5px] font-medium px-4 py-2 hover:text-primary hover:bg-primary/5 focus:bg-primary/5 focus:text-primary active:bg-primary/5 active:text-primary">
+                        <img src="{{ URL::asset('assets/admin/img/flags/arabic.svg') }}" alt="Img" height="16">Arabic
+                    </a>
+                </div>
+            </li>
+            <!-- /Flag -->
+
+            <li class="nav-item nav-item-box">
+                <a href="javascript:void(0);" id="btnFullscreen">
+                    <i class="ti ti-maximize"></i>
+                </a>
+            </li>
+            <li class="nav-item nav-item-box">
+                <a href="email.html">
+                    <i class="ti ti-mail"></i>
+                    <span class="text-[11px] capitalize font-medium tracking-[0.5px] px-[0.45rem] py-[0.35rem] rounded-full leading-none rounded-pill">1</span>
+                </a>
+            </li>
+            <!-- Notifications -->
+            <li class="nav-item dropdown relative nav-item-box">
+                <a href="javascript:void(0);" class="dropdown-toggle nav-link"  data-dropdown-toggle="notification-dropdown">
+                    <i class="ti ti-bell"></i>
+                </a>
+                <div id="notification-dropdown" class="dropdown-menu hidden notifications w-[350px] right-0">
+                    <div class="border-b border-border-color text-center text-[12px] px-[20px] py-[15px] flex items-center justify-between">
+                        <h5 class="notification-title">Notifications</h5>
+                        <a href="javascript:void(0)" class="text-primary font-medium">Mark all as read</a>
+                    </div>
+                    <div class="noti-content">
+                        <ul class="notification-list">
+                            <li class="border-b border-border-color">
+                                <a href="activities.html" class="block relative p-5">
+                                    <div class="media flex">
+                                        <span class="w-12 h-12 me-2 shrink-0">
+                                            <img alt="Img" src="{{ URL::asset('assets/admin/img/profiles/avatar-13.jpg') }}" class="rounded-[50%]">
+                                        </span>
+                                        <div class="flex-grow-1">
+                                            <p class="text-text-default font-medium mb-1"><span class="text-gray-900">James Kirwin</span> confirmed his order.  Order No: #78901.Estimated delivery: 2 days</p>
+                                            <p class="text-text-default">4 mins ago</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="border-b border-border-color">
+                                <a href="activities.html" class="block relative p-5">
+                                    <div class="media flex">
+                                        <span class="w-12 h-12 me-2 shrink-0">
+                                            <img alt="Img" src="{{ URL::asset('assets/admin/img/profiles/avatar-03.jpg') }}" class="rounded-[50%]">
+                                        </span>
+                                        <div class="flex-grow-1">
+                                            <p class="text-text-default font-medium mb-1"><span class="text-gray-900">Leo Kelly</span> cancelled his order scheduled for  17 Jan 2025</p>
+                                            <p class="text-text-default">10 mins ago</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="border-b border-border-color">
+                                <a href="activities.html" class="block relative p-5 recent-msg">
+                                    <div class="media flex">
+                                        <span class="w-12 h-12 me-2 shrink-0">
+                                            <img alt="Img" src="{{ URL::asset('assets/admin/img/profiles/avatar-17.jpg') }}" class="rounded-[50%]">
+                                        </span>
+                                        <div class="flex-grow-1">
+                                            <p class="text-text-default font-medium mb-1">Payment of $50 received for Order #67890 from <span class="text-gray-900">Antonio Engle</span></p>
+                                            <p class="text-text-default">05 mins ago</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="notification-message">
+                                <a href="activities.html" class="block relative p-5 recent-msg">
+                                    <div class="media flex">
+                                        <span class="w-12 h-12 me-2 shrink-0">
+                                            <img alt="Img" src="{{ URL::asset('assets/admin/img/profiles/avatar-02.jpg') }}" class="rounded-[50%]">
+                                        </span>
+                                        <div class="flex-grow-1">
+                                            <p class="text-text-default font-medium mb-1"><span class="text-gray-900">Andrea</span> confirmed his order.  Order No: #73401.Estimated delivery: 3 days</p>
+                                            <p class="text-text-default">4 mins ago</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="border-t border-border-color text-center px-[20px] py-[15px] flex items-center gap-3">
+                        <a href="#" class="btn bg-secondary border border-secondary text-white text-center hover:bg-secondary-hover hover:text-white btn-md w-100">Cancel</a>
+                        <a href="activities.html" class="btn bg-primary border border-primary text-white text-center hover:bg-primary-hover hover:text-white btn-md w-100">View all</a>
+                    </div>
+                </div>
+            </li>
+            <!-- /Notifications -->
+
+            <li class="nav-item nav-item-box">
+                <a href="general-settings.html"><i class="ti ti-settings"></i></a>
+            </li>
+            <li class="nav-item dropdown relative profile-nav">
+                <a href="javascript:void(0);" class="nav-link userset" data-dropdown-toggle="profile-dropdown">
+                    <span class="user-info p-0">
+                        <span class="user-letter flex items-center justify-center text-white w-8 h-8 font-semibold text-[15px] rounded-[10px]">
+                            <img src="{{ $profile_photo }}" alt="Img" class="img-fluid">
+                        </span>
+                    </span>
+                </a>
+                <div id="profile-dropdown" class="dropdown-menu menu-drop-user hidden">
+                    <div class="bg-light mb-2 p-4 rounded-[5px] flex items-center">
+                        <span class="user-img me-2">
+                            <img src="{{ $profile_photo }}" alt="Img" class="w-10 h-10 shrink-0 rounded-[50%]">
+                        </span>
+                        <div>
+                            <h6 class="font-medium">{{ Auth::user()->name }}</h6>
+                            <p>{{ ucwords(Auth::user()->roles->pluck('name')->toArray()[0]) }}</p>
+                        </div>
+                    </div>
+                    <a class="dropdown-item flex items-center font-medium px-4 py-2 hover:text-primary hover:bg-primary/5 focus:bg-primary/5 focus:text-primary active:bg-primary/5 active:text-primary" href="{{ route('profile.edit') }}"><i class="ti ti-user-circle me-2"></i>Profile Saya</a>
+                    <hr class="my-2">
+                    {{-- START: Logout Button --}}
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                        <button type="submit" 
+                            class="btn dropdown-item flex items-center font-medium text-danger px-4 py-2 hover:text-danger-hover hover:bg-primary/5 focus:bg-primary/5 focus:text-danger-hover active:bg-primary/5 active:text-danger-hover" 
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="ti ti-logout me-2"></i>
+                            Logout
+                        </button>
+                    </form>
+                    {{-- End: Logout Button --}}
+                </div>
+            </li>
+        </ul>
+        <!-- /Header Menu -->
+
+        <!-- Mobile Menu -->
+        <div class="dropdown mobile-user-menu">
+            <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-dropdown-toggle="mobile-dropdown"><i class="fa fa-ellipsis-v"></i></a>
+            <div class="dropdown-menu hidden dropdown-menu hidden-right" id="mobile-dropdown">
+                <a class="flex items-center font-medium px-4 py-2 hover:text-primary hover:bg-primary/5 focus:bg-primary/5 focus:text-primary active:bg-primary/5 active:text-primary" href="{{ route('profile.edit') }}">Profile Saya</a>
+                {{-- START: Logout Button --}}
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                    <button type="submit" 
+                        class="btn flex items-center font-medium px-4 py-2 hover:text-primary hover:bg-primary/5 focus:bg-primary/5 focus:text-primary active:bg-primary/5 active:text-primary" 
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="ti ti-logout me-2"></i>
+                        Logout
+                    </button>
+                </form>
+                {{-- End: Logout Button --}}
+            </div>
+        </div>
+        <!-- /Mobile Menu -->
+    </div>
+</div>
+<!-- /Header -->
+
+{{-- Start: Scripts --}}
 @push('scripts')
-{{-- Start: Logout Confirmation --}}
-    <script>
-        // Logout Confirmation
-        document.getElementById('logout-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Anda akan keluar dari aplikasi!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#919191',
-                confirmButtonText: 'Ya, logout!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.submit(); // Submit the form if confirmed
-                }
-            });
-        });
-    </script>
-{{-- End: Logout Confirmation --}}
+    {{-- Start: Sweetalert Confirmation Logout --}}
+
+    {{-- End: Sweetalert Confirmation Logout --}}
 @endpush
+{{-- End: Scripts --}}

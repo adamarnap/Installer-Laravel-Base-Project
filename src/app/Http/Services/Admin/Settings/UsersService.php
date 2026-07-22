@@ -13,12 +13,11 @@ class UsersService
     /* Get all users */
     public function getAllUsersForDataTable()
     {
-        $users = User::query()
-            ->select('users.*')
-            ->with('roles')
+        $users = User::with('roles')
             ->whereDoesntHave('roles', function ($query) {
                 $query->where('name', RoleEnum::DEVELOPER->value);
-            });
+            })
+            ->orderBy('name');
         
         return Datatables::eloquent($users)
             ->addIndexColumn()
@@ -30,42 +29,33 @@ class UsersService
             })
             ->addColumn('status', function ($row) {
                 if ($row->is_active == 1) {
-                    return '<span class="badge border-primary text-primary rounded-full border text-center">Aktif</span>';
+                    return '<span class="px-[8px] py-[3px] inline-block bg-primary-50 dark:bg-[#15203c] text-primary-500 rounded-sm font-medium text-xs">Aktif</span>';
                 }
-                return '<span class="badge border-orange-500 text-orange-500 rounded-full border text-center">Tidak Aktif</span>';
+                return '<span class="px-[8px] py-[3px] inline-block bg-orange-100 dark:bg-[#15203c] text-orange-600 rounded-sm font-medium text-xs">Tidak Aktif</span>';
             })
-            ->orderColumn('name', fn ($query, $order) => $query->orderBy('users.name', $order))
-            ->orderColumn('email', fn ($query, $order) => $query->orderBy('users.email', $order))
-            ->orderColumn('created_at', fn ($query, $order) => $query->orderBy('users.created_at', $order))
             ->addColumn('aksi', function ($row) {
-                $wrapperStart = '<div class="hs-dropdown relative inline-flex">
-                    <button type="button" class="hs-dropdown-toggle flex h-7.5 w-11.25 items-center justify-center font-semibold" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown" hs-dropdown-placement="bottom-end">
-                        <i class="iconify tabler--dots-vertical text-xl"></i>
-                    </button>
-                    <div class="hs-dropdown-menu" role="menu" aria-orientation="vertical">';
+                $wrapperStart = '<div class="action-icon inline-flex gap-2 items-center">';
                 $btnEdit = '';
                 $btnDelete = '';
                 // Btn Edit
                 if (auth()->user()->can('settings-users.update')) {
-                    $btnEdit = '<a title="Edit data pengguna" href="javascript:void(0)"
-                        data-id="' . $row->id . '" data-url-action="' . route('settings.users.update', $row->id) . '" data-url-get="' . route('settings.users.edit', $row->id) . '"
-                        class="dropdown-item btn-modal-edit-user">
-                            <i class="iconify tabler--edit text-xs"></i>
-                            Edit
-                        </a>';
+                    $btnEdit = '<button type="button" title="Edit data pengguna" id="btnModalEdit"
+                        data-id="' . $row->id . '"  data-url-action="' . route('settings.users.update', $row->id) . '" data-url-get="' . route('settings.users.edit', $row->id) . '"
+                        class="btnModalEdit w-[30px] h-[30px] flex items-center justify-center border rounded-[5px] text-warning hover:bg-light-900 hover:text-primary cursor-pointer">
+                            <i class="ti ti-edit text-[16px]"></i>
+                        </button>';
                 }
 
                 // Btn Delete
                 if (auth()->user()->can('settings-users.delete')) {
-                    $btnDelete = '<a title="Hapus data pengguna" href="javascript:void(0)"
-                        data-id="' . $row->id . '" data-url-action="' . route('settings.users.destroy', $row->id) . '"
-                        class="dropdown-item text-danger btn-delete-user">
-                            <i class="iconify tabler--trash text-xs"></i>
-                            Delete
-                        </a>';
+                    $btnDelete = '<button type="button" title="Hapus data pengguna" id="btn-delete"
+                        data-id="' . $row->id . '"  data-url-action="' . route('settings.users.destroy', $row->id) . '"
+                        class="w-[30px] h-[30px] flex items-center justify-center border rounded-[5px] text-danger hover:bg-light-900 hover:text-primary cursor-pointer">
+                            <i class="ti ti-trash text-[16px]"></i>
+                        </button>';
                 }
 
-                $wrapperBottom = '</div></div>';
+                $wrapperBottom = '</div>';
 
                 return $wrapperStart . $btnEdit . ' ' . $btnDelete . $wrapperBottom;
             })
@@ -128,8 +118,9 @@ class UsersService
             // Update user data
             $user->update([
                 'name' => $data['name'] ?? $user->name,
+                'username' => $data['username'] ?? $user->username,
                 'email' => $data['email'] ?? $user->email,
-                'is_active' => isset($data['is_active']) ? (int) $data['is_active'] : $user->is_active,
+                'status' => isset($data['status']) ? (int) $data['status'] : $user->status,
             ]);
 
             // Assign roles

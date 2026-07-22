@@ -61,7 +61,7 @@ class NavigationSeeder extends Seeder
     {
         /* 
          * ========================================================================================================
-         * FOR ICONS HERE USE MATERIAL DESIGN ICONS: https://fonts.google.com/icons
+         * FOR ICONS FONT THEMIFY ICON: https://dreamspos.dreamstechnologies.com/retail-pos/html/icon-themify.html
          * ========================================================================================================
          */
         $navigationsAdmin = [
@@ -74,7 +74,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'dashboard',
                 'slug' => 'dashboard',
-                'icon' => 'dashboard',
+                'icon' => 'ti-dashboard',
                 'order' => 1,
                 'parent_id' => null,
                 'active' => true,
@@ -93,7 +93,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'profile.edit',
                 'slug' => 'profile',
-                'icon' => 'person_book',
+                'icon' => 'ti-user',
                 'order' => 500,
                 'parent_id' => null,
                 'active' => true,
@@ -105,7 +105,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => '#',
                 'slug' => 'settings',
-                'icon' => 'settings',
+                'icon' => 'ti-settings',
                 'order' => 501,
                 'parent_id' => null,
                 'active' => true,
@@ -185,7 +185,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'landing',
                 'url' => 'beranda.index',
                 'slug' => 'beranda',
-                'icon' => 'home',
+                'icon' => 'ti-home',
                 'order' => 600,
                 'parent_id' => null,
                 'active' => true,

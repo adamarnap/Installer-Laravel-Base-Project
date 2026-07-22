@@ -1,1245 +1,190 @@
-<div class="grid grid-cols-1 gap-base">
-    <div class="card">
-        <div class="card-header">
-            <h4 class="card-title">Basic DataTable</h4>
-            <a href="https://datatables.net/examples/basic_init/zero_configuration.html" target="_blank" class="group text-primary font-semibold hover:text-primary-hover">
-                View Docs
-                <i class="iconify tabler--arrow-right group-hover:translate-x-1 transform-3d transition-transform duration-300 align-middle text-base"></i>
-            </a>
-        </div>
+@push('styles')
+    <!-- Datatable CSS -->
+    <link rel="stylesheet" href="{{ URL::asset('assets/admin/css/dataTables.tailwindcss.css') }}">
+@endpush
 
-        <div class="card-body">
-            <div id="table-alert" class="hs-removing:translate-x-5 hs-removing:opacity-0 transition duration-300 bg-warning/10 text-warning text-sm rounded-lg py-3 px-4 mb-5" role="alert" tabindex="-1" aria-labelledby="hs-dismiss-button-label">
-                <div class="flex items-center">
-                    <div class="ms-2">
-                        <div id="hs-dismiss-button-label" class="">
-                            <strong>Note:</strong>
-                            This is a jQuery-based plugin, so you need to include jQuery for it to work.
-                        </div>
+@section('content')
+<!-- START: Data Table -->
+    <div class="card border bg-white rounded">
+        <div class="card-header py-4 px-5">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <div class="relative me-3">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 pointer-events-none">
+                        <i class="ti ti-search"></i>
+                    </span>
+                    <input type="text" id="user-table-search" placeholder="Search" class="pl-8 pr-4 py-2 border outline-none rounded-md text-sm placeholder:text-gray-400 focus:outline-none bg-white focus:ring-0 focus:outline-primary"/>
+                </div>
+                <div class="flex items-center gap-2">
+                    {{-- Start: Custom Button --}}
+                    <div>
+                        <a href="add-product.html" class="flex items-center gap-1 btn bg-primary border border-primary text-white text-center hover:bg-primary-hover hover:text-white">
+                            <i class="ti ti-circle-plus"></i>Add Product
+                        </a>
                     </div>
-                    <div class="ps-3 ms-auto">
-                        <button type="button" class="-mx-1.5" data-hs-remove-element="#table-alert">
-                            <span class="sr-only">Dismiss</span>
-                            <i class="iconify tabler--x text-default-600 size-4"></i>
-                        </button>
+                    {{-- End: Custom Button --}}
+
+                    {{-- Start: Custom Filter --}}
+                    <div>
+                        <a href="javascript:void(0);" class="border border-borderColor rounded py-2 px-3 bg-white inline-flex items-center text-[13px] font-semibold focus:bg-primary focus:border-primary focus:text-white text-gray-900" data-dropdown-toggle="call-duration">
+                            Brand<i class="ti ti-chevron-down ml-1"></i>
+                        </a>
+                        <ul id="call-duration" class="hidden p-2 z-[1] border border-borderColor rounded bg-white shadow-lg w-[150px]">
+                            <li>
+                                <a href="javascript:void(0);" class="rounded p-2 flex items-center hover:bg-primary-transparent hover:text-primary text-gray-900">Lenovo</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="rounded p-2 flex items-center hover:bg-primary-transparent hover:text-primary text-gray-900">Beats</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="rounded p-2 flex items-center hover:bg-primary-transparent hover:text-primary text-gray-900">Nike</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="rounded p-2 flex items-center hover:bg-primary-transparent hover:text-primary text-gray-900">Apple</a>
+                            </li>
+                        </ul>
                     </div>
+                    {{-- End: Custom Filter --}}
                 </div>
             </div>
-
-            <div class="table-wrapper -mb-4">
-                <table data-tables="basic" class="table table-striped">
-                    <thead class="thead-sm uppercase text-2xs">
-                        <tr>
-                            <th scope="col">Company</th>
-                            <th scope="col">Symbol</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Change</th>
-                            <th scope="col">Volume</th>
-                            <th scope="col">Market Cap</th>
-                            <th scope="col">Rating</th>
-                            <th scope="col">Status</th>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive  custom-table">
+                <table class="table table-nowrap border w-full border" id="data-table">
+                    <thead class="bg-light">
+                        <tr >
+                            <th class="text-left text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">No.</th>
+                            <th class="text-left text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">Nama</th>
+                            <th class="text-left text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">Email</th>
+                            <th class="text-left text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">Peran</th>
+                            <th class="text-left text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">Status</th>
+                            <th class="text-left text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">Dibuat Pada</th>
+                            <th class="text-left text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">Aksi</th>
                         </tr>
                     </thead>
+                    <tbody  class="bg-white divide-y divide-borderColor">
 
-                    <tbody>
-                        <tr>
-                            <td>Apple Inc.</td>
-                            <td>AAPL</td>
-                            <td>$2109.53</td>
-                            <td>-0.42%</td>
-                            <td>48,374,838</td>
-                            <td>$53.59B</td>
-                            <td>4.7 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Microsoft Corp.</td>
-                            <td>MSFT</td>
-                            <td>$450.98</td>
-                            <td>-2.04%</td>
-                            <td>26,604,335</td>
-                            <td>$927.77B</td>
-                            <td>3.8 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Alphabet Inc.</td>
-                            <td>GOOGL</td>
-                            <td>$2803.77</td>
-                            <td>+0.68%</td>
-                            <td>22,545,332</td>
-                            <td>$1.88T</td>
-                            <td>4.6 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Amazon.com Inc.</td>
-                            <td>AMZN</td>
-                            <td>$3470.79</td>
-                            <td>+1.34%</td>
-                            <td>32,548,923</td>
-                            <td>$1.75T</td>
-                            <td>4.3 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Meta Platforms</td>
-                            <td>META</td>
-                            <td>$395.68</td>
-                            <td>-0.76%</td>
-                            <td>21,134,438</td>
-                            <td>$1.06T</td>
-                            <td>4.2 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Tesla Inc.</td>
-                            <td>TSLA</td>
-                            <td>$1034.48</td>
-                            <td>+2.04%</td>
-                            <td>18,622,988</td>
-                            <td>$1.08T</td>
-                            <td>5.0 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>NVIDIA Corp.</td>
-                            <td>NVDA</td>
-                            <td>$288.63</td>
-                            <td>+3.12%</td>
-                            <td>27,014,934</td>
-                            <td>$710.89B</td>
-                            <td>4.8 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>JPMorgan Chase</td>
-                            <td>JPM</td>
-                            <td>$158.47</td>
-                            <td>-0.23%</td>
-                            <td>13,523,487</td>
-                            <td>$464.93B</td>
-                            <td>3.9 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Johnson & Johnson</td>
-                            <td>JNJ</td>
-                            <td>$174.89</td>
-                            <td>+0.45%</td>
-                            <td>12,789,456</td>
-                            <td>$457.43B</td>
-                            <td>4.1 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Visa Inc.</td>
-                            <td>V</td>
-                            <td>$226.44</td>
-                            <td>+0.19%</td>
-                            <td>17,532,998</td>
-                            <td>$472.35B</td>
-                            <td>4.7 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Walmart Inc.</td>
-                            <td>WMT</td>
-                            <td>$150.76</td>
-                            <td>+0.55%</td>
-                            <td>14,888,342</td>
-                            <td>$421.57B</td>
-                            <td>3.9 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Procter & Gamble</td>
-                            <td>PG</td>
-                            <td>$136.44</td>
-                            <td>-0.21%</td>
-                            <td>9,563,721</td>
-                            <td>$338.56B</td>
-                            <td>4.5 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>UnitedHealth Group</td>
-                            <td>UNH</td>
-                            <td>$438.57</td>
-                            <td>+1.34%</td>
-                            <td>7,903,765</td>
-                            <td>$385.26B</td>
-                            <td>4.4 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Home Depot</td>
-                            <td>HD</td>
-                            <td>$340.78</td>
-                            <td>+0.23%</td>
-                            <td>10,245,120</td>
-                            <td>$283.74B</td>
-                            <td>4.2 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Mastercard Inc.</td>
-                            <td>MA</td>
-                            <td>$392.90</td>
-                            <td>-1.01%</td>
-                            <td>8,431,999</td>
-                            <td>$390.87B</td>
-                            <td>4.3 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Pfizer Inc.</td>
-                            <td>PFE</td>
-                            <td>$45.22</td>
-                            <td>+2.07%</td>
-                            <td>15,345,324</td>
-                            <td>$252.53B</td>
-                            <td>4.0 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Intel Corp.</td>
-                            <td>INTC</td>
-                            <td>$54.83</td>
-                            <td>-0.72%</td>
-                            <td>18,442,560</td>
-                            <td>$224.67B</td>
-                            <td>3.7 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Coca-Cola Co.</td>
-                            <td>KO</td>
-                            <td>$59.63</td>
-                            <td>+0.11%</td>
-                            <td>19,870,902</td>
-                            <td>$255.45B</td>
-                            <td>4.4 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Disney</td>
-                            <td>DIS</td>
-                            <td>$179.56</td>
-                            <td>-0.93%</td>
-                            <td>8,502,109</td>
-                            <td>$328.72B</td>
-                            <td>3.9 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Cisco Systems</td>
-                            <td>CSCO</td>
-                            <td>$54.12</td>
-                            <td>+0.88%</td>
-                            <td>14,730,222</td>
-                            <td>$233.78B</td>
-                            <td>4.3 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>PepsiCo Inc.</td>
-                            <td>PEP</td>
-                            <td>$155.68</td>
-                            <td>+0.75%</td>
-                            <td>6,578,987</td>
-                            <td>$215.58B</td>
-                            <td>4.2 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Verizon Communications</td>
-                            <td>VZ</td>
-                            <td>$50.74</td>
-                            <td>-0.67%</td>
-                            <td>16,346,523</td>
-                            <td>$205.38B</td>
-                            <td>3.8 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>AT&T Inc.</td>
-                            <td>T</td>
-                            <td>$22.51</td>
-                            <td>+1.22%</td>
-                            <td>27,528,906</td>
-                            <td>$161.83B</td>
-                            <td>4.0 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>AbbVie Inc.</td>
-                            <td>ABBV</td>
-                            <td>$148.13</td>
-                            <td>+1.15%</td>
-                            <td>9,582,210</td>
-                            <td>$259.78B</td>
-                            <td>4.5 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Merck & Co.</td>
-                            <td>MRK</td>
-                            <td>$85.27</td>
-                            <td>-0.31%</td>
-                            <td>11,402,899</td>
-                            <td>$217.74B</td>
-                            <td>4.4 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Lockheed Martin</td>
-                            <td>LMT</td>
-                            <td>$385.12</td>
-                            <td>+0.68%</td>
-                            <td>3,251,432</td>
-                            <td>$105.02B</td>
-                            <td>4.8 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>3M Company</td>
-                            <td>MMM</td>
-                            <td>$178.36</td>
-                            <td>-0.14%</td>
-                            <td>5,643,980</td>
-                            <td>$106.95B</td>
-                            <td>4.2 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>American Express</td>
-                            <td>AXP</td>
-                            <td>$160.95</td>
-                            <td>+0.88%</td>
-                            <td>7,125,347</td>
-                            <td>$146.57B</td>
-                            <td>4.4 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>McDonald's Corp.</td>
-                            <td>MCD</td>
-                            <td>$258.68</td>
-                            <td>+0.45%</td>
-                            <td>10,023,576</td>
-                            <td>$194.35B</td>
-                            <td>4.6 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>ExxonMobil</td>
-                            <td>XOM</td>
-                            <td>$62.32</td>
-                            <td>+0.12%</td>
-                            <td>15,658,723</td>
-                            <td>$264.59B</td>
-                            <td>4.0 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Chevron Corp.</td>
-                            <td>CVX</td>
-                            <td>$172.94</td>
-                            <td>-0.11%</td>
-                            <td>8,203,474</td>
-                            <td>$318.75B</td>
-                            <td>4.5 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Colgate-Palmolive</td>
-                            <td>CL</td>
-                            <td>$78.92</td>
-                            <td>+0.27%</td>
-                            <td>10,298,121</td>
-                            <td>$67.95B</td>
-                            <td>4.1 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Abbott Laboratories</td>
-                            <td>ABT</td>
-                            <td>$119.93</td>
-                            <td>+0.51%</td>
-                            <td>7,287,634</td>
-                            <td>$209.33B</td>
-                            <td>4.6 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>NextEra Energy</td>
-                            <td>NEE</td>
-                            <td>$74.31</td>
-                            <td>-0.76%</td>
-                            <td>8,146,257</td>
-                            <td>$151.48B</td>
-                            <td>4.3 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Danaher Corporation</td>
-                            <td>DHR</td>
-                            <td>$256.12</td>
-                            <td>+1.20%</td>
-                            <td>6,241,544</td>
-                            <td>$186.57B</td>
-                            <td>4.7 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Raytheon Technologies</td>
-                            <td>RTX</td>
-                            <td>$89.45</td>
-                            <td>+0.81%</td>
-                            <td>10,123,556</td>
-                            <td>$133.83B</td>
-                            <td>4.4 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Intel Corp.</td>
-                            <td>INTC</td>
-                            <td>$45.13</td>
-                            <td>-0.98%</td>
-                            <td>14,015,888</td>
-                            <td>$185.77B</td>
-                            <td>3.7 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Target Corp.</td>
-                            <td>TGT</td>
-                            <td>$252.12</td>
-                            <td>+0.45%</td>
-                            <td>7,412,658</td>
-                            <td>$132.18B</td>
-                            <td>4.2 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>AbbVie</td>
-                            <td>ABBV</td>
-                            <td>$142.83</td>
-                            <td>+1.19%</td>
-                            <td>9,725,439</td>
-                            <td>$246.68B</td>
-                            <td>4.4 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Philip Morris</td>
-                            <td>PM</td>
-                            <td>$98.21</td>
-                            <td>+0.35%</td>
-                            <td>10,653,122</td>
-                            <td>$157.56B</td>
-                            <td>4.3 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>General Dynamics</td>
-                            <td>GD</td>
-                            <td>$220.57</td>
-                            <td>+0.78%</td>
-                            <td>6,232,367</td>
-                            <td>$75.99B</td>
-                            <td>4.6 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Johnson & Johnson</td>
-                            <td>JNJ</td>
-                            <td>$175.98</td>
-                            <td>+1.02%</td>
-                            <td>9,124,487</td>
-                            <td>$461.98B</td>
-                            <td>4.8 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Biogen Inc.</td>
-                            <td>BIIB</td>
-                            <td>$273.62</td>
-                            <td>-0.56%</td>
-                            <td>5,890,444</td>
-                            <td>$41.88B</td>
-                            <td>4.0 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Uber Technologies</td>
-                            <td>UBER</td>
-                            <td>$51.26</td>
-                            <td>+0.18%</td>
-                            <td>11,298,673</td>
-                            <td>$87.89B</td>
-                            <td>4.3 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <!-- end card-body-->
-    </div>
-    <!-- end card-->
-
-    <div class="card">
-        <div class="card-header">
-            <h4 class="card-title">Complex Header</h4>
-            <a href="https://datatables.net/examples/advanced_init/complex_header.html" target="_blank" class="group text-primary font-semibold hover:text-primary-hover">
-                View Docs
-                <i class="iconify tabler--arrow-right group-hover:translate-x-1 transform-3d transition-transform duration-300 align-middle text-base"></i>
-            </a>
-        </div>
-
-        <div class="card-body">
-            <div class="table-wrapper -mb-4">
-                <table data-tables="basic" class="table table-bordered">
-                    <thead class="thead-sm text-2xs uppercase">
-                        <tr>
-                            <th colspan="2">Company Info</th>
-                            <th colspan="2">Rate</th>
-                            <th colspan="2">More</th>
-                            <th colspan="2">Other</th>
-                        </tr>
-                        <tr>
-                            <th scope="col">Company</th>
-                            <th scope="col">Symbol</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Change</th>
-                            <th scope="col">Volume</th>
-                            <th scope="col">Market Cap</th>
-                            <th scope="col">Rating</th>
-                            <th scope="col">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Apple Inc.</td>
-                            <td>AAPL</td>
-                            <td>$2109.53</td>
-                            <td>-0.42%</td>
-                            <td>48,374,838</td>
-                            <td>$53.59B</td>
-                            <td>4.7 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Microsoft Corp.</td>
-                            <td>MSFT</td>
-                            <td>$450.98</td>
-                            <td>-2.04%</td>
-                            <td>26,604,335</td>
-                            <td>$927.77B</td>
-                            <td>3.8 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Alphabet Inc.</td>
-                            <td>GOOGL</td>
-                            <td>$2803.77</td>
-                            <td>+0.68%</td>
-                            <td>22,545,332</td>
-                            <td>$1.88T</td>
-                            <td>4.6 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Amazon.com Inc.</td>
-                            <td>AMZN</td>
-                            <td>$3470.79</td>
-                            <td>+1.34%</td>
-                            <td>32,548,923</td>
-                            <td>$1.75T</td>
-                            <td>4.3 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Meta Platforms</td>
-                            <td>META</td>
-                            <td>$395.68</td>
-                            <td>-0.76%</td>
-                            <td>21,134,438</td>
-                            <td>$1.06T</td>
-                            <td>4.2 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Tesla Inc.</td>
-                            <td>TSLA</td>
-                            <td>$1034.48</td>
-                            <td>+2.04%</td>
-                            <td>18,622,988</td>
-                            <td>$1.08T</td>
-                            <td>5.0 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>NVIDIA Corp.</td>
-                            <td>NVDA</td>
-                            <td>$288.63</td>
-                            <td>+3.12%</td>
-                            <td>27,014,934</td>
-                            <td>$710.89B</td>
-                            <td>4.8 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>JPMorgan Chase</td>
-                            <td>JPM</td>
-                            <td>$158.47</td>
-                            <td>-0.23%</td>
-                            <td>13,523,487</td>
-                            <td>$464.93B</td>
-                            <td>3.9 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Johnson & Johnson</td>
-                            <td>JNJ</td>
-                            <td>$174.89</td>
-                            <td>+0.45%</td>
-                            <td>12,789,456</td>
-                            <td>$457.43B</td>
-                            <td>4.1 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Visa Inc.</td>
-                            <td>V</td>
-                            <td>$226.44</td>
-                            <td>+0.19%</td>
-                            <td>17,532,998</td>
-                            <td>$472.35B</td>
-                            <td>4.7 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Walmart Inc.</td>
-                            <td>WMT</td>
-                            <td>$150.76</td>
-                            <td>+0.55%</td>
-                            <td>14,888,342</td>
-                            <td>$421.57B</td>
-                            <td>3.9 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Procter & Gamble</td>
-                            <td>PG</td>
-                            <td>$136.44</td>
-                            <td>-0.21%</td>
-                            <td>9,563,721</td>
-                            <td>$338.56B</td>
-                            <td>4.5 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>UnitedHealth Group</td>
-                            <td>UNH</td>
-                            <td>$438.57</td>
-                            <td>+1.34%</td>
-                            <td>7,903,765</td>
-                            <td>$385.26B</td>
-                            <td>4.4 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Home Depot</td>
-                            <td>HD</td>
-                            <td>$340.78</td>
-                            <td>+0.23%</td>
-                            <td>10,245,120</td>
-                            <td>$283.74B</td>
-                            <td>4.2 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Mastercard Inc.</td>
-                            <td>MA</td>
-                            <td>$392.90</td>
-                            <td>-1.01%</td>
-                            <td>8,431,999</td>
-                            <td>$390.87B</td>
-                            <td>4.3 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Pfizer Inc.</td>
-                            <td>PFE</td>
-                            <td>$45.22</td>
-                            <td>+2.07%</td>
-                            <td>15,345,324</td>
-                            <td>$252.53B</td>
-                            <td>4.0 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Intel Corp.</td>
-                            <td>INTC</td>
-                            <td>$54.83</td>
-                            <td>-0.72%</td>
-                            <td>18,442,560</td>
-                            <td>$224.67B</td>
-                            <td>3.7 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Coca-Cola Co.</td>
-                            <td>KO</td>
-                            <td>$59.63</td>
-                            <td>+0.11%</td>
-                            <td>19,870,902</td>
-                            <td>$255.45B</td>
-                            <td>4.4 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Disney</td>
-                            <td>DIS</td>
-                            <td>$179.56</td>
-                            <td>-0.93%</td>
-                            <td>8,502,109</td>
-                            <td>$328.72B</td>
-                            <td>3.9 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Cisco Systems</td>
-                            <td>CSCO</td>
-                            <td>$54.12</td>
-                            <td>+0.88%</td>
-                            <td>14,730,222</td>
-                            <td>$233.78B</td>
-                            <td>4.3 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>PepsiCo Inc.</td>
-                            <td>PEP</td>
-                            <td>$155.68</td>
-                            <td>+0.75%</td>
-                            <td>6,578,987</td>
-                            <td>$215.58B</td>
-                            <td>4.2 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Verizon Communications</td>
-                            <td>VZ</td>
-                            <td>$50.74</td>
-                            <td>-0.67%</td>
-                            <td>16,346,523</td>
-                            <td>$205.38B</td>
-                            <td>3.8 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>AT&T Inc.</td>
-                            <td>T</td>
-                            <td>$22.51</td>
-                            <td>+1.22%</td>
-                            <td>27,528,906</td>
-                            <td>$161.83B</td>
-                            <td>4.0 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>AbbVie Inc.</td>
-                            <td>ABBV</td>
-                            <td>$148.13</td>
-                            <td>+1.15%</td>
-                            <td>9,582,210</td>
-                            <td>$259.78B</td>
-                            <td>4.5 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Merck & Co.</td>
-                            <td>MRK</td>
-                            <td>$85.27</td>
-                            <td>-0.31%</td>
-                            <td>11,402,899</td>
-                            <td>$217.74B</td>
-                            <td>4.4 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Lockheed Martin</td>
-                            <td>LMT</td>
-                            <td>$385.12</td>
-                            <td>+0.68%</td>
-                            <td>3,251,432</td>
-                            <td>$105.02B</td>
-                            <td>4.8 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>3M Company</td>
-                            <td>MMM</td>
-                            <td>$178.36</td>
-                            <td>-0.14%</td>
-                            <td>5,643,980</td>
-                            <td>$106.95B</td>
-                            <td>4.2 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>American Express</td>
-                            <td>AXP</td>
-                            <td>$160.95</td>
-                            <td>+0.88%</td>
-                            <td>7,125,347</td>
-                            <td>$146.57B</td>
-                            <td>4.4 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>McDonald's Corp.</td>
-                            <td>MCD</td>
-                            <td>$258.68</td>
-                            <td>+0.45%</td>
-                            <td>10,023,576</td>
-                            <td>$194.35B</td>
-                            <td>4.6 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>ExxonMobil</td>
-                            <td>XOM</td>
-                            <td>$62.32</td>
-                            <td>+0.12%</td>
-                            <td>15,658,723</td>
-                            <td>$264.59B</td>
-                            <td>4.0 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Chevron Corp.</td>
-                            <td>CVX</td>
-                            <td>$172.94</td>
-                            <td>-0.11%</td>
-                            <td>8,203,474</td>
-                            <td>$318.75B</td>
-                            <td>4.5 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Colgate-Palmolive</td>
-                            <td>CL</td>
-                            <td>$78.92</td>
-                            <td>+0.27%</td>
-                            <td>10,298,121</td>
-                            <td>$67.95B</td>
-                            <td>4.1 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Abbott Laboratories</td>
-                            <td>ABT</td>
-                            <td>$119.93</td>
-                            <td>+0.51%</td>
-                            <td>7,287,634</td>
-                            <td>$209.33B</td>
-                            <td>4.6 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>NextEra Energy</td>
-                            <td>NEE</td>
-                            <td>$74.31</td>
-                            <td>-0.76%</td>
-                            <td>8,146,257</td>
-                            <td>$151.48B</td>
-                            <td>4.3 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Danaher Corporation</td>
-                            <td>DHR</td>
-                            <td>$256.12</td>
-                            <td>+1.20%</td>
-                            <td>6,241,544</td>
-                            <td>$186.57B</td>
-                            <td>4.7 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Raytheon Technologies</td>
-                            <td>RTX</td>
-                            <td>$89.45</td>
-                            <td>+0.81%</td>
-                            <td>10,123,556</td>
-                            <td>$133.83B</td>
-                            <td>4.4 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Intel Corp.</td>
-                            <td>INTC</td>
-                            <td>$45.13</td>
-                            <td>-0.98%</td>
-                            <td>14,015,888</td>
-                            <td>$185.77B</td>
-                            <td>3.7 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Target Corp.</td>
-                            <td>TGT</td>
-                            <td>$252.12</td>
-                            <td>+0.45%</td>
-                            <td>7,412,658</td>
-                            <td>$132.18B</td>
-                            <td>4.2 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>AbbVie</td>
-                            <td>ABBV</td>
-                            <td>$142.83</td>
-                            <td>+1.19%</td>
-                            <td>9,725,439</td>
-                            <td>$246.68B</td>
-                            <td>4.4 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Philip Morris</td>
-                            <td>PM</td>
-                            <td>$98.21</td>
-                            <td>+0.35%</td>
-                            <td>10,653,122</td>
-                            <td>$157.56B</td>
-                            <td>4.3 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>General Dynamics</td>
-                            <td>GD</td>
-                            <td>$220.57</td>
-                            <td>+0.78%</td>
-                            <td>6,232,367</td>
-                            <td>$75.99B</td>
-                            <td>4.6 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Johnson & Johnson</td>
-                            <td>JNJ</td>
-                            <td>$175.98</td>
-                            <td>+1.02%</td>
-                            <td>9,124,487</td>
-                            <td>$461.98B</td>
-                            <td>4.8 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Biogen Inc.</td>
-                            <td>BIIB</td>
-                            <td>$273.62</td>
-                            <td>-0.56%</td>
-                            <td>5,890,444</td>
-                            <td>$41.88B</td>
-                            <td>4.0 ★</td>
-                            <td>
-                                <span class="badge bg-danger/15 text-danger">Bearish</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Uber Technologies</td>
-                            <td>UBER</td>
-                            <td>$51.26</td>
-                            <td>+0.18%</td>
-                            <td>11,298,673</td>
-                            <td>$87.89B</td>
-                            <td>4.3 ★</td>
-                            <td>
-                                <span class="badge bg-success/15 text-success">Bullish</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="card-footer">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <div class="w-full md:w-1/2">
+                    <div class="datatable-length"></div>
+                </div>
+                <div class="w-full md:w-1/2 text-center">
+                    <div class="datatable-info text-sm text-gray-500"></div>
+                </div>
+                <div class="w-full md:w-1/2 mt-4 md:mt-0 text-end">
+                    <div class="datatable-paginate"></div>
+                </div>
             </div>
         </div>
-        <!-- end card-body-->
     </div>
-    <!-- end card-->
-</div>
+<!-- END: Data Table -->
+@endsection
 
-{{-- Start: Script --}}
-    <!-- Jquery for Datatables-->
-    <script src="{{ URL::asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
+@push('scripts')
+    {{-- Start: Load DataTables JS --}}
+    <script src="{{ URL::asset('assets/admin/js/dataTables.js') }}"></script>
+    <script src="{{ URL::asset('assets/admin/js/dataTables.tailwindcss.js') }}"></script>
+    {{-- End: Load DataTables JS --}}
 
-    <!-- Datatables js -->
-    <script src="{{ URL::asset('assets/admin/plugins/datatables-dt/dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/admin/plugins/datatables-dt/dataTables.responsive.min.js') }}"></script>
+    {{-- Start: Implement serverside datatable --}}
+    <script>
+        $(document).ready(function () {
+            var tbl = $('#data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                searching: true,
+                dom: 'lrtip',
+                language: {
+                    search: ' ',
+                    sLengthMenu: '_MENU_',
+                    searchPlaceholder: 'Search',
+                    info: 'Menampilkan _START_ - _END_ dari _TOTAL_ data',
+                    infoEmpty: 'Tidak ada data yang ditampilkan',
+                    infoFiltered: '(difilter dari _MAX_ total data)',
+                    lengthMenu: 'Tampilkan _MENU_ data',
+                    paginate: {
+                        next: '<i class="ti ti-chevron-right"></i>',
+                        previous: '<i class="ti ti-chevron-left"></i>',
+                    },
+                },
+                ajax: {
+                    url: "{{ route('settings.users.index') }}",
+                    type: 'GET',
+                },
+                pageLength: 10,
+                lengthMenu: [10, 25, 50, 100],
+                columns: [
+                    {
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        searchable: false,
+                        orderable: false,
+                        className: 'px-5 py-2.5 text-gray-500 text-left'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name',
+                        searchable: true,
+                        orderable: true,
+                        className: 'px-5 py-2.5 text-gray-500 text-left'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email',
+                        searchable: true,
+                        orderable: true,
+                        className: 'px-5 py-2.5 text-gray-500 text-left'
+                    },
+                    {
+                        data: 'role',
+                        name: 'role',
+                        searchable: true,
+                        orderable: true,
+                        className: 'px-5 py-2.5 text-gray-500 text-left'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        searchable: true,
+                        orderable: true,
+                        className: 'px-5 py-2.5 text-gray-500 text-left'
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at',
+                        searchable: true,
+                        orderable: true,
+                        className: 'px-5 py-2.5 text-gray-500 text-left'
+                    },
+                    {
+                        data: 'aksi',
+                        name: 'aksi',
+                        searchable: false,
+                        orderable: false,
+                        className: 'action-icon inline-flex gap-2 items-center  '
+                    },
+                ],
+                initComplete: function () {
+                    if ($('.datatable-length').length) {
+                        $('.dt-length').appendTo('.datatable-length');
+                    }
+                    if ($('.datatable-info').length) {
+                        $('.dt-info').appendTo('.datatable-info');
+                    }
+                    if ($('.datatable-paginate').length) {
+                        $('.dt-paging').appendTo('.datatable-paginate');
+                    }
+                },
+            });
 
-    <!-- Page js -->
-    <script src="{{ URL::asset('assets/admin/js/pages/datatables-column-search.js') }}"></script>
-{{-- End: Script --}}
+            $('#user-table-search').on('input', function () {
+                tbl.search(this.value).draw();
+            });
+        });
+    </script>
+    {{-- End: Implement serverside datatable --}}
+@endpush

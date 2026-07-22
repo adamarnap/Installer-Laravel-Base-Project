@@ -2,109 +2,50 @@
 
 @section('title', 'Verifikasi Email')
 
-@section('auth-form')
-
-    {{-- Start: Email verification has sended --}}
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <div class="mt-3 mb-9">
-            <div
-                class="bg-default-50 border-light mx-auto flex size-20 items-center justify-center rounded-full border border-dashed">
-                <img src="{{ URL::asset('assets/admin/images/checkmark.png') }}" alt="checkmark" class="size-16" />
-            </div>
-        </div>
-
-        <h4 class="mb-9 text-center text-lg font-bold">Email verifikasi telah dikirim</h4>
-
-        <div>
-            <button type="submit"
-                class="btn bg-primary w-full py-3 font-semibold text-white hover:bg-primary-hover">Kembali ke Halaman Beranda</button>
-        </div>
-    </form>
-    {{-- End: Email verification has sended --}}
-
-    {{-- Start: Resend Email Verification --}}
-    <p class="text-default-400 mt-7.5">
-    Belum menerima email konfirmasi reset password? Cek folder spam atau 
-    
-        <form method="POST" action="{{ route('verification.send') }}" class="inline-block">
-            @csrf
-            <button type="submit" class="text-primary font-semibold underline underline-offset-3 hover:text-primary/80 transition-colors duration-200 inline-flex items-center gap-1 text-center">
-
-                Kirim ulang email verifikasi
-            </button>
-        </form>
-    </p>
-    {{-- End: Resend Email Verification --}}
-@endsection
-
 @section('content')
-    <!-- Light/Dark Mode Button -->
-    <button type="button" class="light-dark-toggle leading-none inline-block transition-all text-[#fe7a36] absolute top-[20px] md:top-[25px] ltr:right-[20px] rtl:left-[20px] ltr:md:right-[25px] rtl:md:left-[25px]" id="light-dark-toggle">
-        <i class="iconify tabler--{icon_name} text-xs !text-[20px] md:!text-[22px]">
-            light_mode
-        </i>
-    </button>
-    <!-- End Light/Dark Mode Button -->
-
-    <!-- Confirm Email -->
-    <div class="bg-white dark:bg-[#0a0e19] py-[60px] md:py-[80px] lg:py-[135px]">
-        <div class="mx-auto px-[12.5px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1255px]">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-[25px] items-center">
-                <div class="xl:ltr:-mr-[25px] xl:rtl:-ml-[25px] 2xl:ltr:-mr-[45px] 2xl:rtl:-ml-[45px] rounded-[25px] order-2 lg:order-1">
-                    <img src="{{ URL::asset('assets/admin/images/confirm-email.jpg') }}" alt="confirm-email-image" class="rounded-[25px]">
+<div class="login-wrapper email-veri-wrap bg-img">
+    <div class="login-content authent-content">
+        <div class="login-userset text-center">
+            <div class="login-logo logo-normal">
+                <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="img" class="mx-auto">
+            </div>
+            <a href="{{ route('dashboard') }}" class="login-logo logo-white">
+            </a>
+            <div class="flex flex-col items-center">
+                <div class="login-userheading">
+                    <h3>Email Verifikasi Terkirim</h3>
+                    <h4>Silahkan cek email yang Anda berikan saat pendaftaran, link verifikasi ada di dalamnya!</h4>
                 </div>
-                <div class="xl:ltr:pl-[90px] xl:rtl:pr-[90px] 2xl:ltr:pl-[120px] 2xl:rtl:pr-[120px] order-1 lg:order-2">
-                    <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo" class="inline-block dark:hidden w-32">
-                    <img src="{{ URL::asset($prefs_composer['logo']) }}" alt="logo" class="hidden dark:inline-block w-32">
-                    <div class="my-[17px] md:my-[25px]">
-                        <h1 class="font-semibold text-[22px] md:text-xl lg:text-2xl mb-[5px] md:mb-[10px]">
-                            Selamat datang kembali ke {{ $prefs_composer['title'] }} !
-                        </h1>
-                        <p class="font-medium leading-[1.5] lg:text-md text-[#445164] dark:text-gray-400">
-                            Silahkan cek email yang Anda berikan saat pendaftaran, link verifikasi ada di dalamnya!
-                        </p>
+                <div class="w-full flex justify-center">
+                    @if (session('status') == 'verification-link-sent')
+                        <div class="py-2.5 px-3.5 bg-success/10 rounded text-[13px] text-success mb-3 max-w-md w-full">
+                            Tautan verifikasi baru telah dikirim ke alamat email yang Anda berikan saat pendaftaran.
+                        </div>
+                    @endif
+                </div>
+                <div class="text-center otp-input w-full">
+                    <div class="flex flex-col items-center gap-3">
+                        <p class="text-gray-9">Belum mendapatkan email verifikasi ?</p>
+                        <div class="flex justify-center">
+                            <form action="{{ route('verification.send') }}" method="POST" class="digit-group">
+                                @csrf
+                                <button type="submit" class="btn text-primary">Kirim ulang email verifikasi</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="row">
-                        @if (session('status') == 'verification-link-sent')
-                            <div class="font-medium text-sm text-green-600 border border-transparent rounded-md bg-green-50 px-4 py-3 mt-4">
-                                Tautan verifikasi baru telah dikirim ke alamat email yang Anda berikan saat pendaftaran.
-                            </div>
-                        @endif
-                    </div>
-                    {{-- Start Resend Email Verif --}}
-                    <div class="row">
-                        <p><b>Belum mendapatkan email verifikasi ?</b></p>
-                        <form method="POST" action="{{ route('verification.send') }}">
-                            @csrf
-                            <button type="submit" class="md:text-md block w-full text-center transition-all rounded-md font-medium mt-[20px] md:mt-[25px] lg:mt-[30px] py-[12px] px-[25px] text-white bg-primary-500 hover:bg-primary-400">
-                                <span class="flex items-center justify-center gap-[5px]">
-                                    <i class="iconify tabler--{icon_name} text-xs">
-                                        article_shortcut
-                                    </i>
-                                    Kirim ulang email verifikasi
-                                </span>
-                            </button>
-                        </form>
-                    </div>
-                    {{-- End Resend Email Verif --}}
-
-                    {{-- Start: Email Verified --}}
-                    <form method="POST" action="{{ route('logout') }}">
+                </div>
+                <div class="mb-3 w-full flex justify-center">
+                    <form method="POST" action="{{ route('logout') }}" class="w-full max-w-md">
                         @csrf
-                        <button type="submit" class="md:text-md block w-full text-center transition-all rounded-md font-medium mt-[20px] md:mt-[25px] lg:mt-[30px] py-[12px] px-[25px] text-white bg-primary-500 hover:bg-primary-400">
-                            <span class="flex items-center justify-center gap-[5px]">
-                                <i class="iconify tabler--{icon_name} text-xs">
-                                    login
-                                </i>
-                                Kembali ke Beranda
-                            </span>
-                        </button>
+                        <button type="submit" class="btn bg-primary border border-primary text-white text-center hover:bg-primary-hover hover:text-white w-full">Kembali ke Beranda</button>
                     </form>
-                    </a>
                 </div>
+            </div>
+            <div class="my-6 w-full flex justify-center items-center text-center copyright-text">
+                <span class="text-purple-500">{{ $prefs_composer['title'] }}</span>
+                &nbsp; {!! $prefs_composer['copyright'] !!} &nbsp; {!! $prefs_composer['credits'] !!}
             </div>
         </div>
     </div>
-    <!-- End Confirm Email -->
+</div>
 @endsection

@@ -40,16 +40,15 @@ class ImpersonateService
                 return '<span class="px-[8px] py-[3px] inline-block bg-orange-100 dark:bg-[#15203c] text-orange-600 rounded-sm font-medium text-xs">Tidak Aktif</span>';
             })
             ->addColumn('aksi', function ($row) {
-                $html = '<div class="flex items-center gap-[9px] justify-center">';
+                $html = '<div class="action-icon inline-flex gap-2 items-center">';
                 
                 // Btn Impersonate
                 if (auth()->user()->can('settings-impersonate.create')) {
                     $html .= '<form action="' . route('settings.impersonate.store', $row->id) . '" method="POST" class="inline">
                         ' . csrf_field() . '
-                        <button type="submit" 
-                                title="Impersonate pengguna" 
-                                class="btn border-danger text-danger hover:bg-danger hover:text-white">
-                            <i class="iconify tabler--lock text-xs"></i>
+                        <button type="submit" title="Impersonate pengguna"
+                                class="inline-flex items-center gap-1 btn bg-primary border border-primary text-white hover:bg-primary-hover hover:text-white">
+                            <i class="ti ti-user-share text-[16px]"></i>
                             <span>Impersonate</span>
                         </button>
                     </form>';

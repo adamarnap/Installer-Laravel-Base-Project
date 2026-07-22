@@ -1,10 +1,26 @@
-{{-- Styles --}}
-<link rel="stylesheet" href="{{ URL::asset('assets/admin/css/app.min.css') }}">
+<!-- Datetimepicker CSS -->
+<link rel="stylesheet" href="{{ URL::asset('assets/admin/css/bootstrap-datetimepicker.min.css') }}">
 
-{{-- Sweet Alert Styles --}}
-<link rel="stylesheet" href="{{ URL::asset('assets/admin/plugins/sweetalert2/sweetalert2.min.css') }}">
+<!-- animation CSS -->
+<link rel="stylesheet" href="{{ URL::asset('assets/admin/css/animate.css') }}">
 
-{{-- Favicon --}}
-<link rel="shortcut icon" type="image/png" href="{{ URL::asset($prefs_composer['favicon']) }}">
+<!-- Select2 CSS -->
+<link rel="stylesheet" href="{{ URL::asset('assets/admin/plugins/select2/css/select2.min.css') }}">
+
+<!-- Daterangepikcer CSS -->
+<link rel="stylesheet" href="{{ URL::asset('assets/admin/plugins/daterangepicker/daterangepicker.css') }}">
+
+<!-- Tabler Icon CSS -->
+<link rel="stylesheet" href="{{ URL::asset('assets/admin/plugins/tabler-icons/tabler-icons.min.css') }}">
+
+<!-- Fontawesome CSS -->
+<link rel="stylesheet" href="{{ URL::asset('assets/admin/plugins/fontawesome/css/fontawesome.min.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('assets/admin/plugins/fontawesome/css/all.min.css') }}">
+
+<!-- Flowbite CSS -->
+<link rel="stylesheet" href="{{ URL::asset('assets/admin/css/flowbite.min.css') }}">
+    
+<!-- Main CSS -->
+<link rel="stylesheet" href="{{ URL::asset('assets/admin/css/style.css') }}">
 
 @stack('styles')

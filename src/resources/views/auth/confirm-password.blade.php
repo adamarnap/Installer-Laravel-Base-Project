@@ -5,7 +5,7 @@
 @section('content')
     <!-- Light/Dark Mode Button -->
     <button type="button" class="light-dark-toggle leading-none inline-block transition-all text-[#fe7a36] absolute top-[20px] md:top-[25px] ltr:right-[20px] rtl:left-[20px] ltr:md:right-[25px] rtl:md:left-[25px]" id="light-dark-toggle">
-        <i class="iconify tabler--{icon_name} text-xs !text-[20px] md:!text-[22px]">
+        <i class="material-symbols-outlined !text-[20px] md:!text-[22px]">
             light_mode
         </i>
     </button>
@@ -32,13 +32,13 @@
                     {{-- START: Alert Message --}}
                     <div class="">
                         @if (session('status'))
-                            <div class="font-medium text-sm text-green-600 border border-transparent rounded-md bg-green-50 px-4 py-3 mt-4">
+                            <div class="py-2.5 px-3.5 bg-success/10 rounded text-[13px] text-success mb-3">
                                 {{ session('status') }}
                             </div>
                         @endif
                         <!-- Validation Errors -->
                         @if ($errors->any())
-                            <div class="py-[1rem] px-[1rem] text-danger-500 bg-danger-50 border border-danger-200 dark:bg-[#15203c] dark:border-[#15203c] rounded-md" role="alert">
+                            <div class="py-2.5 px-3.5 bg-danger/10 rounded text-[13px] text-danger mb-3" role="alert">
                                 <b><i class="bi bi-x-octagon"></i> Error :</b>
                                 <ul>
                                     @foreach ($errors->get('password') as $message)
@@ -72,7 +72,7 @@
                     </div>
                     <button type="submit" class="md:text-md block w-full text-center transition-all rounded-md font-medium mt-[20px] md:mt-[25px] py-[12px] px-[25px] text-white bg-primary-500 hover:bg-primary-400">
                         <span class="flex items-center justify-center gap-[5px]">
-                            <i class="iconify tabler--{icon_name} text-xs">
+                            <i class="material-symbols-outlined">
                                 autorenew
                             </i>
                             Kirim

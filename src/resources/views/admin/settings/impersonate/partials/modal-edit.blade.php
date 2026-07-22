@@ -13,7 +13,7 @@
                 </div>
                 <div class="trezo-card-subtitle">
                     <button type="button" class="text-[23px] transition-all leading-none text-black dark:text-white hover:text-primary-500" id="modal-edit-toggle">
-                        <i class="iconify tabler--x text-xl"></i>
+                        <i class="ri-close-fill"></i>
                     </button>
                 </div>
             </div>

@@ -14,6 +14,7 @@ class Navigation extends Model
         'name',
         'slug',
         'url',
+        'icon',
         'order',
         'active',
         'display',

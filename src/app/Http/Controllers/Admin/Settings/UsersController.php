@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Settings;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Settings\Users\CreateRequest;
 use App\Http\Requests\Admin\Settings\Users\UpdateRequest;
 use App\Http\Services\Admin\Settings\UsersService;
-use Spatie\Permission\Models\Role;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Password;
 
 class UsersController extends Controller
 {

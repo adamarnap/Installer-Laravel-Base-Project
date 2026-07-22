@@ -6,360 +6,165 @@
     {{ Breadcrumbs::render('roles-permissions', $role->id, $role->name) }}
 @endsection
 
-@push('styles')
-    {{-- DataTables CSS --}}
-    <link rel="stylesheet" href="{{ URL::asset('assets/admin/css/datatables-2.3.4/datatables.tailwindcss.css') }}">
-@endpush
-
-
 @section('content')
-    <div class="grid grid-cols-1 gap-base">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Daftar @yield('title')</h4>
+    @php
+        $permissionRows = collect();
+        foreach ($navigations as $navigation) {
+            $permissionRows->push(['menu' => $navigation, 'level' => 0]);
+            foreach ($navigation->child as $child) {
+                $permissionRows->push(['menu' => $child, 'level' => 1]);
+                foreach ($child->subChild as $subChild) {
+                    $permissionRows->push(['menu' => $subChild, 'level' => 2]);
+                }
+            }
+        }
+    @endphp
 
-                @can('settings-roles.update')
-                    <div class="flex items-center gap-2">
-                        <a href="{{ route('settings.roles.index') }}" class="btn bg-dark text-white hover:bg-warning">
-                            <i class="iconify tabler--arrow-back-up text-xs"></i>
-                            Back
-                        </a>
-
-                        <button type="button" class="btn bg-danger text-white hover:bg-danger-hover" onclick="submitForm()">
-                            <i class="iconify tabler--device-floppy text-xs"></i>
-                            Save @yield('title')
+    <div class="card border bg-white rounded">
+        <div class="card-header py-4 px-5">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <div class="relative me-3">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 pointer-events-none"><i class="ti ti-search"></i></span>
+                    <input type="text" id="permission-table-search" placeholder="Search"
+                        class="pl-8 pr-4 py-2 border outline-none rounded-md text-sm placeholder:text-gray-400 focus:outline-none bg-white focus:ring-0 focus:outline-primary">
+                </div>
+                <div class="flex items-center gap-2">
+                    <a href="{{ route('settings.roles.index') }}" class="flex items-center gap-1 btn btn-light">
+                        <i class="ti ti-arrow-left"></i>Kembali
+                    </a>
+                    @can('settings-roles.update')
+                        <button type="submit" form="permissions-form"
+                            class="flex items-center gap-1 btn bg-primary border border-primary text-white text-center hover:bg-primary-hover hover:text-white">
+                            <i class="ti ti-device-floppy"></i>Simpan
                         </button>
-                    </div>
-                @endcan
+                    @endcan
+                </div>
             </div>
-
-            <div class="card-body">
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive custom-table">
                 <form action="{{ route('settings.roles.permissions', $role->id) }}" id="permissions-form" method="POST">
                     @csrf
                     @method('PUT')
-
-                    <div class="table-wrapper -mb-4">
-                        <table id="data-table" class="table table-striped group">
-                            <thead class="thead-sm uppercase text-2xs">
-                                <tr>
-                                    <th class="text-center">Menu</th>
-                                    <th class="text-center">All</th>
-                                    <th class="text-center">Read</th>
-                                    <th class="text-center">Create</th>
-                                    <th class="text-center">Update</th>
-                                    <th class="text-center">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @can('settings-roles.read')    
-                                @forelse ($navigations as $nav)
-                                    {{-- Start single & parent navs --}}
-                                    <tr class="">
-                                        {{-- Start Nav Icon & Name --}}
-                                        <td class="text-left align-middle">
-                                            <div class="flex items-center gap-2">
-                                                <i class="iconify tabler--{{ str_replace('_', '-', $nav['icon']) }} transition-all text-gray-500 dark:text-gray-400 text-xs leading-none relative -top-px"></i>
-                                                <span class="title leading-none text-left">
-                                                    {{ $nav['name'] }}
-                                                </span>
-                                            </div>
-                                        </td>
-                                        {{-- End Nav Icon & Name --}}
-
-                                        {{-- Start Select All Checkbox --}}
-                                        <td class="text-center">
-                                            <div class="flex justify-center">
-                                                <input type="checkbox" class="check-all size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-purple-500 checked:border-purple-500 dark:checked:bg-purple-500 dark:checked:border-purple-500" data-id="{{ $nav->id }}">
-                                            </div>
-                                        </td>
-                                        {{-- End Select All Checkbox --}}
-
-                                        {{-- Start Permissions (Read) --}}
-                                        <td class="text-center">
-                                            <div class="flex justify-center">
-                                                <input id="checkbox_{{ $nav->id }}_read" name="permissions[]"
-                                            type="checkbox" value="{{ strtolower($nav->slug) . '.read' }}"
-                                            class="size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-green-500 checked:border-green-500 dark:checked:bg-green-500 dark:checked:border-green-500 checked:disabled:bg-green-400 checked:disabled:border-green-400"
-                                            {{ in_array(strtolower($nav->slug) . '.read', $permissions) ? 'checked' : '' }}>
-                                            </div>
-                                        </td>
-                                        {{-- End Permissions (Read) --}}
-                                        
-                                        {{-- Start Permissions (Create) --}}
-                                        <td class="text-center">
-                                            <div class="flex justify-center">
-                                                <input id="checkbox_{{ $nav->id }}_create" name="permissions[]"
-                                            type="checkbox" value="{{ strtolower($nav->slug) . '.create' }}"
-                                            class="size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-green-500 checked:border-green-500 dark:checked:bg-green-500 dark:checked:border-green-500 checked:disabled:bg-green-400 checked:disabled:border-green-400"
-                                            {{ in_array(strtolower($nav->slug) . '.create', $permissions) ? 'checked' : '' }}>
-                                            </div>
-                                        </td>
-                                        {{-- End Permissions (Create) --}}
-
-                                        {{-- Start Permissions (Update) --}}
-                                        <td class="text-center">
-                                            <div class="flex justify-center">
-                                                <input id="checkbox_{{ $nav->id }}_update" name="permissions[]"
-                                            type="checkbox" value="{{ strtolower($nav->slug) . '.update' }}"
-                                            class="size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-green-500 checked:border-green-500 dark:checked:bg-green-500 dark:checked:border-green-500 checked:disabled:bg-green-400 checked:disabled:border-green-400"
-                                            {{ in_array(strtolower($nav->slug) . '.update', $permissions) ? 'checked' : '' }}>
-                                            </div>
-                                        </td>
-                                        {{-- End Permissions (Update) --}}
-
-                                        {{-- Start Permissions (Delete) --}}
-                                        <td class="text-center">
-                                            <div class="flex justify-center">
-                                                <input id="checkbox_{{ $nav->id }}_delete" name="permissions[]"
-                                            type="checkbox" value="{{ strtolower($nav->slug) . '.delete' }}"
-                                            class="size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-green-500 checked:border-green-500 dark:checked:bg-green-500 dark:checked:border-green-500 checked:disabled:bg-green-400 checked:disabled:border-green-400"
-                                            {{ in_array(strtolower($nav->slug) . '.delete', $permissions) ? 'checked' : '' }}>
-                                            </div>
-                                        </td>
-                                        {{-- End Permissions (Delete) --}}
-                                    </tr>
-                                    {{-- End single & parent navs --}}
-                                    
-                                    {{-- Start child navs --}}
-                                    @if ($nav->child->count() > 0)
-                                        @foreach ($nav->child as $child)
-                                            <tr class="">
-                                                {{-- Start Child Nav Icon & Name --}}
-                                                <td class="text-left align-middle border-l-4 border-blue-500">
-                                                    <div class="flex items-center gap-2 mr-4 pl-4">
-                                                        <div class="col-span">
-                                                            <i class="iconify tabler--dots text-blue-500 text-xs"></i>
-                                                        </div> 
-                                                        <div class="title leading-none text-left font-medium">
-                                                            {{ $child->name ?? '-' }}
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                {{-- End Child Nav Icon & Name --}}
-
-                                                {{-- Start Select All Checkbox --}}
-                                                <td class="text-center">
-                                                    <div class="flex justify-center">
-                                                        <input type="checkbox" class="check-all size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-purple-500 checked:border-purple-500 dark:checked:bg-purple-500 dark:checked:border-purple-500" data-id="{{ $child->id }}">
-                                                    </div>
-                                                </td>
-                                                {{-- End Select All Checkbox --}}
-
-                                                {{-- Start Permissions (Read) --}}
-                                                <td class="text-center">
-                                                    <div class="flex justify-center">
-                                                        <input id="checkbox_{{ $child->id }}_read" name="permissions[]"
-                                                    type="checkbox" value="{{ strtolower($child->slug) . '.read' }}"
-                                                    class="size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-green-500 checked:border-green-500 dark:checked:bg-green-500 dark:checked:border-green-500 checked:disabled:bg-green-400 checked:disabled:border-green-400"
-                                                    {{ in_array(strtolower($child->slug) . '.read', $permissions) ? 'checked' : '' }}>
-                                                    </div>
-                                                </td>
-                                                {{-- End Permissions (Read) --}}
-                                                
-                                                {{-- Start Permissions (Create) --}}
-                                                <td class="text-center">
-                                                    <div class="flex justify-center">
-                                                        <input id="checkbox_{{ $child->id }}_create" name="permissions[]"
-                                                    type="checkbox" value="{{ strtolower($child->slug) . '.create' }}"
-                                                    class="size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-green-500 checked:border-green-500 dark:checked:bg-green-500 dark:checked:border-green-500 checked:disabled:bg-green-400 checked:disabled:border-green-400"
-                                                    {{ in_array(strtolower($child->slug) . '.create', $permissions) ? 'checked' : '' }}>
-                                                    </div>
-                                                </td>
-                                                {{-- End Permissions (Create) --}}
-
-                                                {{-- Start Permissions (Update) --}}
-                                                <td class="text-center">
-                                                    <div class="flex justify-center">
-                                                        <input id="checkbox_{{ $child->id }}_update" name="permissions[]"
-                                                    type="checkbox" value="{{ strtolower($child->slug) . '.update' }}"
-                                                    class="size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-green-500 checked:border-green-500 dark:checked:bg-green-500 dark:checked:border-green-500 checked:disabled:bg-green-400 checked:disabled:border-green-400"
-                                                    {{ in_array(strtolower($child->slug) . '.update', $permissions) ? 'checked' : '' }}>
-                                                    </div>
-                                                </td>
-                                                {{-- End Permissions (Update) --}}
-
-                                                {{-- Start Permissions (Delete) --}}
-                                                <td class="text-center">
-                                                    <div class="flex justify-center">
-                                                        <input id="checkbox_{{ $child->id }}_delete" name="permissions[]"
-                                                    type="checkbox" value="{{ strtolower($child->slug) . '.delete' }}"
-                                                    class="size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-green-500 checked:border-green-500 dark:checked:bg-green-500 dark:checked:border-green-500 checked:disabled:bg-green-400 checked:disabled:border-green-400"
-                                                    {{ in_array(strtolower($child->slug) . '.delete', $permissions) ? 'checked' : '' }}>
-                                                    </div>
-                                                </td>
-                                                {{-- End Permissions (Delete) --}}
-                                            </tr>
-
-                                            {{-- Start subChild navs (Level 3) --}}
-                                            @if ($child->subChild->count() > 0)
-                                                @foreach ($child->subChild as $subChild)
-                                                    <tr class="">
-                                                        {{-- Start SubChild Nav Icon & Name --}}
-                                                        <td class="text-left align-middle border-l-4 border-green-500">
-                                                            <div class="flex items-center gap-2 mr-4 pl-8">
-                                                                <div class="col-span">
-                                                                    <i class="iconify tabler--dots text-blue-500 text-xs"></i><i class="iconify tabler--dots text-blue-500 text-xs"></i>
-                                                                </div> 
-                                                                <div class="title leading-none text-left">
-                                                                    {{ $subChild->name ?? '-' }}
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        {{-- End SubChild Nav Icon & Name --}}
-
-                                                        {{-- Start Select All Checkbox --}}
-                                                        <td class="text-center">
-                                                            <div class="flex justify-center">
-                                                                <input type="checkbox" class="check-all size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-purple-500 checked:border-purple-500 dark:checked:bg-purple-500 dark:checked:border-purple-500" data-id="{{ $subChild->id }}">
-                                                            </div>
-                                                        </td>
-                                                        {{-- End Select All Checkbox --}}
-
-                                                        {{-- Start Permissions (Read) --}}
-                                                        <td class="text-center">
-                                                            <div class="flex justify-center">
-                                                                <input id="checkbox_{{ $subChild->id }}_read" name="permissions[]"
-                                                            type="checkbox" value="{{ strtolower($subChild->slug) . '.read' }}"
-                                                            class="size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-green-500 checked:border-green-500 dark:checked:bg-green-500 dark:checked:border-green-500 checked:disabled:bg-green-400 checked:disabled:border-green-400"
-                                                            {{ in_array(strtolower($subChild->slug) . '.read', $permissions) ? 'checked' : '' }}>
-                                                            </div>
-                                                        </td>
-                                                        {{-- End Permissions (Read) --}}
-                                                        
-                                                        {{-- Start Permissions (Create) --}}
-                                                        <td class="text-center">
-                                                            <div class="flex justify-center">
-                                                                <input id="checkbox_{{ $subChild->id }}_create" name="permissions[]"
-                                                            type="checkbox" value="{{ strtolower($subChild->slug) . '.create' }}"
-                                                            class="size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-green-500 checked:border-green-500 dark:checked:bg-green-500 dark:checked:border-green-500 checked:disabled:bg-green-400 checked:disabled:border-green-400"
-                                                            {{ in_array(strtolower($subChild->slug) . '.create', $permissions) ? 'checked' : '' }}>
-                                                            </div>
-                                                        </td>
-                                                        {{-- End Permissions (Create) --}}
-
-                                                        {{-- Start Permissions (Update) --}}
-                                                        <td class="text-center">
-                                                            <div class="flex justify-center">
-                                                                <input id="checkbox_{{ $subChild->id }}_update" name="permissions[]"
-                                                            type="checkbox" value="{{ strtolower($subChild->slug) . '.update' }}"
-                                                            class="size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-green-500 checked:border-green-500 dark:checked:bg-green-500 dark:checked:border-green-500 checked:disabled:bg-green-400 checked:disabled:border-green-400"
-                                                            {{ in_array(strtolower($subChild->slug) . '.update', $permissions) ? 'checked' : '' }}>
-                                                            </div>
-                                                        </td>
-                                                        {{-- End Permissions (Update) --}}
-
-                                                        {{-- Start Permissions (Delete) --}}
-                                                        <td class="text-center">
-                                                            <div class="flex justify-center">
-                                                                <input id="checkbox_{{ $subChild->id }}_delete" name="permissions[]"
-                                                            type="checkbox" value="{{ strtolower($subChild->slug) . '.delete' }}"
-                                                            class="size-4 border rounded-full appearance-none cursor-pointer bg-slate-100 border-slate-200 dark:bg-zink-600 dark:border-zink-500 checked:bg-green-500 checked:border-green-500 dark:checked:bg-green-500 dark:checked:border-green-500 checked:disabled:bg-green-400 checked:disabled:border-green-400"
-                                                            {{ in_array(strtolower($subChild->slug) . '.delete', $permissions) ? 'checked' : '' }}>
-                                                            </div>
-                                                        </td>
-                                                        {{-- End Permissions (Delete) --}}
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-                                            {{-- End subChild navs (Level 3) --}}
-                                        @endforeach
-                                    @endif
-                                    {{-- End child navs --}}
-                                @empty
+                    <table class="table table-nowrap border w-full border" id="data-table">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="text-left text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">Menu</th>
+                                <th class="text-center text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">Semua</th>
+                                <th class="text-center text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">Read</th>
+                                <th class="text-center text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">Create</th>
+                                <th class="text-center text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">Update</th>
+                                <th class="text-center text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-borderColor">
+                            @can('settings-roles.read')
+                                @forelse ($permissionRows as $row)
+                                    @php
+                                        $menu = $row['menu'];
+                                        $icon = trim($menu->icon ?? '');
+                                        $menuIconClass = match (true) {
+                                            $row['level'] > 0 => 'ti ti-corner-down-right',
+                                            $icon === '' => 'ti ti-menu-2',
+                                            str_contains($icon, ' ') => $icon,
+                                            str_starts_with($icon, 'ti-') => 'ti ' . $icon,
+                                            default => 'ti ti-' . $icon,
+                                        };
+                                    @endphp
                                     <tr>
-                                        <td colspan="6" class="text-center">Tidak ada menu ditemukan</td>
+                                        <td class="px-5 py-2.5 text-gray-500">
+                                            <div class="flex items-center gap-2" style="padding-left: {{ $row['level'] * 20 }}px">
+                                                <i class="{{ $menuIconClass }} text-[16px]"></i>
+                                                <span class="{{ $row['level'] === 0 ? 'font-semibold text-gray-900' : '' }}">{{ $menu->name ?? '-' }}</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-5 py-2.5 text-center">
+                                            <input type="checkbox" class="check-all form-check-input border-borderColor rounded" data-id="{{ $menu->id }}"
+                                                aria-label="Pilih semua hak akses {{ $menu->name }}">
+                                        </td>
+                                        @foreach (['read', 'create', 'update', 'delete'] as $action)
+                                            @php($permissionName = strtolower($menu->slug) . '.' . $action)
+                                            <td class="px-5 py-2.5 text-center">
+                                                <input id="checkbox_{{ $menu->id }}_{{ $action }}" name="permissions[]" type="checkbox"
+                                                    value="{{ $permissionName }}" class="form-check-input border-borderColor rounded"
+                                                    aria-label="{{ ucfirst($action) }} {{ $menu->name }}"
+                                                    {{ in_array($permissionName, $permissions) ? 'checked' : '' }}>
+                                            </td>
+                                        @endforeach
                                     </tr>
+                                @empty
                                 @endforelse
                             @endcan
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </form>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <div class="w-full md:w-1/2"><div class="datatable-length"></div></div>
+                <div class="w-full md:w-1/2 text-center"><div class="datatable-info text-sm text-gray-500"></div></div>
+                <div class="w-full md:w-1/2 mt-4 md:mt-0 text-end"><div class="datatable-paginate"></div></div>
             </div>
         </div>
     </div>
 @endsection
 
 @push('scripts')
-    {{-- DataTables JS --}}
-    <script src="{{ URL::asset('assets/admin/js/datatables-2.3.4/dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/admin/js/datatables-2.3.4/dataTables.tailwindcss.js') }}"></script>
-
-    {{-- Implement datatable --}}
+    <script src="{{ URL::asset('assets/admin/js/dataTables.js') }}"></script>
+    <script src="{{ URL::asset('assets/admin/js/dataTables.tailwindcss.js') }}"></script>
     <script>
-        /* Data Table */
-        $(document).ready(function() {
-            $('#data-table').DataTable({
-                columns: [
-                    { width: "50%" },
-                    { width: "10%" },
-                    { width: "10%" },
-                    { width: "10%" },
-                    { width: "10%" },
-                    { width: "10%" }
-                ],
-                autoWidth: false,
-                pageLength: 100,
-                ordering: false
-            });
-        });
-
-        /* Submit form */
-        function submitForm() {
-            document.getElementById('permissions-form').submit();
-        }
-
-        /* Check/Uncheck All Permissions in Row */
-        $(document).on('change', '.check-all', function() {
-            const menuId = $(this).data('id');
-            const isChecked = $(this).prop('checked');
-            
-            // Check/uncheck all permission checkboxes for this menu
-            $(`#checkbox_${menuId}_read`).prop('checked', isChecked);
-            $(`#checkbox_${menuId}_create`).prop('checked', isChecked);
-            $(`#checkbox_${menuId}_update`).prop('checked', isChecked);
-            $(`#checkbox_${menuId}_delete`).prop('checked', isChecked);
-        });
-
-        /* Auto-check 'All' checkbox if all permissions are checked */
-        $(document).on('change', 'input[type="checkbox"][id^="checkbox_"]', function() {
-            // Get the menu ID from checkbox ID (format: checkbox_ID_permission)
-            const checkboxId = $(this).attr('id');
-            const matches = checkboxId.match(/checkbox_(\d+)_/);
-            
-            if (matches) {
-                const menuId = matches[1];
-                
-                // Check if all permission checkboxes are checked
-                const allChecked = 
-                    $(`#checkbox_${menuId}_read`).prop('checked') &&
-                    $(`#checkbox_${menuId}_create`).prop('checked') &&
-                    $(`#checkbox_${menuId}_update`).prop('checked') &&
-                    $(`#checkbox_${menuId}_delete`).prop('checked');
-                
-                // Update the 'All' checkbox accordingly
-                $(`.check-all[data-id="${menuId}"]`).prop('checked', allChecked);
-            }
-        });
-
-        /* Initialize 'All' checkboxes on page load */
-        $(document).ready(function() {
-            $('input[id^="checkbox_"]').each(function() {
-                const checkboxId = $(this).attr('id');
-                const matches = checkboxId.match(/checkbox_(\d+)_read/);
-                
-                if (matches) {
-                    const menuId = matches[1];
-                    const allChecked = 
-                        $(`#checkbox_${menuId}_read`).prop('checked') &&
-                        $(`#checkbox_${menuId}_create`).prop('checked') &&
-                        $(`#checkbox_${menuId}_update`).prop('checked') &&
-                        $(`#checkbox_${menuId}_delete`).prop('checked');
-                    
-                    $(`.check-all[data-id="${menuId}"]`).prop('checked', allChecked);
+        $(document).ready(function () {
+            const table = $('#data-table').DataTable({
+                searching: true,
+                dom: 'lrtip',
+                ordering: false,
+                pageLength: 10,
+                lengthMenu: [10, 25, 50, 100],
+                language: {
+                    info: 'Menampilkan _START_ - _END_ dari _TOTAL_ data',
+                    infoEmpty: 'Tidak ada data yang ditampilkan',
+                    emptyTable: 'Tidak ada menu ditemukan',
+                    lengthMenu: 'Tampilkan _MENU_ data',
+                    paginate: { next: '<i class="ti ti-chevron-right"></i>', previous: '<i class="ti ti-chevron-left"></i>' }
+                },
+                initComplete: function () {
+                    $('.dt-length').appendTo('.datatable-length');
+                    $('.dt-info').appendTo('.datatable-info');
+                    $('.dt-paging').appendTo('.datatable-paginate');
                 }
             });
+
+            $('#permission-table-search').on('input', function () {
+                table.search(this.value).draw();
+            });
+
+            $('#permissions-form').on('submit', function () {
+                $(table.rows().nodes()).appendTo('#data-table tbody');
+            });
+
+            $('.check-all').each(function () {
+                updateCheckAll($(this).data('id'));
+            });
         });
 
+        $(document).on('change', '.check-all', function () {
+            const menuId = $(this).data('id');
+            ['read', 'create', 'update', 'delete'].forEach(function (action) {
+                $('#checkbox_' + menuId + '_' + action).prop('checked', $('.check-all[data-id="' + menuId + '"]').prop('checked'));
+            });
+        });
+
+        $(document).on('change', 'input[id^="checkbox_"]', function () {
+            const matches = this.id.match(/checkbox_(\d+)_/);
+            if (matches) updateCheckAll(matches[1]);
+        });
+
+        function updateCheckAll(menuId) {
+            const allChecked = ['read', 'create', 'update', 'delete'].every(function (action) {
+                return $('#checkbox_' + menuId + '_' + action).prop('checked');
+            });
+            $('.check-all[data-id="' + menuId + '"]').prop('checked', allChecked);
+        }
     </script>
 @endpush

@@ -1,0 +1,116 @@
+
+
+<div class="card border bg-white rounded w-full">
+    <div class="card-header py-4 px-5">
+        <h4>Profile</h4>
+    </div>
+    <div class="card-body">
+        <h5 class="mb-4"><i class="ti ti-user text-primary me-1"></i>Basic Information</h5>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-5 gap-y-1 mb-6">
+            <div class="md:col-span-12">
+                <div class="flex flex-wrap items-center gap-2 mb-4">
+                    <div class="flex items-center justify-center w-[120px] h-120 rounded-lg border border-2 border-dashed  text-gray-400 p-2 relative">
+                        <span class="text-center">
+                            <i class="ti ti-circle-plus mb-1 fs-16 block"></i> 
+                            Add Image
+                        </span>
+                    </div>
+                    <div class="ms-4">
+                        <div class="flex items-center space-x-2">
+                            <label class="btn bg-primary border border-primary text-white text-center hover:bg-primary-hover hover:text-white bg-primary text-white">
+                                Upload Image
+                                <input type="file" class="hidden">
+                            </label>
+                        </div>
+                        <p class="text-gray-500 mt-2">Upload an image below 2 MB, Accepted File format JPG, PNG</p>
+                    </div>
+                </div>
+            </div>
+            <div class="md:col-span-4">
+                <div class="mb-3">
+                    <label class="form-label">First Name<span class="text-primary ms-1">*</span></label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="md:col-span-4">
+                <div class="mb-3">
+                    <label class="form-label">Last Name<span class="text-primary ms-1">*</span></label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="md:col-span-4">
+                <div class="mb-3">
+                    <label class="form-label">User Name<span class="text-primary ms-1">*</span></label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="md:col-span-4">
+                <div class="mb-3">
+                    <label class="form-label">Phone Number<span class="text-primary ms-1">*</span></label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="md:col-span-4">
+                <div class="mb-3">
+                    <label class="form-label">Email<span class="text-primary ms-1">*</span></label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <h5 class="mb-4"><i class="ti ti-map-pin text-primary me-1"></i>Address Information</h5>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-5 gap-y-1">
+            <div class="md:col-span-12">
+                <div class="mb-3">
+                    <label class="form-label">Address <span class="text-primary ms-1">*</span></label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="md:col-span-6">
+                <div class="mb-3">
+                    <label class="form-label">City<span class="text-primary ms-1">*</span></label>
+                    <select class="select">
+                        <option>Select</option>
+                        <option>Los Angles</option>
+                        <option>New York City</option>
+                        <option>Houston</option>
+                    </select>											
+                </div>
+            </div>
+            <div class="md:col-span-6">
+                <div class="mb-3">
+                    <label class="form-label">State<span class="text-danger ms-1">*</span></label>
+                    <select class="select">
+                        <option>Select</option>
+                        <option>California</option>
+                        <option>New York</option>
+                        <option>Texas</option>
+                    </select>												
+                </div>
+            </div>
+            <div class="md:col-span-6">
+                <div class="mb-3">
+                    <label class="form-label">Country<span class="text-danger ms-1">*</span></label>
+                    <select class="select">
+                        <option>Select</option>
+                        <option>United States</option>
+                        <option>Canada</option>
+                        <option>Germany</option>
+                    </select>											
+                </div>
+            </div>
+            <div class="md:col-span-6">
+                <div class="mb-3">
+                    <label class="form-label">Postal Code<span class="text-danger ms-1">*</span></label>
+                    <input type="text" class="form-control"> 											
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="flex items-center justify-end gap-x-2">
+            <button type="button" class="btn bg-secondary border border-secondary text-white text-center hover:bg-secondary-hover hover:text-white">Cancel</button>
+            <button type="button" class="btn bg-primary border border-primary text-white text-center hover:bg-primary-hover hover:text-white">Save Changes</button>
+        </div>
+    </div>
+</div>

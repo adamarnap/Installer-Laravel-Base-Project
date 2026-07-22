@@ -10,7 +10,7 @@
                 </div>
                 <div class="trezo-card-subtitle">
                     <button type="button" class="text-[23px] transition-all leading-none text-black dark:text-white hover:text-primary-500" id="modal-add-toggle">
-                        <i class="iconify tabler--x text-xl"></i>
+                        <i class="ri-close-fill"></i>
                     </button>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                         {{-- END: Role --}}
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-[20px] md:gap-[25px] mt-5">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
                         <div>
                             <label class="mb-[12px] font-medium block">
                                 Password

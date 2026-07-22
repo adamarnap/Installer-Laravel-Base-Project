@@ -2,7 +2,7 @@
 @if($impersonate_data['is_impersonating'])
 <div class="impersonate-bar fixed left-0 right-0 top-0 z-[7] bg-red-500 text-white px-[25px] py-[10px] flex items-center justify-between shadow-md">
     <div class="flex items-center gap-3">
-        <i class="iconify tabler--{icon_name} text-xs text-[22px]">warning</i>
+        <i class="material-symbols-outlined text-[22px]">warning</i>
         <span class="text-sm font-medium">
             Anda sedang melakukan impersonate sebagai <strong>{{ $impersonate_data['impersonated_user']->name }}</strong>
             ({{ $impersonate_data['impersonated_user']->email }})
@@ -12,7 +12,7 @@
         @csrf
         @method('DELETE')
         <button type="submit" class="inline-flex items-center gap-1.5 px-4 py-2 bg-white text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200 text-sm font-semibold shadow">
-            <i class="iconify tabler--eye text-xs">logout</i>
+            <i class="material-symbols-outlined text-base">logout</i>
             <span>Keluar dari Impersonate</span>
         </button>
     </form>

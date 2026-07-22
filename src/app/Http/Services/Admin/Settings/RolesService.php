@@ -87,7 +87,7 @@ class RolesService
             app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
             // Create permissions if not exist
-            foreach ($request->permissions ?? [] as $key => $permission) {
+            foreach ($request['permissions'] ?? [] as $permission) {
                 $permission = Permission::firstOrCreate(['name' => $permission]);
             }
 
@@ -96,7 +96,7 @@ class RolesService
 
             // Assign role permissions
             $role = Role::findOrFail($roleId);
-            $role->syncPermissions($request['permissions']);
+            $role->syncPermissions($request['permissions'] ?? []);
 
             // Clear permission cache after sync
             app()[PermissionRegistrar::class]->forgetCachedPermissions();

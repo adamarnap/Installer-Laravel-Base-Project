@@ -17,9 +17,9 @@
 - Composer
 
 ## Template HTML is Used
-- For Admin (Paces) : 
+- For Admin (Dreampos) : 
 ```
-https://themes.coderthemes.com/paces/tailwind/index.html
+https://dreamspos.dreamstechnologies.com/retail-pos/tailwind/src/index.html
 
 ```
 - For Landing (Martex)
@@ -32,10 +32,7 @@ IF you will edit Tailwind css for Landing Page you can edit file input css then 
 - paste in public/assets/landing/css here
 
 ### Data Table is Used
-- Data Tables Tailwind V 2.3.4
-```
-https://datatables.net/examples/styling/tailwind.html
-```
+- Data Tables From Dream Pos Template
 
 ## How to install
 

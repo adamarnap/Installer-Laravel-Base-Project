@@ -28,7 +28,7 @@
         // Browser globals
         root.daterangepicker = factory(root.moment, root.jQuery);
     }
-}(this, function(moment, $) {
+}(typeof window !== 'undefined' ? window : this, function(moment, $) {
     var DateRangePicker = function(element, options, cb) {
 
         //default settings for options
@@ -65,7 +65,7 @@
             this.drops = 'up';
 
         this.buttonClasses = 'btn btn-sm';
-        this.applyButtonClasses = 'btn-primary';
+        this.applyButtonClasses = 'bg-primary border border-primary text-white text-center hover:bg-primary-hover hover:text-white';
         this.cancelButtonClasses = 'btn-default';
 
         this.locale = {
