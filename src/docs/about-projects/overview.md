@@ -225,16 +225,24 @@ Format wajib untuk content blade (contoh untuk laman admin):
 
 | Kebutuhan UI | Template Referensi |
 |---|---|
-| Badge | `resources/views/templates/template-badges.blade.php` |
-| Basic Alert | `resources/views/templates/template-basic-alert.blade.php` |
-| Buttons | `resources/views/templates/template-buttons.blade.php` |
-| Content Blade | `resources/views/templates/template-content.blade.php` |
-| Data Table | `resources/views/templates/template-data-table.blade.php` |
-| Form Input | `resources/views/templates/template-form-input.blade.php` |
-| Modal Add | `resources/views/templates/template-modal-add.blade.php` |
-| Modal Edit | `resources/views/templates/template-modal-edit.blade.php` |
-| Select2 | `resources/views/templates/template-select2.blade.php` |
-| Tabs | `resources/views/templates/template-tabs.blade.php` |
+| Badge | `resources/views/templates/admin/template-badges.blade.php` |
+| Basic Alert | `resources/views/templates/admin/template-basic-alert.blade.php` |
+| Buttons | `resources/views/templates/admin/template-buttons.blade.php` |
+| Content Blade | `resources/views/templates/admin/template-content.blade.php` |
+| Data Table | `resources/views/templates/admin/template-data-table.blade.php` |
+| Form Input | `resources/views/templates/admin/template-form-input.blade.php` |
+| Modal Add | `resources/views/templates/admin/template-modal-add.blade.php` |
+| Modal Edit | `resources/views/templates/admin/template-modal-edit.blade.php` |
+| Select2 | `resources/views/templates/admin/template-select2.blade.php` |
+| Tabs | `resources/views/templates/admin/template-tabs.blade.php` |
+| Cards | `resources/views/templates/admin/template-cards.blade.php` |
+| Images | `resources/views/templates/admin/template-images.blade.php` |
+| Carousel (Slider) | `resources/views/templates/admin/template-carousel.blade.php` |
+| Charts | `resources/views/templates/admin/template-charts.blade.php` |
+| Grid (Content Sizing) | `resources/views/templates/admin/template-grid.blade.php` |
+| Offcanvas (mini guide or others) | `resources/views/templates/admin/template-offcanvas.blade.php` |
+| Pagination | `resources/views/templates/admin/template-pagination.blade.php` |
+| Popovers (Info in button) | `resources/views/templates/admin/template-popovers.blade.php` |
 
 Aturan tambahan wajib:
 
