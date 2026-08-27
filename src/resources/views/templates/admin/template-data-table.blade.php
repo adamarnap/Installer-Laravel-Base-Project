@@ -52,6 +52,13 @@
                 <table class="table table-nowrap border w-full border" id="data-table">
                     <thead class="bg-light">
                         <tr >
+                            {{-- Start : Checkbox --}}
+                            <th class="text-left no-sort text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b hover:outline-none">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="select-all" class="w-4 h-4 bg-white border rounded text-primary focus:ring-0 focus:outline-none"/>
+                                </div>
+                            </th>
+                            {{-- End : Checkbox --}}
                             <th class="text-left text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">No.</th>
                             <th class="text-left text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">Nama</th>
                             <th class="text-left text-sm leading-normal px-5 py-2.5 bg-light text-gray-900 border-b font-semibold">Email</th>
@@ -188,3 +195,24 @@
     </script>
     {{-- End: Implement serverside datatable --}}
 @endpush
+
+{{-- Start : Contoh td yang digunakan di server side (Hanya sebagai referensi di serverside, jika diperlukan) --}}
+
+{{-- Start: Input Checkbox in table --}}
+<div class="flex items-center">
+    <input class="size-4 bg-white border border-borderColor rounded text-primary focus:ring-0" type="checkbox">
+</div>
+{{-- End: Input Checkbox in table --}}
+
+{{-- Start: Image in table --}}
+<div class="flex items-center">
+    <a href="#" class="avatar size-8" data-bs-toggle="modal" data-bs-target="#view_details">
+        <img src="assets/img/products/stock-img-01.png" class="rounded size-8 img-fluid" alt="img">
+    </a>
+    <div class="ms-2">
+        <p class="text-dark font-medium mb-0"><a class="hover:text-primary" href="#" data-bs-toggle="modal"  data-bs-target="#view_details">Lenovo IdeaPad 3</a></p>
+    </div>
+</div>
+{{-- End: Image in table --}}
+
+{{-- End : Contoh td yang digunakan di server side (Hanya sebagai referensi di serverside, jika diperlukan) --}}

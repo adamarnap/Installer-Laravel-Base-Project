@@ -249,6 +249,11 @@
 {{-- End : Basic Input --}}
 
 {{-- Start : File Upload --}}
+<!-- Quill css -->
+<link rel="stylesheet" href="assets/plugins/quill/quill.core.css">
+<link rel="stylesheet" href="assets/plugins/quill/quill.snow.css">
+<link rel="stylesheet" href="assets/plugins/quill/quill.bubble.css">
+
 <div class="card bg-white border border-borderColor rounded mb-5">
     <div class="card-header border-b border-borderColor p-4">
         <h5 class="card-title">Dropzone File Upload</h5>
@@ -302,3 +307,68 @@
 <!-- File Upload js -->
 <script src="assets/js/form-fileupload.js"></script>
 {{-- End : File Upload --}}
+
+{{-- Start : Form Editor (Quill Editor) --}}
+<div class="card border bg-white border-borderColor mb-5 rounded">
+    <div class="card-header border-b border-borderColor p-4">
+        <h5 class="card-title">Quill Editor</h5>
+    </div>
+
+    <div class="card-body p-4">
+        <p class="text-muted mb-4">Snow is a clean, flat toolbar theme.</p>
+
+        <div id="snow-editor" style="height: 300px;">
+            <h3><span class="ql-size-large">Hello World!</span></h3>
+            <p><br></p>
+            <h3>This is an simple editable area.</h3>
+            <p><br></p>
+            <ul>
+                <li>
+                    Select a text to reveal the toolbar.
+                </li>
+                <li>
+                    Edit rich document on-the-fly, so elastic!
+                </li>
+            </ul>
+            <p><br></p>
+            <p>
+                End of simple area
+            </p>
+        </div><!-- end snow editor-->
+    </div> <!-- end card body -->
+</div> <!-- end card -->
+
+<div class="card border bg-white border-borderColor mb-5 rounded">
+    <div class="card-header border-b border-borderColor p-4">
+        <h5 class="card-title">Quill Bubble Editor</h5>
+    </div>
+    <div class="card-body p-4">
+        <p class="text-muted mb-4">Bubble is a simple tooltip based theme.</p>
+
+        <div id="bubble-editor" class="border border-borderColor rounded" style="height: 300px;">
+            <h3><span class="ql-size-large">Hello World!</span></h3>
+            <p><br></p>
+            <h3>This is an simple editable area.</h3>
+            <p><br></p>
+            <ul>
+                <li>
+                    Select a text to reveal the toolbar.
+                </li>
+                <li>
+                    Edit rich document on-the-fly, so elastic!
+                </li>
+            </ul>
+            <p><br></p>
+            <p>
+                End of simple area
+            </p>
+        </div> <!-- end snow editor-->
+    </div> <!-- end card body -->
+</div> <!-- end card -->
+
+<!-- Quill Editor JS -->
+<script src="assets/plugins/quill/quill.min.js"></script>
+
+<!-- Quill JS -->
+<script src="assets/js/form-quill.js"></script>
+{{-- End : Form Editor (Quill Editor) }}
