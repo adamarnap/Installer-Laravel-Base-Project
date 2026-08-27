@@ -37,7 +37,10 @@
             }
         } else {
             $isParentActive = Request::is($navItemUrl);
-            $hasActiveChild = collect($navItem['child'])->pluck('url')->contains($urlCurrent);
+            // Cek apakah ada child yang URL-nya diawali oleh $urlCurrent (bukan exact match)
+            $hasActiveChild = collect($navItem['child'])->contains(function ($child) use ($urlCurrent) {
+                return Str::startsWith($urlCurrent, $child['url']);
+            });
             $hasActiveSubChild = false;
 
             foreach ($navItem['child'] as $childItem) {
@@ -76,7 +79,10 @@
 
                             if (count($nav['child']) > 0) {
                                 $isParentActive = Request::is($navUrl);
-                                $hasActiveChild = collect($nav['child'])->pluck('url')->contains($urlCurrent);
+                                // Cek apakah ada child yang URL-nya diawali oleh $urlCurrent (bukan exact match)
+                                $hasActiveChild = collect($nav['child'])->contains(function ($child) use ($urlCurrent) {
+                                    return Str::startsWith($urlCurrent, $child['url']);
+                                });
 
                                 foreach ($nav['child'] as $child) {
                                     if (isset($child['sub_child']) && count($child['sub_child']) > 0) {
@@ -135,7 +141,10 @@
 
                             if (count($nav['child']) > 0) {
                                 $isParentActive = Request::is($navUrl);
-                                $hasActiveChild = collect($nav['child'])->pluck('url')->contains($urlCurrent);
+                                // Cek apakah ada child yang URL-nya diawali oleh $urlCurrent (bukan exact match)
+                                $hasActiveChild = collect($nav['child'])->contains(function ($child) use ($urlCurrent) {
+                                    return Str::startsWith($urlCurrent, $child['url']);
+                                });
 
                                 foreach ($nav['child'] as $child) {
                                     if (isset($child['sub_child']) && count($child['sub_child']) > 0) {
@@ -260,7 +269,9 @@
                                     }
 
                                     $isParentOpen = Request::is(ltrim(parse_url($nav['url'], PHP_URL_PATH), '/'))
-                                        || collect($nav['child'])->pluck('url')->contains($urlCurrent)
+                                        || collect($nav['child'])->contains(function ($child) use ($urlCurrent) {
+                                            return Str::startsWith($urlCurrent, $child['url']);
+                                        })
                                         || $hasActiveSubChild;
                                 @endphp
 
@@ -269,7 +280,7 @@
                                     @php
                                         $hasSubChild = $child['sub_child'] && count($child['sub_child']) > 0;
                                     @endphp
-                                    <li class="@if ($hasSubChild) submenu {{ Request::is(ltrim(parse_url($child['url'], PHP_URL_PATH), '/')) || collect($child['sub_child'])->pluck('url')->contains($urlCurrent) ? 'active' : '' }} @else {{ $urlCurrent == $child['url'] ? 'active' : '' }} @endif">
+                                    <li class="@if ($hasSubChild) submenu {{ Request::is(ltrim(parse_url($child['url'], PHP_URL_PATH), '/')) || collect($child['sub_child'])->pluck('url')->contains($urlCurrent) ? 'active' : '' }} @else {{ Str::startsWith($urlCurrent, $child['url']) ? 'active' : '' }} @endif">
                                         {{-- Check if the child has subChild --}}
                                         @if ($hasSubChild)
                                             {{-- START: Sub-Child Menu --}}
@@ -303,7 +314,7 @@
                                             {{-- END: Sub-Child Menu --}}
                                         @else
                                             {{-- START: Child Menu not Have SubChild --}}
-                                            <a href="{{ $child['url'] }}" class="{{ $urlCurrent == $child['url'] ? 'active' : '' }}">
+                                            <a href="{{ $child['url'] }}" class="{{ Str::startsWith($urlCurrent, $child['url']) ? 'active' : '' }}">
                                                 <span>{{ $child['name'] }}</span>
                                             </a>
                                             {{-- END: Child Menu not Have SubChild --}}

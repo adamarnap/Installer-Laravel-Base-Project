@@ -102,7 +102,11 @@
                     }
 
                     $isParentActive = Request::is(ltrim(parse_url($nav['url'], PHP_URL_PATH), '/'));
-                    $hasActiveChild = collect($nav['child'])->pluck('url')->contains($urlCurrent);
+                    // Cek apakah ada child yang URL-nya diawali oleh $urlCurrent (bukan exact match)
+                    // Ini agar route seperti /apps/apps/create tetap mengaktifkan child /apps/apps
+                    $hasActiveChild = collect($nav['child'])->contains(function ($child) use ($urlCurrent) {
+                        return Str::startsWith($urlCurrent, $child['url']);
+                    });
                 @endphp
 
                 {{-- START: Menu Parent With Childs Menu --}}
@@ -133,7 +137,7 @@
                     <ul style="display: {{ $isParentOpen ? 'block' : 'none' }};">
                         {{-- START: Foreach List Childs Menu --}}
                         @foreach ($nav['child'] as $child)
-                            <li class="@if ($child['sub_child'] && count($child['sub_child']) > 0) submenu submenu-two @if (Request::is(ltrim(parse_url($child['url'], PHP_URL_PATH), '/')) || collect($child['sub_child'])->pluck('url')->contains($urlCurrent)) active @endif @else {{ $urlCurrent == $child['url'] ? 'active' : '' }} @endif">
+                            <li class="@if ($child['sub_child'] && count($child['sub_child']) > 0) submenu submenu-two @if (Request::is(ltrim(parse_url($child['url'], PHP_URL_PATH), '/')) || collect($child['sub_child'])->pluck('url')->contains($urlCurrent)) active @endif @else {{ Str::startsWith($urlCurrent, $child['url']) ? 'active' : '' }} @endif">
                                 {{-- Check if the child has subChild --}}
                                 @if ($child['sub_child'] && count($child['sub_child']) > 0)
                                     {{-- START: Sub-Child Menu --}}
@@ -171,7 +175,8 @@
                                 @else
                                     {{-- START: Child Menu not Have SubChild --}}
                                     @php
-                                        $isChildActive = $urlCurrent == $child['url'];
+                                        // Cek apakah child aktif dengan startsWith agar sub-route tetap aktif
+                                        $isChildActive = Str::startsWith($urlCurrent, $child['url']);
                                     @endphp
                                     <a href="{{ $child['url'] }}" class="{{ $isChildActive ? 'active ' : '' }}flex items-center">
                                         {{ $child['name'] }}
