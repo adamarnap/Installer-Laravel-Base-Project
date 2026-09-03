@@ -171,7 +171,78 @@ class NavigationSeeder extends Seeder
                 'active' => true,
                 'display' => true,
             ],
-            
+            [
+                'id' => 507,
+                'name' => 'Cache Management',
+                'page' => 'admin',
+                'url' => 'settings.cache.index',
+                'slug' => 'settings-cache',
+                'icon' => '', // Assuming no icon specified
+                'order' => 6,
+                'parent_id' => 501, // Nested under Settings
+                'active' => true,
+                'display' => true,
+            ],
+            [
+                'id' => 508,
+                'name' => 'App Logs',
+                'page' => 'admin',
+                'url' => 'settings.apps-log.index',
+                'slug' => 'settings-apps-log',
+                'icon' => '', // Assuming no icon specified
+                'order' => 7,
+                'parent_id' => 501, // Nested under Settings
+                'active' => true,
+                'display' => true,
+            ],
+            [
+                'id' => 509,
+                'name' => 'Migrations Management',
+                'page' => 'admin',
+                'url' => 'settings.migrations.index',
+                'slug' => 'settings-migrations',
+                'icon' => '', // Assuming no icon specified
+                'order' => 8,
+                'parent_id' => 501, // Nested under Settings
+                'active' => true,
+                'display' => true,
+            ],
+            [
+                'id' => 510,
+                'name' => 'Seeders Management',
+                'page' => 'admin',
+                'url' => 'settings.seeders.index',
+                'slug' => 'settings-seeders',
+                'icon' => '', // Assuming no icon specified
+                'order' => 9,
+                'parent_id' => 501, // Nested under Settings
+                'active' => true,
+                'display' => true,
+            ],
+            [
+                'id' => 511,
+                'name' => 'Queues Management',
+                'page' => 'admin',
+                'url' => 'settings.queues.index',
+                'slug' => 'settings-queues',
+                'icon' => '', // Assuming no icon specified
+                'order' => 10,
+                'parent_id' => 501, // Nested under Settings
+                'active' => true,
+                'display' => true,
+            ],
+            [
+                'id' => 512,
+                'name' => 'Schedulers Management',
+                'page' => 'admin',
+                'url' => 'settings.schedulers.index',
+                'slug' => 'settings-schedulers',
+                'icon' => '', // Assuming no icon specified
+                'order' => 11,
+                'parent_id' => 501, // Nested under Settings
+                'active' => true,
+                'display' => true,
+            ],
         ];
 
         $navigationLanding = [
