@@ -40,8 +40,14 @@
         {{-- Determines between a single menu and a menu that has children --}}
         @if (count($nav['child']) == 0)
             {{-- Single menu --}}
+            @php
+                /*
+                * Cek apakah single menu aktif baik pada route index maupun halaman turunan (create, edit, show, dll)
+                */
+                $isSingleActive = (!empty($navUrl) && $nav['url'] != '#' && (Request::is($navUrl) || Request::is($navUrl . '/*'))) || ($routePrefix == $navUrl);
+            @endphp
             <div class="accordion-item rounded-md text-black dark:text-white mb-[5px] whitespace-nowrap">
-                <a href="{{ $nav['url'] }}" class="{{ $routePrefix == $navUrl ? 'active' : '' }} accordion-button flex items-center transition-all py-[9px] ltr:pl-[14px] ltr:pr-[28px] rtl:pr-[14px] rtl:pl-[28px] rounded-md font-medium w-full relative hover:bg-gray-50 text-left dark:hover:bg-[#15203c]">
+                <a href="{{ $nav['url'] }}" class="{{ $isSingleActive ? 'active' : '' }} accordion-button flex items-center transition-all py-[9px] ltr:pl-[14px] ltr:pr-[28px] rtl:pr-[14px] rtl:pl-[28px] rounded-md font-medium w-full relative hover:bg-gray-50 text-left dark:hover:bg-[#15203c]">
                     <i class="material-symbols-outlined transition-all text-gray-500 dark:text-gray-400 ltr:mr-[7px] rtl:ml-[7px] !text-[22px] leading-none relative -top-px">
                         {{ $nav['icon'] }}
                     </i>
@@ -99,12 +105,35 @@
                 $urlCurrent .= '/' . Request::segments()[3];
                 $isHaveSegment4 = true;
             }
+
+            /*
+            * Cek apakah salah satu child atau sub_child aktif (termasuk halaman create, edit, show)
+            */
+            $hasActiveChild = false;
+            foreach ($nav['child'] as $checkChild) {
+                $childPath = ltrim(parse_url($checkChild['url'], PHP_URL_PATH), '/');
+                if (!empty($childPath) && $checkChild['url'] != '#' && (Request::is($childPath) || Request::is($childPath . '/*') || $urlCurrent == $checkChild['url'])) {
+                    $hasActiveChild = true;
+                    break;
+                }
+                if (isset($checkChild['sub_child']) && count($checkChild['sub_child']) > 0) {
+                    foreach ($checkChild['sub_child'] as $checkSubChild) {
+                        $subChildPath = ltrim(parse_url($checkSubChild['url'], PHP_URL_PATH), '/');
+                        if (!empty($subChildPath) && $checkSubChild['url'] != '#' && (Request::is($subChildPath) || Request::is($subChildPath . '/*') || $urlCurrent == $checkSubChild['url'])) {
+                            $hasActiveChild = true;
+                            break 2;
+                        }
+                    }
+                }
+            }
+
+            $isParentActive = (!empty($navUrl) && $nav['url'] != '#' && (Request::is($navUrl) || Request::is($navUrl . '/*'))) || $hasActiveChild || collect($nav['child'])->pluck('url')->contains($urlCurrent);
         @endphp
 
         {{-- START: Menu Parent With Childs Menu --}}
         <div class="accordion-item rounded-md text-black dark:text-white mb-[5px] whitespace-nowrap">
             {{-- START: Parent Menu --}}
-            <button class="accordion-button toggle {{ Request::is(ltrim(parse_url($nav['url'], PHP_URL_PATH), '/')) || collect($nav['child'])->pluck('url')->contains($urlCurrent)? 'open active': '' }} flex items-center transition-all py-[9px] ltr:pl-[14px] ltr:pr-[28px] rtl:pr-[14px] rtl:pl-[28px] rounded-md font-medium w-full relative hover:bg-gray-50 text-left dark:hover:bg-[#15203c]" type="button">
+            <button class="accordion-button toggle {{ $isParentActive ? 'open active': '' }} flex items-center transition-all py-[9px] ltr:pl-[14px] ltr:pr-[28px] rtl:pr-[14px] rtl:pl-[28px] rounded-md font-medium w-full relative hover:bg-gray-50 text-left dark:hover:bg-[#15203c]" type="button">
                 <i class="material-symbols-outlined transition-all text-gray-500 dark:text-gray-400 ltr:mr-[7px] rtl:ml-[7px] !text-[22px] leading-none relative -top-px">
                     {{ $nav['icon'] }}
                 </i>
@@ -115,19 +144,7 @@
             {{-- END: Parent Menu --}}
 
             {{-- START: Menu Childs --}}
-            @php
-                // Cek apakah ada sub_child yang aktif
-                $hasActiveSubChild = false;
-                foreach ($nav['child'] as $child) {
-                    if (isset($child['sub_child']) && count($child['sub_child']) > 0) {
-                        if (collect($child['sub_child'])->pluck('url')->contains($urlCurrent)) {
-                            $hasActiveSubChild = true;
-                            break;
-                        }
-                    }
-                }
-            @endphp
-            <div class="accordion-collapse" style="display: {{ Request::is(ltrim(parse_url($nav['url'], PHP_URL_PATH), '/')) || collect($nav['child'])->pluck('url')->contains($urlCurrent) || $hasActiveSubChild ? 'block': 'none' }};">
+            <div class="accordion-collapse" style="display: {{ $isParentActive ? 'block': 'none' }};">
                 <div class="pt-[4px]">
                     <ul class="sidebar-sub-menu" id="{{ $nav['name'] }}-item-list">
                         {{-- START: Foreach List Childs Menu --}}
@@ -137,21 +154,33 @@
                                 @if ($child['sub_child'] && count($child['sub_child']) > 0)
                                     {{-- START: Sub-Child Menu --}}
                                     @php
-                                        // Cek apakah sub_child aktif
-                                        $isSubChildActive = collect($child['sub_child'])->pluck('url')->contains($urlCurrent);
+                                        // Cek apakah sub_child aktif termasuk path turunan
+                                        $childPath = ltrim(parse_url($child['url'], PHP_URL_PATH), '/');
+                                        $isSubChildActive = false;
+                                        foreach ($child['sub_child'] as $sc) {
+                                            $scPath = ltrim(parse_url($sc['url'], PHP_URL_PATH), '/');
+                                            if (!empty($scPath) && $sc['url'] != '#' && (Request::is($scPath) || Request::is($scPath . '/*') || $urlCurrent == $sc['url'])) {
+                                                $isSubChildActive = true;
+                                                break;
+                                            }
+                                        }
+                                        $isChildGroupActive = (!empty($childPath) && $child['url'] != '#' && (Request::is($childPath) || Request::is($childPath . '/*'))) || $isSubChildActive;
                                     @endphp
-                                    <button type="button" class="{{ Request::is(ltrim(parse_url($child['url'], PHP_URL_PATH), '/')) || $isSubChildActive ? 'open active': '' }} sidemenu-link toggle rounded-md flex items-center relative transition-all font-medium text-gray-500 py-[9px] ltr:pl-[38px] ltr:pr-[30px] rtl:pr-[38px] rtl:pl-[30px] hover:text-primary-500 hover:bg-primary-50 w-full text-left dark:hover:bg-[#15203c]">
+                                    <button type="button" class="{{ $isChildGroupActive ? 'open active': '' }} sidemenu-link toggle rounded-md flex items-center relative transition-all font-medium text-gray-500 py-[9px] ltr:pl-[38px] ltr:pr-[30px] rtl:pr-[38px] rtl:pl-[30px] hover:text-primary-500 hover:bg-primary-50 w-full text-left dark:hover:bg-[#15203c]">
                                         {{ $child['name'] }}
                                     </button>
                                     
                                     {{-- START: Foreach Sub-Child Menu --}}
-                                    <div class="accordion-collapse" style="display: {{ Request::is(ltrim(parse_url($child['url'], PHP_URL_PATH), '/')) || $isSubChildActive ? 'block': 'none' }};">
+                                    <div class="accordion-collapse" style="display: {{ $isChildGroupActive ? 'block': 'none' }};">
                                         <div class="pt-[6px] ltr:pl-[20px] rtl:pr-[20px]">
                                             <ul class="sidebar-sub-menu">
-                                                {{-- @dd($urlCurrent) --}}
                                                 @foreach ($child['sub_child'] as $subChild)
+                                                    @php
+                                                        $subChildPath = ltrim(parse_url($subChild['url'], PHP_URL_PATH), '/');
+                                                        $isCurrentSubChildActive = (!empty($subChildPath) && $subChild['url'] != '#' && (Request::is($subChildPath) || Request::is($subChildPath . '/*'))) || ($urlCurrent == $subChild['url']);
+                                                    @endphp
                                                     <li class="sidemenu-item mb-[4px] last:mb-0">
-                                                        <a href="{{ $subChild['url'] }}" class="{{ $urlCurrent == $subChild['url'] ? 'active' : '' }} sidemenu-link rounded-md flex items-center relative transition-all font-medium text-gray-500 dark:text-gray-400 py-[9px] ltr:pl-[38px] ltr:pr-[30px] rtl:pr-[38px] rtl:pl-[30px] hover:text-primary-500 hover:bg-primary-50 w-full text-left dark:hover:bg-[#15203c]">
+                                                        <a href="{{ $subChild['url'] }}" class="{{ $isCurrentSubChildActive ? 'active' : '' }} sidemenu-link rounded-md flex items-center relative transition-all font-medium text-gray-500 dark:text-gray-400 py-[9px] ltr:pl-[38px] ltr:pr-[30px] rtl:pr-[38px] rtl:pl-[30px] hover:text-primary-500 hover:bg-primary-50 w-full text-left dark:hover:bg-[#15203c]">
                                                             @if (strlen($subChild['name']) > 25)
                                                                 {{ substr($subChild['name'], 0, 25) . '...' }}
                                                             @else
@@ -168,7 +197,11 @@
                                     {{-- END: Sub-Child Menu --}}
                                 @else
                                     {{-- START: Child Menu not Have SubChild --}}
-                                    <a href="{{ $child['url'] }}" class="{{ $urlCurrent == $child['url'] ? 'active' : '' }} sidemenu-link rounded-md flex items-center relative transition-all font-medium text-gray-500 dark:text-gray-400 py-[9px] ltr:pl-[38px] ltr:pr-[30px] rtl:pr-[38px] rtl:pl-[30px] hover:text-primary-500 hover:bg-primary-50 w-full text-left dark:hover:bg-[#15203c]">
+                                    @php
+                                        $childPath = ltrim(parse_url($child['url'], PHP_URL_PATH), '/');
+                                        $isThisChildActive = (!empty($childPath) && $child['url'] != '#' && (Request::is($childPath) || Request::is($childPath . '/*'))) || ($urlCurrent == $child['url']);
+                                    @endphp
+                                    <a href="{{ $child['url'] }}" class="{{ $isThisChildActive ? 'active' : '' }} sidemenu-link rounded-md flex items-center relative transition-all font-medium text-gray-500 dark:text-gray-400 py-[9px] ltr:pl-[38px] ltr:pr-[30px] rtl:pr-[38px] rtl:pl-[30px] hover:text-primary-500 hover:bg-primary-50 w-full text-left dark:hover:bg-[#15203c]">
                                         {{ $child['name'] }}
                                     </a>
                                     {{-- END: Child Menu not Have SubChild --}}
