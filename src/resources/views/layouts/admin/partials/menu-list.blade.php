@@ -49,8 +49,11 @@
         {{-- Determines between a single menu and a menu that has children --}}
         @if (count($nav['child']) == 0)
             {{-- Single menu --}}
+            @php
+                $isSingleActive = (!empty($navUrl) && Request::is($navUrl, $navUrl . '/*')) || ($routePrefix == $navUrl);
+            @endphp
             <li class="menu-item">
-                <a href="{{ $nav['url'] }}" class="{{ $routePrefix == $navUrl ? 'active' : '' }} menu-link">
+                <a href="{{ $nav['url'] }}" class="{{ $isSingleActive ? 'active' : '' }} menu-link">
                     @if (!empty($nav['icon']))
                         <span class="menu-icon">
                             <i class="iconify {{ $navIcon }} me-1 align-middle text-lg"></i>
@@ -113,13 +116,32 @@
                 }
 
                 $navPath = ltrim(parse_url($nav['url'], PHP_URL_PATH), '/');
-                $isNavCurrent = Request::is($navPath);
-                $isNavHasActiveChild = collect($nav['child'])->pluck('url')->contains($urlCurrent);
+                $isNavCurrent = !empty($navPath) && Request::is($navPath, $navPath . '/*');
+
+                // Cek apakah ada child yang aktif
+                $isNavHasActiveChild = false;
+                foreach ($nav['child'] as $c) {
+                    $cPath = ltrim(parse_url($c['url'], PHP_URL_PATH), '/');
+                    if (!empty($cPath) && Request::is($cPath, $cPath . '/*')) {
+                        $isNavHasActiveChild = true;
+                        break;
+                    }
+                }
+                if (!$isNavHasActiveChild) {
+                    $isNavHasActiveChild = collect($nav['child'])->pluck('url')->contains($urlCurrent);
+                }
 
                 // Cek apakah ada sub_child yang aktif
                 $hasActiveSubChild = false;
                 foreach ($nav['child'] as $child) {
                     if (isset($child['sub_child']) && count($child['sub_child']) > 0) {
+                        foreach ($child['sub_child'] as $sc) {
+                            $scPath = ltrim(parse_url($sc['url'], PHP_URL_PATH), '/');
+                            if (!empty($scPath) && Request::is($scPath, $scPath . '/*')) {
+                                $hasActiveSubChild = true;
+                                break 2;
+                            }
+                        }
                         if (collect($child['sub_child'])->pluck('url')->contains($urlCurrent)) {
                             $hasActiveSubChild = true;
                             break;
@@ -153,10 +175,19 @@
                     @foreach ($nav['child'] as $child)
                         @php
                             $childPath = ltrim(parse_url($child['url'], PHP_URL_PATH), '/');
-                            $isChildCurrent = Request::is($childPath);
+                            $isChildCurrent = !empty($childPath) && Request::is($childPath, $childPath . '/*');
                             $isChildHasActiveSubChild = false;
                             if (isset($child['sub_child']) && count($child['sub_child']) > 0) {
-                                $isChildHasActiveSubChild = collect($child['sub_child'])->pluck('url')->contains($urlCurrent);
+                                foreach ($child['sub_child'] as $sc) {
+                                    $scPath = ltrim(parse_url($sc['url'], PHP_URL_PATH), '/');
+                                    if (!empty($scPath) && Request::is($scPath, $scPath . '/*')) {
+                                        $isChildHasActiveSubChild = true;
+                                        break;
+                                    }
+                                }
+                                if (!$isChildHasActiveSubChild) {
+                                    $isChildHasActiveSubChild = collect($child['sub_child'])->pluck('url')->contains($urlCurrent);
+                                }
                             }
                             $childIsOpen = $isChildCurrent || $isChildHasActiveSubChild;
                             $childControlsId = 'menu-' . \Illuminate\Support\Str::slug($nav['slug'] ?? $nav['name']) . '-' . \Illuminate\Support\Str::slug($child['slug'] ?? $child['name']) . '-submenu';
@@ -177,7 +208,8 @@
                                 <ul id="{{ $childControlsId }}" class="sub-menu hs-accordion-content hs-accordion-group {{ $childIsOpen ? '' : 'hidden' }}">
                                     @foreach ($child['sub_child'] as $subChild)
                                         @php
-                                            $isSubChildActive = $urlCurrent == $subChild['url'];
+                                            $subChildPath = ltrim(parse_url($subChild['url'], PHP_URL_PATH), '/');
+                                            $isSubChildActive = (!empty($subChildPath) && Request::is($subChildPath, $subChildPath . '/*')) || ($urlCurrent == $subChild['url']);
                                         @endphp
                                         <li class="menu-item">
                                             <a href="{{ $subChild['url'] }}" class="{{ $isSubChildActive ? 'active' : '' }} menu-link">

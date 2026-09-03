@@ -94,3 +94,38 @@ Breadcrumbs::for('preferences', function (BreadcrumbTrail $trail) {
     $trail->parent('settings');
     $trail->push('Preferensi', route('settings.preferences.index'));
 });
+
+Breadcrumbs::for('cache', function (BreadcrumbTrail $trail) {
+    $trail->parent('settings');
+    $trail->push('Cache Management', route('settings.cache.index'));
+});
+
+Breadcrumbs::for('apps-log', function (BreadcrumbTrail $trail) {
+    $trail->parent('settings');
+    $trail->push('App Logs', route('settings.apps-log.index'));
+});
+
+Breadcrumbs::for('apps-log.show', function (BreadcrumbTrail $trail, $filename) {
+    $trail->parent('apps-log');
+    $trail->push($filename, route('settings.apps-log.show', $filename));
+});
+
+Breadcrumbs::for('migrations', function (BreadcrumbTrail $trail) {
+    $trail->parent('settings');
+    $trail->push('Migrations Management', route('settings.migrations.index'));
+});
+
+Breadcrumbs::for('seeders', function (BreadcrumbTrail $trail) {
+    $trail->parent('settings');
+    $trail->push('Seeders Management', route('settings.seeders.index'));
+});
+
+Breadcrumbs::for('queues', function (BreadcrumbTrail $trail) {
+    $trail->parent('settings');
+    $trail->push('Queue Management', route('settings.queues.index'));
+});
+
+Breadcrumbs::for('schedulers', function (BreadcrumbTrail $trail) {
+    $trail->parent('settings');
+    $trail->push('Scheduler Management', route('settings.schedulers.index'));
+});

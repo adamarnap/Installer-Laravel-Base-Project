@@ -12,10 +12,11 @@ enum RoleEnum: string
     public static function getID(string $role): int
     {
         return match ($role) {
-            self::DEVELOPER => 1,
-            self::SUPERADMIN => 2,
-            self::ADMIN => 3,
-            self::USER => 4,
+            self::DEVELOPER->value => 1,
+            self::SUPERADMIN->value => 2,
+            self::ADMIN->value => 3,
+            self::USER->value => 4,
+            default => throw new \InvalidArgumentException("Unknown role: {$role}"),
         };
     }
 }
