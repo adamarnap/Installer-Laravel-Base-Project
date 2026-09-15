@@ -71,13 +71,13 @@ $.extend( true, DataTable.ext.classes, {
 		container: "dt-processing"
 	},
 	paging: {
-		active: 'font-semibold !bg-primary !border-primary !text-white dark:bg-primary',
-		notActive: 'bg-white dark:bg-gray-800',
-		button: 'relative inline-flex justify-center bg-white items-center space-x-2 border px-4 py-2 -mr-px leading-6 hover:z-10 focus:z-10 active:z-10 border-gray-200 active:border-gray-200 active:shadow-none dark:border-gray-700 dark:active:border-gray-700',
-		first: 'rounded-l-lg',
-		last: 'rounded-r-lg',
-		enabled: 'text-gray-800 hover:text-gray-900 hover:border-gray-300 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25 dark:hover:border-gray-600 dark:hover:text-gray-200 dark:focus:ring-gray-600 dark:focus:ring-opacity-40',
-		notEnabled: 'text-gray-300 dark:text-gray-600'
+		active: 'active !bg-primary !border-primary !text-white font-semibold hover:!bg-primary hover:!text-white',
+		notActive: 'bg-light text-dark hover:bg-primary hover:text-white hover:border-primary',
+		button: 'relative inline-flex items-center justify-center min-w-[32px] h-[32px] px-2.5 text-xs font-medium rounded-md border border-border-color transition-all duration-200',
+		first: 'first:rounded-s-md',
+		last: 'last:rounded-e-md',
+		enabled: '',
+		notEnabled: 'opacity-40 !cursor-not-allowed pointer-events-none text-gray-400'
 	},
 	table: 'dataTable min-w-full text-sm align-middle whitespace-nowrap',
 	thead: {
@@ -96,6 +96,16 @@ $.extend( true, DataTable.ext.classes, {
 
 DataTable.ext.renderer.pagingButton.tailwindcss = function (settings, buttonType, content, active, disabled) {
 	var classes = settings.oClasses.paging;
+
+	if (buttonType === 'ellipsis') {
+		var span = $('<span class="ellipsis inline-flex items-center justify-center min-w-[32px] h-[32px] px-2 text-xs text-gray-400"></span>')
+			.html(content);
+		return {
+			display: span,
+			clicker: span
+		};
+	}
+
 	var btnClasses = [classes.button];
 
 	btnClasses.push(active ? classes.active : classes.notActive);
@@ -119,7 +129,7 @@ DataTable.ext.renderer.pagingContainer.tailwindcss = function (settings, buttonE
 	buttonEls[0].addClass(classes.first);
 	buttonEls[buttonEls.length -1].addClass(classes.last);
 
-	return $('<ul/>').addClass('pagination').append(buttonEls);
+	return $('<ul/>').addClass('pagination inline-flex items-center gap-1').append(buttonEls);
 };
 
 DataTable.ext.renderer.layout.tailwindcss = function ( settings, container, items ) {

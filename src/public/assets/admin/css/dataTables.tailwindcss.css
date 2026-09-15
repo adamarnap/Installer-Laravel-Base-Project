@@ -163,3 +163,161 @@ div.dt-scroll-body > table.dataTable > thead > tr > td {
 :root[data-bs-theme=dark] table.dataTable thead > tr > td.dt-orderable-desc:hover {
   outline: 2px solid rgba(255, 255, 255, 0.05);
 }
+
+/* Pagination styles matching design system */
+.datatable-paginate,
+.dt-paging {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.datatable-paginate ul,
+.dt-paging ul.pagination,
+.datatable-paginate .pagination {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.datatable-paginate a,
+.datatable-paginate button,
+.dt-paging nav .pagination a,
+.dt-paging nav .pagination button,
+.dt-paging .dt-paging-button {
+  display: inline-flex;
+  height: 32px;
+  min-width: 32px;
+  padding: 0 10px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px !important;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--color-border-color, #e8e8e8);
+  background-color: var(--color-light, #f8f9fa);
+  color: var(--color-dark, #1b2850) !important;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease-in-out;
+}
+.datatable-paginate a i,
+.datatable-paginate button i,
+.dt-paging nav .pagination a i,
+.dt-paging .dt-paging-button i {
+  font-size: 14px;
+  line-height: 1;
+  color: inherit;
+  transition: color 0.2s ease-in-out;
+}
+.datatable-paginate a:hover:not([aria-current="page"]):not([aria-disabled="true"]):not(.disabled):not(.active),
+.datatable-paginate button:hover:not([aria-current="page"]):not([aria-disabled="true"]):not(.disabled):not(.active),
+.dt-paging nav .pagination a:hover:not([aria-current="page"]):not([aria-disabled="true"]):not(.disabled):not(.active),
+.dt-paging .dt-paging-button:hover:not(.current):not(.disabled) {
+  border-color: var(--color-primary, #FE9F43) !important;
+  background-color: var(--color-primary, #FE9F43) !important;
+  color: #ffffff !important;
+}
+.datatable-paginate a:hover:not([aria-current="page"]):not([aria-disabled="true"]):not(.disabled):not(.active) i,
+.datatable-paginate button:hover:not([aria-current="page"]):not([aria-disabled="true"]):not(.disabled):not(.active) i,
+.dt-paging nav .pagination a:hover:not([aria-current="page"]):not([aria-disabled="true"]):not(.disabled):not(.active) i,
+.dt-paging .dt-paging-button:hover:not(.current):not(.disabled) i {
+  color: #ffffff !important;
+}
+.datatable-paginate a.active,
+.datatable-paginate a[aria-current="page"],
+.datatable-paginate button.active,
+.datatable-paginate button[aria-current="page"],
+.dt-paging nav .pagination a.active,
+.dt-paging nav .pagination a[aria-current="page"],
+.dt-paging .dt-paging-button.current,
+.datatable-paginate a.active:hover,
+.datatable-paginate a[aria-current="page"]:hover,
+.datatable-paginate button.active:hover,
+.datatable-paginate button[aria-current="page"]:hover,
+.dt-paging nav .pagination a.active:hover,
+.dt-paging nav .pagination a[aria-current="page"]:hover,
+.dt-paging .dt-paging-button.current:hover {
+  border-color: var(--color-primary, #FE9F43) !important;
+  background-color: var(--color-primary, #FE9F43) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  cursor: default;
+}
+.datatable-paginate a.active i,
+.datatable-paginate a[aria-current="page"] i,
+.dt-paging nav .pagination a.active i,
+.dt-paging nav .pagination a[aria-current="page"] i {
+  color: #ffffff !important;
+}
+.datatable-paginate a[aria-disabled="true"],
+.datatable-paginate a.disabled,
+.datatable-paginate button[aria-disabled="true"],
+.datatable-paginate button.disabled,
+.dt-paging nav .pagination a[aria-disabled="true"],
+.dt-paging nav .pagination a.disabled,
+.dt-paging .dt-paging-button.disabled,
+.datatable-paginate a[aria-disabled="true"]:hover,
+.datatable-paginate a.disabled:hover,
+.dt-paging nav .pagination a[aria-disabled="true"]:hover,
+.dt-paging nav .pagination a.disabled:hover {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  background-color: var(--color-light, #f8f9fa) !important;
+  border-color: var(--color-border-color, #e8e8e8) !important;
+  color: var(--color-gray-400, #9ca3af) !important;
+}
+.datatable-paginate a[aria-disabled="true"] i,
+.datatable-paginate a.disabled i,
+.dt-paging nav .pagination a[aria-disabled="true"] i,
+.dt-paging nav .pagination a.disabled i {
+  color: var(--color-gray-400, #9ca3af) !important;
+}
+.datatable-paginate .ellipsis,
+.dt-paging .ellipsis,
+.dt-paging nav .pagination .ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 4px;
+  font-size: 12px;
+  color: var(--color-gray-400, #9ca3af);
+  user-select: none;
+}
+.datatable-paginate a[aria-label="First"],
+.datatable-paginate a[aria-label="Last"],
+.dt-paging nav .pagination a.first,
+.dt-paging nav .pagination a.last {
+  display: none !important;
+}
+:root.dark .datatable-paginate a,
+:root.dark .datatable-paginate button,
+:root.dark .dt-paging nav .pagination a,
+:root.dark .dt-paging nav .pagination button,
+:root.dark .dt-paging .dt-paging-button,
+html.dark .datatable-paginate a,
+html.dark .datatable-paginate button,
+html.dark .dt-paging nav .pagination a,
+html.dark .dt-paging nav .pagination button,
+html.dark .dt-paging .dt-paging-button {
+  border-color: var(--color-border-color, #2E3856);
+  background-color: var(--color-light, #15203C);
+  color: var(--color-dark, #D6DADE) !important;
+}
+:root.dark .datatable-paginate a:hover:not([aria-current="page"]):not([aria-disabled="true"]):not(.disabled):not(.active),
+:root.dark .dt-paging nav .pagination a:hover:not([aria-current="page"]):not([aria-disabled="true"]):not(.disabled):not(.active),
+html.dark .datatable-paginate a:hover:not([aria-current="page"]):not([aria-disabled="true"]):not(.disabled):not(.active),
+html.dark .dt-paging nav .pagination a:hover:not([aria-current="page"]):not([aria-disabled="true"]):not(.disabled):not(.active) {
+  border-color: var(--color-primary, #FE9F43) !important;
+  background-color: var(--color-primary, #FE9F43) !important;
+  color: #ffffff !important;
+}
