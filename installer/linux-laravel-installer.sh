@@ -1,9 +1,9 @@
-# Laravel Installer Script | FOR MAC OS
+# Laravel Installer Script | FOR LINUX
 #!/bin/bash
 
 # ============= START : Welcome Message
 echo "============================================================"
-echo "🎉 Welcome to the Laravel Starter Kit Installer for macOS 🎉"
+echo " Welcome to the Laravel Starter Kit Installer for Linux "
 echo "============================================================"
 # ============= END : Welcome Message
 # ============= END : Welcome Message
@@ -203,7 +203,19 @@ php artisan ide-helper:meta
 echo ""
 echo "------------------------- [STEP] 6.6 Installing Laravel Yajra DataTables -------------------------"
 echo ""
-composer require yajra/laravel-datatables:"^12.0"
+# Extract major version from the user's Laravel version input to select a compatible Yajra DataTables version
+laravel_major=$(echo "$laravel_version" | grep -oE '^[0-9]+')
+
+case "$laravel_major" in
+    13) yajra_version="^13" ;;
+    12) yajra_version="^12.0" ;;
+    11) yajra_version="^11.0" ;;
+    9|10) yajra_version="^10.0" ;;
+    *) yajra_version="^12.0" ;;
+esac
+
+echo "Detected Laravel major version: $laravel_major -> installing yajra/laravel-datatables:$yajra_version"
+composer require yajra/laravel-datatables:"$yajra_version"
 php artisan vendor:publish --provider="Yajra\DataTables\DataTablesServiceProvider"
 php artisan vendor:publish --tag=datatables
 
