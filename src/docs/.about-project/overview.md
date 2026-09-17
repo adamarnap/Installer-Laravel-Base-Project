@@ -231,8 +231,14 @@ Format wajib untuk content blade (contoh untuk laman admin):
 | Basic Alert | `resources/views/templates/admin/template-basic-alert.blade.php` |
 | Buttons | `resources/views/templates/admin/template-buttons.blade.php` |
 | Content Blade | `resources/views/templates/admin/template-content.blade.php` |
+| Chat | `resources/views/templates/admin/template-chat.blade.php` |
 | Data Table | `resources/views/templates/admin/template-data-table.blade.php` |
+| Page Detail | `resources/views/templates/admin/template-detail-page.blade.php` |
+| Page Detail (Property: Home, etc) | `resources/views/templates/admin/template-detail-page-property.blade.php` |
+| Invoice | `resources/views/templates/admin/template-invoice.blade.php` |
+| Card Text (Testimonial) | `resources/views/templates/admin/template-testimonial.blade.php` |
 | Form Input | `resources/views/templates/admin/template-form-input.blade.php` |
+| Form Input - Rich Text Editor (Quill JS) | `resources/views/templates/admin/template-form-input-rich-text-editor.blade.php` |
 | Modal Add | `resources/views/templates/admin/template-modal-add.blade.php` |
 | Modal Edit | `resources/views/templates/admin/template-modal-edit.blade.php` |
 | Select2 | `resources/views/templates/admin/template-select2.blade.php` |
