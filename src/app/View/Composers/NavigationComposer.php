@@ -16,16 +16,19 @@ class NavigationComposer
         $navs = Navigation::with(['child' => function ($query) {
             $query->where('active', 1)
                 ->where('display', true)
+                ->where('is_public', false)
                 ->orderBy('order', 'asc');
         }, 'child.subChild' => function ($query) {
             $query->where('active', 1)
                 ->where('display', true)
+                ->where('is_public', false)
                 ->orderBy('order', 'asc');
         }])
             ->whereNull('parent_id')
             ->where('page', 'admin')
             ->where('active', true)
             ->where('display', true)
+            ->where('is_public', false)
             ->orderBy('order')
             ->get()
             ->map(function ($nav) {
