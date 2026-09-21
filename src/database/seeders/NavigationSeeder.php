@@ -79,6 +79,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => null,
                 'active' => true,
                 'display' => true,
+                'is_public' => false
             ],
 
             /* 
@@ -98,6 +99,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => null,
                 'active' => true,
                 'display' => true,
+                'is_public' => false
             ],
             [
                 'id' => 501,
@@ -110,6 +112,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => null,
                 'active' => true,
                 'display' => true,
+                'is_public' => false
             ],
             [
                 'id' => 502,
@@ -122,6 +125,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,
+                'is_public' => false
             ],
             [
                 'id' => 503,
@@ -134,6 +138,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,
+                'is_public' => false
             ],
             [
                 'id' => 504,
@@ -146,6 +151,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,
+                'is_public' => false
             ],
             [
                 'id' => 505,
@@ -158,6 +164,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,
+                'is_public' => false
             ],
             [
                 'id' => 506,
@@ -170,6 +177,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,
+                'is_public' => false
             ],
             [
                 'id' => 507,
@@ -182,6 +190,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,
+                'is_public' => false
             ],
             [
                 'id' => 508,
@@ -194,6 +203,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,
+                'is_public' => false
             ],
             [
                 'id' => 509,
@@ -206,6 +216,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,
+                'is_public' => false
             ],
             [
                 'id' => 510,
@@ -218,6 +229,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,
+                'is_public' => false
             ],
             [
                 'id' => 511,
@@ -230,6 +242,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,
+                'is_public' => false
             ],
             [
                 'id' => 512,
@@ -242,6 +255,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
                 'display' => true,
+                'is_public' => false
             ],
         ];
 
@@ -261,6 +275,7 @@ class NavigationSeeder extends Seeder
                 'parent_id' => null,
                 'active' => true,
                 'display' => true,
+                'is_public' => true
             ],
         ];
 

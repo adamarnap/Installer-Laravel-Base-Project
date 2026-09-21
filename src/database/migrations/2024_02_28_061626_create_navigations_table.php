@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('parent_id')->nullable();
             $table->integer('active')->nullable();
             $table->integer('display')->nullable();
+            $table->boolean('is_public')->default(false)->comment('apakah menu ini bisa diakses publik atau tidak');
             $table->timestamps();
             $table->softDeletes();
         });
