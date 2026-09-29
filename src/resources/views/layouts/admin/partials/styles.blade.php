@@ -23,4 +23,29 @@
 <!-- Main CSS -->
 <link rel="stylesheet" href="{{ URL::asset('assets/admin/css/style.css') }}">
 
+<!-- Submenu Icon CSS -->
+<style>
+    .sidebar .sidebar-menu .submenu-open .submenu ul li a.has-submenu-icon::after,
+    .settings-sidebar .sidebar-menu .submenu-open .submenu ul li a.has-submenu-icon::after,
+    .sidebarOne .sidebar-menu .submenu-open .submenu ul li a.has-submenu-icon::after,
+    .sidebar .sidebar-menu .submenu-open .submenu ul li a:has(i)::after,
+    .settings-sidebar .sidebar-menu .submenu-open .submenu ul li a:has(i)::after,
+    .sidebarOne .sidebar-menu .submenu-open .submenu ul li a:has(i)::after {
+        display: none !important;
+    }
+    .sidebar .sidebar-menu .submenu-open .submenu ul li a.has-submenu-icon,
+    .settings-sidebar .sidebar-menu .submenu-open .submenu ul li a.has-submenu-icon,
+    .sidebarOne .sidebar-menu .submenu-open .submenu ul li a.has-submenu-icon,
+    .sidebar .sidebar-menu .submenu-open .submenu ul li a:has(i),
+    .settings-sidebar .sidebar-menu .submenu-open .submenu ul li a:has(i),
+    .sidebarOne .sidebar-menu .submenu-open .submenu ul li a:has(i) {
+        padding-left: 20px !important;
+    }
+
+    /* Fallback for legacy ti-layout-grid2 if present in DB or cache */
+    .ti-layout-grid2:before {
+        content: "\eaeb";
+    }
+</style>
+
 @stack('styles')

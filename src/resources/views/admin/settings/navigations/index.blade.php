@@ -58,11 +58,11 @@
                                     $menu = $row['menu'];
                                     $icon = trim($menu->icon ?? '');
                                     $menuIconClass = match (true) {
+                                        $icon !== '' && str_contains($icon, ' ') => $icon,
+                                        $icon !== '' && str_starts_with($icon, 'ti-') => 'ti ' . $icon,
+                                        $icon !== '' => 'ti ti-' . $icon,
                                         $row['level'] > 0 => 'ti ti-corner-down-right',
-                                        $icon === '' => 'ti ti-menu-2',
-                                        str_contains($icon, ' ') => $icon,
-                                        str_starts_with($icon, 'ti-') => 'ti ' . $icon,
-                                        default => 'ti ti-' . $icon,
+                                        default => 'ti ti-menu-2',
                                     };
                                 @endphp
                                 <tr>

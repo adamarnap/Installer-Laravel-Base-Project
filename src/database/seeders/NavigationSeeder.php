@@ -64,6 +64,13 @@ class NavigationSeeder extends Seeder
          * FOR ICONS FONT THEMIFY ICON: https://dreamspos.dreamstechnologies.com/retail-pos/html/icon-themify.html
          * ========================================================================================================
          */
+
+        /*
+         * ========================================================================================================
+         * FOR ICONS FONT HERE USE TABLER ICONS
+         * ========================================================================================================
+         */
+
         $navigationsAdmin = [
             /* ---------------------------------------------------------
             *                      ADMIN PAGE
@@ -120,7 +127,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.users.index',
                 'slug' => 'settings-users',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'ti-users', // Assuming no icon specified
                 'order' => 1,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -133,7 +140,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.impersonate.index',
                 'slug' => 'settings-impersonate',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'ti-spy', // Assuming no icon specified
                 'order' => 2,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -146,7 +153,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.roles.index',
                 'slug' => 'settings-roles',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'ti-badge', // Assuming no icon specified
                 'order' => 3,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -159,7 +166,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.navs.index',
                 'slug' => 'settings-navs',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'ti-menu-2', // Assuming no icon specified
                 'order' => 4,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -172,7 +179,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.preferences.index',
                 'slug' => 'settings-preferences',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'ti-adjustments-horizontal', // Assuming no icon specified
                 'order' => 5,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -185,7 +192,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.cache.index',
                 'slug' => 'settings-cache',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'ti-bolt', // Assuming no icon specified
                 'order' => 6,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -198,7 +205,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.apps-log.index',
                 'slug' => 'settings-apps-log',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'ti-file-analytics', // Assuming no icon specified
                 'order' => 7,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -211,7 +218,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.migrations.index',
                 'slug' => 'settings-migrations',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'ti-database-import', // Assuming no icon specified
                 'order' => 8,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -224,7 +231,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.seeders.index',
                 'slug' => 'settings-seeders',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'ti-seeding', // Assuming no icon specified
                 'order' => 9,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -237,7 +244,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.queues.index',
                 'slug' => 'settings-queues',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'ti-list-numbers', // Assuming no icon specified
                 'order' => 10,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -250,7 +257,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.schedulers.index',
                 'slug' => 'settings-schedulers',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'ti-calendar-time', // Assuming no icon specified
                 'order' => 11,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,

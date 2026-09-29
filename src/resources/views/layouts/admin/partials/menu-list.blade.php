@@ -2,9 +2,6 @@
 {{-- Start: TEMPLATE HTML BARU --}}
 <ul>
     <li class="submenu-open">
-        {{-- START: Title Section Menus --}}
-        <h6 class="font-bold text-xs text-[#092C4C] mt-0 mb-2">SECTION MENU</h6>
-        {{-- END: Title Section Menus --}}
         <ul>
             @foreach ($navs as $nav)
                 {{-- Route prefix to determine menu activity  --}}
@@ -147,8 +144,11 @@
                                         $isChildMenuActive = Request::is(ltrim(parse_url($child['url'], PHP_URL_PATH), '/'));
                                         $isChildMenuOpen = $isChildMenuActive || $isSubChildActive;
                                     @endphp
-                                    <a href="javascript:void(0);" class="{{ $isChildMenuOpen ? 'active subdrop ' : '' }}flex items-center">
-                                        {{ $child['name'] }}
+                                    <a href="javascript:void(0);" class="{{ $isChildMenuOpen ? 'active subdrop ' : '' }}flex items-center {{ !empty($child['icon']) ? 'has-submenu-icon' : '' }}">
+                                        @if (!empty($child['icon']))
+                                            <i class="ti {{ $child['icon'] }} text-[16px] me-2" data-tooltip-placement="top"></i>
+                                        @endif
+                                        <span>{{ $child['name'] }}</span>
                                         <span class="menu-arrow inside-submenu"></span>
                                     </a>
 
@@ -159,12 +159,17 @@
                                                 $isSubChildMenuActive = $urlCurrent == $subChild['url'];
                                             @endphp
                                             <li class="{{ $isSubChildMenuActive ? 'active' : '' }}">
-                                                <a href="{{ $subChild['url'] }}" class="{{ $isSubChildMenuActive ? 'active ' : '' }}flex items-center">
-                                                    @if (strlen($subChild['name']) > 25)
-                                                        {{ substr($subChild['name'], 0, 25) . '...' }}
-                                                    @else
-                                                        {{ $subChild['name'] }}
+                                                <a href="{{ $subChild['url'] }}" class="{{ $isSubChildMenuActive ? 'active ' : '' }}flex items-center {{ !empty($subChild['icon']) ? 'has-submenu-icon' : '' }}">
+                                                    @if (!empty($subChild['icon']))
+                                                        <i class="ti {{ $subChild['icon'] }} text-[16px] me-2" data-tooltip-placement="top"></i>
                                                     @endif
+                                                    <span>
+                                                        @if (strlen($subChild['name']) > 25)
+                                                            {{ substr($subChild['name'], 0, 25) . '...' }}
+                                                        @else
+                                                            {{ $subChild['name'] }}
+                                                        @endif
+                                                    </span>
                                                 </a>
                                             </li>
                                         @endforeach
@@ -178,8 +183,11 @@
                                         // Cek apakah child aktif dengan startsWith agar sub-route tetap aktif
                                         $isChildActive = Str::startsWith($urlCurrent, $child['url']);
                                     @endphp
-                                    <a href="{{ $child['url'] }}" class="{{ $isChildActive ? 'active ' : '' }}flex items-center">
-                                        {{ $child['name'] }}
+                                    <a href="{{ $child['url'] }}" class="{{ $isChildActive ? 'active ' : '' }}flex items-center {{ !empty($child['icon']) ? 'has-submenu-icon' : '' }}">
+                                        @if (!empty($child['icon']))
+                                            <i class="ti {{ $child['icon'] }} text-[16px] me-2" data-tooltip-placement="top"></i>
+                                        @endif
+                                        <span>{{ $child['name'] }}</span>
                                     </a>
                                     {{-- END: Child Menu not Have SubChild --}}
                                 @endif

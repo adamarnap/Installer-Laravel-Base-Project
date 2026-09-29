@@ -143,6 +143,9 @@
                         @if ($hasSubChild)
                             {{-- START: Sub-Child Menu --}}
                             <a href="javascript:void(0);" class="{{ $isChildMenuOpen ? 'active subdrop' : '' }}">
+                                @if (!empty($child['icon']))
+                                    <i class="ti {{ $child['icon'] }} text-[16px] me-2"></i>
+                                @endif
                                 <span>{{ $child['name'] }}</span>
                                 <span class="menu-arrow inside-submenu"></span>
                             </a>
@@ -155,11 +158,16 @@
                                     @endphp
                                     <li class="{{ $isSubChildMenuActive ? 'active' : '' }}">
                                         <a href="{{ $subChild['url'] }}" class="{{ $isSubChildMenuActive ? 'active' : '' }}">
-                                            @if (strlen($subChild['name']) > 25)
-                                                {{ substr($subChild['name'], 0, 25) . '...' }}
-                                            @else
-                                                {{ $subChild['name'] }}
+                                            @if (!empty($subChild['icon']))
+                                                <i class="ti {{ $subChild['icon'] }} text-[16px] me-2"></i>
                                             @endif
+                                            <span>
+                                                @if (strlen($subChild['name']) > 25)
+                                                    {{ substr($subChild['name'], 0, 25) . '...' }}
+                                                @else
+                                                    {{ $subChild['name'] }}
+                                                @endif
+                                            </span>
                                         </a>
                                     </li>
                                 @endforeach
@@ -174,6 +182,9 @@
                                 $isChildActive = Str::startsWith($urlCurrent, $child['url']);
                             @endphp
                             <a href="{{ $child['url'] }}" class="{{ $isChildActive ? 'active' : '' }}">
+                                @if (!empty($child['icon']))
+                                    <i class="ti {{ $child['icon'] }} text-[16px] me-2"></i>
+                                @endif
                                 <span>{{ $child['name'] }}</span>
                             </a>
                             {{-- END: Child Menu not Have SubChild --}}
