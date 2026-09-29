@@ -99,10 +99,9 @@
                     }
 
                     $isParentActive = Request::is(ltrim(parse_url($nav['url'], PHP_URL_PATH), '/'));
-                    // Cek apakah ada child yang URL-nya diawali oleh $urlCurrent (bukan exact match)
-                    // Ini agar route seperti /apps/apps/create tetap mengaktifkan child /apps/apps
+                    // Check if any child URL matches current URL or has slash-delimited sub-path
                     $hasActiveChild = collect($nav['child'])->contains(function ($child) use ($urlCurrent) {
-                        return Str::startsWith($urlCurrent, $child['url']);
+                        return $child['url'] !== '#' && ($urlCurrent == $child['url'] || Str::startsWith($urlCurrent, $child['url'] . '/'));
                     });
                 @endphp
 
@@ -123,7 +122,7 @@
                 @endphp
                 <li class="submenu {{ $isParentOpen ? 'active' : '' }}">
                     {{-- START: Parent Menu --}}
-                    <a href="javascript:void(0);" class="{{ $isParentOpen ? 'active subdrop ' : '' }}flex items-center">
+                    <a href="javascript:void(0);" class="{{ $isParentOpen ? 'active subdrop' : '' }} flex items-center">
                         <i class="ti {{ $nav['icon'] }} text-[16px] me-2" data-tooltip-placement="top"></i>
                         <span>{{ $nav['name'] }}</span>
                         <span class="menu-arrow"></span>
@@ -131,20 +130,20 @@
                     {{-- END: Parent Menu --}}
 
                     {{-- START: Menu Childs --}}
-                    <ul style="display: {{ $isParentOpen ? 'block' : 'none' }};">
+                    <ul style="{{ $isParentOpen ? 'display: block !important;' : '' }}">
                         {{-- START: Foreach List Childs Menu --}}
                         @foreach ($nav['child'] as $child)
-                            <li class="@if ($child['sub_child'] && count($child['sub_child']) > 0) submenu submenu-two @if (Request::is(ltrim(parse_url($child['url'], PHP_URL_PATH), '/')) || collect($child['sub_child'])->pluck('url')->contains($urlCurrent)) active @endif @else {{ Str::startsWith($urlCurrent, $child['url']) ? 'active' : '' }} @endif">
+                            @php
+                                $hasSubChild = $child['sub_child'] && count($child['sub_child']) > 0;
+                                $isChildMenuActive = Request::is(ltrim(parse_url($child['url'], PHP_URL_PATH), '/'));
+                                $isSubChildActive = $hasSubChild ? collect($child['sub_child'])->pluck('url')->contains($urlCurrent) : false;
+                                $isChildMenuOpen = $isChildMenuActive || $isSubChildActive;
+                            @endphp
+                            <li class="@if ($hasSubChild) submenu submenu-two {{ $isChildMenuOpen ? 'active' : '' }} @else {{ Str::startsWith($urlCurrent, $child['url']) ? 'active' : '' }} @endif">
                                 {{-- Check if the child has subChild --}}
-                                @if ($child['sub_child'] && count($child['sub_child']) > 0)
+                                @if ($hasSubChild)
                                     {{-- START: Sub-Child Menu --}}
-                                    @php
-                                        // Cek apakah sub_child aktif
-                                        $isSubChildActive = collect($child['sub_child'])->pluck('url')->contains($urlCurrent);
-                                        $isChildMenuActive = Request::is(ltrim(parse_url($child['url'], PHP_URL_PATH), '/'));
-                                        $isChildMenuOpen = $isChildMenuActive || $isSubChildActive;
-                                    @endphp
-                                    <a href="javascript:void(0);" class="{{ $isChildMenuOpen ? 'active subdrop ' : '' }}flex items-center {{ !empty($child['icon']) ? 'has-submenu-icon' : '' }}">
+                                    <a href="javascript:void(0);" class="{{ $isChildMenuOpen ? 'active subdrop' : '' }} flex items-center {{ !empty($child['icon']) ? 'has-submenu-icon' : '' }}">
                                         @if (!empty($child['icon']))
                                             <i class="ti {{ $child['icon'] }} text-[16px] me-2" data-tooltip-placement="top"></i>
                                         @endif
@@ -153,13 +152,13 @@
                                     </a>
 
                                     {{-- START: Foreach Sub-Child Menu --}}
-                                    <ul style="display: {{ $isChildMenuOpen ? 'block' : 'none' }};">
+                                    <ul style="{{ $isChildMenuOpen ? 'display: block !important;' : '' }}">
                                         @foreach ($child['sub_child'] as $subChild)
                                             @php
                                                 $isSubChildMenuActive = $urlCurrent == $subChild['url'];
                                             @endphp
                                             <li class="{{ $isSubChildMenuActive ? 'active' : '' }}">
-                                                <a href="{{ $subChild['url'] }}" class="{{ $isSubChildMenuActive ? 'active ' : '' }}flex items-center {{ !empty($subChild['icon']) ? 'has-submenu-icon' : '' }}">
+                                                <a href="{{ $subChild['url'] }}" class="{{ $isSubChildMenuActive ? 'active' : '' }} flex items-center {{ !empty($subChild['icon']) ? 'has-submenu-icon' : '' }}">
                                                     @if (!empty($subChild['icon']))
                                                         <i class="ti {{ $subChild['icon'] }} text-[16px] me-2" data-tooltip-placement="top"></i>
                                                     @endif
@@ -183,7 +182,7 @@
                                         // Cek apakah child aktif dengan startsWith agar sub-route tetap aktif
                                         $isChildActive = Str::startsWith($urlCurrent, $child['url']);
                                     @endphp
-                                    <a href="{{ $child['url'] }}" class="{{ $isChildActive ? 'active ' : '' }}flex items-center {{ !empty($child['icon']) ? 'has-submenu-icon' : '' }}">
+                                    <a href="{{ $child['url'] }}" class="{{ $isChildActive ? 'active' : '' }} flex items-center {{ !empty($child['icon']) ? 'has-submenu-icon' : '' }}">
                                         @if (!empty($child['icon']))
                                             <i class="ti {{ $child['icon'] }} text-[16px] me-2" data-tooltip-placement="top"></i>
                                         @endif
@@ -214,5 +213,32 @@
         </ul>
     </li>
 </ul>
+
+<style>
+    /* Prevent parent li.submenu.active from cascading active styles to all child items */
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu.active {
+        background-color: transparent !important;
+    }
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li:not(.active) a,
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li:not(.active) a span {
+        color: var(--sidebar-submenu-item) !important;
+    }
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li:not(.active) a i {
+        color: var(--sidebar-menu-item-icon) !important;
+    }
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li:not(.active) {
+        background-color: transparent !important;
+    }
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li.active {
+        background-color: var(--color-primary-100) !important;
+    }
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li.active a,
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li.active a span {
+        color: var(--color-primary) !important;
+    }
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li.active a i {
+        color: var(--color-primary) !important;
+    }
+</style>
 {{-- End: TEMPLATE HTML BARU --}}
 {{-- End List Menus --}}
