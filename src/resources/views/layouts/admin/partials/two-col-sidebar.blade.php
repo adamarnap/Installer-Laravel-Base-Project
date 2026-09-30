@@ -245,4 +245,11 @@
         background-color: transparent !important;
         color: var(--sidebar-submenu-item) !important;
     }
+    .sidebar-twocol.sidebar .sidebar-right ul li.submenu ul li:not(.active) > a:not(.active) i {
+        color: var(--sidebar-menu-item-icon, #646b72) !important;
+    }
+    .sidebar-twocol.sidebar .sidebar-right ul li.submenu ul li.active > a i,
+    .sidebar-twocol.sidebar .sidebar-right ul li.submenu ul li > a.active i {
+        color: var(--color-primary) !important;
+    }
 </style>

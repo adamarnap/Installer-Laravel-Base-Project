@@ -7786,10 +7786,10 @@
     border-radius: 0.25rem;
     background-color: var(--color-primary-100);
   }
-  .sidebar .sidebar-menu > ul > li.submenu-open ul li.active a span {
+  .sidebar .sidebar-menu > ul > li.submenu-open ul li.active > a span {
     color: var(--color-primary);
   }
-  .sidebar .sidebar-menu > ul > li.submenu-open ul li.active a i {
+  .sidebar .sidebar-menu > ul > li.submenu-open ul li.active > a i {
     color: var(--color-primary) !important;
   }
   .sidebar .sidebar-menu > ul > li.submenu-open .submenu ul, .settings-sidebar .sidebar-menu > ul > li.submenu-open .submenu ul {
@@ -13211,10 +13211,10 @@
     border-radius: 0.25rem;
     background-color: var(--color-primary-100);
   }
-  .sidebarOne .sidebar-menu > ul > li.submenu-open ul li.active a span {
+  .sidebarOne .sidebar-menu > ul > li.submenu-open ul li.active > a span {
     color: var(--color-primary);
   }
-  .sidebarOne .sidebar-menu > ul > li.submenu-open ul li.active a i {
+  .sidebarOne .sidebar-menu > ul > li.submenu-open ul li.active > a i {
     color: var(--color-primary) !important;
   }
   .sidebarOne .sidebar-menu > ul > li.submenu-open .submenu ul, .settings-sidebar .sidebar-menu > ul > li.submenu-open .submenu ul {

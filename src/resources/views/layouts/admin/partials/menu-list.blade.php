@@ -111,7 +111,10 @@
                     $hasActiveSubChild = false;
                     foreach ($nav['child'] as $child) {
                         if (isset($child['sub_child']) && count($child['sub_child']) > 0) {
-                            if (collect($child['sub_child'])->pluck('url')->contains($urlCurrent)) {
+                            $hasActiveSub = collect($child['sub_child'])->contains(function ($subChild) use ($urlCurrent) {
+                                return $subChild['url'] !== '#' && ($urlCurrent == $subChild['url'] || Str::startsWith($urlCurrent, rtrim($subChild['url'], '/') . '/'));
+                            });
+                            if ($hasActiveSub) {
                                 $hasActiveSubChild = true;
                                 break;
                             }
@@ -134,12 +137,15 @@
                         {{-- START: Foreach List Childs Menu --}}
                         @foreach ($nav['child'] as $child)
                             @php
-                                $hasSubChild = $child['sub_child'] && count($child['sub_child']) > 0;
+                                $hasSubChild = !empty($child['sub_child']) && count($child['sub_child']) > 0;
+                                $isChildActive = $child['url'] !== '#' && ($urlCurrent == $child['url'] || Str::startsWith($urlCurrent, rtrim($child['url'], '/') . '/'));
                                 $isChildMenuActive = Request::is(ltrim(parse_url($child['url'], PHP_URL_PATH), '/'));
-                                $isSubChildActive = $hasSubChild ? collect($child['sub_child'])->pluck('url')->contains($urlCurrent) : false;
+                                $isSubChildActive = $hasSubChild ? collect($child['sub_child'])->contains(function ($subChild) use ($urlCurrent) {
+                                    return $subChild['url'] !== '#' && ($urlCurrent == $subChild['url'] || Str::startsWith($urlCurrent, rtrim($subChild['url'], '/') . '/'));
+                                }) : false;
                                 $isChildMenuOpen = $isChildMenuActive || $isSubChildActive;
                             @endphp
-                            <li class="@if ($hasSubChild) submenu submenu-two {{ $isChildMenuOpen ? 'active' : '' }} @else {{ Str::startsWith($urlCurrent, $child['url']) ? 'active' : '' }} @endif">
+                            <li class="@if ($hasSubChild) submenu submenu-two {{ $isChildMenuOpen ? 'active' : '' }} @else {{ $isChildActive ? 'active' : '' }} @endif">
                                 {{-- Check if the child has subChild --}}
                                 @if ($hasSubChild)
                                     {{-- START: Sub-Child Menu --}}
@@ -155,7 +161,7 @@
                                     <ul style="{{ $isChildMenuOpen ? 'display: block !important;' : '' }}">
                                         @foreach ($child['sub_child'] as $subChild)
                                             @php
-                                                $isSubChildMenuActive = $urlCurrent == $subChild['url'];
+                                                $isSubChildMenuActive = $subChild['url'] !== '#' && ($urlCurrent == $subChild['url'] || Str::startsWith($urlCurrent, rtrim($subChild['url'], '/') . '/'));
                                             @endphp
                                             <li class="{{ $isSubChildMenuActive ? 'active' : '' }}">
                                                 <a href="{{ $subChild['url'] }}" class="{{ $isSubChildMenuActive ? 'active' : '' }} flex items-center {{ !empty($subChild['icon']) ? 'has-submenu-icon' : '' }}">
@@ -178,10 +184,6 @@
                                     {{-- END: Sub-Child Menu --}}
                                 @else
                                     {{-- START: Child Menu not Have SubChild --}}
-                                    @php
-                                        // Cek apakah child aktif dengan startsWith agar sub-route tetap aktif
-                                        $isChildActive = Str::startsWith($urlCurrent, $child['url']);
-                                    @endphp
                                     <a href="{{ $child['url'] }}" class="{{ $isChildActive ? 'active' : '' }} flex items-center {{ !empty($child['icon']) ? 'has-submenu-icon' : '' }}">
                                         @if (!empty($child['icon']))
                                             <i class="ti {{ $child['icon'] }} text-[16px] me-2" data-tooltip-placement="top"></i>
@@ -219,24 +221,36 @@
     .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu.active {
         background-color: transparent !important;
     }
-    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li:not(.active) a,
-    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li:not(.active) a span {
-        color: var(--sidebar-submenu-item) !important;
-    }
-    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li:not(.active) a i {
-        color: var(--sidebar-menu-item-icon) !important;
-    }
     .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li:not(.active) {
         background-color: transparent !important;
     }
     .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li.active {
         background-color: var(--color-primary-100) !important;
     }
-    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li.active a,
-    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li.active a span {
+
+    /* Submenu item link text: default vs active */
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li:not(.active) > a,
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li:not(.active) > a span {
+        color: var(--sidebar-submenu-item) !important;
+    }
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li.active > a,
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li.active > a span,
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li > a.active,
+    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li > a.active span {
         color: var(--color-primary) !important;
     }
-    .sidebar .sidebar-menu > ul > li.submenu-open ul li.submenu ul li.active a i {
+
+    /* Submenu item icon: reset inactive items to default icon color to stop cascade from parent li.active */
+    .sidebar .sidebar-menu ul li.submenu ul li:not(.active) > a:not(.active) i,
+    .sidebar .sidebar-menu ul li.submenu ul li:not(.active) > a:not(.active) > i {
+        color: var(--sidebar-menu-item-icon, #646b72) !important;
+    }
+
+    /* Submenu item icon: only color primary orange when specifically active */
+    .sidebar .sidebar-menu ul li.submenu ul li.active > a i,
+    .sidebar .sidebar-menu ul li.submenu ul li.active > a > i,
+    .sidebar .sidebar-menu ul li.submenu ul li > a.active i,
+    .sidebar .sidebar-menu ul li.submenu ul li > a.active > i {
         color: var(--color-primary) !important;
     }
 </style>
