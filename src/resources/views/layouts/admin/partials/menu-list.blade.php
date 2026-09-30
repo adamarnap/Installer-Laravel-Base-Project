@@ -263,7 +263,7 @@
 
     <li class="menu-item">
         {{-- START: Logout Button --}}
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        <form id="logout-form-sidebar" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
             <button type="submit" class="menu-link">
                 <span class="menu-icon">
@@ -283,7 +283,7 @@
 {{-- Start: Logout Confirmation --}}
     <script>
         // Logout Confirmation
-        document.getElementById('logout-form').addEventListener('submit', function(event) {
+        document.getElementById('logout-form-sidebar').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the default form submission
             Swal.fire({
                 title: 'Apakah Anda yakin?',
