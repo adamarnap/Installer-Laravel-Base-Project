@@ -235,6 +235,7 @@ Format wajib untuk content blade (contoh untuk laman admin):
 | Modal Edit | `resources/views/templates/template-modal-edit.blade.php` |
 | Select2 | `resources/views/templates/template-select2.blade.php` |
 | Textarea (Quill.js) | `resources/views/templates/template-textarea-quilljs.blade.php` |
+| Icon ("Tabler Icon", Daftar icon yang tersedia, anda bisa melihat). Untuk icon format penulisannya adalah <i class="iconify tabler--{icon name}"> | `public/assets/admin/css/app.min.css` |
 
 Aturan tambahan wajib:
 

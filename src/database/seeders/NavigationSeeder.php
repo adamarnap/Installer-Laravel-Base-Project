@@ -21,7 +21,7 @@ class NavigationSeeder extends Seeder
     //     'page' => 'admin',
     //     'url' => '#',
     //     'slug' => 'settings',
-    //     'icon' => 'settings',
+    //     'icon' => 'tabler--settings',
     //     'order' => 501,
     //     'parent_id' => null,
     //     'active' => true,
@@ -34,7 +34,7 @@ class NavigationSeeder extends Seeder
     //     'page' => 'admin',
     //     'url' => '#',
     //     'slug' => 'settings-advanced',
-    //     'icon' => 'settings-advanced',
+    //     'icon' => 'tabler--settings-2',
     //     'order' => 1,
     //     'parent_id' => 501,
     //     'active' => true,
@@ -47,7 +47,7 @@ class NavigationSeeder extends Seeder
     //     'page' => 'admin',
     //     'url' => 'settings.advanced.profile.index',
     //     'slug' => 'settings-advanced-profile',
-    //     'icon' => 'settings-advanced-profile',
+    //     'icon' => 'tabler--layout',
     //     'order' => 1,
     //     'parent_id' => 502,
     //     'active' => true,
@@ -61,7 +61,7 @@ class NavigationSeeder extends Seeder
     {
         /* 
          * ========================================================================================================
-         * FOR ICONS HERE USE MATERIAL DESIGN ICONS: https://fonts.google.com/icons
+         * FOR ICONS HERE USE TABLER DESIGN ICONS: https://tabler.io/icons
          * ========================================================================================================
          */
         $navigationsAdmin = [
@@ -74,7 +74,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'dashboard',
                 'slug' => 'dashboard',
-                'icon' => 'dashboard',
+                'icon' => 'tabler--dashboard',
                 'order' => 1,
                 'parent_id' => null,
                 'active' => true,
@@ -94,7 +94,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'profile.edit',
                 'slug' => 'profile',
-                'icon' => 'person_book',
+                'icon' => 'tabler--user',
                 'order' => 500,
                 'parent_id' => null,
                 'active' => true,
@@ -107,7 +107,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => '#',
                 'slug' => 'settings',
-                'icon' => 'settings',
+                'icon' => 'tabler--settings',
                 'order' => 501,
                 'parent_id' => null,
                 'active' => true,
@@ -120,7 +120,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.users.index',
                 'slug' => 'settings-users',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'tabler--users',
                 'order' => 1,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -133,7 +133,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.impersonate.index',
                 'slug' => 'settings-impersonate',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'tabler--user-check',
                 'order' => 2,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -146,7 +146,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.roles.index',
                 'slug' => 'settings-roles',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'tabler--shield',
                 'order' => 3,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -159,7 +159,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.navs.index',
                 'slug' => 'settings-navs',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'tabler--category',
                 'order' => 4,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -172,7 +172,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.preferences.index',
                 'slug' => 'settings-preferences',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'tabler--world',
                 'order' => 5,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -185,7 +185,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.cache.index',
                 'slug' => 'settings-cache',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'tabler--database',
                 'order' => 6,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -198,7 +198,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.apps-log.index',
                 'slug' => 'settings-apps-log',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'tabler--report',
                 'order' => 7,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -211,7 +211,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.migrations.index',
                 'slug' => 'settings-migrations',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'tabler--database',
                 'order' => 8,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -224,7 +224,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.seeders.index',
                 'slug' => 'settings-seeders',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'tabler--table-column',
                 'order' => 9,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -237,7 +237,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.queues.index',
                 'slug' => 'settings-queues',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'tabler--list-check',
                 'order' => 10,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -250,7 +250,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'admin',
                 'url' => 'settings.schedulers.index',
                 'slug' => 'settings-schedulers',
-                'icon' => '', // Assuming no icon specified
+                'icon' => 'tabler--calendar-clock',
                 'order' => 11,
                 'parent_id' => 501, // Nested under Settings
                 'active' => true,
@@ -270,7 +270,7 @@ class NavigationSeeder extends Seeder
                 'page' => 'landing',
                 'url' => 'beranda.index',
                 'slug' => 'beranda',
-                'icon' => 'home',
+                'icon' => 'tabler--smart-home',
                 'order' => 600,
                 'parent_id' => null,
                 'active' => true,
