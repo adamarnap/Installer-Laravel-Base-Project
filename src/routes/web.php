@@ -30,6 +30,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 /* 
+--------------------------------------------------------------------------
+| Blocked Routes
+|--------------------------------------------------------------------------
+|
+| This route is used to block access to certain routes. It will return a 403 Forbidden response for any route that uses this middleware.
+| When you want to block a route, you can use the 'blocked.route' middleware in your route definition.
+
+*/
+
+/* 
 |--------------------------------------------------------------------------
 | Landing Routes
 |--------------------------------------------------------------------------

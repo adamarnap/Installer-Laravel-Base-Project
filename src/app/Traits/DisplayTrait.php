@@ -2,42 +2,10 @@
 namespace App\Traits;
 
 use App\Enums\RoleEnum;
-use App\Models\Navigation;
-use App\Models\Preference;
 
-trait DisplayTrait
+trait PermissionTrait
 {
-    public function display(string $view, array $data = [])
-    {
-        $sidebar = $this->getSidebar();
-        $lang = ['en', 'id'];
-        $site = $this->getPreference();
-        $data = array_merge($data, ['sidebar' => $sidebar], ['_langs'=>$lang], ['_site'=>$site]);
-
-        return view($view, $data);
-    }
-
-    protected function getSidebar()
-    {
-        return Navigation::where('display', true)
-                        ->where('parent_id', null)
-                        ->where('active', true)
-                        ->with('child')
-                        ->orderBy('order', 'asc')->get();
-    }
-
-    protected function getPreference(){
-        $preferences = Preference::where('group', 'site')->get();
-        $new = new \stdClass();
-
-        foreach ($preferences as $preference) {
-            $new->{$preference['name']} = $preference['value'];
-        }
-
-        // Output
-        return $new;
-    }
-
+    // This function is used to check, role user has permission to access the page, if not, it will return 403 error
     protected function setRule($role=null) {
         auth()->user()->hasRole(RoleEnum::DEVELOPER->value) || auth()->user()->can($role) || abort(403);
     }

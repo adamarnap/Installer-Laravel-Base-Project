@@ -4,6 +4,6 @@ namespace App\Http\Controllers;
 
 abstract class Controller
 {
-    use \App\Traits\DisplayTrait;
+    use \App\Traits\PermissionTrait;
     use \App\Traits\ApiResponse;
 }

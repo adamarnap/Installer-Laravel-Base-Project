@@ -198,6 +198,11 @@
                             @if (!empty($child['sub_child']) && count($child['sub_child']) > 0)
                                 {{-- START: Sub-Child Menu --}}
                                 <a href="javascript:void(0)" aria-expanded="{{ $childIsOpen ? 'true' : 'false' }}" aria-controls="{{ $childControlsId }}" class="{{ $childIsOpen ? 'active' : '' }} hs-accordion-toggle menu-link">
+                                    @if (!empty($child['icon']))
+                                        <span class="menu-icon">
+                                            <i class="iconify {{ \Illuminate\Support\Str::startsWith($child['icon'], 'tabler--') ? $child['icon'] : 'tabler--' . $child['icon'] }} me-1 align-middle text-lg"></i>
+                                        </span>
+                                    @endif
                                     <span class="menu-text" data-lang="{{ $child['slug'] ?? \Illuminate\Support\Str::slug($child['name']) }}">
                                         {{ $child['name'] }}
                                     </span>
@@ -213,6 +218,11 @@
                                         @endphp
                                         <li class="menu-item">
                                             <a href="{{ $subChild['url'] }}" class="{{ $isSubChildActive ? 'active' : '' }} menu-link">
+                                                @if (!empty($subChild['icon']))
+                                                    <span class="menu-icon">
+                                                        <i class="iconify {{ \Illuminate\Support\Str::startsWith($subChild['icon'], 'tabler--') ? $subChild['icon'] : 'tabler--' . $subChild['icon'] }} me-1 align-middle text-lg"></i>
+                                                    </span>
+                                                @endif
                                                 <span class="menu-text" data-lang="{{ $subChild['slug'] ?? \Illuminate\Support\Str::slug($subChild['name']) }}">
                                                     @if (strlen($subChild['name']) > 25)
                                                         {{ substr($subChild['name'], 0, 25) . '...' }}
@@ -230,6 +240,11 @@
                             @else
                                 {{-- START: Child Menu not Have SubChild --}}
                                 <a href="{{ $child['url'] }}" class="{{ $isChildCurrent ? 'active' : '' }} menu-link">
+                                    @if (!empty($child['icon']))
+                                        <span class="menu-icon">
+                                            <i class="iconify {{ \Illuminate\Support\Str::startsWith($child['icon'], 'tabler--') ? $child['icon'] : 'tabler--' . $child['icon'] }} me-1 align-middle text-lg"></i>
+                                        </span>
+                                    @endif
                                     <span class="menu-text" data-lang="{{ $child['slug'] ?? \Illuminate\Support\Str::slug($child['name']) }}">
                                         {{ $child['name'] }}
                                     </span>
@@ -248,7 +263,7 @@
 
     <li class="menu-item">
         {{-- START: Logout Button --}}
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        <form id="logout-form-sidebar" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
             <button type="submit" class="menu-link">
                 <span class="menu-icon">
@@ -268,7 +283,7 @@
 {{-- Start: Logout Confirmation --}}
     <script>
         // Logout Confirmation
-        document.getElementById('logout-form').addEventListener('submit', function(event) {
+        document.getElementById('logout-form-sidebar').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the default form submission
             Swal.fire({
                 title: 'Apakah Anda yakin?',
