@@ -24,8 +24,8 @@
 
     <!-- Sidenav Menu Toggle Button -->
     <div class="h-topbar justify absolute end-5 top-0 flex items-center">
-        <button id="button-hover-toggle">
-            <span class="btn-on-hover-icon"></span>
+        <button id="button-hover-toggle" type="button" aria-label="Minimize sidebar" title="Minimize sidebar">
+            <i class="iconify tabler--layout-sidebar-left-collapse" aria-hidden="true"></i>
         </button>
     </div>
 
