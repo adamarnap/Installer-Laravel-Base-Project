@@ -796,7 +796,9 @@ class LayoutCustomizer {
             })
         })
 
-        document.querySelectorAll("#button-hover-toggle").forEach(e => { e.addEventListener("click", () => { var e = this.html.getAttribute("data-sidenav-size"); this.changeSidenavSize("on-hover-active" === e ? "on-hover" : "on-hover-active", !0) }) })
+        document.querySelectorAll("#button-hover-toggle").forEach((button) => {
+            button.addEventListener("click", () => this._toggleSidebar())
+        })
     }
 
     _toggleSidebar() {
