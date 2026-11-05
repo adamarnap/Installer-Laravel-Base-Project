@@ -1,5 +1,5 @@
 {{-- Start: Topbar --}}
-<header class="app-header">
+<header class="app-header relative z-[100] overflow-visible">
     <div class="container-fluid flex items-center justify-between">
         <div class="flex items-center gap-2.5">
             <div class="logo-topbar">
@@ -31,16 +31,16 @@
                 </button>
             </div>
             {{-- Start: Search Box --}}
-            <div id="search-box-rounded" class="hidden xl:flex">
+            {{-- <div id="search-box-rounded" class="hidden xl:flex">
                 <div class="input-icon-group">
                     <i class="iconify tabler--search input-icon text-lg text-(--topbar-item-color)/50! placeholder:opacity-50"></i>
                     <input type="search" id="topbar-search" class="form-input w-57.5 rounded-full! border-(--topbar-search-border)! bg-(--topbar-search-bg)! text-(--topbar-item-color)! placeholder:opacity-50" placeholder="Quick Search...">
                 </div>
-            </div>
+            </div> --}}
             {{-- End: Search Box --}}
 
             {{-- Start: Mega Menu Columns --}}
-            <div id="megamenu-columns" class="md:inline-flex hidden">
+            {{-- <div id="megamenu-columns" class="md:inline-flex hidden">
                 <div class="topbar-item hs-dropdown relative inline-flex">
                     <button class="topbar-link hs-dropdown-toggle btn px-2.5! font-medium" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">Mega Menu <i class="iconify tabler--chevron-down"></i></button>
 
@@ -159,11 +159,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- End: Mega Menu Columns --}}
 
             {{-- Start: Mega Menu Apps --}}
-            <div id="megamenu-apps" class="md:inline-flex hidden">
+            {{-- <div id="megamenu-apps" class="md:inline-flex hidden">
                 <div class="topbar-item hs-dropdown relative inline-flex">
                     <button class="topbar-link hs-dropdown-toggle btn px-2.5! font-medium" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">Apps <i class="iconify tabler--chevron-down"></i></button>
 
@@ -310,29 +310,29 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- End: Mega Menu Apps --}}
         </div>
 
-        {{-- Start: Impersonate Warning (di dalam topbar, di antara kiri & kanan) --}}
         @if($impersonate_data['is_impersonating'])
-        <div class="flex-1 flex items-center justify-center px-4">
-            <div class="flex items-center gap-2 bg-red-500 text-white px-3 py-1.5 rounded-md">
-                <i class="iconify tabler--{icon_name} text-xs text-[18px]">warning</i>
-                <span class="text-xs font-medium whitespace-nowrap">
-                    Impersonate: <strong>{{ $impersonate_data['impersonated_user']->name }}</strong>
-                </span>
-                <form action="{{ route('settings.impersonate.destroy', $impersonate_data['impersonated_user']->id) }}" method="POST" class="inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-white text-red-600 hover:bg-red-50 rounded text-[11px] font-semibold transition-all ml-1">
-                        <i class="iconify tabler--{icon_name} text-xs text-[14px]">logout</i>
-                    </button>
-                </form>
+            <div class="relative z-[110] flex min-w-0 flex-1 items-center justify-center px-4">
+                <div class="flex items-center gap-2 whitespace-nowrap rounded-md border border-danger bg-danger px-3 py-1.5 text-white shadow-md">
+                    <i class="iconify tabler--alert-triangle text-[18px]"></i>
+                    <span class="whitespace-nowrap text-xs font-medium">
+                        Impersonate: <strong>{{ $impersonate_data['impersonated_user']->name }}</strong>
+                        <span class="opacity-90">({{ $impersonate_data['impersonated_role'] }})</span>
+                    </span>
+                    <form action="{{ route('settings.impersonate.destroy', $impersonate_data['impersonated_user']->id) }}" method="POST" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="ml-1 inline-flex items-center gap-1 rounded bg-white px-2 py-1 text-[11px] font-semibold text-danger transition-all hover:bg-danger/10" title="Keluar dari impersonate">
+                            <i class="iconify tabler--logout text-base" aria-hidden="true"></i>
+                            <span>Keluar</span>
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
         @endif
-        {{-- End: Impersonate Warning (di dalam topbar, di antara kiri & kanan) --}}
 
         <div class="flex items-center gap-2.5">
             {{-- Start: Theme Dark/Light Toggle --}}
@@ -630,49 +630,6 @@
                 </div>
             </div>
             {{-- End: Monochrome Mode Toggle --}}
-
-            {{-- Start: Language Selector --}}
-            <div id="language-selector-rounded" class="topbar-item hs-dropdown relative inline-flex [--placement:bottom-right]">
-                {{-- Get Current Language --}}
-                @php
-                    $currentLanguage = strtoupper(Lang::locale());
-                    $selectedLanguageImage = 'us.svg'; // Default to English flag
-
-                    if($currentLanguage === 'EN') {
-                        $selectedLanguageImage = 'us.svg';
-                    } elseif($currentLanguage === 'DE') {
-                        $selectedLanguageImage = 'de.svg';
-                    } elseif($currentLanguage === 'IT') {
-                        $selectedLanguageImage = 'it.svg';
-                    } elseif($currentLanguage === 'ES') {
-                        $selectedLanguageImage = 'es.svg';
-                    } elseif($currentLanguage === 'ID') {
-                        $selectedLanguageImage = 'id.svg';
-                    } elseif($currentLanguage === 'RU') {
-                        $selectedLanguageImage = 'ru.svg';
-                    } elseif($currentLanguage === 'HI') {
-                        $selectedLanguageImage = 'in.svg';
-                    } elseif($currentLanguage === 'AR') {
-                        $selectedLanguageImage = 'sa.svg';
-                    }
-                @endphp
-                <button class="topbar-link hs-dropdown-toggle font-bold relative flex items-center" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                    <img src="{{ URL::asset('assets/admin/images/flags/' . $selectedLanguageImage) }}" alt="" class="me-3 size-4.5 rounded-full" id="selected-language-image">
-                    <span id="selected-language-code">{{ $currentLanguage }}</span>
-                </button>
-
-                <div class="hs-dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-menu">
-                    <a href="{{ route('change-locale', 'en') }}" class="dropdown-item" data-translator-lang="en" title="English">
-                        <img src="{{ URL::asset('assets/admin/images/flags/us.svg') }}" alt="English" class="me-1 size-4 rounded-full" height="18" data-translator-image="">
-                        <span class="align-middle">English</span>
-                    </a>
-                    <a href="{{ route('change-locale', 'id') }}" class="dropdown-item" data-translator-lang="id" title="Indonesian">
-                        <img src="{{ URL::asset('assets/admin/images/flags/id.svg') }}" alt="Indonesian" class="me-1 size-4 rounded-full" height="18" data-translator-image="">
-                        <span class="align-middle">Indonesia</span>
-                    </a>
-                </div>
-            </div>
-            {{-- End: Language Selector --}}
 
             {{-- Start: User Dropdown --}}
             <div id="user-dropdown-detailed" class="topbar-item hs-dropdown before:bg-default-700/35 relative inline-flex before:h-4.5 before:w-px before:content-['']">

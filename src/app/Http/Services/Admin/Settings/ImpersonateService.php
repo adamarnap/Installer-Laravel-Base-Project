@@ -92,12 +92,12 @@ class ImpersonateService
             return redirect()->back()->with('error', 'Tidak dapat melakukan impersonate pada pengguna dengan peran Developer.');
         }
 
-        // Save original user id and guard in session
-        Session::put(self::SESSION_KEY, $originalUser->id);
-        Session::put(self::SESSION_GUARD_KEY, $guard);
-
         // Log in as the target user.
         Auth::guard($guard)->login($targetUser);
+
+        // Save original user id and guard after login regenerates the session.
+        Session::put(self::SESSION_KEY, $originalUser->id);
+        Session::put(self::SESSION_GUARD_KEY, $guard);
 
         return redirect()->route('dashboard')->with('success', 'Anda sekarang sedang melakukan impersonate sebagai ' . $targetUser->name . '.');
     }

@@ -15,9 +15,14 @@ class ImpersonateComposer
     {
         $isImpersonating = $this->impersonateService->isImpersonating();
         
+        $impersonatedUser = $isImpersonating
+            ? $this->impersonateService->getImpersonatedUserData()
+            : null;
+
         $view->with('impersonate_data', [
             'is_impersonating'    => $isImpersonating,
-            'impersonated_user'   => $isImpersonating ? $this->impersonateService->getImpersonatedUserData() : null,
+            'impersonated_user'   => $impersonatedUser,
+            'impersonated_role'   => $impersonatedUser?->getRoleNames()->implode(', ') ?: '-',
             'impersonator_user'   => $isImpersonating ? $this->impersonateService->getImpersonatorUserData() : null,
         ]);
     }

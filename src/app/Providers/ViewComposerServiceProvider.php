@@ -33,7 +33,10 @@ class ViewComposerServiceProvider extends ServiceProvider
         
         // Admin
         View::composer(['layouts.admin.master'], PreferenceComposer::class);
-        View::composer(['layouts.admin.master'], ImpersonateComposer::class);
+        View::composer([
+            'layouts.admin.master',
+            'layouts.admin.partials.topbar',
+        ], ImpersonateComposer::class);
         View::composer(['layouts.admin.auth'], PreferenceComposer::class);
         View::composer(['layouts.admin.partials.sidebar'], PreferenceComposer::class);
         View::composer(['layouts.admin.partials.menu-list'], NavigationComposer::class);
